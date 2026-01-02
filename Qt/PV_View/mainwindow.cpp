@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
   , m_socket(m_io_service)
   #endif
   , ui(new Ui::MainWindow)
-    , mDocumentFile("/home/rolf/.config/huawei-sun2000-dongle-powersensor.yaml")
+    , mDocumentFile("/home/rolf/projects/Qt/PV_View/resource/huawei-sun2000-dongle-powersensor.yaml")
 {
     ui->setupUi(this);
 
@@ -232,9 +232,24 @@ bool MainWindow::load_yaml(const QString &filename)
         m_meter = std::make_unique<meter>();
         yaml_document >> *m_meter;
 
-        m_meter->m_render_source = m_meter->m_render_source.replace("{{-", "command: ");
-        YAML::Node rendered = YAML::Load(m_meter->m_render_source.toStdString());
-        rendered >> m_meter->m_rendered;
+        if (m_meter->m_render_source.contains("{{-"))
+        {
+            m_meter->m_render_source = m_meter->m_render_source.replace("{{-", "command: ");
+            YAML::Node rendered = YAML::Load(m_meter->m_render_source.toStdString());
+            rendered >> m_meter->m_rendered;
+            m_request_index = 1;
+        }
+        else if (QFileInfo(m_meter->m_render_source).exists())
+        {
+            YAML::Node rendered = YAML::LoadFile(m_meter->m_render_source.toStdString());
+            rendered >> m_meter->m_rendered;
+            m_request_index = 2;
+        }
+        else
+        {
+            yaml_document >> m_meter->m_rendered;
+        }
+
 
         ui->statusbar->showMessage(tr("read document \"%1\" successfully").arg(QFileInfo(filename).baseName()));
 
@@ -478,11 +493,14 @@ void MainWindow::on_btnConnect_clicked()
         {
             QString port = ui->edtAddress->text();
             QStringList part_parameter = port.split(",");
-            modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter, part_parameter[0].toInt());
-            modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter, part_parameter[1].toInt());
-            modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter, part_parameter[2].toInt());
-            modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter, to_parity(part_parameter[3]));
-            modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter, part_parameter[4].toInt());
+            if (part_parameter.size() >= 5)
+            {
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter, part_parameter[0].toInt());
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter, part_parameter[1].toInt());
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter, part_parameter[2].toInt());
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter, to_parity(part_parameter[3]));
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter, part_parameter[4].toInt());
+            }
         }
         else
         {
@@ -639,7 +657,7 @@ void MainWindow::readReady(QVector<quint16>& values)
                     double value = get_value(measurement, &values[v]);
                     if (measurement.m_scale == 1)
                     {
-                        const std::vector<QString>& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, 1));
+                        const std::vector<QString>& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, m_request_index));
                         int no_of_choices = choices.size();
                         if (no_of_choices)
                         {

@@ -1,6 +1,6 @@
 QT += core gui serialport
 
-DEFINES += SERIALBUS=0
+DEFINES += SERIALBUS=1
 QT += serialbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -31,10 +31,11 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-INCLUDEPATH += /home/rolf/testproject/mothbus/include
+INCLUDEPATH += \
+    /home/rolf/testproject/mothbus/include \
+    /home/rolf/test_projects/yaml-cpp/include
 
-unix:!macx:!symbian: LIBS += -lyaml-cpp
-#-L/home/rolf/testproject/yaml-cpp-yaml-cpp-0.6.0
+unix:!macx:!symbian: LIBS += -lyaml-cpp -L/home/rolf/test_projects/yaml-cpp/build
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

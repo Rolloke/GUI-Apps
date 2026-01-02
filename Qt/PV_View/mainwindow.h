@@ -95,6 +95,7 @@ private:
     QString        m_pending_request;
     read           m_read_permanent = read::off;
     int            m_read_index = 0;
+    int            m_request_index = 0;
 
     QString        mDocumentFile;
     std::unique_ptr<meter> m_meter;

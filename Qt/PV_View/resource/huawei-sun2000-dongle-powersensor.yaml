@@ -1,0 +1,45 @@
+# open evcc at http://evcc.local:7070
+template: huawei-dongle-powersensor
+
+products:
+- brand: huawei
+  description: 
+    generic: chinese
+- brand: bosch
+  description: 
+    generic: german
+  
+params:
+- name: modbus
+  choice: ["tcpip"]
+  type: type        # unused
+  default: default  # unused
+  advanced: false   # unused
+  allinone: false   # unused
+
+- name: timeout
+  default: 5000
+
+- name: "Meter Type"
+  choice: [
+      "0:single-phase",
+      "1:three-phase" ]
+
+- name: "Meter Status"
+  choice: [
+      "0:offline",
+      "1:normal" ]
+
+- name: "Q-U characteristic curve mode"
+  choice: [
+      "0:non-hysteresis",
+      "1:hysteresis" ]
+
+render: /home/rolf/projects/Qt/PV_View/resource/registers.yaml
+
+
+
+
+
+
+

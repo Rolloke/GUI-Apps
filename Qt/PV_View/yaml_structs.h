@@ -58,6 +58,7 @@ struct measured_register
     QString m_address;
     QString m_type;
     QString m_decode;
+    int     m_count = 0;
 
     friend void operator >> (const YAML::Node& nodes, measured_register& _register);
 };
@@ -70,6 +71,12 @@ struct measured_value
     measured_register m_register;
     double  m_scale = 1;
     QString m_unit;
+
+    QString m_name;
+    QString m_hub;
+    QString m_device_class;
+    int     m_slave = 0;
+    choices m_values;
 
     friend void operator >> (const YAML::Node& nodes, measured_value& _measured_value);
 };

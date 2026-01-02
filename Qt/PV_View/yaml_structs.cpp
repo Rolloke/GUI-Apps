@@ -168,12 +168,29 @@ void operator >> (const YAML::Node& nodes, measured_register& _register)
 
 void operator >> (const YAML::Node& nodes, measured_value& _measured_value)
 {
-    nodes["model"]        >> _measured_value.m_model;
-    nodes["timeout"]      >> _measured_value.m_timeout;
-    nodes["connectdelay"] >> _measured_value.m_connectdelay;
-    nodes["register"]     >> _measured_value.m_register;
-    nodes["scale"]        >> _measured_value.m_scale;
-    nodes["unit"]         >> _measured_value.m_unit;
+    if (nodes["model"].IsDefined())
+    {
+        nodes["model"]        >> _measured_value.m_model;
+        nodes["timeout"]      >> _measured_value.m_timeout;
+        nodes["connectdelay"] >> _measured_value.m_connectdelay;
+        nodes["register"]     >> _measured_value.m_register;
+        nodes["scale"]        >> _measured_value.m_scale;
+        nodes["unit"]         >> _measured_value.m_unit;
+    }
+    else
+    {
+        nodes["name"]                >> _measured_value.m_name;
+        nodes["hub"]                 >> _measured_value.m_hub;
+        nodes["unit_of_measurement"] >> _measured_value.m_unit;
+        nodes["device_class"]        >> _measured_value.m_device_class;
+        nodes["slave"]               >> _measured_value.m_slave;
+        nodes["register"]            >> _measured_value.m_register.m_address;
+        nodes["register_type"]       >> _measured_value.m_register.m_type;
+        nodes["data_type"]           >> _measured_value.m_register.m_decode;
+        nodes["count"]               >> _measured_value.m_register.m_count;
+        nodes["scale"]               >> _measured_value.m_scale;
+        nodes["values"]              >> _measured_value.m_values;
+    }
 }
 
 void s_render::read_measurement(const YAML::Node& node, const QString& name)
@@ -189,8 +206,15 @@ void s_render::read_measurement(const YAML::Node& node, const QString& name)
             {
                 measured_value mv;
                 node >> mv;
-                m_measurements[full_name+c] = mv;
-                c++;
+                if (mv.m_name.size())
+                {
+                    m_measurements[full_name + ":" + mv.m_name] = mv;
+                }
+                else
+                {
+                    m_measurements[full_name+c] = mv;
+                    c++;
+                }
             }
         }
         else
@@ -308,6 +332,10 @@ size_t  get_value_size(const measured_value& value_param)
     }
     else if (value_param.m_register.m_decode.contains("char"))
     {
+        if (value_param.m_register.m_count)
+        {
+            return value_param.m_register.m_count / 2;
+        }
         return value_param.m_register.m_decode.mid(4).toInt() / 2;
     }
     return 0;
@@ -334,10 +362,10 @@ int get_entries(const QString& decode)
     {
         return decode.mid(pos + 4).toInt()/sizeof(int16_t);
     }
-    int factor = 1;
+    int entries = 1;
     if ((pos = decode.indexOf("array")) != -1)
     {
-        factor = decode.mid(pos + 5).toInt();
+        entries = decode.mid(pos + 5).toInt();
     }
     if (decode.contains("32"))
     {
@@ -345,7 +373,7 @@ int get_entries(const QString& decode)
     }
     else
     {
-        return factor;
+        return entries;
     }
 }
 

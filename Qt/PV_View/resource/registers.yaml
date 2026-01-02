@@ -1,0 +1,992 @@
+
+command: usage"measure"
+Inverter:
+      ############################
+      # ☀️ INVERTER – SUN2000
+      ############################
+
+      - name: Model
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30000
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: SN
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30015
+        register_type: holding
+        data_type: char10
+        count: 10
+        scale: 1
+
+      - name: PN
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30025
+        register_type: holding
+        data_type: char10
+        count: 10
+        scale: 1
+
+      - name: PV1 Voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32016
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.1
+
+      - name: PV1 Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: ampere
+        slave: 0
+        register: 32017
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.01
+
+      - name: PV2 Voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32018
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.1
+
+      - name: PV2 Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: ampere
+        slave: 0
+        register: 32019
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.01
+
+      - name: Input Power
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: power
+        slave: 0
+        register: 32064
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.001
+
+      - name: Phase A/B voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32066
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 0.1
+
+      - name: Phase B/C voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32067
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 0.1
+
+      - name: Phase A/C voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32068
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 0.1
+
+      - name: Phase A voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32069
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 0.1
+
+      - name: Phase B voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32070
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 0.1
+
+      - name: Phase C voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32071
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 0.1
+
+      - name: Phase A Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: current
+        slave: 0
+        register: 32072
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 0.001
+
+      - name: Phase B Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: current
+        slave: 0
+        register: 32074
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 0.001
+
+      - name: Phase C Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: current
+        slave: 0
+        register: 32076
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 0.001
+
+      - name: Peak Active Power
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: power
+        slave: 0
+        register: 32078
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.001
+
+      - name: Active Power
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: power
+        slave: 0
+        register: 32080
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.001
+
+      - name: Reactive Power
+        hub: huawei_solar
+        unit_of_measurement: kVar
+        device_class: power
+        slave: 0
+        register: 32082
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.001
+
+      - name: Power Factor
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: power
+        slave: 0
+        register: 32084
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.001
+
+      - name: Frequency
+        hub: huawei_solar
+        unit_of_measurement: Hz
+        device_class: frequency
+        slave: 0
+        register: 32085
+        register_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        count: 1
+
+      - name: Efficiency
+        hub: huawei_solar
+        unit_of_measurement: "%"
+        device_class: quality
+        slave: 0
+        register: 32086
+        register_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 1
+        count: 1
+
+      - name: Internal Temperature
+        hub: huawei_solar
+        unit_of_measurement: "°C"
+        device_class: temperature
+        slave: 0
+        register: 32087
+        register_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        count: 1
+
+      - name: Insulation resistance
+        hub: huawei_solar
+        unit_of_measurement: "MOhm"
+        device_class: resistance
+        slave: 0
+        register: 32088
+        register_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        count: 1
+
+InverterScheduling:
+
+      - name: Q-U characteristic curve mode
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 40037
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Q-U dispatch trigger power
+        hub: huawei_solar
+        unit_of_measurement: "%"
+        device_class: scheduling
+        slave: 0
+        register: 40038
+        register_type: holding
+        data_type: int16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Fixed active power derated
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: scheduling
+        slave: 0
+        register: 40120
+        register_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        count: 1
+
+      - name: Reactive power compensation (PF)
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 40122
+        register_type: holding
+        data_type: int16
+        scale: 0.001
+        precision: 1
+        count: 1
+
+      - name: Reactive power compensation (Q/S)
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 40123
+        register_type: holding
+        data_type: int16
+        scale: 0.001
+        precision: 1
+        count: 1
+
+      - name: Active power percentage derating
+        hub: huawei_solar
+        unit_of_measurement: "%"
+        device_class: scheduling
+        slave: 0
+        register: 40125
+        register_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        count: 1
+
+      - name: Fixed active power derated
+        hub: huawei_solar
+        unit_of_measurement: W
+        device_class: scheduling
+        slave: 0
+        register: 40126
+        register_type: holding
+        data_type: uint32
+        scale: 1
+        precision: 1
+        count: 2
+
+      - name: Reactive power compensation at night
+        hub: huawei_solar
+        unit_of_measurement: kVar
+        device_class: scheduling
+        slave: 0
+        register: 40129
+        register_type: holding
+        data_type: int16
+        scale: 0.001
+        precision: 1
+        count: 2
+
+      - name: cosφ-P/Pn characteristic curve !
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 40133
+        register_type: holding
+        data_type: array21
+        scale: 1
+        precision: 1
+        count: 21
+
+      - name: Q-U characteristic curve !
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 40154
+        register_type: holding
+        data_type: array21
+        scale: 1
+        precision: 1
+        count: 21
+
+      - name: PF-U characteristic curve
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 40175
+        register_type: holding
+        data_type: array21
+        scale: 1
+        precision: 1
+        count: 21
+
+      - name: Reactive power adjustment time
+        hub: huawei_solar
+        unit_of_measurement: s
+        device_class: scheduling
+        slave: 0
+        register: 40196
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Q-U power percentage to exit scheduling
+        hub: huawei_solar
+        unit_of_measurement: "%"
+        device_class: scheduling
+        slave: 0
+        register: 40198
+        register_type: holding
+        data_type: int16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Reactive power change gradient
+        hub: huawei_solar
+        unit_of_measurement: "%/s"
+        device_class: scheduling
+        slave: 0
+        register: 42015
+        register_type: holding
+        data_type: uint32
+        scale: 0.001
+        precision: 1
+        count: 2
+
+      - name: Active power change gradient
+        hub: huawei_solar
+        unit_of_measurement: "%/s"
+        device_class: scheduling
+        slave: 0
+        register: 42017
+        register_type: holding
+        data_type: uint32
+        scale: 0.001
+        precision: 1
+        count: 2
+
+      - name: Schedule instruction valid duration
+        hub: huawei_solar
+        unit_of_measurement: s
+        device_class: scheduling
+        slave: 0
+        register: 42019
+        register_type: holding
+        data_type: int16
+        scale: 1
+        precision: 1
+        count: 1
+
+InverterControl:
+
+      - name: Startup 
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 40200
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0 ]
+
+      - name: Shutdown
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 40201
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0 ]
+
+      - name: WLAN wakeup
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 45052
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1 ]
+
+      - name: TLS encryption
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 43098
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1 ]
+
+      - name: Scheduled task
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 47674
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1 ]
+
+      - name: Phase-to-ground short-circuit protection
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 48090
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1 ]
+
+      - name: Remote charge/discharge control mode
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 47589
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1, 2, 3, 4, 5 ]
+
+      - name: Peak Shaving
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 47954
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1, 2 ]
+
+      - name: AI optical storage
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 48020
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1 ]
+
+      - name: Backup Box model
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 1
+        register: 48089
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+        values: [ 0, 1, 2, 3 ]
+
+InverterValues:
+
+      - name: Default maximum feed-in power
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: power
+        slave: 1
+        register: 47675
+        register_type: holding
+        data_type: int32
+        scale: 0.001
+        precision: 1
+        count: 2
+
+      - name: Default active power change gradient
+        hub: huawei_solar
+        unit_of_measurement: "%/s"
+        device_class: power
+        slave: 1
+        register: 47677
+        register_type: holding
+        data_type: uint32
+        scale: 0.001
+        precision: 1
+        count: 2
+
+      - name: Backup power SOC for peak shaving
+        hub: huawei_solar
+        unit_of_measurement: "%"
+        device_class: power
+        slave: 1
+        register: 47955
+        register_type: holding
+        data_type: uint16
+        scale: 0.001
+        precision: 1
+        count: 1
+
+      - name: Grid code
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: scheduling
+        slave: 0
+        register: 42000
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Time zone
+        hub: huawei_solar
+        unit_of_measurement: min
+        device_class: scheduling
+        slave: 0
+        register: 43006
+        register_type: holding
+        data_type: int16
+        scale: 1
+        precision: 1
+        count: 1
+
+      ############################
+      # 🔋 BATTERY – LUNA2000
+      ############################
+Battery:
+      - name: Status
+        hub: huawei_solar
+        unit_of_measurement: ""
+        device_class: state
+        slave: 0
+        register: 37000
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Power
+        hub: huawei_solar
+        unit_of_measurement: W
+        device_class: power
+        slave: 0
+        register: 37001
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 1
+        # + = discharging / − = charging
+
+      - name: Bus Voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 37003
+        register_type: holding
+        data_type: uint16
+        scale: 0.1
+
+      - name: SOC
+        hub: huawei_solar
+        unit_of_measurement: "%"
+        device_class: battery
+        slave: 0
+        register: 37004
+        register_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+
+      - name: Working Mode
+        hub: huawei_solar
+        unit_of_measurement: ""
+        device_class: state
+        slave: 0
+        register: 37006
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Fault ID
+        hub: huawei_solar
+        unit_of_measurement: ""
+        device_class: state
+        slave: 0
+        register: 37014
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+      - name: Rated Charge Power
+        hub: huawei_solar
+        unit_of_measurement: W
+        device_class: power
+        slave: 0
+        register: 37007
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 1
+
+      - name: Rated Discharge Power
+        hub: huawei_solar
+        unit_of_measurement: W
+        device_class: power
+        slave: 0
+        register: 37009
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 1
+
+      - name: Current day Charge Capacity
+        hub: huawei_solar
+        unit_of_measurement: kWh
+        device_class: power
+        slave: 0
+        register: 37015
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 0.01
+
+      - name: Current day Discharge Capacity
+        hub: huawei_solar
+        unit_of_measurement: kWh
+        device_class: power
+        slave: 0
+        register: 37017
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 0.01
+
+      - name: Bus Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: temperature
+        slave: 0
+        register: 37021
+        register_type: holding
+        data_type: int16
+        scale: 0.1
+
+      - name: Temperature
+        hub: huawei_solar
+        unit_of_measurement: °C
+        device_class: temperature
+        slave: 0
+        register: 37022
+        register_type: holding
+        data_type: int16
+        scale: 0.1
+
+      - name: Software version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 37799
+        register_type: holding
+        data_type: char15
+        scale: 1
+        count: 15
+
+
+      ############################
+      # ⚡ GRID METER – DTSU666-H
+      ############################
+Grid:
+      - name: Voltage Phase A
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 37101
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.1
+
+      - name: Voltage Phase B
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 37103
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.1
+
+      - name: Voltage Phase C
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 37105
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.1
+
+      - name: Current Phase A
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: current
+        slave: 0
+        register: 37107
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.01
+
+      - name: Current Phase B
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: current
+        slave: 0
+        register: 37109
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.01
+
+      - name: Current Phase C
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: current
+        slave: 0
+        register: 37111
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.01
+
+      - name: Active Power
+        hub: huawei_solar
+        unit_of_measurement: W
+        device_class: power
+        slave: 0
+        register: 37113
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 1
+        # + = import / − = export
+
+      - name: Reactive Power
+        hub: huawei_solar
+        unit_of_measurement: Var
+        device_class: power
+        state_class: total_increasing
+        slave: 0
+        register: 37115
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 1
+
+      - name: Positive Active Electricity
+        hub: huawei_solar
+        unit_of_measurement: kWh
+        device_class: energy
+        slave: 0
+        register: 37119
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.01
+
+      - name: Reverse Active Electricity
+        hub: huawei_solar
+        unit_of_measurement: kWh
+        device_class: energy
+        slave: 0
+        register: 37121
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.01
+
+      - name: Accumulated Reactive power
+        hub: huawei_solar
+        unit_of_measurement: kVarh
+        device_class: power
+        slave: 0
+        register: 37123
+        register_type: holding
+        data_type: int32
+        count: 2
+        scale: 0.01
+
+      - name: Power Factor
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: power
+        state_class: total_increasing
+        slave: 0
+        register: 37117
+        register_type: holding
+        data_type: uint32
+        count: 1
+        scale: 0.001
+
+      - name: Frequency (Meter)
+        hub: huawei_solar
+        unit_of_measurement: Hz
+        device_class: frequency
+        slave: 0
+        register: 37118
+        register_type: holding
+        data_type: uint16
+        scale: 0.01
+
+      - name: Meter Type
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: meta
+        slave: 0
+        register: 37125
+        register_type: holding
+        data_type: uint16
+        scale: 1
+
+      - name: Meter Status
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: meta
+        slave: 0
+        register: 37100
+        register_type: holding
+        data_type: uint16
+        scale: 1
+
