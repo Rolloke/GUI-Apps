@@ -382,7 +382,7 @@ InverterScheduling:
         precision: 1
         count: 2
 
-      - name: cosφ-P/Pn characteristic curve !
+      - name: cosφ-P/Pn characteristic curve
         hub: huawei_solar
         unit_of_measurement: 
         device_class: scheduling
@@ -394,7 +394,7 @@ InverterScheduling:
         precision: 1
         count: 21
 
-      - name: Q-U characteristic curve !
+      - name: Q-U characteristic curve
         hub: huawei_solar
         unit_of_measurement: 
         device_class: scheduling
@@ -627,7 +627,7 @@ InverterValues:
       - name: Default active power change gradient
         hub: huawei_solar
         unit_of_measurement: "%/s"
-        device_class: power
+        device_class: gradient
         slave: 1
         register: 47677
         register_type: holding
@@ -639,7 +639,7 @@ InverterValues:
       - name: Backup power SOC for peak shaving
         hub: huawei_solar
         unit_of_measurement: "%"
-        device_class: power
+        device_class: percent
         slave: 1
         register: 47955
         register_type: holding
@@ -651,7 +651,7 @@ InverterValues:
       - name: Grid code
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: status
         slave: 0
         register: 42000
         register_type: holding
@@ -663,7 +663,7 @@ InverterValues:
       - name: Time zone
         hub: huawei_solar
         unit_of_measurement: min
-        device_class: scheduling
+        device_class: value
         slave: 0
         register: 43006
         register_type: holding

@@ -266,7 +266,7 @@ bool MainWindow::load_yaml(const QString &filename)
             mListModel->setData(mListModel->index(current_row, eDecode, QModelIndex()), measurement.value().m_register.m_decode);
             mListModel->setData(mListModel->index(current_row, eScale, QModelIndex()), measurement.value().m_scale);
             mListModel->setData(mListModel->index(current_row, eValue, QModelIndex()), "n/a");
-            mListModel->setData(mListModel->index(current_row, eModel, QModelIndex()), measurement.value().m_model);
+            mListModel->setData(mListModel->index(current_row, eModel, QModelIndex()), measurement.value().m_model.size() ? measurement.value().m_model : measurement.value().m_device_class);
 
             current_row++;
         }

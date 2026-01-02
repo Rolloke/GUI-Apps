@@ -10,7 +10,7 @@ products:
     generic: german
   
 params:
-- name: modbus
+- name: modbus      # all params
   choice: ["tcpip"]
   type: type        # unused
   default: default  # unused
@@ -34,6 +34,127 @@ params:
   choice: [
       "0:non-hysteresis",
       "1:hysteresis" ]
+
+- name: "Phase-to-ground short-circuit protection"
+  choice: [
+      "0:Disabled",
+      "1:Enabled" ]
+
+- name: "Backup Box model"
+  choice: [
+	"0:Backup Box-B0/B1",
+	"1:Compatible Third Party Backup Box",
+	"2:SmartGuard",
+ 	"3:No Backup Box" ]
+
+- name: "Peak Shaving"
+  choice: [
+	"0:Disabled",
+	"1:Enable",
+	"1:Active power limit",
+	"2:Apparent power limit (not supported in the single-device scenario)" ]
+
+- name: "Scheduled task"
+  choice: [
+	"0:Disable",
+	"1:Enable" ]
+
+- name: "Remote charge/discharge control mode"
+  choice: [
+	"0:Local control",
+	"1:Remote control–Max. self-consumption",
+	"2:Remote control–Fully fed to grid",
+	"3:Remote control–TOU",
+	"4:Remote control–AI control",
+	"5:Remote Control - Three-party Scheduling" ]
+
+- name: "WLAN wakeup"
+  choice: [
+	"0:Waken up",
+	"1:Disabled" ]
+
+- name: "TLS encryption"
+  choice: [
+    "0:Disabled",
+	"1:Enabled" ]
+
+- name: "Startup"
+  choice: [ "0:Run" ]
+
+- name: "Shutdown"
+  choice: [ "0:Run" ]
+
+- name: "cosφ-P/Pn characteristic curve"
+  choice: [
+	"0:Number of points:uint16:1:N/A",
+	"1:P/Pn value at point 1:uint16:10:%",
+	"2:cosφ value at point 1:int16:1000:N/A",
+	"3:P/Pn value at point 2:uint16:10:%",
+	"4:cosφ value at point 2:int16:1000:N/A",
+	"5:P/Pn value at point 3:uint16:10:%",
+	"6:cosφ value at point 3:int16:1000:N/A",
+	"7:P/Pn value at point 4:uint16:10:%",
+	"8:cosφ value at point 4:int16:1000:N/A",
+	"9:P/Pn value at point 5:uint16:10:%",
+	"10:cosφ value at point 5:int16:1000:N/A",
+	"11:P/Pn value at point 6:uint16:10:%",
+	"12:cosφ value at point 6:int16:1000:N/A",
+	"13:P/Pn value at point 7:uint16:10:%",
+	"14:cosφ value at point 7:int16:1000:N/A",
+	"15:P/Pn value at point 8:uint16:10:%",
+	"16:cosφ value at point 8:int16:1000:N/A",
+	"17:P/Pn value at point 9:uint16:10:%",
+	"18:cosφ value at point 9:int16:1000:N/A",
+	"19:P/Pn value at point 10:uint16:10:%",
+	"20:cosφ value at point 10:int16:1000:N/A" ]
+
+- name: "Q-U characteristic curve"
+  choice: [
+	"0:Number of points:uint16:1:N/A",
+	"1:U/Un value at point 1:uint16:10:%",
+	"2:Q/S value at point 1:int16:1000:N/A",
+	"3:U/Un value at point 2:uint16:10:%",
+	"4:Q/S value at point 2:int16:1000:N/A",
+	"5:U/Un value at point 3:uint16:10:%",
+	"6:Q/S value at point 3:int16:1000:N/A",
+	"7:U/Un value at point 4:uint16:10:%",
+	"8:Q/S value at point 4:int16:1000:N/A",
+	"9:U/Un value at point 5:uint16:10:%",
+	"10:Q/S value at point 5:int16:1000:N/A",
+	"11:U/Un value at point 6:uint16:10:%",
+	"12:Q/S value at point 6:int16:1000:N/A",
+	"13:U/Un value at point 7:uint16:10:%",
+	"14:Q/S value at point 7:int16:1000:N/A",
+	"15:U/Un value at point 8:uint16:10:%",
+	"16:Q/S value at point 8:int16:1000:N/A",
+	"17:U/Un value at point 9:uint16:10:%",
+	"18:Q/S value at point 9:int16:1000:N/A",
+	"19:U/Un value at point 10:uint16:10:%",
+	"20:Q/S value at point 10:int16:1000:N/A" ] 
+
+- name: "PF-U characteristic curve"
+  choice: [
+	"0:Number of points:uint16:1:N/A",
+	"1:U/Un value at point 1:uint16:10:%",
+	"2:PF value at point 1:int16:1000:N/A",
+	"3:U/Un value at point 2:uint16:10:%",
+	"4:PF value at point 2:int16:1000:N/A",
+	"5:U/Un value at point 3:uint16:10:%",
+	"6:PF value at point 3:int16:1000:N/A",
+	"7:U/Un value at point 4:uint16:10:%",
+	"8:PF value at point 4:int16:1000:N/A",
+	"9:U/Un value at point 5:uint16:10:%",
+	"10:PF value at point 5:int16:1000:N/A",
+	"11:U/Un value at point 6:uint16:10:%",
+	"12:PF value at point 6:int16:1000:N/A",
+	"13:U/Un value at point 7:uint16:10:%",
+	"14:PF value at point 7:int16:1000:N/A",
+	"15:U/Un value at point 8:uint16:10:%",
+	"16:PF value at point 8:int16:1000:N/A",
+	"17:U/Un value at point 9:uint16:10:%",
+	"18:PF value at point 9:int16:1000:N/A",
+	"19:U/Un value at point 10:uint16:10:%",
+	"20:PF value at point 10:int16:1000:N/A"]
 
 render: /home/rolf/projects/Qt/PV_View/resource/registers.yaml
 
