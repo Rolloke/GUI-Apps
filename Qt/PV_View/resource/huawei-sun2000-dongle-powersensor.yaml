@@ -20,6 +20,9 @@ params:
 - name: timeout
   default: 5000
 
+- name: "StoreValuesSection"
+  default: "InverterScheduling"
+
 - name: "Meter Type"
   choice: [
       "0:single-phase",

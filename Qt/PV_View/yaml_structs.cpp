@@ -67,6 +67,33 @@ void operator >> (const YAML::Node& nodes, parameters& s_parameters)
     }
 }
 
+void operator >> (const YAML::Node& nodes, stored_value_list& s_values)
+{
+    if (nodes.Type() == YAML::NodeType::Sequence)
+    {
+        QString name, value;
+        for (const auto &node: nodes)
+        {
+            node["name"]  >> name;
+            node["value"]  >> value;
+            s_values[name] = value;
+        }
+    }
+}
+
+void operator << (YAML::Node& nodes, const stored_value_list &s_values)
+{
+    QMapIterator<QString, QString> entry(s_values);
+    while (entry.hasNext())
+    {
+        entry.next();
+        YAML::Node node;
+        node["name"]  = entry.key().toStdString();
+        node["value"]  = entry.value().toStdString();
+        nodes.push_back(node);
+    }
+}
+
 QString parameters::get_choice(const QString& name, int n)
 {
     if (m_map.contains(name) && n < static_cast<int>(m_map[name].m_choice.m_choice.size()))

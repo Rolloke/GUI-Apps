@@ -35,6 +35,10 @@ INCLUDEPATH += \
     /home/rolf/testproject/mothbus/include \
     /home/rolf/test_projects/yaml-cpp/include
 
+DISTFILES += \
+   resource/registers.yaml \
+   resource/huawei-sun2000-dongle-powersensor.yaml
+
 unix:!macx:!symbian: LIBS += -lyaml-cpp -L/home/rolf/test_projects/yaml-cpp/build
 
 # Default rules for deployment.

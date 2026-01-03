@@ -15,6 +15,7 @@
 #include <QCheckBox>
 #include <QTimer>
 #include <QFile>
+#include <fstream>
 
 #if SERIALBUS == 1
 
@@ -29,8 +30,16 @@ using boost::asio::ip::tcp;
 
 #endif
 
-/// TODO: RW Values
-/// store in file
+/// TODO: RW Values (scheduled values for storing scheduled parameters)
+/// [x] read from file and write to file
+/// [ ] show in table on control tab
+/// [ ] checkbox to select values to write back to PV
+/// [ ] show control buttons defined in yaml (depending on values: [ 0 ])
+/// [ ] show array parameters defined in "choice" parameter description
+/// [ ] - show characteristic curve
+/// [ ] - show info
+/// [x] show checkboxes on same heigth of progress bars
+
 namespace config
 {
 constexpr char sGroupMeter[]  = "Meter";
@@ -77,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     setWindowIcon(QIcon(":/48x48/go-home.png"));
 
-    QStringList fSectionNames = { tr("Name"), tr("Address"), tr("Type"), tr("Decode"), tr("Scale"), tr("Value"), tr("Model")};
+    QStringList fSectionNames = { tr("Name"), tr("Address"), tr("Type"), tr("Decode"), tr("Scale"), tr("Value"), tr("Unit/Type")};
     mListModel = new QStandardItemModel(0, eLast, this);
     for (int fSection = 0; fSection < eLast; ++fSection)
     {
@@ -138,7 +147,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect( &m_thread, &QThread::started, this, &MainWindow::process);
     m_thread.start();
 #endif
-
 }
 
 #if SERIALBUS == 0
@@ -177,10 +185,10 @@ MainWindow::~MainWindow()
     {
         fSettings.beginWriteArray(config::sMeasurement);
         {
-            for (int i = 1; i < ui->labelNames->count(); ++i)
+            for (int i = 0; i < ui->verticalNames->count(); ++i)
             {
-                fSettings.setArrayIndex(i-1);
-                auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
+                fSettings.setArrayIndex(i);
+                auto namewidget = dynamic_cast<QLabel*>(ui->verticalNames->itemAt(i)->widget());
                 if (namewidget)
                 {
                     QString fName       = namewidget->toolTip();
@@ -190,7 +198,7 @@ MainWindow::~MainWindow()
                     QString fValues     = namewidget->whatsThis();
                     STORE_STR(fSettings, fValues);
                 }
-                auto progressbar = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
+                auto progressbar = dynamic_cast<QProgressBarFloat*>(ui->verticalMeter->itemAt(i)->widget());
                 if (progressbar)
                 {
                     double fScale   = progressbar->scale();
@@ -237,13 +245,15 @@ bool MainWindow::load_yaml(const QString &filename)
             m_meter->m_render_source = m_meter->m_render_source.replace("{{-", "command: ");
             YAML::Node rendered = YAML::Load(m_meter->m_render_source.toStdString());
             rendered >> m_meter->m_rendered;
-            m_request_index = 1;
+            m_request_name_index = 1;
         }
         else if (QFileInfo(m_meter->m_render_source).exists())
         {
+            /// TODO: use relative file path
             YAML::Node rendered = YAML::LoadFile(m_meter->m_render_source.toStdString());
             rendered >> m_meter->m_rendered;
-            m_request_index = 2;
+            m_request_name_index    = 2;
+            m_request_section_index = 1;
         }
         else
         {
@@ -266,10 +276,20 @@ bool MainWindow::load_yaml(const QString &filename)
             mListModel->setData(mListModel->index(current_row, eDecode, QModelIndex()), measurement.value().m_register.m_decode);
             mListModel->setData(mListModel->index(current_row, eScale, QModelIndex()), measurement.value().m_scale);
             mListModel->setData(mListModel->index(current_row, eValue, QModelIndex()), "n/a");
-            mListModel->setData(mListModel->index(current_row, eModel, QModelIndex()), measurement.value().m_model.size() ? measurement.value().m_model : measurement.value().m_device_class);
+            QString str = measurement.value().m_model;
+            if (str.isEmpty())
+            {
+                str = measurement.value().m_unit;
+            }
+            if (str.isEmpty())
+            {
+                str = measurement.value().m_device_class;
+            }
+            mListModel->setData(mListModel->index(current_row, eModel, QModelIndex()), str);
 
             current_row++;
         }
+        m_store_value_section = m_meter->m_parameters.get_default("StoreValuesSection");
 
         return true;
     }
@@ -390,22 +410,25 @@ void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_na
     meter->setUnit(unit);
     meter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     meter->setSizeIncrement(1, 0);
+    meter->setMinimumHeight(label_name->height());
+    meter->setMaximumHeight(label_name->height());
 //    "{ border: 1px solid black; text-align: top; padding: 1px; border-top-left-radius: 7px; border-bottom-left-radius: 7px; "
 //    "background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fff, stop: 0.4999 #eee, stop: 0.5 #ddd, stop: 1 #eee ); width: 15px;}"
 //        "QProgressBar::chunk { background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #0000ff, stop: 1 #ff0000 ); border-top-left-radius: 7px;border-bottom-left-radius: 7px; border: 1px solid black;}");
 
-    ui->labelMeter->addWidget(meter, 1);
-    ui->labelMeter->setStretchFactor(meter, 1);
+    ui->verticalMeter->addWidget(meter, 1);
+    //ui->verticalMeter->setStretchFactor(meter, 1);
 
-    label_name->setMinimumHeight(meter->height()-5);
+//    label_name->setMinimumHeight(meter->height()-5);
     label_name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    ui->labelNames->addWidget(label_name);
-    ui->labelNames->setStretchFactor(label_name, 0);
+    ui->verticalNames->addWidget(label_name);
+    //ui->verticalNames->setStretchFactor(label_name, 0);
 
     auto checkbox = new QCheckBox(this);
     connect(checkbox, SIGNAL(clicked()), this, SLOT(btnCheckboxClicked()));
-    checkbox->setMinimumHeight(meter->height()-5);
-    ui->labelCheck->addWidget(checkbox);
+    checkbox->setMinimumHeight(label_name->height());
+    checkbox->setMaximumHeight(label_name->height());
+    ui->verticalCheck->addWidget(checkbox);
 }
 
 void MainWindow::read_meter_value()
@@ -413,9 +436,9 @@ void MainWindow::read_meter_value()
     switch (m_read_permanent)
     {
     case read::meter:
-        if (m_read_index < ui->labelNames->count())
+        if (m_read_index < ui->verticalNames->count())
         {
-            auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(m_read_index)->widget());
+            auto namewidget = dynamic_cast<QLabel*>(ui->verticalNames->itemAt(m_read_index)->widget());
             if (namewidget)
             {
                 bool ok = false;
@@ -655,9 +678,10 @@ void MainWindow::readReady(QVector<quint16>& values)
                         std::swap(values[v], values[v+1]);
                     }
                     double value = get_value(measurement, &values[v]);
+                    string_value = tr("%1").arg(value);
                     if (measurement.m_scale == 1)
                     {
-                        const std::vector<QString>& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, m_request_index));
+                        const std::vector<QString>& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, m_request_name_index));
                         int no_of_choices = choices.size();
                         if (no_of_choices)
                         {
@@ -708,12 +732,12 @@ void MainWindow::readReady(QVector<quint16>& values)
                     } break;
                     case read::meter:
                     {
-                        for (int i = 1; i < ui->labelNames->count(); ++i)
+                        for (int i = 0; i < ui->verticalNames->count(); ++i)
                         {
-                            auto name = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
+                            auto name = dynamic_cast<QLabel*>(ui->verticalNames->itemAt(i)->widget());
                             if (name && name->toolTip() == m_pending_request)
                             {
-                                auto meter = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
+                                auto meter = dynamic_cast<QProgressBarFloat*>(ui->verticalMeter->itemAt(i)->widget());
                                 if (meter)
                                 {
                                     meter->setValue(value);
@@ -745,12 +769,18 @@ void MainWindow::readReady(QVector<quint16>& values)
                     }
                 }
             }
+
+            if (get_request(m_pending_request, m_request_section_index) == m_store_value_section)
+            {
+                m_values[m_pending_request] = string_value;
+            }
+
             switch (m_read_permanent)
             {
             case read::meter:
-                if (m_read_index >= ui->labelNames->count())
+                if (m_read_index >= ui->verticalNames->count())
                 {
-                    m_read_index = 1;
+                    m_read_index = 0;
                 } break;
             case read::table:
                 if (m_read_index >= mListModel->rowCount())
@@ -802,7 +832,7 @@ void MainWindow::readReady(QVector<quint16>& values)
 
 void MainWindow::on_btnStart_clicked()
 {
-    if (ui->labelNames->count() > 1)
+    if (ui->verticalNames->count() > 0)
     {
         m_read_permanent = read::meter;
         m_read_index     = 1;
@@ -817,18 +847,18 @@ void MainWindow::on_btnStop_clicked()
 }
 void MainWindow::on_btnRemove_clicked()
 {
-    for (int i = 1; i < ui->labelCheck->count(); ++i)
+    for (int i = 0; i < ui->verticalCheck->count(); ++i)
     {
-        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        auto check = dynamic_cast<QCheckBox*>(ui->verticalCheck->itemAt(i)->widget());
         if (check &&check->isChecked())
         {
-            ui->labelCheck->removeWidget(check);
+            ui->verticalCheck->removeWidget(check);
             delete check;
-            auto meter = ui->labelMeter->itemAt(i)->widget();
-            ui->labelMeter->removeWidget(meter);
+            auto meter = ui->verticalMeter->itemAt(i)->widget();
+            ui->verticalMeter->removeWidget(meter);
             delete meter;
-            auto name = ui->labelNames->itemAt(i)->widget();
-            ui->labelNames->removeWidget(name);
+            auto name = ui->verticalNames->itemAt(i)->widget();
+            ui->verticalNames->removeWidget(name);
             delete name;
             break;
         }
@@ -837,22 +867,22 @@ void MainWindow::on_btnRemove_clicked()
 
 void MainWindow::on_btnUp_clicked()
 {
-    for (int i = 2; i < ui->labelCheck->count(); ++i)
+    for (int i = 1; i < ui->verticalCheck->count(); ++i)
     {
-        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        auto check = dynamic_cast<QCheckBox*>(ui->verticalCheck->itemAt(i)->widget());
         if (check &&check->isChecked())
         {
-            QWidget* check = ui->labelCheck->itemAt(i)->widget();
-            ui->labelCheck->removeWidget(check);
-            ui->labelCheck->insertWidget(i-1, check);
+            QWidget* check = ui->verticalCheck->itemAt(i)->widget();
+            ui->verticalCheck->removeWidget(check);
+            ui->verticalCheck->insertWidget(i-1, check);
 
-            QWidget* name = ui->labelNames->itemAt(i)->widget();
-            ui->labelNames->removeWidget(name);
-            ui->labelNames->insertWidget(i-1, name);
+            QWidget* name = ui->verticalNames->itemAt(i)->widget();
+            ui->verticalNames->removeWidget(name);
+            ui->verticalNames->insertWidget(i-1, name);
 
-            QWidget* meter = ui->labelMeter->itemAt(i)->widget();
-            ui->labelMeter->removeWidget(meter);
-            ui->labelMeter->insertWidget(i-1, meter);
+            QWidget* meter = ui->verticalMeter->itemAt(i)->widget();
+            ui->verticalMeter->removeWidget(meter);
+            ui->verticalMeter->insertWidget(i-1, meter);
             break;
         }
     }
@@ -860,22 +890,22 @@ void MainWindow::on_btnUp_clicked()
 
 void MainWindow::on_btnDown_clicked()
 {
-    for (int i = 1; i < ui->labelCheck->count()-1; ++i)
+    for (int i = 0; i < ui->verticalCheck->count()-1; ++i)
     {
-        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        auto check = dynamic_cast<QCheckBox*>(ui->verticalCheck->itemAt(i)->widget());
         if (check &&check->isChecked())
         {
-            QWidget* check = ui->labelCheck->itemAt(i)->widget();
-            ui->labelCheck->removeWidget(check);
-            ui->labelCheck->insertWidget(i+1, check);
+            QWidget* check = ui->verticalCheck->itemAt(i)->widget();
+            ui->verticalCheck->removeWidget(check);
+            ui->verticalCheck->insertWidget(i+1, check);
 
-            QWidget* name = ui->labelNames->itemAt(i)->widget();
-            ui->labelNames->removeWidget(name);
-            ui->labelNames->insertWidget(i+1, name);
+            QWidget* name = ui->verticalNames->itemAt(i)->widget();
+            ui->verticalNames->removeWidget(name);
+            ui->verticalNames->insertWidget(i+1, name);
 
-            QWidget* meter = ui->labelMeter->itemAt(i)->widget();
-            ui->labelMeter->removeWidget(meter);
-            ui->labelMeter->insertWidget(i+1, meter);
+            QWidget* meter = ui->verticalMeter->itemAt(i)->widget();
+            ui->verticalMeter->removeWidget(meter);
+            ui->verticalMeter->insertWidget(i+1, meter);
             break;
         }
     }
@@ -1014,6 +1044,25 @@ void MainWindow::on_btnTest_clicked()
 //    sleep(1);
 
 //    ui->statusbar->showMessage(tr("read valus: %1").arg(value));
+}
 
+void MainWindow::on_btnStoreValues_clicked()
+{
+    /// TODO: Use file dialog
+    std::ofstream fout("./values.yaml");
+    YAML::Node stored_values;
+    stored_values << m_values;
+    YAML::Node value_list;
+    value_list["value_list"] = stored_values;
+    fout << value_list;
+    fout.close();
+}
+
+
+void MainWindow::on_btnLoadValues_clicked()
+{
+    /// TODO: Use file dialog
+    YAML::Node value_list = YAML::LoadFile("./values.yaml");
+    value_list["value_list"] >> m_values;
 }
 

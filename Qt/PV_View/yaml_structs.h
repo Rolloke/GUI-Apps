@@ -111,6 +111,10 @@ struct meter
     friend void operator >> (const YAML::Node& node, meter& met);
 };
 
+typedef QMap<QString, QString> stored_value_list;
+void operator >> (const YAML::Node& node, stored_value_list& sv);
+void operator << (YAML::Node& node, const stored_value_list& sv);
+
 double  get_value(const measured_value& value_param, quint16* address);
 size_t  get_value_size(const measured_value& value_param);
 

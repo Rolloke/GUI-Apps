@@ -25,6 +25,7 @@ QT_END_NAMESPACE
 
 struct meter;
 struct measured_value;
+typedef QMap<QString, QString> stored_value_list;
 
 class MainWindow : public QMainWindow
 {
@@ -62,6 +63,10 @@ private slots:
     void on_btnReadConfig_clicked();
     void on_btnTest_clicked();
 
+    void on_btnStoreValues_clicked();
+
+    void on_btnLoadValues_clicked();
+
 private:
     QString getConfigName() const;
     bool load_yaml(const QString &filename);
@@ -95,11 +100,15 @@ private:
     QString        m_pending_request;
     read           m_read_permanent = read::off;
     int            m_read_index = 0;
-    int            m_request_index = 0;
+    int            m_request_name_index = 0;
+    int            m_request_section_index = 0;
 
     QString        mDocumentFile;
     std::unique_ptr<meter> m_meter;
     bool           m_gui_mode = true;
+
+    QString        m_store_value_section;
+    stored_value_list m_values;
 
     QString        mConfigurationFileName;
     QFile          m_configuration_file;
