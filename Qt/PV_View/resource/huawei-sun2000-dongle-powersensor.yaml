@@ -62,6 +62,11 @@ params:
 	"0:Disable",
 	"1:Enable" ]
 
+- name: "Fast Power scheduling"
+  choice: [
+        "0:Disable",
+        "1:Enable" ]
+
 - name: "Remote charge/discharge control mode"
   choice: [
 	"0:Local control",
@@ -159,7 +164,36 @@ params:
 	"19:U/Un value at point 10:uint16:10:%",
 	"20:PF value at point 10:int16:1000:N/A"]
 
-render: /home/rolf/projects/Qt/PV_View/resource/registers.yaml
+- name: "Grid code"
+  choice: [
+        "0:VDE-AR-N-4105:Germany",
+        "1:NB/T 32004:China",
+        "2:UTE C 15-712-1(A):France",
+        "3:UTE C 15-712-1(B):France",
+        "4:UTE C 15-712-1(C):France",
+        "5:VDE 0126-1-1-BU:Bulgarian",
+        "6:VDE 0126-1-1-GR(A):Greece",
+        "7:VDE 0126-1-1-GR(B):Greece",
+        "8:BDEW-MV:Germany",
+        "9:G59-England:United Kingdom",
+        "10:G59-Scotland:United Kingdom",
+        "11:G83-England:United Kingdom",
+        "12:G83-ScotlandUnited Kingdom",
+        "13:CEI0-21:Italy",
+        "14:EN50438-CZ:Czech Republic",
+        "15:RD1699/661:Spain",
+        "28:BDEW-MV480:Germany",
+        "69:VDE-AR-N-4105-MV480:Germany",
+        "124:BDEW-MV800:Germany",
+        "180:VDE-AR-N4120-HV:Germany",
+        "181:VDE-AR-N4120-HV480:Germany",
+        "182:VDE-AR-N4120-HV800:Germany",
+        "268:VDE-AR-N4110:Germany",
+        "269:VDE-AR-N4110-MV480:Germany",
+        "270:VDE-AR-N4110-MV800:Germany",
+        "405:VDE-AR-N4130-800:Germany 4130" ]
+
+render: registers.yaml
 
 
 

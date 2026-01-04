@@ -7,6 +7,7 @@
 #include <QModbusDataUnit>
 #include <QFile>
 #include <QThread>
+#include <QStandardItemModel>
 
 #if SERIALBUS == 1
 class QModelIndex;
@@ -17,7 +18,6 @@ class QModbusReply;
 #include <mothbus/adu/tcp.h>
 #endif
 
-class QStandardItemModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,6 +26,19 @@ QT_END_NAMESPACE
 struct meter;
 struct measured_value;
 typedef QMap<QString, QString> stored_value_list;
+
+
+class CheckboxItemModel : public QStandardItemModel
+{
+public:
+    CheckboxItemModel(int rows, int columns, QObject *parent = nullptr);
+
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    void setCheckedColumn(int checked);
+private:
+    int mChecked = 0;
+};
 
 class MainWindow : public QMainWindow
 {
@@ -62,10 +75,12 @@ private slots:
     void btnCheckboxClicked();
     void on_btnReadConfig_clicked();
     void on_btnTest_clicked();
-
     void on_btnStoreValues_clicked();
-
     void on_btnLoadValues_clicked();
+    void on_btnSendValueToPv_clicked();
+    void on_btnUpdataList_clicked();
+
+    void on_tableViewSchedule_clicked(const QModelIndex &index);
 
 private:
     QString getConfigName() const;
@@ -80,6 +95,7 @@ private:
 
     void create_modbus_device();
     void disconnect_modbus_device();
+    void update_schedule_value_list();
 
 #if SERIALBUS == 1
     QModbusReply  *lastRequest   = nullptr;
@@ -97,6 +113,8 @@ private:
     QStandardItemModel*  mListModel = nullptr;
     QList<int>           m_hidden_columns;
 
+    CheckboxItemModel*  mListModelSchedule = nullptr;
+
     QString        m_pending_request;
     read           m_read_permanent = read::off;
     int            m_read_index = 0;
@@ -111,8 +129,8 @@ private:
     stored_value_list m_values;
 
     QString        mConfigurationFileName;
-    QFile          m_configuration_file;
-
 
 };
+
+
 #endif // MAINWINDOW_H

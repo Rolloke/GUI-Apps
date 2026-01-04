@@ -353,7 +353,7 @@ InverterScheduling:
         slave: 0
         register: 40125
         register_type: holding
-        data_type: int16
+        data_type: uint16
         scale: 0.1
         precision: 1
         count: 1
@@ -377,7 +377,7 @@ InverterScheduling:
         slave: 0
         register: 40129
         register_type: holding
-        data_type: int16
+        data_type: int32
         scale: 0.001
         precision: 1
         count: 2
@@ -437,7 +437,7 @@ InverterScheduling:
         slave: 0
         register: 40198
         register_type: holding
-        data_type: int16
+        data_type: uint16
         scale: 1
         precision: 1
         count: 1
@@ -473,17 +473,17 @@ InverterScheduling:
         slave: 0
         register: 42019
         register_type: holding
-        data_type: int16
+        data_type: uint32
         scale: 1
         precision: 1
-        count: 1
+        count: 2
 
 InverterControl:
 
       - name: Startup 
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 40200
         register_type: holding
@@ -496,7 +496,7 @@ InverterControl:
       - name: Shutdown
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 40201
         register_type: holding
@@ -509,7 +509,7 @@ InverterControl:
       - name: WLAN wakeup
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 45052
         register_type: holding
@@ -519,10 +519,23 @@ InverterControl:
         count: 1
         values: [ 0, 1 ]
 
+      # - name: Fast Power scheduling
+      #   hub: huawei_solar
+      #   unit_of_measurement:
+      #   device_class: control
+      #   slave: 1
+      #   register: 45086
+      #   register_type: holding
+      #   data_type: uint16
+      #   scale: 1
+      #   precision: 1
+      #   count: 1
+      #   values: [ 0, 1 ]
+
       - name: TLS encryption
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 43098
         register_type: holding
@@ -535,7 +548,7 @@ InverterControl:
       - name: Scheduled task
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 47674
         register_type: holding
@@ -548,7 +561,7 @@ InverterControl:
       - name: Phase-to-ground short-circuit protection
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 48090
         register_type: holding
@@ -561,7 +574,7 @@ InverterControl:
       - name: Remote charge/discharge control mode
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 47589
         register_type: holding
@@ -574,7 +587,7 @@ InverterControl:
       - name: Peak Shaving
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 47954
         register_type: holding
@@ -587,7 +600,7 @@ InverterControl:
       - name: AI optical storage
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 48020
         register_type: holding
@@ -600,7 +613,7 @@ InverterControl:
       - name: Backup Box model
         hub: huawei_solar
         unit_of_measurement: 
-        device_class: scheduling
+        device_class: control
         slave: 1
         register: 48089
         register_type: holding
@@ -610,13 +623,26 @@ InverterControl:
         count: 1
         values: [ 0, 1, 2, 3 ]
 
+
 InverterValues:
+
+      - name: System time
+        hub: huawei_solar
+        unit_of_measurement: s
+        device_class: time
+        slave: 0
+        register: 40000
+        register_type: holding
+        data_type: uint32
+        scale: 1
+        precision: 1
+        count: 2
 
       - name: Default maximum feed-in power
         hub: huawei_solar
         unit_of_measurement: kW
         device_class: power
-        slave: 1
+        slave: 0
         register: 47675
         register_type: holding
         data_type: int32
@@ -628,7 +654,7 @@ InverterValues:
         hub: huawei_solar
         unit_of_measurement: "%/s"
         device_class: gradient
-        slave: 1
+        slave: 0
         register: 47677
         register_type: holding
         data_type: uint32
@@ -640,7 +666,7 @@ InverterValues:
         hub: huawei_solar
         unit_of_measurement: "%"
         device_class: percent
-        slave: 1
+        slave: 0
         register: 47955
         register_type: holding
         data_type: uint16

@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabTable">
        <property name="sizePolicy">
@@ -66,6 +66,9 @@
         </item>
         <item row="7" column="2" colspan="2">
          <widget class="QPushButton" name="btnStopRead">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Stop</string>
           </property>
@@ -151,6 +154,9 @@
         </item>
         <item row="7" column="1">
          <widget class="QPushButton" name="btnStartRead">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Read</string>
           </property>
@@ -562,6 +568,9 @@
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QPushButton" name="btnStart">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="locale">
                <locale language="English" country="UnitedStates"/>
               </property>
@@ -572,6 +581,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnStop">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Stop</string>
               </property>
@@ -605,86 +617,134 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabControl">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
        <property name="accessibleName">
         <string/>
        </property>
        <attribute name="title">
         <string>Control</string>
        </attribute>
-       <widget class="QPushButton" name="btnStartup">
+       <widget class="QGroupBox" name="groupBox">
         <property name="geometry">
          <rect>
-          <x>920</x>
-          <y>470</y>
-          <width>80</width>
-          <height>24</height>
+          <x>9</x>
+          <y>-1</y>
+          <width>1011</width>
+          <height>311</height>
          </rect>
         </property>
-        <property name="text">
-         <string>Startup</string>
+        <property name="title">
+         <string>Inverter Schedule Values</string>
         </property>
-       </widget>
-       <widget class="QPushButton" name="btnReadConfig">
-        <property name="geometry">
-         <rect>
-          <x>800</x>
-          <y>10</y>
-          <width>201</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Read Configuration Values</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelFilterForConfig">
-        <property name="geometry">
-         <rect>
-          <x>810</x>
-          <y>50</y>
-          <width>51</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Filter:</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="edtFilterForConfig">
-        <property name="geometry">
-         <rect>
-          <x>870</x>
-          <y>50</y>
-          <width>141</width>
-          <height>24</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="btnStoreValues">
-        <property name="geometry">
-         <rect>
-          <x>840</x>
-          <y>110</y>
-          <width>101</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Save Values</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="btnLoadValues">
-        <property name="geometry">
-         <rect>
-          <x>840</x>
-          <y>150</y>
-          <width>101</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Load Values</string>
-        </property>
+        <widget class="QTableView" name="tableViewSchedule">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>991</width>
+           <height>241</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelFilterForSchedule">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>280</y>
+           <width>51</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Filter:</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="edtFilterForSchedule">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>280</y>
+           <width>151</width>
+           <height>24</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnReadConfig">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>280</y>
+           <width>151</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Read from PV</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnLoadValues">
+         <property name="geometry">
+          <rect>
+           <x>540</x>
+           <y>280</y>
+           <width>151</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Load from File</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnStoreValues">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>280</y>
+           <width>151</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Save to File</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnSendValueToPv">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>810</x>
+           <y>280</y>
+           <width>191</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Update Checked value to PV</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnUpdataList">
+         <property name="geometry">
+          <rect>
+           <x>710</x>
+           <y>280</y>
+           <width>80</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Update</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>

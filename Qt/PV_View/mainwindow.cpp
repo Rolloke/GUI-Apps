@@ -9,12 +9,12 @@
 #include <QUrl>
 #include <QLoggingCategory>
 #include <QSerialPort>
-#include <QStandardItemModel>
 #include <QProgressBar>
 #include <QProgressDialog>
 #include <QCheckBox>
 #include <QTimer>
 #include <QFile>
+#include <QMessageBox>
 #include <fstream>
 
 #if SERIALBUS == 1
@@ -32,8 +32,9 @@ using boost::asio::ip::tcp;
 
 /// TODO: RW Values (scheduled values for storing scheduled parameters)
 /// [x] read from file and write to file
-/// [ ] show in table on control tab
-/// [ ] checkbox to select values to write back to PV
+/// [x] show in table on control tab
+/// [x] checkbox to select values to write back to PV
+/// [ ] resize elements in control tab
 /// [ ] show control buttons defined in yaml (depending on values: [ 0 ])
 /// [ ] show array parameters defined in "choice" parameter description
 /// [ ] - show characteristic curve
@@ -62,11 +63,15 @@ int     to_parity(const QString& parity);
 #if SERIALBUS == 1
 QString to_string(QModbusPdu::ExceptionCode code);
 #endif
-
-enum Table
+struct Register { enum Table
 {
     eName, eAddress, eType, eDecode, eScale, eValue, eModel, eLast
-};
+};};
+
+struct Schedule { enum Table
+{
+    eName, eValue, eLast
+    }; };
 
 enum ModbusConnection
 {
@@ -87,24 +92,33 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     setWindowIcon(QIcon(":/48x48/go-home.png"));
 
     QStringList fSectionNames = { tr("Name"), tr("Address"), tr("Type"), tr("Decode"), tr("Scale"), tr("Value"), tr("Unit/Type")};
-    mListModel = new QStandardItemModel(0, eLast, this);
-    for (int fSection = 0; fSection < eLast; ++fSection)
+    mListModel = new QStandardItemModel(0, Register::eLast, this);
+    for (int fSection = 0; fSection < Register::eLast; ++fSection)
     {
         mListModel->setHeaderData(fSection, Qt::Horizontal, fSectionNames[fSection]);
-        if (!m_hidden_columns.contains(fSection))
-        {
-        }
     }
 
     ui->tableView->setModel(mListModel);
-    for (int fSection = 0; fSection < eLast; ++fSection)
+    for (int fSection = 0; fSection < Register::eLast; ++fSection)
     {
-        if (!m_hidden_columns.contains(fSection))
-        {
-            ui->tableView->horizontalHeader()->setSectionResizeMode(fSection , fSection == 0 ? QHeaderView::Stretch : QHeaderView::ResizeToContents);
-        }
+        ui->tableView->horizontalHeader()->setSectionResizeMode(fSection , fSection == 0 ? QHeaderView::Stretch : QHeaderView::ResizeToContents);
     }
     ui->tableView->horizontalHeader()->setStretchLastSection(false);
+
+    QStringList fSectionNamesSchedule = { tr("Name"), tr("Data") };
+    mListModelSchedule = new CheckboxItemModel(0, Schedule::eLast, this);
+    for (int fSection = 0; fSection < Schedule::eLast; ++fSection)
+    {
+        mListModelSchedule->setHeaderData(fSection, Qt::Horizontal, fSectionNamesSchedule[fSection]);
+    }
+
+    ui->tableViewSchedule->setModel(mListModelSchedule);
+    for (int fSection = 0; fSection < Schedule::eLast; ++fSection)
+    {
+        ui->tableViewSchedule->horizontalHeader()->setSectionResizeMode(fSection , fSection == 0 ? QHeaderView::Stretch : QHeaderView::ResizeToContents);
+    }
+    ui->tableViewSchedule->horizontalHeader()->setStretchLastSection(false);
+
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
@@ -239,7 +253,14 @@ bool MainWindow::load_yaml(const QString &filename)
         YAML::Node yaml_document = YAML::LoadFile(filename.toStdString());
         m_meter = std::make_unique<meter>();
         yaml_document >> *m_meter;
-
+        QString render_file = m_meter->m_render_source;
+        bool render_file_exitst = QFileInfo(render_file).exists();
+        if (!render_file_exitst)
+        {
+            QFileInfo info(filename);
+            render_file = info.absolutePath() + "/" + render_file;
+            render_file_exitst = QFileInfo(render_file).exists();
+        }
         if (m_meter->m_render_source.contains("{{-"))
         {
             m_meter->m_render_source = m_meter->m_render_source.replace("{{-", "command: ");
@@ -247,10 +268,9 @@ bool MainWindow::load_yaml(const QString &filename)
             rendered >> m_meter->m_rendered;
             m_request_name_index = 1;
         }
-        else if (QFileInfo(m_meter->m_render_source).exists())
+        else if (render_file_exitst)
         {
-            /// TODO: use relative file path
-            YAML::Node rendered = YAML::LoadFile(m_meter->m_render_source.toStdString());
+            YAML::Node rendered = YAML::LoadFile(render_file.toStdString());
             rendered >> m_meter->m_rendered;
             m_request_name_index    = 2;
             m_request_section_index = 1;
@@ -270,12 +290,12 @@ bool MainWindow::load_yaml(const QString &filename)
              measurement != m_meter->m_rendered.m_measurements.constEnd(); ++measurement)
         {
             mListModel->insertRows(current_row, 1);
-            mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), measurement.key());
-            mListModel->setData(mListModel->index(current_row, eAddress, QModelIndex()), measurement.value().m_register.m_address);
-            mListModel->setData(mListModel->index(current_row, eType, QModelIndex()), measurement.value().m_register.m_type);
-            mListModel->setData(mListModel->index(current_row, eDecode, QModelIndex()), measurement.value().m_register.m_decode);
-            mListModel->setData(mListModel->index(current_row, eScale, QModelIndex()), measurement.value().m_scale);
-            mListModel->setData(mListModel->index(current_row, eValue, QModelIndex()), "n/a");
+            mListModel->setData(mListModel->index(current_row, Register::eName   , QModelIndex()), measurement.key());
+            mListModel->setData(mListModel->index(current_row, Register::eAddress, QModelIndex()), measurement.value().m_register.m_address);
+            mListModel->setData(mListModel->index(current_row, Register::eType   , QModelIndex()), measurement.value().m_register.m_type);
+            mListModel->setData(mListModel->index(current_row, Register::eDecode , QModelIndex()), measurement.value().m_register.m_decode);
+            mListModel->setData(mListModel->index(current_row, Register::eScale  , QModelIndex()), measurement.value().m_scale);
+            mListModel->setData(mListModel->index(current_row, Register::eValue  , QModelIndex()), "n/a");
             QString str = measurement.value().m_model;
             if (str.isEmpty())
             {
@@ -285,11 +305,12 @@ bool MainWindow::load_yaml(const QString &filename)
             {
                 str = measurement.value().m_device_class;
             }
-            mListModel->setData(mListModel->index(current_row, eModel, QModelIndex()), str);
+            mListModel->setData(mListModel->index(current_row, Register::eModel, QModelIndex()), str);
 
             current_row++;
         }
         m_store_value_section = m_meter->m_parameters.get_default("StoreValuesSection");
+        ui->edtFilterForSchedule->setText(m_store_value_section);
 
         return true;
     }
@@ -384,6 +405,26 @@ void MainWindow::disconnect_modbus_device()
 #endif
 }
 
+void MainWindow::update_schedule_value_list()
+{
+    mListModelSchedule->removeRows(0, mListModelSchedule->rowCount());
+    int current_row = 0;
+
+    QMapIterator<QString, QString> entry(m_values);
+    while (entry.hasNext())
+    {
+        entry.next();
+
+        mListModelSchedule->insertRows(current_row, 1);
+        mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eName , QModelIndex()), entry.key());
+        mListModelSchedule->setData(mListModelSchedule->index(current_row, 0, QModelIndex()), Qt::Checked, Qt::CheckStateRole);
+        mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eValue, QModelIndex()), entry.value());
+
+        current_row++;
+    }
+
+}
+
 void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_name, int values,
                                    double scale, double minimum, double maximum, double value,
                                    const QString& unit)
@@ -417,12 +458,9 @@ void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_na
 //        "QProgressBar::chunk { background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #0000ff, stop: 1 #ff0000 ); border-top-left-radius: 7px;border-bottom-left-radius: 7px; border: 1px solid black;}");
 
     ui->verticalMeter->addWidget(meter, 1);
-    //ui->verticalMeter->setStretchFactor(meter, 1);
 
-//    label_name->setMinimumHeight(meter->height()-5);
     label_name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     ui->verticalNames->addWidget(label_name);
-    //ui->verticalNames->setStretchFactor(label_name, 0);
 
     auto checkbox = new QCheckBox(this);
     connect(checkbox, SIGNAL(clicked()), this, SLOT(btnCheckboxClicked()));
@@ -450,7 +488,7 @@ void MainWindow::read_meter_value()
     case read::table:
         if (m_read_index < mListModel->rowCount())
         {
-            auto current = mListModel->index(m_read_index, eName);
+            auto current = mListModel->index(m_read_index, Register::eName);
             ui->tableView->selectionModel()->select(current, QItemSelectionModel::SelectCurrent);
             ui->tableView->selectionModel()->setCurrentIndex(current, QItemSelectionModel::SelectCurrent);
             readValue(mListModel->data(current).toString());
@@ -458,7 +496,7 @@ void MainWindow::read_meter_value()
     case read::control:
         {
             QStringList keys = m_meter->m_rendered.m_measurements.keys();
-            QString filter = ui->edtFilterForConfig->text();
+            QString filter = ui->edtFilterForSchedule->text();
             if (filter.size())
             {
                 for (; m_read_index < keys.size(); ++m_read_index)
@@ -495,6 +533,14 @@ void MainWindow::on_btnAddMeter_clicked()
 void MainWindow::onStateChanged(int state)
 {
     ui->btnConnect->setText(state == QModbusDevice::UnconnectedState ? tr("Connect") : tr("Disconnect"));
+    ui->btnStartRead->setEnabled(state == QModbusDevice::ConnectedState);
+    ui->btnStopRead->setEnabled(state == QModbusDevice::ConnectedState);
+
+    ui->btnStart->setEnabled(state == QModbusDevice::ConnectedState);
+    ui->btnStop->setEnabled(state == QModbusDevice::ConnectedState);
+
+    ui->btnReadConfig->setEnabled(state == QModbusDevice::ConnectedState);
+    ui->btnSendValueToPv->setEnabled(state == QModbusDevice::ConnectedState);
 }
 #endif
 
@@ -560,7 +606,7 @@ void MainWindow::on_btnConnect_clicked()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    readValue(mListModel->data(mListModel->index(index.row(), static_cast<int>(eName))).toString(), ui->edtMultipleValues->text().toInt());
+    readValue(mListModel->data(mListModel->index(index.row(), static_cast<int>(Register::eName))).toString(), ui->edtMultipleValues->text().toInt());
 }
 
 void MainWindow::readValue(const QString& name, int values)
@@ -652,7 +698,7 @@ void MainWindow::readReady(QVector<quint16>& values)
             if (measurement.m_register.m_decode.contains("char"))
             {
                 char *value = reinterpret_cast<char*>(&values[0]);
-                mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
+                mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(Register::eValue)), value);
                 string_value = value;
                 ++m_read_index;
             }
@@ -714,10 +760,10 @@ void MainWindow::readReady(QVector<quint16>& values)
                     {
                         for (int row = 0; row < mListModel->rowCount(); ++row)
                         {
-                            auto i_name   = mListModel->index(row, static_cast<int>(eName));
+                            auto i_name   = mListModel->index(row, static_cast<int>(Register::eName));
                             if (mListModel->data(i_name).toString() == m_pending_request)
                             {
-                                auto i_value  = mListModel->index(row, static_cast<int>(eValue));
+                                auto i_value  = mListModel->index(row, static_cast<int>(Register::eValue));
                                 mListModel->setData(i_value, value);
                                 if (i_v == 0)
                                 {
@@ -748,9 +794,7 @@ void MainWindow::readReady(QVector<quint16>& values)
                     } break;
                     case read::control:
                     {
-                        std::stringstream stream;
-                        stream << m_pending_request.toStdString() << ": " << value << std::endl;
-                        m_configuration_file.write(stream.str().c_str(), stream.str().size());
+                        /// NOTE: do nothing here
                     } break;
                     }
                     ++m_read_index;
@@ -789,16 +833,9 @@ void MainWindow::readReady(QVector<quint16>& values)
                 } break;
             case read::control:
             {
-                if (string_value.size())
-                {
-                    std::stringstream stream;
-                    stream << m_pending_request.toStdString() << ": " << string_value.toStdString() << std::endl;
-                    m_configuration_file.write(stream.str().c_str(), stream.str().size());
-                }
                 if (m_read_index >= m_meter->m_rendered.m_measurements.count())
                 {
                     m_read_permanent = read::off;
-                    m_configuration_file.close();
                 }
             }  break;
             default: break;
@@ -915,16 +952,9 @@ void MainWindow::on_btnReadConfig_clicked()
 {
     if (m_read_permanent != read::control)
     {
-        QString file = QFileDialog::getSaveFileName(this, tr("Save configuration"), QFileInfo(mConfigurationFileName).absolutePath(), tr("*.txt"));
-        if (file.size())
-        {
-            mConfigurationFileName = file;
-            m_configuration_file.setFileName(file);
-            m_configuration_file.open(QFile::WriteOnly);
-            m_read_permanent = read::control;
-            m_read_index     = 0;
-            read_meter_value();
-        }
+        m_read_permanent = read::control;
+        m_read_index     = 0;
+        read_meter_value();
     }
 }
 
@@ -1048,21 +1078,79 @@ void MainWindow::on_btnTest_clicked()
 
 void MainWindow::on_btnStoreValues_clicked()
 {
-    /// TODO: Use file dialog
-    std::ofstream fout("./values.yaml");
-    YAML::Node stored_values;
-    stored_values << m_values;
-    YAML::Node value_list;
-    value_list["value_list"] = stored_values;
-    fout << value_list;
-    fout.close();
+    QString file = QFileDialog::getSaveFileName(this, tr("Save Schedule Values"), QFileInfo(mConfigurationFileName).absolutePath(), tr("*.yaml"));
+    if (file.size())
+    {
+        mConfigurationFileName = file;
+        if (m_values.size())
+        {
+            std::ofstream fout(mConfigurationFileName.toStdString());
+            YAML::Node stored_values;
+            stored_values << m_values;
+            YAML::Node value_list;
+            value_list["value_list"] = stored_values;
+            fout << value_list;
+            fout.close();
+        }
+    }
 }
 
 
 void MainWindow::on_btnLoadValues_clicked()
 {
-    /// TODO: Use file dialog
-    YAML::Node value_list = YAML::LoadFile("./values.yaml");
-    value_list["value_list"] >> m_values;
+    QString file = QFileDialog::getOpenFileName(this, tr("Read Schedule Values"), QFileInfo(mConfigurationFileName).absolutePath(), tr("*.yaml"));
+    if (file.size())
+    {
+        mConfigurationFileName = file;
+        YAML::Node value_list = YAML::LoadFile(mConfigurationFileName.toStdString());
+        value_list["value_list"] >> m_values;
+        update_schedule_value_list();
+    }
+}
+
+
+void MainWindow::on_btnSendValueToPv_clicked()
+{
+    QMessageBox box(QMessageBox::Warning, tr("Send selected values to PV"), tr("Please be shure that the values are correct, otherwise they may cause damage"));
+    if (box.exec() == QMessageBox::Ok)
+    {
+        /// TODO update value to PV
+    }
+}
+
+
+void MainWindow::on_btnUpdataList_clicked()
+{
+    update_schedule_value_list();
+}
+
+CheckboxItemModel::CheckboxItemModel(int rows, int columns, QObject *parent):
+    QStandardItemModel(rows, columns, parent),
+    mChecked(0)
+{
+}
+
+QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
+{
+    if (role == Qt::CheckStateRole && index.column() == mChecked)
+    {
+        return QStandardItemModel::data(index, role).toBool() ? Qt::Checked : Qt::Unchecked;
+    }
+    return QStandardItemModel::data(index, role);
+}
+
+void CheckboxItemModel::setCheckedColumn(int checked)
+{
+    mChecked = checked;
+}
+
+
+void MainWindow::on_tableViewSchedule_clicked(const QModelIndex &index)
+{
+    if (index.column() == 0)
+    {
+        mListModelSchedule->setData(index, !mListModelSchedule->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
+    }
+
 }
 
