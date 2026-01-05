@@ -23,6 +23,9 @@ params:
 - name: "StoreValuesSection"
   default: "InverterScheduling"
 
+- name: "ControlSection"
+  default: "InverterControl"
+
 - name: "Meter Type"
   choice: [
       "0:single-phase",
@@ -95,26 +98,27 @@ params:
 - name: "cosφ-P/Pn characteristic curve"
   choice: [
 	"0:Number of points:uint16:1:N/A",
-	"1:P/Pn value at point 1:uint16:10:%",
-	"2:cosφ value at point 1:int16:1000:N/A",
-	"3:P/Pn value at point 2:uint16:10:%",
-	"4:cosφ value at point 2:int16:1000:N/A",
-	"5:P/Pn value at point 3:uint16:10:%",
-	"6:cosφ value at point 3:int16:1000:N/A",
-	"7:P/Pn value at point 4:uint16:10:%",
-	"8:cosφ value at point 4:int16:1000:N/A",
-	"9:P/Pn value at point 5:uint16:10:%",
-	"10:cosφ value at point 5:int16:1000:N/A",
-	"11:P/Pn value at point 6:uint16:10:%",
-	"12:cosφ value at point 6:int16:1000:N/A",
-	"13:P/Pn value at point 7:uint16:10:%",
-	"14:cosφ value at point 7:int16:1000:N/A",
-	"15:P/Pn value at point 8:uint16:10:%",
-	"16:cosφ value at point 8:int16:1000:N/A",
-	"17:P/Pn value at point 9:uint16:10:%",
-	"18:cosφ value at point 9:int16:1000:N/A",
-	"19:P/Pn value at point 10:uint16:10:%",
-	"20:cosφ value at point 10:int16:1000:N/A" ]
+        "1:P/Pn value at point:1:uint16:10:%",
+        "2:cosφ value at point:1:int16:1000:N/A",
+        "3:P/Pn value at point:2:uint16:10:%",
+        "4:cosφ value at point:2:int16:1000:N/A",
+        "5:P/Pn value at point:3:uint16:10:%",
+        "6:cosφ value at point:3:int16:1000:N/A",
+        "7:P/Pn value at point:4:uint16:10:%",
+        "8:cosφ value at point:4:int16:1000:N/A",
+        "9:P/Pn value at point:5:uint16:10:%",
+        "10:cosφ value at point:5:int16:1000:N/A",
+        "11:P/Pn value at point:6:uint16:10:%",
+        "12:cosφ value at point:6:int16:1000:N/A",
+        "13:P/Pn value at point:7:uint16:10:%",
+        "14:cosφ value at point:7:int16:1000:N/A",
+        "15:P/Pn value at point:8:uint16:10:%",
+        "16:cosφ value at point:8:int16:1000:N/A",
+        "17:P/Pn value at point:9:uint16:10:%",
+        "18:cosφ value at point:9:int16:1000:N/A",
+        "19:P/Pn value at point:10:uint16:10:%",
+        "20:cosφ value at point:10:int16:1000:N/A" ]
+  type: "id:name:index:type:scale"
 
 - name: "Q-U characteristic curve"
   choice: [
@@ -139,6 +143,7 @@ params:
 	"18:Q/S value at point 9:int16:1000:N/A",
 	"19:U/Un value at point 10:uint16:10:%",
 	"20:Q/S value at point 10:int16:1000:N/A" ] 
+  type: "id:name:index:type:scale"
 
 - name: "PF-U characteristic curve"
   choice: [
@@ -163,6 +168,7 @@ params:
 	"18:PF value at point 9:int16:1000:N/A",
 	"19:U/Un value at point 10:uint16:10:%",
 	"20:PF value at point 10:int16:1000:N/A"]
+  type: "id:name:index:type:scale"
 
 - name: "Grid code"
   choice: [
@@ -192,6 +198,7 @@ params:
         "269:VDE-AR-N4110-MV480:Germany",
         "270:VDE-AR-N4110-MV800:Germany",
         "405:VDE-AR-N4130-800:Germany 4130" ]
+  type: "id:name:country"
 
 render: registers.yaml
 

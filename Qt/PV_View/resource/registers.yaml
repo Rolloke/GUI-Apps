@@ -1,5 +1,5 @@
 
-command: usage"measure"
+command: usage"read"
 Inverter:
       ############################
       # ☀️ INVERTER – SUN2000

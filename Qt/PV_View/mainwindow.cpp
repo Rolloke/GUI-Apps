@@ -34,7 +34,7 @@ using boost::asio::ip::tcp;
 /// [x] read from file and write to file
 /// [x] show in table on control tab
 /// [x] checkbox to select values to write back to PV
-/// [ ] resize elements in control tab
+/// [x] resize elements in control tab
 /// [ ] show control buttons defined in yaml (depending on values: [ 0 ])
 /// [ ] show array parameters defined in "choice" parameter description
 /// [ ] - show characteristic curve

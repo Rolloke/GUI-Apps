@@ -629,123 +629,129 @@
        <attribute name="title">
         <string>Control</string>
        </attribute>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>-1</y>
-          <width>1011</width>
-          <height>311</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Inverter Schedule Values</string>
-        </property>
-        <widget class="QTableView" name="tableViewSchedule">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>991</width>
-           <height>241</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelFilterForSchedule">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>280</y>
-           <width>51</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Filter:</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="edtFilterForSchedule">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>280</y>
-           <width>151</width>
-           <height>24</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnReadConfig">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>220</x>
-           <y>280</y>
-           <width>151</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Read from PV</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnLoadValues">
-         <property name="geometry">
-          <rect>
-           <x>540</x>
-           <y>280</y>
-           <width>151</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Load from File</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnStoreValues">
-         <property name="geometry">
-          <rect>
-           <x>380</x>
-           <y>280</y>
-           <width>151</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Save to File</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnSendValueToPv">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>810</x>
-           <y>280</y>
-           <width>191</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Update Checked value to PV</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnUpdataList">
-         <property name="geometry">
-          <rect>
-           <x>710</x>
-           <y>280</y>
-           <width>80</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Update</string>
-         </property>
-        </widget>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupInverterSchedule">
+          <property name="title">
+           <string>Inverter Schedule Values</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QTableView" name="tableViewSchedule"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="labelFilterForSchedule">
+               <property name="text">
+                <string>Filter:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="edtFilterForSchedule"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnReadConfig">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Read from PV</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnStoreValues">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Save to File</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnLoadValues">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Load from File</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSendValueToPv">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>Update Checked value to PV</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnUpdataList">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Update</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupInverterControl">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>Inverter Controls</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <layout class="QGridLayout" name="gridLayoutControls"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
