@@ -25,7 +25,7 @@ struct products
 
 struct choices
 {
-    std::vector<QString> m_choice;
+    QStringList m_choice;
 
     friend void operator >> (const YAML::Node& node, choices& s_choices);
 };
@@ -44,7 +44,7 @@ struct parameters
     friend void operator >> (const YAML::Node& nodes, parameters& s_parameters);
 
     QString get_choice(const QString& name, int n=0);
-    const std::vector<QString> &get_choices(const QString& name);
+    const QStringList &get_choices(const QString& name);
     QString get_type(const QString& name);
     QString get_default(const QString& name);
     bool    is_allinone(const QString& name);

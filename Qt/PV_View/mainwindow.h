@@ -79,8 +79,8 @@ private slots:
     void on_btnLoadValues_clicked();
     void on_btnSendValueToPv_clicked();
     void on_btnUpdataList_clicked();
-
     void on_tableViewSchedule_clicked(const QModelIndex &index);
+    void on_btn_clicked();
 
 private:
     QString getConfigName() const;

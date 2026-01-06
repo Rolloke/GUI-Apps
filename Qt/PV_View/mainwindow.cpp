@@ -12,6 +12,7 @@
 #include <QProgressBar>
 #include <QProgressDialog>
 #include <QCheckBox>
+#include <QComboBox>
 #include <QTimer>
 #include <QFile>
 #include <QMessageBox>
@@ -35,7 +36,7 @@ using boost::asio::ip::tcp;
 /// [x] show in table on control tab
 /// [x] checkbox to select values to write back to PV
 /// [x] resize elements in control tab
-/// [ ] show control buttons defined in yaml (depending on values: [ 0 ])
+/// [x] show control buttons defined in yaml (depending on values: [ 0 ])
 /// [ ] show array parameters defined in "choice" parameter description
 /// [ ] - show characteristic curve
 /// [ ] - show info
@@ -283,19 +284,27 @@ bool MainWindow::load_yaml(const QString &filename)
 
         ui->statusbar->showMessage(tr("read document \"%1\" successfully").arg(QFileInfo(filename).baseName()));
 
-        mListModel->removeRows(0, mListModel->rowCount());
-        int current_row = 0;
+        m_store_value_section = m_meter->m_parameters.get_default("StoreValuesSection");
+        ui->edtFilterForSchedule->setText(m_store_value_section);
 
+        QString control_filter =   m_meter->m_parameters.get_default("ControlSection");
+        ui->edtFilterForControls->setText(control_filter);
+
+        mListModel->removeRows(0, mListModel->rowCount());
+        int list_row = 0;
+        int control_columns = ui->spinControlColumns->value() * 1;
+        int control_row     = 0;
+        int control_column  = 0;
         for (auto measurement= m_meter->m_rendered.m_measurements.constBegin();
              measurement != m_meter->m_rendered.m_measurements.constEnd(); ++measurement)
         {
-            mListModel->insertRows(current_row, 1);
-            mListModel->setData(mListModel->index(current_row, Register::eName   , QModelIndex()), measurement.key());
-            mListModel->setData(mListModel->index(current_row, Register::eAddress, QModelIndex()), measurement.value().m_register.m_address);
-            mListModel->setData(mListModel->index(current_row, Register::eType   , QModelIndex()), measurement.value().m_register.m_type);
-            mListModel->setData(mListModel->index(current_row, Register::eDecode , QModelIndex()), measurement.value().m_register.m_decode);
-            mListModel->setData(mListModel->index(current_row, Register::eScale  , QModelIndex()), measurement.value().m_scale);
-            mListModel->setData(mListModel->index(current_row, Register::eValue  , QModelIndex()), "n/a");
+            mListModel->insertRows(list_row, 1);
+            mListModel->setData(mListModel->index(list_row, Register::eName   , QModelIndex()), measurement.key());
+            mListModel->setData(mListModel->index(list_row, Register::eAddress, QModelIndex()), measurement.value().m_register.m_address);
+            mListModel->setData(mListModel->index(list_row, Register::eType   , QModelIndex()), measurement.value().m_register.m_type);
+            mListModel->setData(mListModel->index(list_row, Register::eDecode , QModelIndex()), measurement.value().m_register.m_decode);
+            mListModel->setData(mListModel->index(list_row, Register::eScale  , QModelIndex()), measurement.value().m_scale);
+            mListModel->setData(mListModel->index(list_row, Register::eValue  , QModelIndex()), "n/a");
             QString str = measurement.value().m_model;
             if (str.isEmpty())
             {
@@ -305,12 +314,30 @@ bool MainWindow::load_yaml(const QString &filename)
             {
                 str = measurement.value().m_device_class;
             }
-            mListModel->setData(mListModel->index(current_row, Register::eModel, QModelIndex()), str);
+            mListModel->setData(mListModel->index(list_row, Register::eModel, QModelIndex()), str);
 
-            current_row++;
+            list_row++;
+
+            if (get_request(measurement.key(), m_request_section_index) == control_filter)
+            {
+                QString name = get_request(measurement.key(), m_request_name_index);
+                const auto& choices = m_meter->m_parameters.get_choices(name);
+                if (choices.size())
+                {
+                    QPushButton *button = new QPushButton(tr("\"") + name + tr("\" send value: "), this);
+                    QComboBox   *combo  = new QComboBox(this);
+                    connect(button, SIGNAL(pressed()), this, SLOT(on_btn_clicked()));
+                    combo->addItems(choices);
+                    ui->gridLayoutControls->addWidget(button, control_row, control_column++);
+                    ui->gridLayoutControls->addWidget(combo, control_row, control_column++);
+                    if (control_column > control_columns)
+                    {
+                        control_column = 0;
+                        control_row++;
+                    }
+                }
+            }
         }
-        m_store_value_section = m_meter->m_parameters.get_default("StoreValuesSection");
-        ui->edtFilterForSchedule->setText(m_store_value_section);
 
         return true;
     }
@@ -727,7 +754,7 @@ void MainWindow::readReady(QVector<quint16>& values)
                     string_value = tr("%1").arg(value);
                     if (measurement.m_scale == 1)
                     {
-                        const std::vector<QString>& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, m_request_name_index));
+                        const QStringList& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, m_request_name_index));
                         int no_of_choices = choices.size();
                         if (no_of_choices)
                         {
@@ -1118,6 +1145,14 @@ void MainWindow::on_btnSendValueToPv_clicked()
     }
 }
 
+void MainWindow::on_btn_clicked()
+{
+    QMessageBox box(QMessageBox::Warning, tr("Send selected values to PV"), tr("Please be shure that the values are correct, otherwise they may cause damage"));
+    if (box.exec() == QMessageBox::Ok)
+    {
+        /// TODO update value to PV
+    }
+}
 
 void MainWindow::on_btnUpdataList_clicked()
 {

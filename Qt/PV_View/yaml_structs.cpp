@@ -39,11 +39,11 @@ void operator >> (const YAML::Node& node, choices& s_choices)
 {
     if (node.IsDefined() && node.Type() == YAML::NodeType::Sequence)
     {
-        s_choices.m_choice.resize(node.size());
-        int i=0;
         for (const auto& choice : node)
         {
-            choice >> s_choices.m_choice[i++];
+            QString str;
+            choice >> str;
+            s_choices.m_choice.push_back(str);
         }
     }
 }
@@ -103,9 +103,9 @@ QString parameters::get_choice(const QString& name, int n)
     return "";
 }
 
-const std::vector<QString>& parameters::get_choices(const QString& name)
+const QStringList& parameters::get_choices(const QString& name)
 {
-    static std::vector<QString> dummy;
+    static QStringList dummy;
     if (m_map.contains(name))
     {
         return m_map[name].m_choice.m_choice;

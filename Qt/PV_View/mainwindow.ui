@@ -641,6 +641,9 @@
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="spacing">
+              <number>10</number>
+             </property>
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -661,7 +664,14 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="edtFilterForSchedule"/>
+              <widget class="QLineEdit" name="edtFilterForSchedule">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="btnReadConfig">
@@ -728,6 +738,19 @@
                </property>
               </widget>
              </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </item>
           </layout>
@@ -746,7 +769,74 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <layout class="QGridLayout" name="gridLayoutControls"/>
+            <layout class="QGridLayout" name="gridLayoutControls">
+             <property name="horizontalSpacing">
+              <number>10</number>
+             </property>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="labelFilterForControlls">
+               <property name="text">
+                <string>Filter: </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="edtFilterForControls">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="labelControlColumns">
+               <property name="text">
+                <string>Columns: </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spinControlColumns">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="value">
+                <number>2</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
