@@ -91,7 +91,8 @@ private:
                            double scale, double minimum, double maximum, double value,
                            const QString &unit);
     void read_meter_value();
-    void updateButtons();
+    void update_buttons();
+    void init_table_and_controls();
 
     void create_modbus_device();
     void disconnect_modbus_device();
@@ -132,5 +133,6 @@ private:
 
 };
 
+void clearLayout(QLayout *layout);
 
 #endif // MAINWINDOW_H

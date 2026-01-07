@@ -161,7 +161,7 @@
            <string>Read</string>
           </property>
           <property name="checkable">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -340,9 +340,9 @@
        <attribute name="title">
         <string>Meter</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
+       <layout class="QGridLayout" name="gridLayoutMeter">
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="verticalLayoutMeter">
           <property name="spacing">
            <number>5</number>
           </property>
@@ -350,7 +350,7 @@
            <enum>QLayout::SetMinAndMaxSize</enum>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1,0">
+           <layout class="QHBoxLayout" name="horizontalLayoutMeter" stretch="0,1,0">
             <property name="spacing">
              <number>5</number>
             </property>
@@ -565,7 +565,7 @@
            </spacer>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
+           <layout class="QHBoxLayout" name="horizontalLayoutMeterButtons">
             <item>
              <widget class="QPushButton" name="btnStart">
               <property name="enabled">
@@ -629,18 +629,18 @@
        <attribute name="title">
         <string>Control</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayoutSchedule1">
         <item>
          <widget class="QGroupBox" name="groupInverterSchedule">
           <property name="title">
            <string>Inverter Schedule Values</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayoutSchedule2">
            <item>
             <widget class="QTableView" name="tableViewSchedule"/>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <layout class="QHBoxLayout" name="horizontalLayoutScheduleControl">
              <property name="spacing">
               <number>10</number>
              </property>
@@ -674,6 +674,13 @@
               </widget>
              </item>
              <item>
+              <widget class="QLabel" name="labelFor">
+               <property name="text">
+                <string>for</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="btnReadConfig">
                <property name="enabled">
                 <bool>false</bool>
@@ -686,6 +693,16 @@
                </property>
                <property name="text">
                 <string>Read from PV</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSendValueToPv">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>Update Checked value to PV</string>
                </property>
               </widget>
              </item>
@@ -716,16 +733,6 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="btnSendValueToPv">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>Update Checked value to PV</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QPushButton" name="btnUpdataList">
                <property name="minimumSize">
                 <size>
@@ -734,12 +741,12 @@
                 </size>
                </property>
                <property name="text">
-                <string>Update</string>
+                <string>Update List</string>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_2">
+              <spacer name="horizontalSpacerSchedule">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -767,7 +774,7 @@
           <property name="title">
            <string>Inverter Controls</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayoutGridControls">
            <item>
             <layout class="QGridLayout" name="gridLayoutControls">
              <property name="horizontalSpacing">
@@ -776,7 +783,7 @@
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <layout class="QHBoxLayout" name="horizontalLayoutControls">
              <property name="leftMargin">
               <number>5</number>
              </property>
@@ -804,6 +811,9 @@
                  <height>16777215</height>
                 </size>
                </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -824,7 +834,7 @@
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer">
+              <spacer name="horizontalSpacerControls">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
