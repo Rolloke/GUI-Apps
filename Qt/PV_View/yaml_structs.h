@@ -121,6 +121,6 @@ size_t  get_value_size(const measured_value& value_param);
 QModbusDataUnit::RegisterType get_type(const QString& name);
 int     get_address(const QString& address, int n=-1);
 int     get_entries(const QString& decode);
-QString get_request(const QString&request, int n=-1);
+QString get_request(const QString& request, int n=-1);
 
 #endif // YAML_STRUCTS_H

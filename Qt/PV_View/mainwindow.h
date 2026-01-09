@@ -129,10 +129,10 @@ private:
     QString        m_store_value_section;
     stored_value_list m_values;
 
+    QString        m_control_filter_section;
     QString        mConfigurationFileName;
 
 };
 
-void clearLayout(QLayout *layout);
 
 #endif // MAINWINDOW_H

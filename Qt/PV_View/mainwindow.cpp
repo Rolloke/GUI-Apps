@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "yaml_structs.h"
 #include "qprogressbarfloat.h"
+#include "helper.h"
 
 #include <string>
 #include <QFileDialog>
@@ -46,6 +47,14 @@ namespace config
 {
 constexpr char sGroupMeter[]  = "Meter";
 constexpr char sMeasurement[] = "Measurement";
+
+constexpr char s_modbus[]                = "modbus";
+constexpr char s_tcpip[]                 = "tcpip";
+constexpr char s_timeout[]               = "timeout";
+constexpr char s_store_value_section[]   = "StoreValuesSection";
+constexpr char s_control_section[]       = "ControlSection";
+
+constexpr char s_property_association[]  = "associated";
 }
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
@@ -64,15 +73,22 @@ int     to_parity(const QString& parity);
 #if SERIALBUS == 1
 QString to_string(QModbusPdu::ExceptionCode code);
 #endif
-struct Register { enum Table
-{
-    eName, eAddress, eType, eDecode, eScale, eValue, eModel, eLast
-};};
 
-struct Schedule { enum Table
+struct Register
 {
-    eName, eValue, eLast
-    }; };
+    enum Table
+    {
+        eName, eAddress, eType, eDecode, eScale, eValue, eModel, eLast
+    };
+};
+
+struct Schedule
+{
+    enum Table
+    {
+        eName, eValue, eLast
+    };
+};
 
 enum ModbusConnection
 {
@@ -320,7 +336,7 @@ void MainWindow::create_modbus_device()
         modbusDevice = nullptr;
     }
 
-    auto type = m_meter->m_parameters.get_choice("modbus") == "tcpip" ? Tcp : Serial;
+    auto type = m_meter->m_parameters.get_choice(config::s_modbus) == config::s_tcpip ? Tcp : Serial;
     if (type == Serial)
     {
         modbusDevice = new QModbusRtuSerialMaster(this);
@@ -534,7 +550,7 @@ void MainWindow::on_btnConnect_clicked()
     statusBar()->clearMessage();
     if (modbusDevice->state() != QModbusDevice::ConnectedState)
     {
-        auto type = m_meter->m_parameters.get_choice("modbus") == "tcpip" ? Tcp : Serial;
+        auto type = m_meter->m_parameters.get_choice(config::s_modbus) == config::s_tcpip ? Tcp : Serial;
         if (type == Serial)
         {
             QString port = ui->edtAddress->text();
@@ -554,7 +570,7 @@ void MainWindow::on_btnConnect_clicked()
             modbusDevice->setConnectionParameter(QModbusDevice::NetworkPortParameter, url.port());
             modbusDevice->setConnectionParameter(QModbusDevice::NetworkAddressParameter, url.host());
         }
-        modbusDevice->setTimeout(m_meter->m_parameters.get_default("timeout").toInt());
+        modbusDevice->setTimeout(m_meter->m_parameters.get_default(config::s_timeout).toInt());
         modbusDevice->setNumberOfRetries(3);
         if (!modbusDevice->connectDevice())
         {
@@ -790,10 +806,23 @@ void MainWindow::readReady(QVector<quint16>& values)
                     }
                 }
             }
-
-            if (get_request(m_pending_request, m_request_section_index) == m_store_value_section)
+            QString request_section = get_request(m_pending_request, m_request_section_index);
+            if (request_section == m_store_value_section)
             {
                 m_values[m_pending_request] = string_value;
+            }
+            else if (request_section == m_control_filter_section)
+            {
+                QString name = get_request(m_pending_request, m_request_name_index);
+                QPushButton* button = dynamic_cast<QPushButton*>(find_widget(ui->gridLayoutControls, name));
+                if (button)
+                {
+                    QComboBox *combo = button->property(config::s_property_association).value<QComboBox*>();
+                    if (combo)
+                    {
+                        combo->setCurrentIndex(get_request(string_value, 0).toInt());
+                    }
+                }
             }
 
             switch (m_read_permanent)
@@ -968,11 +997,11 @@ void MainWindow::update_buttons()
 
 void MainWindow::init_table_and_controls()
 {
-    m_store_value_section = m_meter->m_parameters.get_default("StoreValuesSection");
+    m_store_value_section = m_meter->m_parameters.get_default(config::s_store_value_section);
     ui->edtFilterForSchedule->setText(m_store_value_section);
 
-    QString control_filter =   m_meter->m_parameters.get_default("ControlSection");
-    ui->edtFilterForControls->setText(control_filter);
+    m_control_filter_section =   m_meter->m_parameters.get_default(config::s_control_section);
+    ui->edtFilterForControls->setText(m_control_filter_section);
 
     clearLayout(ui->gridLayoutControls);
     mListModel->removeRows(0, mListModel->rowCount());
@@ -1003,7 +1032,7 @@ void MainWindow::init_table_and_controls()
 
         list_row++;
 
-        if (get_request(measurement.key(), m_request_section_index) == control_filter)
+        if (get_request(measurement.key(), m_request_section_index) == m_control_filter_section)
         {
             QString name = get_request(measurement.key(), m_request_name_index);
             const auto& choices = m_meter->m_parameters.get_choices(name);
@@ -1013,7 +1042,7 @@ void MainWindow::init_table_and_controls()
                 connect(button, SIGNAL(pressed()), this, SLOT(on_btn_clicked()));
                 QComboBox   *combo  = new QComboBox(this);
                 combo->addItems(choices);
-                button->setProperty("associated", QVariant::fromValue(combo));
+                button->setProperty(config::s_property_association, QVariant::fromValue(combo));
                 ui->gridLayoutControls->addWidget(button, control_row, control_column++);
                 ui->gridLayoutControls->addWidget(combo, control_row, control_column++);
                 if (control_column > control_columns)
@@ -1164,12 +1193,13 @@ void MainWindow::on_btnSendValueToPv_clicked()
 void MainWindow::on_btn_clicked()
 {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
-    QComboBox *combo = button->property("associated").value<QComboBox*>();
+    QComboBox *combo = button->property(config::s_property_association).value<QComboBox*>();
     QMessageBox box(QMessageBox::Warning, tr("Send selected values to PV"), tr("Please be shure that the values are correct, otherwise they may cause damage"));
     if (box.exec() == QMessageBox::Ok)
     {
         QString selection = combo->currentText();
-        (void)(selection);
+        QString value = get_request(selection, 0);
+        (void)(value);
         /// TODO update value to PV
     }
 }
@@ -1209,18 +1239,4 @@ void MainWindow::on_tableViewSchedule_clicked(const QModelIndex &index)
 
 }
 
-void clearLayout(QLayout *layout)
-{
-    if (!layout)
-        return;
 
-    while (QLayoutItem *item = layout->takeAt(0)) {
-        if (QWidget *widget = item->widget()) {
-            widget->deleteLater();   // remove and delete widget
-        }
-        if (QLayout *childLayout = item->layout()) {
-            clearLayout(childLayout); // recursive for nested layouts
-        }
-        delete item; // delete the layout item itself
-    }
-}
