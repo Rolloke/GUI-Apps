@@ -48,3 +48,24 @@ void clearLayout(QLayout *layout)
         }
     }
 }
+
+CheckboxItemModel::CheckboxItemModel(int rows, int columns, QObject *parent):
+    QStandardItemModel(rows, columns, parent),
+    mChecked(0)
+{
+}
+
+QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
+{
+    if (role == Qt::CheckStateRole && index.column() == mChecked)
+    {
+        return QStandardItemModel::data(index, role).toBool() ? Qt::Checked : Qt::Unchecked;
+    }
+    return QStandardItemModel::data(index, role);
+}
+
+void CheckboxItemModel::setCheckedColumn(int checked)
+{
+    mChecked = checked;
+}
+

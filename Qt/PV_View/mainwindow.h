@@ -25,20 +25,10 @@ QT_END_NAMESPACE
 
 struct meter;
 struct measured_value;
+class CheckboxItemModel;
+
 typedef QMap<QString, QString> stored_value_list;
 
-
-class CheckboxItemModel : public QStandardItemModel
-{
-public:
-    CheckboxItemModel(int rows, int columns, QObject *parent = nullptr);
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-
-    void setCheckedColumn(int checked);
-private:
-    int mChecked = 0;
-};
 
 class MainWindow : public QMainWindow
 {
@@ -80,7 +70,9 @@ private slots:
     void on_btnSendValueToPv_clicked();
     void on_btnUpdataList_clicked();
     void on_tableViewSchedule_clicked(const QModelIndex &index);
-    void on_btn_clicked();
+
+    void schedule_table_list_item_changed(QStandardItem*item);
+    void btn_clicked();
 
 private:
     QString getConfigName() const;
@@ -97,6 +89,7 @@ private:
     void create_modbus_device();
     void disconnect_modbus_device();
     void update_schedule_value_list();
+    void set_control_combo_index(const QString& request, const QString &string_value);
 
 #if SERIALBUS == 1
     QModbusReply  *lastRequest   = nullptr;
@@ -128,6 +121,7 @@ private:
 
     QString        m_store_value_section;
     stored_value_list m_values;
+    bool           m_initialize = true;
 
     QString        m_control_filter_section;
     QString        mConfigurationFileName;

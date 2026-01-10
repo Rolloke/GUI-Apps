@@ -124,6 +124,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     QStringList fSectionNamesSchedule = { tr("Name"), tr("Data") };
     mListModelSchedule = new CheckboxItemModel(0, Schedule::eLast, this);
+    mListModelSchedule->setCheckedColumn(Schedule::eName);
+
     for (int fSection = 0; fSection < Schedule::eLast; ++fSection)
     {
         mListModelSchedule->setHeaderData(fSection, Qt::Horizontal, fSectionNamesSchedule[fSection]);
@@ -135,7 +137,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         ui->tableViewSchedule->horizontalHeader()->setSectionResizeMode(fSection , fSection == 0 ? QHeaderView::Stretch : QHeaderView::ResizeToContents);
     }
     ui->tableViewSchedule->horizontalHeader()->setStretchLastSection(false);
-
+    connect(mListModelSchedule, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(schedule_table_list_item_changed(QStandardItem*)));
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
@@ -399,6 +401,7 @@ void MainWindow::disconnect_modbus_device()
 
 void MainWindow::update_schedule_value_list()
 {
+    m_initialize = true;
     mListModelSchedule->removeRows(0, mListModelSchedule->rowCount());
     int current_row = 0;
 
@@ -406,15 +409,35 @@ void MainWindow::update_schedule_value_list()
     while (entry.hasNext())
     {
         entry.next();
+        if (entry.key().contains(m_store_value_section))
+        {
+            mListModelSchedule->insertRows(current_row, 1);
+            mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eName , QModelIndex()), entry.key());
+            mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eName , QModelIndex()), Qt::Checked, Qt::CheckStateRole);
+            mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eValue, QModelIndex()), entry.value());
 
-        mListModelSchedule->insertRows(current_row, 1);
-        mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eName , QModelIndex()), entry.key());
-        mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eName , QModelIndex()), Qt::Checked, Qt::CheckStateRole);
-        mListModelSchedule->setData(mListModelSchedule->index(current_row, Schedule::eValue, QModelIndex()), entry.value());
-
-        current_row++;
+            current_row++;
+        }
+        if (entry.key().contains(m_control_filter_section))
+        {
+            set_control_combo_index(entry.key(), entry.value());
+        }
     }
+    m_initialize = false;
+}
 
+void MainWindow::set_control_combo_index(const QString &request, const QString& string_value)
+{
+    QString name = get_request(request, m_request_name_index);
+    QPushButton* button = dynamic_cast<QPushButton*>(find_widget(ui->gridLayoutControls, name));
+    if (button)
+    {
+        QComboBox *combo = button->property(config::s_property_association).value<QComboBox*>();
+        if (combo)
+        {
+            combo->setCurrentIndex(get_request(string_value, 0).toInt());
+        }
+    }
 }
 
 void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_name, int values,
@@ -813,16 +836,8 @@ void MainWindow::readReady(QVector<quint16>& values)
             }
             else if (request_section == m_control_filter_section)
             {
-                QString name = get_request(m_pending_request, m_request_name_index);
-                QPushButton* button = dynamic_cast<QPushButton*>(find_widget(ui->gridLayoutControls, name));
-                if (button)
-                {
-                    QComboBox *combo = button->property(config::s_property_association).value<QComboBox*>();
-                    if (combo)
-                    {
-                        combo->setCurrentIndex(get_request(string_value, 0).toInt());
-                    }
-                }
+                m_values[m_pending_request] = string_value;
+                set_control_combo_index(m_pending_request, string_value);
             }
 
             switch (m_read_permanent)
@@ -892,6 +907,7 @@ void MainWindow::on_btnStop_clicked()
     update_buttons();
     statusBar()->showMessage(tr("Stopped reading"));
 }
+
 void MainWindow::on_btnRemove_clicked()
 {
     for (int i = 0; i < ui->verticalCheck->count(); ++i)
@@ -1003,6 +1019,7 @@ void MainWindow::init_table_and_controls()
     m_control_filter_section =   m_meter->m_parameters.get_default(config::s_control_section);
     ui->edtFilterForControls->setText(m_control_filter_section);
 
+    m_initialize = true;
     clearLayout(ui->gridLayoutControls);
     mListModel->removeRows(0, mListModel->rowCount());
     int list_row = 0;
@@ -1039,7 +1056,7 @@ void MainWindow::init_table_and_controls()
             if (choices.size())
             {
                 QPushButton *button = new QPushButton(tr("\"") + name + tr("\" send value: "), this);
-                connect(button, SIGNAL(pressed()), this, SLOT(on_btn_clicked()));
+                connect(button, SIGNAL(pressed()), this, SLOT(btn_clicked()));
                 QComboBox   *combo  = new QComboBox(this);
                 combo->addItems(choices);
                 button->setProperty(config::s_property_association, QVariant::fromValue(combo));
@@ -1053,6 +1070,7 @@ void MainWindow::init_table_and_controls()
             }
         }
     }
+    m_initialize = false;
 }
 
 void MainWindow::btnCheckboxClicked()
@@ -1122,8 +1140,6 @@ int to_parity(const QString& parity)
     return QSerialPort::UnknownParity;
 }
 
-
-
 void MainWindow::on_btnTest_clicked()
 {
 //    using boost::asio::ip::tcp;
@@ -1184,18 +1200,20 @@ void MainWindow::on_btnLoadValues_clicked()
 void MainWindow::on_btnSendValueToPv_clicked()
 {
     QMessageBox box(QMessageBox::Warning, tr("Send selected values to PV"), tr("Please be shure that the values are correct, otherwise they may cause damage"));
-    if (box.exec() == QMessageBox::Ok)
+    box.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+    if (box.exec() == QMessageBox::Yes)
     {
         /// TODO update value to PV
     }
 }
 
-void MainWindow::on_btn_clicked()
+void MainWindow::btn_clicked()
 {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     QComboBox *combo = button->property(config::s_property_association).value<QComboBox*>();
     QMessageBox box(QMessageBox::Warning, tr("Send selected values to PV"), tr("Please be shure that the values are correct, otherwise they may cause damage"));
-    if (box.exec() == QMessageBox::Ok)
+    box.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+    if (box.exec() == QMessageBox::Yes)
     {
         QString selection = combo->currentText();
         QString value = get_request(selection, 0);
@@ -1209,27 +1227,6 @@ void MainWindow::on_btnUpdataList_clicked()
     update_schedule_value_list();
 }
 
-CheckboxItemModel::CheckboxItemModel(int rows, int columns, QObject *parent):
-    QStandardItemModel(rows, columns, parent),
-    mChecked(Schedule::eName)
-{
-}
-
-QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
-{
-    if (role == Qt::CheckStateRole && index.column() == mChecked)
-    {
-        return QStandardItemModel::data(index, role).toBool() ? Qt::Checked : Qt::Unchecked;
-    }
-    return QStandardItemModel::data(index, role);
-}
-
-void CheckboxItemModel::setCheckedColumn(int checked)
-{
-    mChecked = checked;
-}
-
-
 void MainWindow::on_tableViewSchedule_clicked(const QModelIndex &index)
 {
     if (index.column() == Schedule::eName)
@@ -1237,6 +1234,22 @@ void MainWindow::on_tableViewSchedule_clicked(const QModelIndex &index)
         mListModelSchedule->setData(index, !mListModelSchedule->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
 
+}
+
+void MainWindow::schedule_table_list_item_changed(QStandardItem *item)
+{
+    if (!m_initialize)
+    {
+        int column = item->column();
+        if (column == Schedule::eValue)
+        {
+            QString name = mListModelSchedule->data(mListModelSchedule->index(item->row(), Schedule::eName)).toString();
+            if (name.size())
+            {
+                m_values[name] = item->text();
+            }
+        }
+    }
 }
 
 

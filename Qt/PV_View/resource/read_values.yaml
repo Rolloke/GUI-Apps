@@ -1,0 +1,35 @@
+value_list:
+  - name: read:InverterControl:AI optical storage
+    value: 0
+  - name: read:InverterControl:Phase-to-ground short-circuit protection
+    value: 1:Enabled
+  - name: read:InverterControl:Remote charge/discharge control mode
+    value: 0:Local control
+  - name: read:InverterControl:Shutdown
+    value: 0:Run
+  - name: read:InverterControl:TLS encryption
+    value: 1:Enabled
+  - name: read:InverterControl:WLAN wakeup
+    value: 1:Disabled
+  - name: read:InverterScheduling:Active power change gradient
+    value: 125
+  - name: read:InverterScheduling:Fixed active power derated
+    value: 5500
+  - name: read:InverterScheduling:PF-U characteristic curve
+    value: 10,950,950,960,960,970,970,980,980,990,1000,1010,1000,1020,64556,1030,64566,1040,64576,1050,64586,
+  - name: read:InverterScheduling:Q-U characteristic curve
+    value: 4,930,436,970,0,1030,0,1070,65100,0,0,0,0,0,0,0,0,0,0,0,0,
+  - name: read:InverterScheduling:Q-U dispatch trigger power
+    value: 0
+  - name: read:InverterScheduling:Q-U power percentage to exit scheduling
+    value: 0
+  - name: read:InverterScheduling:Reactive power adjustment time
+    value: 10
+  - name: read:InverterScheduling:Reactive power compensation (Q/S)
+    value: 0
+  - name: read:InverterScheduling:Reactive power compensation at night
+    value: 0
+  - name: read:InverterScheduling:Schedule instruction valid duration
+    value: 0
+  - name: read:InverterScheduling:cosφ-P/Pn characteristic curve
+    value: 10,100,1000,200,1000,300,1000,400,1000,500,1000,600,64556,700,64576,800,64596,900,64616,1000,64636,
