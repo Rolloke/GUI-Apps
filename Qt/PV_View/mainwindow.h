@@ -70,9 +70,10 @@ private slots:
     void on_btnSendValueToPv_clicked();
     void on_btnUpdataList_clicked();
     void on_tableViewSchedule_clicked(const QModelIndex &index);
-
+    void on_btnEditCharacteristic_clicked();
     void schedule_table_list_item_changed(QStandardItem*item);
     void btn_clicked();
+
 
 private:
     QString getConfigName() const;
@@ -114,6 +115,7 @@ private:
     int            m_read_index = 0;
     int            m_request_name_index = 0;
     int            m_request_section_index = 0;
+    int            m_current_schedule_row = -1;
 
     QString        mDocumentFile;
     std::unique_ptr<meter> m_meter;

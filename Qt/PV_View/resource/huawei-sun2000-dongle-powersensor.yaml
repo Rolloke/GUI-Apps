@@ -119,6 +119,7 @@ params:
         "19:P/Pn value at point:10:uint16:10:%",
         "20:cosφ value at point:10:int16:1000:N/A" ]
   type: "id:name:index:type:scale"
+  default: " value at point"
 
 - name: "Q-U characteristic curve"
   choice: [
@@ -144,6 +145,7 @@ params:
 	"19:U/Un value at point 10:uint16:10:%",
 	"20:Q/S value at point 10:int16:1000:N/A" ] 
   type: "id:name:index:type:scale"
+  default: " value at point"
 
 - name: "PF-U characteristic curve"
   choice: [
@@ -169,6 +171,7 @@ params:
 	"19:U/Un value at point 10:uint16:10:%",
 	"20:PF value at point 10:int16:1000:N/A"]
   type: "id:name:index:type:scale"
+  default: " value at point"
 
 - name: "Grid code"
   choice: [

@@ -3,6 +3,7 @@
 #include "yaml_structs.h"
 #include "qprogressbarfloat.h"
 #include "helper.h"
+#include "characteristicsdlg.h"
 
 #include <string>
 #include <QFileDialog>
@@ -1233,7 +1234,8 @@ void MainWindow::on_tableViewSchedule_clicked(const QModelIndex &index)
     {
         mListModelSchedule->setData(index, !mListModelSchedule->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
-
+    m_current_schedule_row = index.row();
+    ui->btnEditCharacteristic->setEnabled(mListModelSchedule->data(mListModelSchedule->index(m_current_schedule_row, Schedule::eValue)).toString().contains(","));
 }
 
 void MainWindow::schedule_table_list_item_changed(QStandardItem *item)
@@ -1252,4 +1254,12 @@ void MainWindow::schedule_table_list_item_changed(QStandardItem *item)
     }
 }
 
+void MainWindow::on_btnEditCharacteristic_clicked()
+{
+    QString full_name = mListModelSchedule->data(mListModelSchedule->index(m_current_schedule_row, Schedule::eName)).toString();
+    QString value     = mListModelSchedule->data(mListModelSchedule->index(m_current_schedule_row, Schedule::eValue)).toString();
+    QString name      = get_request(full_name, m_request_name_index);
+    CharacteristicsDlg dlg(value, name, m_meter->m_parameters);
+    dlg.exec();
+}
 
