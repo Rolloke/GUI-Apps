@@ -189,7 +189,8 @@ private:
     static int2stringmap mCommandMap;
 };
 
-void operator++(git::Cmd::eCmd& cmd);
+void operator++(Cmd::eCmd &cmd);
+void operator+=(Cmd::eCmd &cmd, int num);
 
 struct Type
 {

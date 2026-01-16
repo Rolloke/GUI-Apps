@@ -43,6 +43,11 @@ void operator++(Cmd::eCmd& cmd)
     cmd = static_cast<Cmd::eCmd>(cmd + 1);
 }
 
+void operator+=(Cmd::eCmd &cmd, int num)
+{
+    cmd = static_cast<Cmd::eCmd>(cmd + num);
+}
+
 Cmd::Cmd()
 {
     mCommandMap[GetStatusAll]           = "git -C %1 status -sb";
@@ -467,5 +472,6 @@ void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2type
         }
     }
 }
+
 
 }

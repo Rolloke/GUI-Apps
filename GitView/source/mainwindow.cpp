@@ -2272,7 +2272,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckFindWholeWord, new_id,     mActions.check_location("applications-system.png"));
     /// NOTE: free ID 511
     /// NOTE: free ID 512
-    new_id = static_cast<Cmd::eCmd>(new_id + 3);
+    new_id += 3;
     create_auto_cmd(ui->ckTypeConverter, new_id, mActions.check_location("format-text-direction-rtl.png"));
 
     std::vector<Cmd::eCmd> contextmenu_text_view;
@@ -2303,7 +2303,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
 
     /// NOTE: free ID 521
-    new_id = static_cast<Cmd::eCmd>(new_id + 2);
+    new_id += 2;
     create_auto_cmd(ui->ckIgnoredFiles, new_id);
 
     create_auto_cmd(ui->comboShowItems, new_id);
@@ -2317,12 +2317,12 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->comboUserStyle, new_id);
     /// NOTE: free ID 532
     /// NOTE: free ID 533
-    new_id = static_cast<Cmd::eCmd>(new_id + 3);
+    new_id += 3;
     create_auto_cmd(ui->btnFindReplace, new_id, mActions.check_location("edit-find-replace.png"));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->comboWordWrap, new_id);
     /// NOTE: free ID 536
-    new_id = static_cast<Cmd::eCmd>(new_id + 2);
+    new_id += 2;
     create_auto_cmd(ui->spinFontSize, new_id);
 
     create_auto_cmd(ui->comboFindBox, new_id, "")->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));
@@ -2332,6 +2332,7 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(new_id)->setToolTip(tr("Execute"));
 
     contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubExtra, Cmd::EditToUpper, Cmd::EditToLower, Cmd::EditToggleComment, Cmd::EditToSnakeCase, Cmd::EditToCamelCase, Cmd::EditTabIndent, Cmd::EditTabOutdent });
+
 
     auto found_sub = std::find_if(Cmd::mContextMenuTextView.begin(), Cmd::mContextMenuTextView.end(), [](auto cmd) { return is_any_equal_to(cmd, Cmd::SubFind, Cmd::SubFiles, Cmd::SubExtra); });
     if (found_sub == Cmd::mContextMenuTextView.end())

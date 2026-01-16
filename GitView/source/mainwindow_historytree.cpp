@@ -176,6 +176,22 @@ void MainWindow::on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int col
         {
             mHistoryFile.clear();
         }
+        QString file_path_part;
+        QString repository_root;
+        QTreeWidgetItem *parent = getTopLevelItem(*ui->treeHistory, item);
+        if (parent)
+        {
+            repository_root = parent->text(FindColumn::FilePath);
+#ifdef __linux__
+            if (repository_root.isEmpty())
+            {
+                file_path_part = "/";
+            }
+#endif
+            file_path_part += item->text(FindColumn::FilePath);
+        }
+
+        ui->treeSource->find_item(repository_root, file_path_part);
     }
 }
 
