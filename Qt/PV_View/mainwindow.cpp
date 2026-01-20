@@ -404,8 +404,8 @@ void MainWindow::update_schedule_value_list()
 {
     m_initialize = true;
     mListModelSchedule->removeRows(0, mListModelSchedule->rowCount());
-    int current_row = 0;
 
+    int current_row = 0;
     QMapIterator<QString, QString> entry(m_values);
     while (entry.hasNext())
     {

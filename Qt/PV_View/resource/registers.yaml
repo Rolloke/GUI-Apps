@@ -38,6 +38,281 @@ Inverter:
         count: 10
         scale: 1
 
+      - name: Model ID
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30070
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: Number of PV strings
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30071
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: Number of MPP trackers
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30072
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: Rated power (Pn)
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: device
+        slave: 0
+        register: 30073
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 1000
+
+      - name: Maximum active power (Pmax)
+        hub: huawei_solar
+        unit_of_measurement: kW
+        device_class: device
+        slave: 0
+        register: 30075
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 1000
+
+      - name: Maximum apparent power (Smax)
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30077
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 1
+
+      - name: Maximum reactive power (Qmax, fed to the power grid)
+        hub: huawei_solar
+        unit_of_measurement: kVar 
+        device_class: device
+        slave: 0
+        register: 30079
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 1000
+
+      - name: Maximum reactive power (Qmax, absorbed from the power grid)
+        hub: huawei_solar
+        unit_of_measurement: kVar
+        device_class: device
+        slave: 0
+        register: 30081
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 1000
+
+      - name: Offering name of southbound device 1
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30561
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: Offering name of southbound device 2
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30576
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: Offering name of southbound device 3
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 30591
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: Hardware version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31000
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: Monitoring board SN
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31015
+        register_type: holding
+        data_type: char10
+        count: 10
+        scale: 1
+
+      - name: Monitoring software version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31025
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: Master DSP version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31040
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: CPLD version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31070
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: AFCI version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31085
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: DC-MBUS version
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31115
+        register_type: holding
+        data_type: char15
+        count: 15
+        scale: 1
+
+      - name: REGKEY
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 31200
+        register_type: holding
+        data_type: uint16
+        count: 10
+        scale: 1
+
+      - name: "[Remote communication] Single-machine remote communication"
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32000
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: "[Remote communication] Running status (monitoring processing)"
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32002
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: "[Remote communication] Running status (power processing)"
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32003
+        register_type: holding
+        data_type: uint32
+        count: 2
+        scale: 1
+
+      - name: Alarm 1
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32008
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: Alarm 2
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32009
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
+      - name: Alarm 3
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32010
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
       - name: PV1 Voltage
         hub: huawei_solar
         unit_of_measurement: V

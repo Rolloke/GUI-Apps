@@ -118,59 +118,59 @@ params:
         "18:cosφ value at point:9:int16:1000:N/A",
         "19:P/Pn value at point:10:uint16:10:%",
         "20:cosφ value at point:10:int16:1000:N/A" ]
-  type: "id:name:index:type:scale"
+  type: "id:name:index:type:scale:unit"
   default: " value at point"
 
 - name: "Q-U characteristic curve"
   choice: [
 	"0:Number of points:uint16:1:N/A",
-	"1:U/Un value at point 1:uint16:10:%",
-	"2:Q/S value at point 1:int16:1000:N/A",
-	"3:U/Un value at point 2:uint16:10:%",
-	"4:Q/S value at point 2:int16:1000:N/A",
-	"5:U/Un value at point 3:uint16:10:%",
-	"6:Q/S value at point 3:int16:1000:N/A",
-	"7:U/Un value at point 4:uint16:10:%",
-	"8:Q/S value at point 4:int16:1000:N/A",
-	"9:U/Un value at point 5:uint16:10:%",
-	"10:Q/S value at point 5:int16:1000:N/A",
-	"11:U/Un value at point 6:uint16:10:%",
-	"12:Q/S value at point 6:int16:1000:N/A",
-	"13:U/Un value at point 7:uint16:10:%",
-	"14:Q/S value at point 7:int16:1000:N/A",
-	"15:U/Un value at point 8:uint16:10:%",
-	"16:Q/S value at point 8:int16:1000:N/A",
-	"17:U/Un value at point 9:uint16:10:%",
-	"18:Q/S value at point 9:int16:1000:N/A",
-	"19:U/Un value at point 10:uint16:10:%",
-	"20:Q/S value at point 10:int16:1000:N/A" ] 
-  type: "id:name:index:type:scale"
+        "1:U/Un value at point:1:uint16:10:%",
+        "2:Q/S value at point:1:int16:1000:N/A",
+        "3:U/Un value at point:2:uint16:10:%",
+        "4:Q/S value at point:2:int16:1000:N/A",
+        "5:U/Un value at point:3:uint16:10:%",
+        "6:Q/S value at point:3:int16:1000:N/A",
+        "7:U/Un value at point:4:uint16:10:%",
+        "8:Q/S value at point:4:int16:1000:N/A",
+        "9:U/Un value at point:5:uint16:10:%",
+        "10:Q/S value at point:5:int16:1000:N/A",
+        "11:U/Un value at point:6:uint16:10:%",
+        "12:Q/S value at point:6:int16:1000:N/A",
+        "13:U/Un value at point:7:uint16:10:%",
+        "14:Q/S value at point:7:int16:1000:N/A",
+        "15:U/Un value at point:8:uint16:10:%",
+        "16:Q/S value at point:8:int16:1000:N/A",
+        "17:U/Un value at point:9:uint16:10:%",
+        "18:Q/S value at point:9:int16:1000:N/A",
+        "19:U/Un value at point:10:uint16:10:%",
+        "20:Q/S value at point:10:int16:1000:N/A" ]
+  type: "id:name:index:type:scale:unit"
   default: " value at point"
 
 - name: "PF-U characteristic curve"
   choice: [
 	"0:Number of points:uint16:1:N/A",
-	"1:U/Un value at point 1:uint16:10:%",
-	"2:PF value at point 1:int16:1000:N/A",
-	"3:U/Un value at point 2:uint16:10:%",
-	"4:PF value at point 2:int16:1000:N/A",
-	"5:U/Un value at point 3:uint16:10:%",
-	"6:PF value at point 3:int16:1000:N/A",
-	"7:U/Un value at point 4:uint16:10:%",
-	"8:PF value at point 4:int16:1000:N/A",
-	"9:U/Un value at point 5:uint16:10:%",
-	"10:PF value at point 5:int16:1000:N/A",
-	"11:U/Un value at point 6:uint16:10:%",
-	"12:PF value at point 6:int16:1000:N/A",
-	"13:U/Un value at point 7:uint16:10:%",
-	"14:PF value at point 7:int16:1000:N/A",
-	"15:U/Un value at point 8:uint16:10:%",
-	"16:PF value at point 8:int16:1000:N/A",
-	"17:U/Un value at point 9:uint16:10:%",
-	"18:PF value at point 9:int16:1000:N/A",
-	"19:U/Un value at point 10:uint16:10:%",
-	"20:PF value at point 10:int16:1000:N/A"]
-  type: "id:name:index:type:scale"
+        "1:U/Un value at point:1:uint16:10:%",
+        "2:PF value at point:1:int16:1000:N/A",
+        "3:U/Un value at point:2:uint16:10:%",
+        "4:PF value at point:2:int16:1000:N/A",
+        "5:U/Un value at point:3:uint16:10:%",
+        "6:PF value at point:3:int16:1000:N/A",
+        "7:U/Un value at point:4:uint16:10:%",
+        "8:PF value at point:4:int16:1000:N/A",
+        "9:U/Un value at point:5:uint16:10:%",
+        "10:PF value at point:5:int16:1000:N/A",
+        "11:U/Un value at point:6:uint16:10:%",
+        "12:PF value at point:6:int16:1000:N/A",
+        "13:U/Un value at point:7:uint16:10:%",
+        "14:PF value at point:7:int16:1000:N/A",
+        "15:U/Un value at point:8:uint16:10:%",
+        "16:PF value at point:8:int16:1000:N/A",
+        "17:U/Un value at point:9:uint16:10:%",
+        "18:PF value at point:9:int16:1000:N/A",
+        "19:U/Un value at point:10:uint16:10:%",
+        "20:PF value at point:10:int16:1000:N/A"]
+  type: "id:name:index:type:scale:unit"
   default: " value at point"
 
 - name: "Grid code"
@@ -203,6 +203,111 @@ params:
         "405:VDE-AR-N4130-800:Germany 4130" ]
   type: "id:name:country"
 
+- name: "Model ID"
+  choice: [
+        "SUN2000_6K_LB0:361:V300R024C00",
+        "SUN2000_5K_LB0:362:V300R024C00",
+        "SUN2000_4.6K_LB0:363:V300R024C00",
+        "SUN2000_4K_LB0:364:V300R024C00",
+        "SUN2000_3.68K_LB0:365:V300R024C00",
+        "SUN2000_3K_LB0:366:V300R024C00",
+        "SUN5000_6K_LB0:368:V300R024C00",
+        "SUN5000_3K_LB0:369:V300R024C00" ]
+  type: "Model:Model ID:Earliest Firm Version"
+
+
+- name: "[Remote communication] Single-machine remote communication"
+  choice: [
+        "Bit 0:standby",
+        "Bit 1:grid-connected",
+        "Bit 2:grid-connected normally",
+        "Bit 3:grid connection with derating due to power rationing",
+        "Bit 4:grid connection with derating due to internal causes of the solar inverter",
+        "Bit 5:normal stop",
+        "Bit 6:stop due to faults",
+        "Bit 7:stop due to power rationing",
+        "Bit 8:shutdown",
+        "Bit 9:spot check",
+        "Bit 10:Off-grid operation",
+        "Bit 11:Hot Standby Operation" ]
+  type: "Bit number:Description"
+
+- name: "[Remote communication] Running status (monitoring processing)"
+  choice: [
+        "Bit 0:locking status (0: locked; 1: unlocked)",
+        "Bit 1:PV connection status (0: disconnected; 1: connected)",
+        "Bit 2:DSP data collection (0: no; 1: yes)" ]
+  type: "Bit number:Description"
+
+- name: "[Remote communication] Running status (power processing)"
+  choice: [
+        "Bit 0: off-grid (0: on-grid; 1: off-grid)",
+        "Bit 1: off-grid switch (0: disable; 1: enable)",
+        "Bit2: DC switch (0: OFF, 1: ON) ",
+        "Bit3: On-grid operation (0: off-grid operation, 1: on-grid operation)",
+        "Bit4: Off-grid operation (0: offline and not running; 1: offline and running)",
+        "Bit5: Standby (0: non- standby; 1: standby)" ]
+  type: "Bit number:Description"
+
+- name: "Alarm 1"
+  choice: [
+        "1:Alarm 1:0:High String Input Voltage:2001:Major",
+        "2:Alarm 1:1:DC Arc Fault[1]:2002:Major",
+        "3:Alarm 1:2:String Reverse Connection:2011:Major",
+        "4:Alarm 1:3:String Current Backfeed:2012:Warning",
+        "5:Alarm 1:4:Abnormal String Power:2013:Warning",
+        "6:Alarm 1:5:AFCI Self-Check Fail.[1]:2021:Major",
+        "7:Alarm 1:6:Phase Wire Short-Circuited to PE:2031:Major",
+        "8:Alarm 1:7:Grid Loss:2032:Major",
+        "9:Alarm 1:8:Grid Undervoltage:2033:Major",
+        "10:Alarm 1:9:Grid Overvoltage:2034:Major",
+        "11:Alarm 1:10:Grid Volt. Imbalance:2035:Major",
+        "12:Alarm 1:11:Grid Overfrequency:2036:Major",
+        "13:Alarm 1:12:Grid Underfrequency:2037:Major",
+        "14:Alarm 1:13:Unstable Grid Frequency:2038:Major",
+        "15:Alarm 1:14:Output Overcurrent:2039:Major",
+        "16:Alarm 1:15:Output DC Component Overhigh:2040:Major" ]
+  type: "No.:Alarm:Bit:Alarm Name:Alarm ID:Level"
+
+- name: "Alarm 2"
+  choice: [
+        "17:Alarm 2:0:Abnormal Residual Current:2051:Major",
+        "18:Alarm 2:1:Abnormal Grounding:2061:Major",
+        "19:Alarm 2:2:Low Insulation Resistance:2062:Major",
+        "20:Alarm 2:3:Overtemperature:2063:Minor",
+        "21:Alarm 2:4:Device Fault:2064:Major",
+        "22:Alarm 2:5:Upgrade Failed or Version Mismatch:2065:Minor",
+        "23:Alarm 2:6:License Expired:2066:Warning",
+        "24:Alarm 2:7:Faulty Monitoring Unit:61440:Minor",
+        "25:Alarm 2:8:Faulty Power Collector[2]:2067:Major",
+        "26:Alarm 2:9:Battery abnormal:2068:Minor",
+        "27:Alarm 2:10:Active Islanding:2070:Major",
+        "28:Alarm 2:11:Passive Islanding:2071:Major",
+        "29:Alarm 2:12:Transient AC Overvoltage:2072:Major",
+        "30:Alarm 2:13:Peripheral port short circuit[3]:2075:Warning",
+        "31:Alarm 2:14:Churn output overload[4]:2077:Major",
+        "32:Alarm 2:15:Abnormal PV module configuration:2080:Major" ]
+  type: "No.:Alarm:Bit:Alarm Name:Alarm ID:Level"
+
+- name: "Alarm 3"
+  choice: [
+        "33:Alarm 3:0:Optimizer fault[5]:2081:Warning",
+        "34:Alarm 3:1:Built-in PID operation abnormal[6]:2085:Minor",
+        "35:Alarm 3:2:High input string voltage to ground.:2014:Major",
+        "36:Alarm 3:3:External Fan Abnormal:2086:Major",
+        "37:Alarm 3:4:Battery Reverse Connection[7]:2069:Major",
+        "38:Alarm 3:5:On-grid/Off-grid controller abnormal[4]:2082:Major",
+        "39:Alarm 3:6:PV String Loss:2015:Warning",
+        "40:Alarm 3:7:Internal Fan Abnormal.:2087:Major",
+        "41:Alarm 3:8:DC Protection Unit Abnormal[8]:2088:Major",
+        "42:Alarm 3:9:EL Unit Abnormal:2089:Minor",
+        "43:Alarm 3:10:Active Adjustment Instruction Abnormal:2090:Major",
+        "44:Alarm 3:11:Reactive Adjustment Instruction Abnormal:2091:Major",
+        "45:Alarm 3:12:CT Wiring Abnormal:2092:Major",
+        "46:Alarm 3:13:DC Arc Fault(ADMC Alarm to be clear manually):2003:Major",
+        "47:Alarm 3:14:DC Switch Abnormal:2093:Minor",
+        "48:Alarm 3:15:Allowable discharge capacity of thebattery is low:2094:Warning" ]
+  type: "No.:Alarm:Bit:Alarm Name:Alarm ID:Level"
 render: registers.yaml
 
 
