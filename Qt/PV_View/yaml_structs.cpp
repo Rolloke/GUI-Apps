@@ -113,6 +113,41 @@ const QStringList& parameters::get_choices(const QString& name)
     return dummy;
 }
 
+QString parameters::get_value(const QString &name, const QString& val)
+{
+    if (m_map.contains(name))
+    {
+        const parameter & par = m_map[name];
+        int index = get_index(par.m_type, "id");
+        if (index != -1)
+        {
+            for (const auto& c_val : par.m_choice.m_choice)
+            {
+                if (get_request(c_val, index) == val)
+                {
+                    return c_val;
+                }
+            }
+        }
+        index = get_index(par.m_type, "bit");
+        if (index != -1)
+        {
+            QString values = "|";
+            quint32 bits = val.toUInt();
+            for (const auto& c_val : par.m_choice.m_choice)
+            {
+                quint32 bit = 1 << get_request(c_val, index).toUInt();
+                if (bit & bits)
+                {
+                    values += c_val + "|";
+                }
+            }
+            return values;
+        }
+    }
+    return "";
+}
+
 QString parameters::get_type(const QString& name)
 {
     if (m_map.contains(name))
@@ -436,3 +471,18 @@ QModbusDataUnit::RegisterType get_type(const QString& name)
     return QModbusDataUnit::Invalid;
 }
 
+
+int get_index(const QString &request, const QString &name)
+{
+    QStringList list = request.split(":");
+    int index = 0;
+    for (const auto& item : list)
+    {
+        if (name == item)
+        {
+            return index;
+        }
+        ++index;
+    }
+    return -1;
+}

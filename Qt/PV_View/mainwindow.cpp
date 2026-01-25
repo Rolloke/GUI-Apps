@@ -744,31 +744,41 @@ void MainWindow::readReady(QVector<quint16>& values)
                     string_value = tr("%1").arg(value);
                     if (measurement.m_scale == 1)
                     {
-                        const QStringList& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, m_request_name_index));
-                        int no_of_choices = choices.size();
-                        if (no_of_choices)
+                        const QString request = get_request(m_pending_request, m_request_name_index);
+                        const QString type    = m_meter->m_parameters.get_type(request);
+                        /// TODO: get parameter values "id" "bit"
+                        if (type.contains("id") || type.contains("bit"))
                         {
-                            bool hex = -1 != choices[0].indexOf("0x");
-                            int ivalue = static_cast<int>(value);
-                            auto found =std::find_if(choices.begin(), choices.end(), [hex, ivalue](const QString&str)
+                            statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(m_meter->m_parameters.get_value(request, string_value)));
+                        }
+                        else
+                        {
+                            const QStringList& choices = m_meter->m_parameters.get_choices(request);
+                            int no_of_choices = choices.size();
+                            if (no_of_choices)
                             {
-                                bool ok = false;
-                                bool equal = ivalue == str.split(":")[0].toInt(&ok, hex? 16 : 10);
-                                return ok && equal;
-                            });
-                            if (found != choices.end())
-                            {
-                                string_value = *found;
+                                bool hex = -1 != choices[0].indexOf("0x");
+                                int ivalue = static_cast<int>(value);
+                                auto found =std::find_if(choices.begin(), choices.end(), [hex, ivalue](const QString&str)
+                                {
+                                    bool ok = false;
+                                    bool equal = ivalue == str.split(":")[0].toInt(&ok, hex? 16 : 10);
+                                    return ok && equal;
+                                });
+                                if (found != choices.end())
+                                {
+                                    string_value = *found;
+                                }
+                                else if (ivalue < 0)
+                                {
+                                    string_value = choices[0];
+                                }
+                                else if (ivalue < static_cast<int>(choices.size()))
+                                {
+                                    string_value = choices[ivalue];
+                                }
+                                statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(string_value));
                             }
-                            else if (ivalue < 0)
-                            {
-                                string_value = choices[0];
-                            }
-                            else if (ivalue < static_cast<int>(choices.size()))
-                            {
-                                string_value = choices[ivalue];
-                            }
-                            statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(string_value));
                         }
                     }
                     switch (m_read_permanent)

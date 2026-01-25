@@ -30,21 +30,25 @@ params:
   choice: [
       "0:single-phase",
       "1:three-phase" ]
+  type: "no:name"
 
 - name: "Meter Status"
   choice: [
       "0:offline",
       "1:normal" ]
+  type: "no:name"
 
 - name: "Q-U characteristic curve mode"
   choice: [
       "0:non-hysteresis",
       "1:hysteresis" ]
+  type: "no:name"
 
 - name: "Phase-to-ground short-circuit protection"
   choice: [
       "0:Disabled",
       "1:Enabled" ]
+  type: "no:name"
 
 - name: "Backup Box model"
   choice: [
@@ -52,6 +56,7 @@ params:
 	"1:Compatible Third Party Backup Box",
 	"2:SmartGuard",
  	"3:No Backup Box" ]
+  type: "no:name"
 
 - name: "Peak Shaving"
   choice: [
@@ -59,16 +64,19 @@ params:
 	"1:Enable",
 	"1:Active power limit",
 	"2:Apparent power limit (not supported in the single-device scenario)" ]
+  type: "no:name"
 
 - name: "Scheduled task"
   choice: [
 	"0:Disable",
 	"1:Enable" ]
+  type: "no:name"
 
 - name: "Fast Power scheduling"
   choice: [
         "0:Disable",
         "1:Enable" ]
+  type: "no:name"
 
 - name: "Remote charge/discharge control mode"
   choice: [
@@ -78,22 +86,27 @@ params:
 	"3:Remote control–TOU",
 	"4:Remote control–AI control",
 	"5:Remote Control - Three-party Scheduling" ]
+  type: "no:name"
 
 - name: "WLAN wakeup"
   choice: [
 	"0:Waken up",
 	"1:Disabled" ]
+  type: "no:name"
 
 - name: "TLS encryption"
   choice: [
-    "0:Disabled",
+        "0:Disabled",
 	"1:Enabled" ]
+  type: "no:name"
 
 - name: "Startup"
   choice: [ "0:Run" ]
+  type: "no:name"
 
 - name: "Shutdown"
   choice: [ "0:Run" ]
+  type: "no:name"
 
 - name: "cosφ-P/Pn characteristic curve"
   choice: [
@@ -118,7 +131,7 @@ params:
         "18:cosφ value at point:9:int16:1000:N/A",
         "19:P/Pn value at point:10:uint16:10:%",
         "20:cosφ value at point:10:int16:1000:N/A" ]
-  type: "id:name:index:type:scale:unit"
+  type: "no:name:index:type:scale:unit"
   default: " value at point"
 
 - name: "Q-U characteristic curve"
@@ -144,7 +157,7 @@ params:
         "18:Q/S value at point:9:int16:1000:N/A",
         "19:U/Un value at point:10:uint16:10:%",
         "20:Q/S value at point:10:int16:1000:N/A" ]
-  type: "id:name:index:type:scale:unit"
+  type: "no:name:index:type:scale:unit"
   default: " value at point"
 
 - name: "PF-U characteristic curve"
@@ -170,7 +183,7 @@ params:
         "18:PF value at point:9:int16:1000:N/A",
         "19:U/Un value at point:10:uint16:10:%",
         "20:PF value at point:10:int16:1000:N/A"]
-  type: "id:name:index:type:scale:unit"
+  type: "no:name:index:type:scale:unit"
   default: " value at point"
 
 - name: "Grid code"
@@ -201,7 +214,7 @@ params:
         "269:VDE-AR-N4110-MV480:Germany",
         "270:VDE-AR-N4110-MV800:Germany",
         "405:VDE-AR-N4130-800:Germany 4130" ]
-  type: "id:name:country"
+  type: "no:name:country"
 
 - name: "Model ID"
   choice: [
@@ -213,41 +226,41 @@ params:
         "SUN2000_3K_LB0:366:V300R024C00",
         "SUN5000_6K_LB0:368:V300R024C00",
         "SUN5000_3K_LB0:369:V300R024C00" ]
-  type: "Model:Model ID:Earliest Firm Version"
+  type: "Model:id:Earliest Firm Version"
 
 
 - name: "[Remote communication] Single-machine remote communication"
   choice: [
-        "Bit 0:standby",
-        "Bit 1:grid-connected",
-        "Bit 2:grid-connected normally",
-        "Bit 3:grid connection with derating due to power rationing",
-        "Bit 4:grid connection with derating due to internal causes of the solar inverter",
-        "Bit 5:normal stop",
-        "Bit 6:stop due to faults",
-        "Bit 7:stop due to power rationing",
-        "Bit 8:shutdown",
-        "Bit 9:spot check",
-        "Bit 10:Off-grid operation",
-        "Bit 11:Hot Standby Operation" ]
-  type: "Bit number:Description"
+        "0:standby",
+        "1:grid-connected",
+        "2:grid-connected normally",
+        "3:grid connection with derating due to power rationing",
+        "4:grid connection with derating due to internal causes of the solar inverter",
+        "5:normal stop",
+        "6:stop due to faults",
+        "7:stop due to power rationing",
+        "8:shutdown",
+        "9:spot check",
+        "10:Off-grid operation",
+        "11:Hot Standby Operation" ]
+  type: "bit:description"
 
 - name: "[Remote communication] Running status (monitoring processing)"
   choice: [
-        "Bit 0:locking status (0: locked; 1: unlocked)",
-        "Bit 1:PV connection status (0: disconnected; 1: connected)",
-        "Bit 2:DSP data collection (0: no; 1: yes)" ]
-  type: "Bit number:Description"
+        "0:locking status (0: locked; 1: unlocked)",
+        "1:PV connection status (0: disconnected; 1: connected)",
+        "2:DSP data collection (0: no; 1: yes)" ]
+  type: "bit:description"
 
 - name: "[Remote communication] Running status (power processing)"
   choice: [
-        "Bit 0: off-grid (0: on-grid; 1: off-grid)",
-        "Bit 1: off-grid switch (0: disable; 1: enable)",
-        "Bit2: DC switch (0: OFF, 1: ON) ",
-        "Bit3: On-grid operation (0: off-grid operation, 1: on-grid operation)",
-        "Bit4: Off-grid operation (0: offline and not running; 1: offline and running)",
-        "Bit5: Standby (0: non- standby; 1: standby)" ]
-  type: "Bit number:Description"
+        "0: off-grid (0: on-grid; 1: off-grid)",
+        "1: off-grid switch (0: disable; 1: enable)",
+        "2: DC switch (0: OFF, 1: ON) ",
+        "3: On-grid operation (0: off-grid operation, 1: on-grid operation)",
+        "4: Off-grid operation (0: offline and not running; 1: offline and running)",
+        "5: Standby (0: non- standby; 1: standby)" ]
+  type: "bit:description"
 
 - name: "Alarm 1"
   choice: [
@@ -267,7 +280,7 @@ params:
         "14:Alarm 1:13:Unstable Grid Frequency:2038:Major",
         "15:Alarm 1:14:Output Overcurrent:2039:Major",
         "16:Alarm 1:15:Output DC Component Overhigh:2040:Major" ]
-  type: "No.:Alarm:Bit:Alarm Name:Alarm ID:Level"
+  type: "No.:Alarm:bit:Alarm Name:Alarm ID:Level"
 
 - name: "Alarm 2"
   choice: [
@@ -287,7 +300,7 @@ params:
         "30:Alarm 2:13:Peripheral port short circuit[3]:2075:Warning",
         "31:Alarm 2:14:Churn output overload[4]:2077:Major",
         "32:Alarm 2:15:Abnormal PV module configuration:2080:Major" ]
-  type: "No.:Alarm:Bit:Alarm Name:Alarm ID:Level"
+  type: "No.:Alarm:bit:Alarm Name:Alarm ID:Level"
 
 - name: "Alarm 3"
   choice: [
@@ -307,7 +320,8 @@ params:
         "46:Alarm 3:13:DC Arc Fault(ADMC Alarm to be clear manually):2003:Major",
         "47:Alarm 3:14:DC Switch Abnormal:2093:Minor",
         "48:Alarm 3:15:Allowable discharge capacity of thebattery is low:2094:Warning" ]
-  type: "No.:Alarm:Bit:Alarm Name:Alarm ID:Level"
+  type: "No.:Alarm:bit:Alarm Name:Alarm ID:Level"
+
 render: registers.yaml
 
 

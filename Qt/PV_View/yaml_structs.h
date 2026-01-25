@@ -45,6 +45,7 @@ struct parameters
 
     QString get_choice(const QString& name, int n=0);
     const QStringList &get_choices(const QString& name);
+    QString get_value(const QString& name, const QString& val);
     QString get_type(const QString& name);
     QString get_default(const QString& name);
     bool    is_allinone(const QString& name);
@@ -122,5 +123,6 @@ QModbusDataUnit::RegisterType get_type(const QString& name);
 int     get_address(const QString& address, int n=-1);
 int     get_entries(const QString& decode);
 QString get_request(const QString& request, int n=-1);
+int     get_index(const QString& request, const QString& name);
 
 #endif // YAML_STRUCTS_H
