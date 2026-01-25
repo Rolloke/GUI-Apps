@@ -78,6 +78,7 @@ struct measured_value
     QString m_device_class;
     int     m_slave = 0;
     choices m_values;
+    bool    m_address_valid = true;
 
     friend void operator >> (const YAML::Node& nodes, measured_value& _measured_value);
 };

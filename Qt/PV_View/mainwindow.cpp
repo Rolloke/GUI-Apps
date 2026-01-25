@@ -39,7 +39,7 @@ using boost::asio::ip::tcp;
 /// [x] checkbox to select values to write back to PV
 /// [x] resize elements in control tab
 /// [x] show and access control buttons defined in yaml
-/// [ ] show array parameters defined in "choice" parameter description
+/// [x] show array parameters defined in "choice" parameter description
 /// [ ] - show characteristic curve
 /// [ ] - show info
 /// [x] show checkboxes on same heigth of progress bars
@@ -502,24 +502,35 @@ void MainWindow::read_meter_value()
             }
         } break;
     case read::table:
-        if (m_read_index < mListModel->rowCount())
+        while (m_read_index < mListModel->rowCount())
         {
             auto current = mListModel->index(m_read_index, Register::eName);
+            const auto& param = m_meter->m_rendered.m_measurements[mListModel->data(current).toString()];
+            if (!param.m_address_valid)
+            {
+                ++m_read_index;
+                continue;
+            }
             ui->tableView->selectionModel()->select(current, QItemSelectionModel::SelectCurrent);
             ui->tableView->selectionModel()->setCurrentIndex(current, QItemSelectionModel::SelectCurrent);
             readValue(mListModel->data(current).toString());
+            break;
         } break;
     case read::control:
         {
             QStringList keys = m_meter->m_rendered.m_measurements.keys();
             QString filter = ui->edtFilterForSchedule->text();
-            if (filter.size())
+            for (; m_read_index < keys.size(); ++m_read_index)
             {
-                for (; m_read_index < keys.size(); ++m_read_index)
+                const auto& param = m_meter->m_rendered.m_measurements[keys[m_read_index]];
+                if (param.m_address_valid)
                 {
-                    if (keys[m_read_index].contains(filter))
+                    if (filter.size())
                     {
-                        break;
+                        if (keys[m_read_index].contains(filter))
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -710,7 +721,7 @@ void MainWindow::readReady(QVector<quint16>& values)
         if (1)
         {
 #endif
-            auto measurement = m_meter->m_rendered.m_measurements[m_pending_request];
+            measured_value measurement = m_meter->m_rendered.m_measurements[m_pending_request];
             QString string_value;
             if (measurement.m_register.m_decode.contains("char"))
             {
@@ -795,6 +806,7 @@ void MainWindow::readReady(QVector<quint16>& values)
                                 if (i_v == 0)
                                 {
                                     ui->textSelected->setText(m_pending_request);
+                                    ui->edtPrettyName->setText(get_request(m_pending_request, m_request_name_index));
                                     ui->textValue->setText(tr("%1").arg(value));
                                     ui->textScale->setText(tr("%1").arg(measurement.m_scale));
                                     ui->edtUnit->setText(tr("%1").arg(measurement.m_unit));
@@ -880,9 +892,21 @@ void MainWindow::readReady(QVector<quint16>& values)
 #if SERIALBUS == 1
         else if (reply->error() == QModbusDevice::ProtocolError)
         {
+            measured_value& measurement = m_meter->m_rendered.m_measurements[m_pending_request];
+
             statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2: %3)").
                                      arg(reply->errorString()).
                                      arg(reply->rawResult().exceptionCode(), -1, 16).arg(to_string(reply->rawResult().exceptionCode())), 5000);
+
+            switch (reply->rawResult().exceptionCode())
+            {
+            case QModbusPdu::IllegalFunction:
+            case QModbusPdu::IllegalDataAddress:
+            //case QModbusPdu::IllegalDataValue:
+                measurement.m_address_valid = false;
+                break;
+            default: break;
+            }
 
             QTimer::singleShot(1000, [&] () { read_meter_value(); });
         }
@@ -1151,29 +1175,6 @@ int to_parity(const QString& parity)
     return QSerialPort::UnknownParity;
 }
 
-void MainWindow::on_btnTest_clicked()
-{
-//    using boost::asio::ip::tcp;
-//    std::string host = "192.168.2.113"; //ui->edtAddress->text().toStdString();
-//    boost::asio::io_service io_service;
-//    tcp::resolver resolver(io_service);
-//    tcp::socket socket(io_service);
-//    boost::asio::connect(socket, resolver.resolve(tcp::resolver::query{host, "502"}));
-
-//    // mothbus reads from server
-
-//    uint8_t slave = 1;
-//    uint16_t register_address = 37022;
-//    mothbus::tcp_master<tcp::socket> client(socket);
-//    std::array<mothbus::byte, 2> singleRegister;
-//    client.read_registers(slave, register_address, singleRegister);
-
-//    // output value
-//    uint16_t value = (gsl::to_integer<uint16_t>(singleRegister[0]) << 8) + gsl::to_integer<uint16_t>(singleRegister[1]);
-//    sleep(1);
-
-//    ui->statusbar->showMessage(tr("read valus: %1").arg(value));
-}
 
 void MainWindow::on_btnStoreValues_clicked()
 {
@@ -1273,3 +1274,47 @@ void MainWindow::on_btnEditCharacteristic_clicked()
     dlg.exec();
 }
 
+/*
+void MainWindow::on_btnTest_clicked()
+{
+    //    using boost::asio::ip::tcp;
+    //    std::string host = "192.168.2.113"; //ui->edtAddress->text().toStdString();
+    //    boost::asio::io_service io_service;
+    //    tcp::resolver resolver(io_service);
+    //    tcp::socket socket(io_service);
+    //    boost::asio::connect(socket, resolver.resolve(tcp::resolver::query{host, "502"}));
+
+    //    // mothbus reads from server
+
+    //    uint8_t slave = 1;
+    //    uint16_t register_address = 37022;
+    //    mothbus::tcp_master<tcp::socket> client(socket);
+    //    std::array<mothbus::byte, 2> singleRegister;
+    //    client.read_registers(slave, register_address, singleRegister);
+
+    //    // output value
+    //    uint16_t value = (gsl::to_integer<uint16_t>(singleRegister[0]) << 8) + gsl::to_integer<uint16_t>(singleRegister[1]);
+    //    sleep(1);
+
+    //    ui->statusbar->showMessage(tr("read valus: %1").arg(value));
+}
+*/
+/*
+void MainWindow::on_pushButtonAbout_clicked()
+{
+    QString message = tr("<h3>About Rescent Files list viewer and editor for linux</h3><br><br>"
+                         "View, open recent files or remove files from recent files list.<br>"
+                         "The program is provided AS IS with NO WARRANTY OF ANY KIND<br>"
+                         "<table cellSpacing=\"0\" cellPadding=\"4\" >"
+                         "<tr><td>Based on Qt</td><td>%1</td></tr>"
+                         "<tr><td>Built on</td><td>%2, %3</td></tr>"
+                         "<tr><td>Author</td><td>Rolf Kary Ehlers</td></tr>"
+                         "<tr><td>Version</td><td>%4</td></tr>"
+                         "<tr><td>License</td><td>GNU GPL Version 2</td></tr>"
+                         "<tr><td>Email</td><td>rolf-kary-ehlers@t-online.de</td></tr>"
+                         "</table>"
+                         ).arg(qVersion(), __DATE__, __TIME__, txt::version);
+    QMessageBox::about(this, windowTitle(), message);
+
+}
+*/

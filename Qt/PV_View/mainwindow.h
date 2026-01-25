@@ -64,7 +64,6 @@ private slots:
     void on_btnRemove_clicked();
     void btnCheckboxClicked();
     void on_btnReadConfig_clicked();
-    void on_btnTest_clicked();
     void on_btnStoreValues_clicked();
     void on_btnLoadValues_clicked();
     void on_btnSendValueToPv_clicked();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1158</width>
-    <height>741</height>
+    <width>1000</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabTable">
        <property name="sizePolicy">
@@ -50,202 +50,21 @@
         <string>Table</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="12" column="2" colspan="2">
+        <item row="11" column="1">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Minimum:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="2" colspan="2">
          <widget class="QLineEdit" name="edtMinimum">
           <property name="text">
            <string>0</string>
           </property>
          </widget>
         </item>
-        <item row="11" column="1">
-         <widget class="QLabel" name="labelScale">
-          <property name="text">
-           <string>Scale:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2" colspan="2">
-         <widget class="QPushButton" name="btnStopRead">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Stop</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" rowspan="17">
-         <widget class="QTableView" name="tableView">
-          <property name="editTriggers">
-           <set>QAbstractItemView::EditKeyPressed</set>
-          </property>
-          <property name="alternatingRowColors">
-           <bool>true</bool>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="9" column="2" colspan="2">
-         <widget class="QLineEdit" name="edtPrettyName">
-          <property name="toolTip">
-           <string>Pretty Name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="14" column="2" colspan="2">
-         <widget class="QLineEdit" name="edtUnit"/>
-        </item>
-        <item row="5" column="3">
-         <widget class="QSpinBox" name="edtServerAddress">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>247</number>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <widget class="QLabel" name="labelValue">
-          <property name="text">
-           <string>Value:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="16" column="1" colspan="3">
-         <widget class="QPushButton" name="btnAddMeter">
-          <property name="text">
-           <string>Add Meter</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="2" colspan="2">
-         <widget class="QLabel" name="textSelected">
-          <property name="minimumSize">
-           <size>
-            <width>380</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QPushButton" name="btnStartRead">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Read</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="QLabel" name="labelPrettyName">
-          <property name="text">
-           <string>Name:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1" colspan="3">
-         <widget class="QPushButton" name="btnConnect">
-          <property name="text">
-           <string>Connect</string>
-          </property>
-         </widget>
-        </item>
-        <item row="15" column="1">
-         <widget class="QLabel" name="labelMultipeValues">
-          <property name="text">
-           <string>Anzahl:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="11" column="2" colspan="2">
-         <widget class="QLabel" name="textScale">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1" colspan="3">
-         <widget class="QPushButton" name="btnLoadYamlFile">
-          <property name="text">
-           <string>Load Yaml...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="14" column="1">
-         <widget class="QLabel" name="labelUnit">
-          <property name="text">
-           <string>Unit:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="15" column="2" colspan="2">
-         <widget class="QSpinBox" name="edtMultipleValues">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1" colspan="3">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="10" column="2" colspan="2">
          <widget class="QLabel" name="textValue">
           <property name="minimumSize">
            <size>
@@ -270,7 +89,42 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1" colspan="3">
+        <item row="12" column="1">
+         <widget class="QLabel" name="labelMaximum">
+          <property name="text">
+           <string>Maximum:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="1" colspan="3">
+         <widget class="QPushButton" name="btnAddMeter">
+          <property name="text">
+           <string>Add Meter</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" colspan="3">
+         <widget class="QPushButton" name="btnLoadYamlFile">
+          <property name="text">
+           <string>Load Yaml...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1">
+         <widget class="QLabel" name="labelMultipeValues">
+          <property name="text">
+           <string>Anzahl:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLabel" name="labelValue">
+          <property name="text">
+           <string>Value:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="3">
          <widget class="QLabel" name="labelAddressOrPort">
           <property name="text">
            <string>Address or Port:</string>
@@ -278,27 +132,173 @@
          </widget>
         </item>
         <item row="8" column="1">
+         <widget class="QLabel" name="labelPrettyName">
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="3">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="8" column="2" colspan="2">
+         <widget class="QLineEdit" name="edtPrettyName">
+          <property name="toolTip">
+           <string>Pretty Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
          <widget class="QLabel" name="labelSelected">
           <property name="text">
            <string>Selected:</string>
           </property>
          </widget>
         </item>
-        <item row="13" column="1">
-         <widget class="QLabel" name="labelMaximum">
-          <property name="text">
-           <string>Maximum:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="13" column="2" colspan="2">
+        <item row="12" column="2" colspan="2">
          <widget class="QLineEdit" name="edtMaximum">
           <property name="text">
            <string>100</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="1" colspan="2">
+        <item row="7" column="2" colspan="2">
+         <widget class="QLabel" name="textSelected">
+          <property name="minimumSize">
+           <size>
+            <width>380</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="16">
+         <widget class="QTableView" name="tableView">
+          <property name="editTriggers">
+           <set>QAbstractItemView::EditKeyPressed</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="2" colspan="2">
+         <widget class="QSpinBox" name="edtMultipleValues">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2" colspan="2">
+         <widget class="QPushButton" name="btnStopRead">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Stop</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QSpinBox" name="edtServerAddress">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>247</number>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLabel" name="labelScale">
+          <property name="text">
+           <string>Scale:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="2" colspan="2">
+         <widget class="QLineEdit" name="edtUnit"/>
+        </item>
+        <item row="10" column="2" colspan="2">
+         <widget class="QLabel" name="textScale">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QPushButton" name="btnStartRead">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Read</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="1">
+         <widget class="QLabel" name="labelUnit">
+          <property name="text">
+           <string>Unit:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="2">
          <widget class="QLabel" name="labelServerAddress">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -311,20 +311,13 @@
           </property>
          </widget>
         </item>
-        <item row="12" column="1">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Minimum:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1" colspan="3">
+        <item row="3" column="1" colspan="3">
          <widget class="QLineEdit" name="edtAddress"/>
         </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="btnTest">
+        <item row="5" column="1" colspan="3">
+         <widget class="QPushButton" name="btnConnect">
           <property name="text">
-           <string>Test</string>
+           <string>Connect</string>
           </property>
          </widget>
         </item>
@@ -872,7 +865,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1158</width>
+     <width>1000</width>
      <height>20</height>
     </rect>
    </property>
