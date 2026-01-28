@@ -56,6 +56,7 @@ constexpr char s_store_value_section[]   = "StoreValuesSection";
 constexpr char s_control_section[]       = "ControlSection";
 
 constexpr char s_property_association[]  = "associated";
+constexpr char s_version[]               = "1.0.0.0";
 }
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
@@ -1299,11 +1300,9 @@ void MainWindow::on_btnTest_clicked()
     //    ui->statusbar->showMessage(tr("read valus: %1").arg(value));
 }
 */
-/*
-void MainWindow::on_pushButtonAbout_clicked()
+void MainWindow::on_btnAbout_clicked()
 {
-    QString message = tr("<h3>About Rescent Files list viewer and editor for linux</h3><br><br>"
-                         "View, open recent files or remove files from recent files list.<br>"
+    QString message = tr("<h3>About PV viewer and editor for linux</h3><br><br>"
                          "The program is provided AS IS with NO WARRANTY OF ANY KIND<br>"
                          "<table cellSpacing=\"0\" cellPadding=\"4\" >"
                          "<tr><td>Based on Qt</td><td>%1</td></tr>"
@@ -1313,8 +1312,8 @@ void MainWindow::on_pushButtonAbout_clicked()
                          "<tr><td>License</td><td>GNU GPL Version 2</td></tr>"
                          "<tr><td>Email</td><td>rolf-kary-ehlers@t-online.de</td></tr>"
                          "</table>"
-                         ).arg(qVersion(), __DATE__, __TIME__, txt::version);
+                         ).arg(qVersion(), __DATE__, __TIME__, config::s_version);
     QMessageBox::about(this, windowTitle(), message);
 
 }
-*/
+

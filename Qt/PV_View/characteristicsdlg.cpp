@@ -1,8 +1,6 @@
 #include "characteristicsdlg.h"
 #include "ui_characteristicsdlg.h"
 
-#include <QGraphicsItem>
-
 struct s_entry
 {
     std::vector<double> values;
@@ -72,7 +70,10 @@ CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& n
     ui->tableView->horizontalHeader()->setStretchLastSection(false);
 
 
+    QVector<QVector<QPointF>> data;
+
     int rows = lists.begin()->second.values.size();
+    data.resize(lists.size());
     for (int current_row = 0; current_row < rows; ++current_row)
     {
         mListModel->insertRows(current_row, 1);
@@ -80,12 +81,11 @@ CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& n
         mListModel->setData(mListModel->index(current_row, column++, QModelIndex()), lists.begin()->second.index[current_row]);
         for (const auto& list : lists)
         {
+            data[column-1].push_back(QPointF(current_row, list.second.values[current_row]));
             mListModel->setData(mListModel->index(current_row, column++, QModelIndex()), list.second.values[current_row]);
         }
     }
-    ui->graphicsView->setScene(new QGraphicsScene());
-    // update_graphics();
-    // fit_in_view();
+    ui->graphicsView->setCurves(data);
 }
 
 CharacteristicsDlg::~CharacteristicsDlg()
@@ -103,66 +103,4 @@ void CharacteristicsDlg::on_btnApply_clicked()
 
 }
 
-void CharacteristicsDlg::update_graphics()
-{
-    ui->graphicsView->scene()->clear();
-
-    std::vector<QPolygonF> polygons;
-    std::vector<QPen>      pens;
-    std::vector<QColor>    colors = { QColorConstants::Red, QColorConstants::Green, QColorConstants::Blue };
-    int columns = mListModel->columnCount() - 1;
-    polygons.resize(columns);
-    pens.resize(columns);
-    int rowcount = mListModel->rowCount();
-    QPainterPath path;
-    for (int column = 0; column < columns; ++column)
-    {
-        for (int row = 0; row < rowcount; ++row)
-        {
-            if (row == 0)
-            {
-                path.moveTo(row, mListModel->data(mListModel->index(row, column + 1, QModelIndex())).toDouble());
-            }
-            else
-            {
-                path.lineTo(row, mListModel->data(mListModel->index(row, column + 1, QModelIndex())).toDouble());
-            }
-            //polygons[column].append(QPointF(row, mListModel->data(mListModel->index(row, column + 1, QModelIndex())).toDouble()));
-        }
-        pens[column].setColor(colors[column]);
-
-        QGraphicsPathItem *pathItem = new QGraphicsPathItem(path);
-        pathItem->setPen(pens[column]);
-        ui->graphicsView->scene()->addItem(pathItem);
-    }
-
-    // for (int column = 0; column < columns; ++column)
-    // {
-    //     auto item = new QGraphicsPolygonItem(polygons[column]);
-    //     item->setPen(pens[column]);
-    //     ui->graphicsView->scene()->addItem(item);
-    //     //ui->graphicsView->scene()->addPolygon(polygons[column], );
-    // }
-}
-
-void CharacteristicsDlg::fit_in_view()
-{
-    const auto& items = ui->graphicsView->scene()->items();
-    QRectF bounding_rect;
-    for (int i=0; i<items.size(); ++i)
-    {
-        bounding_rect = bounding_rect.united(items[i]->boundingRect());
-    }
-    //bounding_rect.marginsAdded(QMargins(20, 20, 20, 20));
-
-    ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-//    ui->graphicsView->setViewportUpdateMode(QGraphicsView::MinimalViewportUpdate);
-
-    ui->graphicsView->setSceneRect(bounding_rect);
-    ui->graphicsView->scale(2, -2);
-    //ui->graphicsView->fitInView(bounding_rect, Qt::KeepAspectRatio);
-
-
-
-}
 

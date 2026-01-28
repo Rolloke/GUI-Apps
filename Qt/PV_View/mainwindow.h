@@ -74,6 +74,8 @@ private slots:
     void btn_clicked();
 
 
+    void on_btnAbout_clicked();
+
 private:
     QString getConfigName() const;
     bool load_yaml(const QString &filename);

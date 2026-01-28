@@ -22,6 +22,7 @@ SOURCES += \
     helper.cpp \
     main.cpp \
     mainwindow.cpp \
+    plot_view.cpp \
     qprogressbarfloat.cpp \
     yaml_structs.cpp
 
@@ -29,6 +30,7 @@ HEADERS += \
     characteristicsdlg.h \
     helper.h \
     mainwindow.h \
+    plot_view.h \
     qprogressbarfloat.h \
     yaml_structs.h
 

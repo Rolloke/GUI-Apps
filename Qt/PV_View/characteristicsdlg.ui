@@ -32,10 +32,10 @@
       <widget class="QTableView" name="tableView"/>
      </item>
      <item>
-      <widget class="QGraphicsView" name="graphicsView">
+      <widget class="PlotView" name="graphicsView">
        <property name="maximumSize">
         <size>
-         <width>1</width>
+         <width>16777215</width>
          <height>16777215</height>
         </size>
        </property>
@@ -88,6 +88,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlotView</class>
+   <extends>QGraphicsView</extends>
+   <header>plot_view.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

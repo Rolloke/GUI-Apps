@@ -24,8 +24,6 @@ private slots:
     void on_btnCancel_clicked();
     void on_btnApply_clicked();
 
-    void update_graphics();
-    void fit_in_view();
 
 private:
     QStandardItemModel*  mListModel = nullptr;
