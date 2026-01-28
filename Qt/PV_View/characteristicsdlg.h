@@ -23,7 +23,7 @@ public:
 private slots:
     void on_btnCancel_clicked();
     void on_btnApply_clicked();
-
+    void on_ckShowHoverValues_clicked(bool checked);
 
 private:
     QStandardItemModel*  mListModel = nullptr;

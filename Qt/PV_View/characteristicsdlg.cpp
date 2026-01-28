@@ -85,7 +85,13 @@ CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& n
             mListModel->setData(mListModel->index(current_row, column++, QModelIndex()), list.second.values[current_row]);
         }
     }
-    ui->graphicsView->setCurves(data);
+
+    QStringList curve_names;
+    for (int i=1; i<fSectionNames.size(); ++i)
+    {
+        curve_names.append(fSectionNames[i]);
+    }
+    ui->graphicsView->setCurves(data, curve_names);
 }
 
 CharacteristicsDlg::~CharacteristicsDlg()
@@ -103,4 +109,8 @@ void CharacteristicsDlg::on_btnApply_clicked()
 
 }
 
+void CharacteristicsDlg::on_ckShowHoverValues_clicked(bool checked)
+{
+    ui->graphicsView->set_show_hover_values(checked);
+}
 

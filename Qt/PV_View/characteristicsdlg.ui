@@ -84,6 +84,13 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QCheckBox" name="ckShowHoverValues">
+       <property name="text">
+        <string>Show Hover Values</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
