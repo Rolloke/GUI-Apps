@@ -85,9 +85,44 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Show</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QCheckBox" name="ckShowHoverValues">
        <property name="text">
-        <string>Show Hover Values</string>
+        <string>Hover Values</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="ckLegend">
+       <property name="text">
+        <string>Legend</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="ckTicks">
+       <property name="text">
+        <string>Ticks</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="ckAxis">
+       <property name="text">
+        <string>Axis</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="ckGrid">
+       <property name="text">
+        <string>Grid</string>
        </property>
       </widget>
      </item>

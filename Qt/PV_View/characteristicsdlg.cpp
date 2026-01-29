@@ -56,6 +56,7 @@ CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& n
     {
         fSectionNames.append(list.first + " [" + list.second.unit + "]");
     }
+    /// TODO: edit values and modify curves
     mListModel = new QStandardItemModel(0, fSectionNames.size(), this);
     for (int fSection = 0; fSection < fSectionNames.size(); ++fSection)
     {
@@ -106,11 +107,36 @@ void CharacteristicsDlg::on_btnCancel_clicked()
 
 void CharacteristicsDlg::on_btnApply_clicked()
 {
-
+    /// TODO: store also graphics vew settings
+    /// TODO: store values, if changed
 }
 
 void CharacteristicsDlg::on_ckShowHoverValues_clicked(bool checked)
 {
     ui->graphicsView->set_show_hover_values(checked);
+}
+
+
+void CharacteristicsDlg::on_ckLegend_clicked(bool checked)
+{
+    ui->graphicsView->set_show_legend(checked);
+}
+
+
+void CharacteristicsDlg::on_ckTicks_clicked(bool checked)
+{
+    ui->graphicsView->set_show_ticks(checked);
+}
+
+
+void CharacteristicsDlg::on_ckAxis_clicked(bool checked)
+{
+    ui->graphicsView->set_show_axis(checked);
+}
+
+
+void CharacteristicsDlg::on_ckGrid_clicked(bool checked)
+{
+    ui->graphicsView->set_show_grid(checked);
 }
 
