@@ -40,14 +40,17 @@ using boost::asio::ip::tcp;
 /// [x] resize elements in control tab
 /// [x] show and access control buttons defined in yaml
 /// [x] show array parameters defined in "choice" parameter description
-/// [ ] - show characteristic curve
-/// [ ] - show info
+/// [x] - show characteristic curve
+/// [x] - show info
 /// [x] show checkboxes on same heigth of progress bars
+/// [ ] search in table: Name, Address, Decode, Scale, Unit
+/// [ ] - count and select in table
 
 namespace config
 {
 constexpr char sGroupMeter[]  = "Meter";
 constexpr char sMeasurement[] = "Measurement";
+constexpr char sGroupModbusList[]  = "ModbusList";
 
 constexpr char s_modbus[]                = "modbus";
 constexpr char s_tcpip[]                 = "tcpip";
@@ -144,6 +147,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     LOAD_STR(fSettings, mDocumentFile, toString);
+    LOAD_STR(fSettings, m_plot_settings.m_show_axis, toBool);
+    LOAD_STR(fSettings, m_plot_settings.m_show_grid, toBool);
+    LOAD_STR(fSettings, m_plot_settings.m_show_hover_values, toBool);
+    LOAD_STR(fSettings, m_plot_settings.m_show_legend, toBool);
+    LOAD_STR(fSettings, m_plot_settings.m_show_ticks, toBool);
+    LOAD_STR(fSettings, m_plot_settings.m_ticks, toInt);
     LOAD_STR(fSettings, mConfigurationFileName, toString);
     LOAD_PTR(fSettings, ui->edtAddress, setText, text, toString);
     LOAD_PTR(fSettings, ui->edtServerAddress, setValue, value, toInt);
@@ -174,9 +183,33 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
                 add_meter_widgets(fName, fPrettyName, fValues.toInt(), fScale, fMinimum, fMaximum, 0, fUnit);
             }
         }
+        fSettings.endArray();
     }
+    fSettings.endGroup();
 
     load_yaml(mDocumentFile);
+
+    if (m_meter)
+    {
+        fSettings.beginGroup(config::sGroupModbusList);
+        int fItemCount = fSettings.beginReadArray(config::sMeasurement);
+        {
+            for (int fItem = 0; fItem < fItemCount; ++fItem)
+            {
+                fSettings.setArrayIndex(fItem);
+                QString fName;
+                LOAD_STR(fSettings, fName, toString);
+                auto entry = m_meter->m_rendered.m_measurements.find(fName);
+                if (entry != m_meter->m_rendered.m_measurements.end())
+                {
+                    entry.value().m_address_valid = false;
+                }
+            }
+        }
+        fSettings.endArray();
+        fSettings.endGroup();
+    }
+
     update_buttons();
 #if 1
     startTimer(10);
@@ -214,6 +247,13 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     STORE_STR(fSettings, mDocumentFile);
+    STORE_STR(fSettings, m_plot_settings.m_show_axis);
+    STORE_STR(fSettings, m_plot_settings.m_show_grid);
+    STORE_STR(fSettings, m_plot_settings.m_show_hover_values);
+    STORE_STR(fSettings, m_plot_settings.m_show_legend);
+    STORE_STR(fSettings, m_plot_settings.m_show_ticks);
+    STORE_STR(fSettings, m_plot_settings.m_ticks);
+
     STORE_STR(fSettings, mConfigurationFileName);
     STORE_PTR(fSettings, ui->edtAddress, text);
     STORE_PTR(fSettings, ui->edtServerAddress, value);
@@ -253,6 +293,26 @@ MainWindow::~MainWindow()
         fSettings.endArray();
     }
     fSettings.endGroup();
+
+    if (m_meter)
+    {
+        fSettings.beginGroup(config::sGroupModbusList);
+        QMapIterator<QString, measured_value> entry(m_meter->m_rendered.m_measurements);
+        fSettings.beginWriteArray(config::sMeasurement);
+        int i=0;
+        while (entry.hasNext())
+        {
+            entry.next();
+            if (!entry.value().m_address_valid)
+            {
+                fSettings.setArrayIndex(i++);
+                QString fName       = entry.key();
+                STORE_STR(fSettings, fName);
+            }
+        }
+        fSettings.endArray();
+        fSettings.endGroup();
+    }
 
 //    m_thread.quit();
 //    m_thread.wait();
@@ -758,7 +818,7 @@ void MainWindow::readReady(QVector<quint16>& values)
                     {
                         const QString request = get_request(m_pending_request, m_request_name_index);
                         const QString type    = m_meter->m_parameters.get_type(request);
-                        /// TODO: get parameter values "id" "bit"
+
                         if (type.contains("id") || type.contains("bit"))
                         {
                             statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(m_meter->m_parameters.get_value(request, string_value)));
@@ -1271,8 +1331,11 @@ void MainWindow::on_btnEditCharacteristic_clicked()
     QString full_name = mListModelSchedule->data(mListModelSchedule->index(m_current_schedule_row, Schedule::eName)).toString();
     QString value     = mListModelSchedule->data(mListModelSchedule->index(m_current_schedule_row, Schedule::eValue)).toString();
     QString name      = get_request(full_name, m_request_name_index);
-    CharacteristicsDlg dlg(value, name, m_meter->m_parameters);
-    dlg.exec();
+    CharacteristicsDlg dlg(value, name, m_meter->m_parameters, m_plot_settings);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        m_plot_settings = dlg.get_plot_settings();
+    }
 }
 
 /*

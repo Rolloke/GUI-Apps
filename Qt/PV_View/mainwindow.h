@@ -9,6 +9,8 @@
 #include <QThread>
 #include <QStandardItemModel>
 
+#include "plot_view.h"
+
 #if SERIALBUS == 1
 class QModelIndex;
 class QModbusClient;
@@ -128,6 +130,7 @@ private:
 
     QString        m_control_filter_section;
     QString        mConfigurationFileName;
+    PlotView::settings m_plot_settings;
 
 };
 

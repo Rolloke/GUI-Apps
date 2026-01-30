@@ -10,12 +10,13 @@ struct s_entry
     QString type;
 };
 
-CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& name, parameters &parameter, QWidget *parent)
+CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& name, parameters &parameter, const PlotView::settings& plot_settings, QWidget *parent)
     : QDialog(parent)
     , m_characteristic(characteristic)
     , ui(new Ui::CharacteristicsDlg)
 {
     ui->setupUi(this);
+
     setWindowTitle(windowTitle() + name);
     QStringList values = m_characteristic.split(",");
 
@@ -87,11 +88,18 @@ CharacteristicsDlg::CharacteristicsDlg(QString &characteristic, const QString& n
         }
     }
 
+    ui->ckAxis->setChecked(plot_settings.m_show_axis);
+    ui->ckGrid->setChecked(plot_settings.m_show_grid);
+    ui->ckShowHoverValues->setChecked(plot_settings.m_show_hover_values);
+    ui->ckLegend->setChecked(plot_settings.m_show_legend);
+    ui->ckTicks->setChecked(plot_settings.m_show_ticks);
+
     QStringList curve_names;
     for (int i=1; i<fSectionNames.size(); ++i)
     {
         curve_names.append(fSectionNames[i]);
     }
+    ui->graphicsView->set_settings(plot_settings);
     ui->graphicsView->setCurves(data, curve_names);
 }
 
@@ -100,15 +108,19 @@ CharacteristicsDlg::~CharacteristicsDlg()
     delete ui;
 }
 
+const PlotView::settings &CharacteristicsDlg::get_plot_settings() const
+{
+    return ui->graphicsView->get_settings();
+}
+
 void CharacteristicsDlg::on_btnCancel_clicked()
 {
-
+    QDialog::reject();
 }
 
 void CharacteristicsDlg::on_btnApply_clicked()
 {
-    /// TODO: store also graphics vew settings
-    /// TODO: store values, if changed
+    QDialog::accept();
 }
 
 void CharacteristicsDlg::on_ckShowHoverValues_clicked(bool checked)

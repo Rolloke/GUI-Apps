@@ -5,10 +5,23 @@
 #include <QVector>
 #include <QPointF>
 
-class PlotView : public QGraphicsView {
+class PlotView : public QGraphicsView
+{
     Q_OBJECT
 
+
+
 public:
+    struct settings
+    {
+        bool m_show_hover_values = false;
+        bool m_show_grid         = true;
+        bool m_show_axis         = true;
+        bool m_show_ticks        = true;
+        bool m_show_legend       = true;
+        int  m_ticks             = 5;
+    };
+
     explicit PlotView(QWidget* parent = nullptr);
 
     void setCurves(const QVector<QVector<QPointF>>& curves, const QStringList& names = {});
@@ -19,12 +32,8 @@ public:
     void set_show_legend(bool show);
     void set_ticks(int ticks);
 
-    bool show_hover_values();
-    bool show_grid();
-    bool show_axis();
-    bool show_ticks();
-    bool show_legend();
-    int  ticks();
+    void set_settings(const settings& set);
+    const settings& get_settings() const;
 
 protected:
     void resizeEvent(QResizeEvent*) override;
@@ -48,12 +57,7 @@ private:
     QPoint m_lastPanPoint;
 
     QGraphicsTextItem* m_hoverText = nullptr;
-    bool m_show_hover_values = false;
-    bool m_show_grid         = true;
-    bool m_show_axis         = true;
-    bool m_show_ticks        = true;
-    bool m_show_legend       = true;
-    int  m_ticks             = 5;
+    settings m_settings;
 };
 
 #endif // PLOT_VIEW_H

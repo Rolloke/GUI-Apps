@@ -80,7 +80,7 @@ Inverter:
         register_type: holding
         data_type: uint32
         count: 2
-        scale: 1000
+        scale: 0.001
 
       - name: Maximum active power (Pmax)
         hub: huawei_solar
@@ -91,7 +91,7 @@ Inverter:
         register_type: holding
         data_type: uint32
         count: 2
-        scale: 1000
+        scale: 0.001
 
       - name: Maximum apparent power (Smax)
         hub: huawei_solar
@@ -113,7 +113,7 @@ Inverter:
         register_type: holding
         data_type: uint32
         count: 2
-        scale: 1000
+        scale: 0.001
 
       - name: Maximum reactive power (Qmax, absorbed from the power grid)
         hub: huawei_solar
@@ -124,7 +124,7 @@ Inverter:
         register_type: holding
         data_type: uint32
         count: 2
-        scale: 1000
+        scale: 0.001
 
       - name: Offering name of southbound device 1
         hub: huawei_solar
@@ -313,6 +313,17 @@ Inverter:
         count: 1
         scale: 1
 
+      - name: ESN
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32015
+        register_type: holding
+        data_type: uint16
+        count: 1
+        scale: 1
+
       - name: PV1 Voltage
         hub: huawei_solar
         unit_of_measurement: V
@@ -352,6 +363,50 @@ Inverter:
         device_class: ampere
         slave: 0
         register: 32019
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.01
+
+      - name: PV3 Voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32020
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.1
+
+      - name: PV3 Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: ampere
+        slave: 0
+        register: 32021
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.01
+
+      - name: PV4 Voltage
+        hub: huawei_solar
+        unit_of_measurement: V
+        device_class: voltage
+        slave: 0
+        register: 32022
+        register_type: holding
+        data_type: int16
+        count: 1
+        scale: 0.1
+
+      - name: PV4 Current
+        hub: huawei_solar
+        unit_of_measurement: A
+        device_class: ampere
+        slave: 0
+        register: 32023
         register_type: holding
         data_type: int16
         count: 1
@@ -558,6 +613,44 @@ Inverter:
         scale: 0.1
         precision: 1
         count: 1
+
+      - name: Device status
+        hub: huawei_solar
+        unit_of_measurement: 
+        device_class: device
+        slave: 0
+        register: 32089
+        register_type: holding
+        data_type: uint16
+        scale: 1
+        precision: 1
+        count: 1
+
+# Fault code RO U16 N/A N/A 32090 1 N/A
+
+# Startup time RO EPOCHTIME s 1 32091 2 Epoch seconds, local time
+
+# Shutdown time RO EPOCHTIME s 1 32093 2 Epoch seconds, local time
+
+# Accumulated energy yield RO U32 kWh 100 32106 2 N/A
+
+# Daily energy yield RO U32 kWh 100 32114 2 N/A
+# [Management system] Management systemstatus RO UINT16 N/A 1 35127 1 
+# [Smart I-V Curve Diagnosis] Authorization function RO DBitfield32 N/A 1 35136 2 Bit 0: Smart I-V Curve Diagnosis
+# [Smart I-V Curve Diagnosis] License status RO ENUM16 N/A N/A 35138 1 0: No license, 1: Normal, 2: In grace period, 3: Revoked, 4: SN not match, 5: Expired
+# [Smart I-V Curve Diagnosis] License expiration time RO EPOCHTIME s 1 35139 2 N/A
+
+# License loading time RO EPOCHTIME s 1 35141 2 N/A
+# License revocation time RO EPOCHTIME s 1 35143 2 N/A
+# License SN RO String N/A 1 35145 10 
+# Revocation code RO String N/A 1 35155 64
+# [4G] Module status RO ENUM16 N/A N/A 35249 1 0: Card not found, 1: Card registration failed, 2: No connection, 3: Low signal strength, 4: Medium signal strength, 5: High signal strength, 0x6: Connected, 0x100: Card in position, 0x101: PIN required, 0x102: PUK required, 0xFFFF: Module not found
+# [4G] IP address RO UINT32 N/A 1 35250 2
+# [4G] Subnet mask RO UINT32 N/A 1 35252 2
+# [4G] IMEI RO String N/A 1 35254 10
+# [4G] Signal strength RO UINT16 N/A 1 35264 1 [0,5]
+
+
 
 InverterScheduling:
 

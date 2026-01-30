@@ -22,67 +22,48 @@ void PlotView::setCurves(const QVector<QVector<QPointF>>& curves, const QStringL
 
 void PlotView::set_show_hover_values(bool show)
 {
-    m_show_hover_values = show;
+    m_settings.m_show_hover_values = show;
 }
 
 void PlotView::set_show_grid(bool show)
 {
-    m_show_grid = show;
+    m_settings.m_show_grid = show;
     redraw();
 }
 
 void PlotView::set_show_axis(bool show)
 {
-    m_show_axis = show;
+    m_settings.m_show_axis = show;
     redraw();
 }
 
 void PlotView::set_show_ticks(bool show)
 {
-    m_show_ticks = show;
+    m_settings.m_show_ticks = show;
     redraw();
 }
 
 void PlotView::set_show_legend(bool show)
 {
-    m_show_legend = show;
+    m_settings.m_show_legend = show;
     redraw();
 }
 
 void PlotView::set_ticks(int ticks)
 {
-    m_ticks = ticks;
+    m_settings.m_ticks = ticks;
 }
 
-bool PlotView::show_hover_values()
+void PlotView::set_settings(const settings &set)
 {
-    return m_show_hover_values;
+    m_settings = set;
 }
 
-bool PlotView::show_grid()
+const PlotView::settings &PlotView::get_settings() const
 {
-    return m_show_grid;
+    return m_settings;
 }
 
-bool PlotView::show_axis()
-{
-    return m_show_axis;
-}
-
-bool PlotView::show_ticks()
-{
-    return m_show_ticks;
-}
-
-bool PlotView::show_legend()
-{
-    return m_show_legend;
-}
-
-int PlotView::ticks()
-{
-    return m_ticks;
-}
 
 void PlotView::resizeEvent(QResizeEvent*)
 {
@@ -107,7 +88,7 @@ void PlotView::mousePressEvent(QMouseEvent* e)
 
 void PlotView::mouseMoveEvent(QMouseEvent* e)
 {
-    if (m_show_hover_values)
+    if (m_settings.m_show_hover_values)
     {
         if (m_panning)
         {
@@ -178,14 +159,14 @@ void PlotView::redraw()
     };
 
     // --- Grid + axes ---
-    if (m_show_grid)
+    if (m_settings.m_show_grid)
     {
         QPen gridPen(Qt::lightGray, 1, Qt::DashLine);
 
-        for (int i = 0; i <= m_ticks; ++i)
+        for (int i = 0; i <= m_settings.m_ticks; ++i)
         {
-            qreal x = m_plotRect.left() + i * m_plotRect.width() / m_ticks;
-            qreal y = m_plotRect.bottom() - i * m_plotRect.height() / m_ticks;
+            qreal x = m_plotRect.left()   + i * m_plotRect.width()  / m_settings.m_ticks;
+            qreal y = m_plotRect.bottom() - i * m_plotRect.height() / m_settings.m_ticks;
 
             scene()->addLine(x, m_plotRect.top(), x, m_plotRect.bottom(), gridPen);
             scene()->addLine(m_plotRect.left(), y, m_plotRect.right(), y, gridPen);
@@ -193,35 +174,36 @@ void PlotView::redraw()
     }
 
     // --- Axes ---
-    if (m_show_axis)
+    if (m_settings.m_show_axis)
     {
         scene()->addLine(m_plotRect.left(), m_plotRect.bottom(), m_plotRect.right(), m_plotRect.bottom(), QPen(Qt::black, 2));
         scene()->addLine(m_plotRect.left(), m_plotRect.top()   , m_plotRect.left() , m_plotRect.bottom(), QPen(Qt::black, 2));
     }
-    if (m_show_ticks)
+    if (m_settings.m_show_ticks)
     {
         QFont labelFont;
         labelFont.setPointSize(8);
 
-        for (int i = 0; i <= m_ticks; ++i) {
-            qreal tx = m_plotRect.left() + i * m_plotRect.width() / m_ticks;
-            qreal ty = m_plotRect.bottom() - i * m_plotRect.height() / m_ticks;
+        for (int i = 0; i <= m_settings.m_ticks; ++i)
+        {
+            qreal tx = m_plotRect.left()   + i * m_plotRect.width()  / m_settings.m_ticks;
+            qreal ty = m_plotRect.bottom() - i * m_plotRect.height() / m_settings.m_ticks;
 
             // X ticks
             scene()->addLine(tx, m_plotRect.bottom(), tx, m_plotRect.bottom() + 5);
-            qreal xVal = minX + i * (maxX - minX) / m_ticks;
+            qreal xVal = minX + i * (maxX - minX) / m_settings.m_ticks;
             auto xLabel = scene()->addText(QString::number(xVal, 'g', 3), labelFont);
             xLabel->setPos(tx - 10, m_plotRect.bottom() + 8);
 
             // Y ticks
             scene()->addLine(m_plotRect.left() - 5, ty, m_plotRect.left(), ty);
-            qreal yVal = minY + i * (maxY - minY) / m_ticks;
+            qreal yVal = minY + i * (maxY - minY) / m_settings.m_ticks;
             auto yLabel = scene()->addText(QString::number(yVal, 'g', 3), labelFont);
             yLabel->setPos(5, ty - 8);
         }
     }
 
-    if (!m_show_axis)
+    if (!m_settings.m_show_axis)
     {
         scene()->addRect(m_plotRect, QPen(Qt::black, 2));
     }
@@ -244,7 +226,7 @@ void PlotView::redraw()
         scene()->addPath(path, QPen(colors[c % colors.size()], 2));
     }
 
-    if (m_show_legend)
+    if (m_settings.m_show_legend)
     {
         // --- Legend ---
         qreal lx = m_plotRect.right() - 120;
