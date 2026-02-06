@@ -624,13 +624,14 @@ void QDrawGraphItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     }
 }
 
+#define BEZIER 1
 void QDrawGraphItemDelegate::drawStart(QPainter &painter, const QRect& rc, int level) const
 {
     qreal p1x = getLevelPosition(rc, 0);
     qreal p1y = rc.center().y();
     qreal p2x = getLevelPosition(rc, level);
     qreal p2y = rc.top();
-#if 1
+#if BEZIER
     qreal cpx = p2x + (p1x - p2x) * 0.25;
     qreal cpy = p1y + (p2y - p1y) * 0.25;
     drawBezier(painter, p1x, p1y, cpx, cpy, cpx, cpy, p2x, p2y);
@@ -645,7 +646,7 @@ void QDrawGraphItemDelegate::drawEnd(QPainter &painter, const QRect &rc, int lev
     qreal p1y = rc.bottom();
     qreal p2x = getLevelPosition(rc, 0);
     qreal p2y = rc.center().y();
-#if 1
+#if BEZIER
     qreal cpx = p1x + (p2x - p1x) * 0.25;
     qreal cpy = p2y + (p1y - p2y) * 0.25;
     drawBezier(painter, p1x, p1y, cpx, cpy, cpx, cpy, p2x, p2y);
@@ -742,7 +743,7 @@ void HistoryEntries::determine_connections()
     for (auto connection = m_item_connections.begin(); connection != m_item_connections.end(); ++connection)
     {
         auto& connection_vector = connection.value();
-        if (connection_vector.size() > 1 && reinterpret_cast<Connection*>(&connection_vector[0])->type == Connection::start)
+        if (connection_vector.size() > 1 && is_any_equal_to(reinterpret_cast<Connection*>(&connection_vector[0])->type, Connection::start, Connection::end))
         {
             auto pt00 = reinterpret_cast<ConnectionUnion*>(&connection_vector[0]);
             auto pt01 = reinterpret_cast<ConnectionUnion*>(&connection_vector[1]);
