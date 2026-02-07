@@ -1025,78 +1025,105 @@ void MainWindow::initMergeTools(bool read_new_items)
     }
 }
 
+
 void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was_dropped)
 {
     getSelectedTreeItem();
     if (mContextMenuSourceTreeItem)
     {
-        bool      fOk {false};
-        const Type fType(Type::type(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
-        const QString   fFileTypeName = Type::name(Type::type(Type::FileType&fType.type()));
-        const QFileInfo fPath(ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem));
+        int         result_copy = 2;
+        bool        git_move_possible = true;
+        bool        same_repository   = true;
+        QString     dialog_title;
+        QString     edit_label;
+        QStringList button_names = {tr("Cancel")};
+        QString     old_name = mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);
 
-        QString       fOldName = mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);
+        const Type      type(Type::type(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        const QString   file_type_name = Type::name(Type::type(Type::FileType&type.type()));
+        const QFileInfo path(ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem));
+
         if (dropped_target)
         {
-            QString repository = ui->treeSource->getItemTopDirPath(dropped_target);
-            if (repository == ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem))
+            same_repository   = ui->treeSource->getItemTopDirPath(dropped_target) == ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
+            git_move_possible = same_repository && !type.is(Type::GitUnTracked) && !type.is(Type::GitIgnored);
+            old_name     = ui->treeSource->getItemFilePath(dropped_target);
+            dialog_title = tr("Copy or %2 Move %1").arg(file_type_name, (git_move_possible? "Git" : ""));
+            edit_label   = tr("Target for the %2 \"%1\":\n").arg(path.fileName(), file_type_name);
+            button_names.append(tr("Move"));
+            button_names.append(tr("Copy"));
+            if (!same_repository)
             {
-                fOldName = ui->treeSource->getItemFilePath(dropped_target);
-            }
-            else
-            {
-                return;
+                mContextMenuSourceTreeItem = dropped_target;
             }
         }
-
-        QString fNewName = QInputDialog::getText(this,
-                       tr("Move or rename %1").arg(fFileTypeName),
-                       tr("Enter a new name or destination for \"%1\".\n"
-                          "To move the %3 insert the destination path before.\n"
-                          "To rename just modify the name.").arg(fPath.filePath(), fFileTypeName),
-                       QLineEdit::Normal, fOldName, &fOk);
-
-        if (fOk && !fNewName.isEmpty())
+        else
         {
-            QString     fCommand;
-            bool        fMoved = false;
-            if (fType.is(Type::GitUnTracked) || fType.is(Type::GitIgnored))
+            dialog_title  = tr("Rename %1").arg(file_type_name);
+            button_names.append(tr("Rename"));
+        }
+
+        QString new_name;
+        int result = getInputText(dialog_title, edit_label, old_name, button_names, new_name);
+        if (result != QDialog::Rejected && !new_name.isEmpty())
+        {
+            /// TODO: support also windows commands
+#ifdef __linux__
+            const QString copy_cmd = "cp";
+            const QString move_cmd = "mv";
+#else
+            const QString copy_cmd = "copy";
+            const QString move_cmd = "rename";
+#endif
+            QString     command;
+            bool        moved = false;
+            if (result == result_copy)
             {
-                if (fNewName.contains("/"))
+                if (new_name.contains("/"))
                 {
-                    const QString fNewRenamed = "\"" + fNewName + "\"";
-                    fMoved   = true;
-                    fOldName = "\"" + fPath.filePath() + "\"";
-                    fCommand = tr("mv %1 %2").arg(fOldName, fNewRenamed);
+                    const QString new_copied = "\"" + new_name + "\"";
+                    moved   = true;
+                    old_name = "\"" + path.filePath() + "\"";
+                    command = tr("%1 %2 %3").arg(copy_cmd, old_name, new_copied);
+                }
+            }
+            else if (git_move_possible)
+            {
+                const string format_cmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString();
+                const QString new_renamed = "\"" + new_name + "\"";
+                if (new_renamed.contains("/"))
+                {
+                    moved   = true;
+                    old_name = "\"" + path.filePath() + "\"";
+                    command = tr(format_cmd.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), old_name, new_renamed);
                 }
                 else
                 {
-                    fOldName = "\"" + fOldName + "\"";
-                    fCommand  = tr("mv \"%1/%2\" \"%1/%3\"").arg(fPath.absolutePath(),fOldName, fNewName);
+                    old_name = "\"" + old_name + "\"";
+                    command  = tr(format_cmd.c_str()).arg(path.absolutePath(), old_name, new_renamed);
                 }
             }
             else
             {
-                const string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString();
-                const QString fNewRenamed = "\"" + fNewName + "\"";
-                if (fNewRenamed.contains("/"))
+                if (new_name.contains("/"))
                 {
-                    fMoved   = true;
-                    fOldName = "\"" + fPath.filePath() + "\"";
-                    fCommand = tr(fFormatCmd.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), fOldName, fNewRenamed);
+                    const QString new_renamed = "\"" + new_name + "\"";
+                    moved   = true;
+                    old_name = "\"" + path.filePath() + "\"";
+                    command = tr("%3 %1 %2").arg(old_name, new_renamed, move_cmd);
                 }
                 else
                 {
-                    fOldName = "\"" + fOldName + "\"";
-                    fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath(), fOldName, fNewRenamed);
+                    old_name = "\"" + old_name + "\"";
+                    command  = tr("%4 \"%1/%2\" \"%1/%3\"").arg(path.absolutePath(),old_name, new_name, move_cmd);
                 }
             }
 
-            QString fResultStr;
-            int fResult = execute(fCommand, fResultStr);
-            if (fResult == NoError)
+            QString result_str;
+            int exe_result = execute(command, result_str);
+            if (exe_result == NoError)
             {
-                if (fMoved)
+                if (moved)
                 {
 #if 1
                     perform_post_cmd_action(Cmd::UpdateRootItemStatus);
@@ -1109,7 +1136,7 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
                 }
                 else
                 {
-                    mContextMenuSourceTreeItem->setText(QSourceTreeWidget::Column::FileName, fNewName);
+                    mContextMenuSourceTreeItem->setText(QSourceTreeWidget::Column::FileName, new_name);
                     updateTreeItemStatus(mContextMenuSourceTreeItem);
                 }
                 if (was_dropped)
@@ -1119,7 +1146,7 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             }
             else
             {
-                appendTextToBrowser(fCommand + fResultStr + tr("\nError %1 occurred").arg(fResult));
+                appendTextToBrowser(command + result_str + tr("\nError %1 occurred").arg(exe_result));
             }
         }
         mContextMenuSourceTreeItem = nullptr;

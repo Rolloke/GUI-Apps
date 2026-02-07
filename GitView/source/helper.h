@@ -103,6 +103,9 @@ bool isMessageBoxNo(int msg);
 
 const char* getLineFeed();
 
+int getInputText(const QString &title, const QString &label_text, const QString &initial_text, const QStringList &button_texts, QString &edit_text);
+
+
 class QTreeWidgetHook: public QTreeWidget
 {
 public:

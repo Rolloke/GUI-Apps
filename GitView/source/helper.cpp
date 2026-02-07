@@ -25,6 +25,9 @@
 #include <QGridLayout>
 #include <QGuiApplication>
 #include <QWindow>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QLabel>
 
 #ifdef USE_BOOST
 #include <boost/algorithm/string.hpp>
@@ -840,4 +843,86 @@ QPoint check_screen_position(QPoint pos, bool add_offset, QWidget* map_to_global
     }
 #endif
     return pos;
+}
+
+//! \brief getInputText 
+//! \param title Title of the box (const QString&)
+//! \param label_text lable for edit field (const QString&)
+//! \param initial_text initial edit field text (const QString&)
+//! \param button_texts List of texts for buttons, Order: { Rejected, Accepted[, furtherID, ... ]} (const QStringList&)
+//! \param edit_text  (QString&)
+//! \return result of the dialog (QDialog::reject, QDialog::accept[, 2, ...])
+int getInputText(const QString& title, const QString& label_text, const QString& initial_text, const QStringList& button_texts, QString& edit_text)
+{
+    /// TODO: evalueate ChatGPT sample
+    QDialog dialog;
+    dialog.setWindowTitle(title);
+
+    auto *layout = new QVBoxLayout(&dialog);
+
+    // Label
+    auto *label = new QLabel(label_text);
+    layout->addWidget(label);
+
+    // Input field
+    auto *edit = new QLineEdit;
+    layout->addWidget(edit);
+    edit->setText(initial_text);
+
+    // Buttons
+    auto *buttons = new QDialogButtonBox;
+    int ret;
+    for (ret = 0; ret < button_texts.size(); ++ret)
+    {
+        QDialogButtonBox::ButtonRole role = QDialogButtonBox::DestructiveRole;
+        switch (ret)
+        {
+        case QDialog::Accepted:
+            role  = QDialogButtonBox::AcceptRole;
+            break;
+        case QDialog::Rejected:
+            role = QDialogButtonBox::RejectRole;
+            break;
+        }
+
+        auto *btn = buttons->addButton(button_texts[ret], role);
+        switch (role)
+        {
+        case QDialogButtonBox::AcceptRole:
+            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::accept);
+            break;
+        case QDialogButtonBox::RejectRole:
+            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::reject);
+            break;
+        case QDialogButtonBox::DestructiveRole:
+            QObject::connect(btn, &QPushButton::clicked, &dialog, [&]
+            {
+                /// TODO: return code is always the last value of ret
+                dialog.done(ret);  // custom result code
+            });
+            break;
+        default: break;
+        }
+    }
+    --ret;
+
+    layout->addWidget(buttons);
+
+    // Show dialog
+    dialog.exec();
+
+    int result = dialog.result();
+    switch (result)
+    {
+    case QDialog::Accepted:
+        edit_text = edit->text();
+        break;
+    case QDialog::Rejected:
+        break;
+    default:
+        edit_text = edit->text();
+        break;
+    }
+
+    return result;
 }
