@@ -845,16 +845,15 @@ QPoint check_screen_position(QPoint pos, bool add_offset, QWidget* map_to_global
     return pos;
 }
 
-//! \brief getInputText 
+//! \brief retrieves text from an edit field confirmed by confgurable buttons
 //! \param title Title of the box (const QString&)
 //! \param label_text lable for edit field (const QString&)
 //! \param initial_text initial edit field text (const QString&)
 //! \param button_texts List of texts for buttons, Order: { Rejected, Accepted[, furtherID, ... ]} (const QStringList&)
-//! \param edit_text  (QString&)
-//! \return result of the dialog (QDialog::reject, QDialog::accept[, 2, ...])
+//! \param edit_text returned text from edit field (QString&)
+//! \return result of the QDialog (Rejected, Accepted[, 2, ...])
 int getInputText(const QString& title, const QString& label_text, const QString& initial_text, const QStringList& button_texts, QString& edit_text)
 {
-    /// TODO: evalueate ChatGPT sample
     QDialog dialog;
     dialog.setWindowTitle(title);
 
@@ -895,16 +894,14 @@ int getInputText(const QString& title, const QString& label_text, const QString&
             QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::reject);
             break;
         case QDialogButtonBox::DestructiveRole:
-            QObject::connect(btn, &QPushButton::clicked, &dialog, [&]
+            QObject::connect(btn, &QPushButton::clicked, &dialog, [&, ret]
             {
-                /// TODO: return code is always the last value of ret
                 dialog.done(ret);  // custom result code
             });
             break;
         default: break;
         }
     }
-    --ret;
 
     layout->addWidget(buttons);
 
