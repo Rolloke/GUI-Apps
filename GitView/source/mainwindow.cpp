@@ -145,9 +145,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->textBrowser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     ui->textBrowser->set_active(true);
     connect(this, SIGNAL(tabifiedDockWidgetActivated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
-    startTimer(100);
 
-    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
+    QString config_filename = getConfigName();
+    bool config_exists = QFileInfo(config_filename).exists();
+    QSettings fSettings(config_filename, QSettings::NativeFormat);
 
     fSettings.beginGroup(config::sGroupView);
     {
@@ -311,6 +312,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     {
         addCmdToolBar(i);
     }
+
+    insertTopToolBars();
+    insertBottomToolBars();
 
     fSettings.beginGroup(config::sGroupView);
     {
@@ -501,6 +505,26 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     m_initializing_elements = false;
     TRACEX(Logger::info, windowTitle() << " Started");
     init_miscelaneous_items();
+
+    delete ui->topLayout;
+
+    if (!config_exists) /// NOTE: initialize program at the first time
+    {
+        int width = rect().width();
+        QScreen *screen = QGuiApplication::primaryScreen();
+        if (screen)
+        {
+            width =  screen->geometry().width();
+            if (width > 1600)
+            {
+                ui->comboToolBarStyle->setCurrentIndex(3);
+            }
+        }
+        showMaximized();
+        centralWidget()->setFixedWidth(width / 4);
+        m_initializing_elements = true;
+    }
+    startTimer(100);
 }
 
 void MainWindow::set_app_path(const QString &path)
@@ -980,54 +1004,11 @@ void MainWindow::createDockWindows()
     mDockAreaNames.append(tr("Right"));
     mDockAreaNames.append(tr("Bottom"));
 
-    QLayoutItem *layoutItem {nullptr};
-    QToolBar* pTB {nullptr};
-    pTB = new QToolBar(tr("Git File View States"));
-    pTB->setObjectName("fileviewtoolbar");
-    while ((layoutItem = ui->horizontalLayoutForTreeViewHead->takeAt(0)) != 0)
-    {
-        pTB->addWidget(layoutItem->widget());
-        delete layoutItem;
-    }
-    addToolBar(Qt::TopToolBarArea, pTB);
-
-    pTB = new QToolBar(tr("Text Editor / Viewer Control"));
-    pTB->setObjectName("textviewtoolbar");
-    while ((layoutItem = ui->horizontalLayoutForTextBrowserHead->takeAt(0)) != 0)
-    {
-        pTB->addWidget(layoutItem->widget());
-        delete layoutItem;
-    }
-    addToolBar(Qt::TopToolBarArea, pTB);
-
-    pTB = new QToolBar(tr("Settings"));
-    pTB->setObjectName("fileflagtoolbar");
-    while ((layoutItem = ui->verticalLayout_Settings->takeAt(0)) != 0)
-    {
-        pTB->addWidget(layoutItem->widget());
-        delete layoutItem;
-    }
-    addToolBar(Qt::BottomToolBarArea, pTB);
-
-    pTB = new QToolBar(tr("Find"));
-    pTB->setObjectName("findtoolbar");
-    while ((layoutItem = ui->horizontalLayoutFind->takeAt(0)) != 0)
-    {
-        pTB->addWidget(layoutItem->widget());
-        delete layoutItem;
-    }
-    addToolBar(Qt::BottomToolBarArea, pTB);
-
     connect(ui->comboFindBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboFindBoxIndexChanged(int)));
     // - remove obsolete layout
     // NOTE: regard future layout items, if any
-    delete ui->topLayout;
     ui->topLayout = nullptr;
     ui->horizontalLayout = nullptr;
-    ui->verticalLayout_Settings = nullptr;
-    ui->horizontalLayoutFind = nullptr;
-    ui->horizontalLayoutForTextBrowserHead = nullptr;
-    ui->horizontalLayoutForTreeViewHead = nullptr;
     ui->horizontalLayoutHistoryAndText  = nullptr;
     ui->horizontalLayoutTool = nullptr;
     ui->verticalLayout = nullptr;
@@ -1044,8 +1025,62 @@ void MainWindow::addCmdToolBar(int i)
     mActions.fillToolbar(*pTB, fToolbar);
     pTB->setObjectName(Cmd::mToolbarNames[i]);
     pTB->setIconSize(QSize(24,24));
+    addToolBar(i==0 ? Qt::LeftToolBarArea : Qt::TopToolBarArea, pTB);
+}
+
+void MainWindow::insertTopToolBars()
+{
+    addToolBarBreak(Qt::TopToolBarArea);
+
+    QLayoutItem *layoutItem {nullptr};
+    QToolBar* pTB {nullptr};
+    pTB = new QToolBar(tr("Git File View States"));
+    pTB->setObjectName("fileviewtoolbar");
+    while ((layoutItem = ui->horizontalLayoutForTreeViewHead->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
     addToolBar(Qt::TopToolBarArea, pTB);
-    if (i==0) insertToolBarBreak(pTB);
+    ui->horizontalLayoutForTreeViewHead = nullptr;
+
+    pTB = new QToolBar(tr("Text Editor / Viewer Control"));
+    pTB->setObjectName("textviewtoolbar");
+    while ((layoutItem = ui->horizontalLayoutForTextBrowserHead->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
+    addToolBar(Qt::TopToolBarArea, pTB);
+    ui->horizontalLayoutForTextBrowserHead = nullptr;
+}
+
+void MainWindow::insertBottomToolBars()
+{
+    QLayoutItem *layoutItem {nullptr};
+    QToolBar* pTB {nullptr};
+
+    pTB = new QToolBar(tr("Settings"));
+    pTB->setObjectName("fileflagtoolbar");
+    while ((layoutItem = ui->verticalLayout_Settings->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
+    addToolBar(Qt::BottomToolBarArea, pTB);
+    ui->verticalLayout_Settings = nullptr;
+
+    addToolBarBreak(Qt::BottomToolBarArea);
+
+    pTB = new QToolBar(tr("Find"));
+    pTB->setObjectName("findtoolbar");
+    while ((layoutItem = ui->horizontalLayoutFind->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
+    addToolBar(Qt::BottomToolBarArea, pTB);
+    ui->horizontalLayoutFind = nullptr;
 }
 
 void MainWindow::removeCmdToolBar(const QString& toolbar_name)
@@ -2613,6 +2648,13 @@ void MainWindow::timerEvent(QTimerEvent *  event )
         perform_post_cmd_action(static_cast<Cmd::ePostAction>(post_cmd), {}, cmd);
         mTimerTask.remove(id);
     }
+
+    // if (m_initializing_elements)
+    // {
+    //     centralWidget()->setMinimumWidth(200);
+    //     centralWidget()->setMaximumWidth(QWIDGETSIZE_MAX);
+    //     m_initializing_elements = false;
+    // }
 }
 
 void MainWindow::expand_tree_items()

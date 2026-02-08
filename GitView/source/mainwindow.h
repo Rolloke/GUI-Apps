@@ -391,6 +391,8 @@ private:
     void store_filter(QSettings& fSettings);
     void     createDockWindows();
     void     addCmdToolBar(int i);
+    void     insertTopToolBars();
+    void     insertBottomToolBars();
     QWidget* get_widget(QDockWidget*dock);
     void init_miscelaneous_items(bool load=true);
     bool     mDockedWidgetMinMaxButtons;
