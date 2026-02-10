@@ -1068,13 +1068,13 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
         int result = getInputText(dialog_title, edit_label, old_name, button_names, new_name);
         if (result != QDialog::Rejected && !new_name.isEmpty())
         {
-#ifdef __linux__
+// #ifdef __linux__
             const QString copy_cmd = "cp -r";
             const QString move_cmd = "mv";
-#else
-            const QString copy_cmd = "xcopy /E /H /C /K /O";
-            const QString move_cmd = "move /y";
-#endif
+// #else
+//             const QString copy_cmd = "xcopy /E /H /C /K /O";
+//             const QString move_cmd = "move /y";
+// #endif
             QString     command;
             bool        moved = false;
             if (result == result_copy)

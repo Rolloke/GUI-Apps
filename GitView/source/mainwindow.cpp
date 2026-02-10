@@ -81,6 +81,8 @@ constexpr char sFlagsDisabled[]           = "FlagsDisabled";
 constexpr char sIconPath[]                = "IconPath";
 constexpr char sMenuStringList[]          = "MenuStringList";
 constexpr char sShortcut[]                = "Shortcut";
+constexpr char sFontName[]                = "FontName";
+
 //constexpr char sModified[] = "Modified";
 constexpr char sMessagePattern[]          = "MessagePattern";
 constexpr char sFileNamePosition[]        = "FilePosition";
@@ -146,12 +148,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->textBrowser->set_active(true);
     connect(this, SIGNAL(tabifiedDockWidgetActivated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
 
+    bool config_exists = true;
     QString config_filename = getConfigName();
-    bool config_exists = QFileInfo(config_filename).exists();
     QSettings fSettings(config_filename, QSettings::NativeFormat);
-
     fSettings.beginGroup(config::sGroupView);
     {
+        config_exists = fSettings.contains(config::sFontName);
         LOAD_STR(fSettings, mBranchHasSiblingsNotAdjoins, toString);
         LOAD_STR(fSettings, mBranchHasSiblingsAdjoins, toString);
         LOAD_STR(fSettings, mBranchHasChildrenNotHasSiblingsAdjoins, toString);
@@ -517,9 +519,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             width =  screen->geometry().width();
             if (width > 1600)
             {
-                ui->comboToolBarStyle->setCurrentIndex(3);
+                ui->comboToolBarStyle->setCurrentIndex(Qt::ToolButtonTextUnderIcon);
             }
         }
+        ui->comboTabPosition->setCurrentIndex(QTabWidget::South);
         showMaximized();
         centralWidget()->setFixedWidth(width / 4);
         m_initializing_elements = true;
