@@ -285,7 +285,7 @@ private Q_SLOTS:
     void on_ckShortState_clicked(bool checked);
     void on_comboShowItems_currentIndexChanged(int index);
 
-    void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column, bool called=true);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
     void on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);

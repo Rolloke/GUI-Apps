@@ -97,9 +97,9 @@ void MainWindow::call_git_history_diff_command()
     }
 }
 
-void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
+void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn, bool called)
 {
-    if (ui->treeHistory->isMouseButtonPressed(Qt::LeftButton) == false)
+    if (ui->treeHistory->isMouseButtonPressed(Qt::LeftButton) == false && !called)
     {
         /// NOTE: do not draw twice (react on mouse button release)
         return;
@@ -199,6 +199,6 @@ void MainWindow::on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTr
 {
     if (current)
     {
-        on_treeHistory_itemClicked(current, ui->treeHistory->currentColumn());
+        on_treeHistory_itemClicked(current, ui->treeHistory->currentColumn(), true);
     }
 }

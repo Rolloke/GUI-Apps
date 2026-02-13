@@ -35,6 +35,7 @@
 #include <QStringConverter>
 #else
 #include <QTextCodec>
+#include <QScreen>
 #endif
 
 #ifdef WEB_ENGINE
