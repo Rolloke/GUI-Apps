@@ -82,6 +82,7 @@ struct Cmd
         /// hint: add further git commands before
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands
+        CustomBackgroundCommand=498,
         CustomTestCommand=499,
         AutoCommand=500,
         RenderGraphics = AutoCommand+6,

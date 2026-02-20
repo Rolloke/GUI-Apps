@@ -119,7 +119,8 @@ private:
         Branch,
         Stash,
         FindTextInFilesView,
-        ExecuteCommand
+        ExecuteCommand,
+        ExecuteCommandinBackground
     };
 
     struct FindColumn { enum e
@@ -202,6 +203,7 @@ private:
     void     perform_post_cmd_action(git::Cmd::ePostAction post_cmd, const git::Type& type = {}, git::Cmd::eCmd cmd = git::Cmd::Invalid);
 
     QString  getConfigName() const;
+    QString  getBookmarksgName() const;
 
     bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
     void     insertSourceTree(const QDir& fSource, int fItem);
@@ -395,6 +397,9 @@ private:
     void     insertBottomToolBars();
     QWidget* get_widget(QDockWidget*dock);
     void init_miscelaneous_items(bool load=true);
+    void store_bookmarks();
+    void load_bookmarks();
+
     bool     mDockedWidgetMinMaxButtons;
 
     Ui::MainWindow*       ui;

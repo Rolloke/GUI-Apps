@@ -161,8 +161,6 @@ bool CustomGitActions::isMiscelaneousItemChanged()
 
 CustomGitActions::~CustomGitActions()
 {
-    QAction* action = mActionList.getAction(Cmd::CustomTestCommand);
-    action->setStatusTip("");
     delete ui;
 }
 

@@ -73,6 +73,9 @@ constexpr char sCommands[]                = "Commands";
 constexpr char sCommand[]                 = "Command";
 constexpr char sID[]                      = "ID";
 constexpr char sName[]                    = "Name";
+constexpr char sPath[]                    = "path";
+constexpr char sIndex[]                 = "index";
+constexpr char sText[]                    = "text";
 constexpr char sTooltip[]                 = "Tooltip";
 constexpr char sCustomMessageBoxText[]    = "MessageBoxText";
 constexpr char sCustomCommandPostAction[] = "PostAction";
@@ -93,6 +96,7 @@ constexpr char sReplace[]                 = "Replace";
 constexpr char Cmd__mToolbars[]           = "Cmd__mToolbars_%1";
 constexpr char Cmd__mToolbarName[]        = "Cmd__mToolbarName_%1";
 } // namespace config
+
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
@@ -509,6 +513,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     delete ui->topLayout;
 
+    load_bookmarks();
     if (!config_exists) /// NOTE: initialize program at the first time
     {
         int width = rect().width();
@@ -565,6 +570,7 @@ MainWindow::~MainWindow()
     showDockedWidget(mBinaryValuesView.data(), false);
 
     store_settings();
+    store_bookmarks();
 
     delete ui;
 
@@ -900,7 +906,7 @@ void MainWindow::read_custom_commands(const QString &file_name)
 void MainWindow::store_custom_commands(const QString& file_name)
 {
     QSettings settings(file_name, QSettings::NativeFormat);
-    store_commands(settings, {git::Cmd::CustomCommand, git::Cmd::CustomTestCommand} );
+    store_commands(settings, { git::Cmd::CustomCommand, git::Cmd::CustomTestCommand, git::Cmd::CustomBackgroundCommand } );
 }
 
 void MainWindow::createDockWindows()
@@ -1000,6 +1006,7 @@ void MainWindow::createDockWindows()
     dock->setVisible(false);
 
     ui->comboFindBox->addItem(tr("Execute Git Command"));
+    ui->comboFindBox->addItem(tr("Execute in Background"));
 
     mDockAreaNames.append(tr("Left"));
     mDockAreaNames.append(tr("Right"));
@@ -1323,6 +1330,91 @@ void MainWindow::init_miscelaneous_items(bool load)
     }
 }
 
+void MainWindow::store_bookmarks()
+{
+    QString   config_filename = getBookmarksgName();
+    QSettings settings(config_filename, QSettings::NativeFormat);
+    QString   file_path;
+    int       index = 0;
+
+    auto iterate_items = [&](QTreeWidgetItem*& item, int level)
+    {
+        if (level < 0)
+        {
+            int pos = std::distance(std::find(file_path.rbegin() + 1, file_path.rend(), '/'), file_path.rend());
+            if (pos > 0 && pos < file_path.size())
+            {
+                file_path = file_path.left(pos);
+            }
+        }
+        else if (item->childCount() == 0)
+        {
+            settings.setArrayIndex(index++);
+            settings.setValue(config::sPath, file_path + item->text(FindColumn::FilePath));
+            settings.setValue(config::sIndex, item->text(FindColumn::Line));
+            settings.setValue(config::sText,  item->text(FindColumn::FoundTextLine));
+        }
+        else
+        {
+            if (level == 0)
+            {
+                file_path += "/";
+            }
+            else
+            {
+                file_path += item->text(FindColumn::FilePath) + "/";
+            }
+        }
+    };
+
+    settings.clear();
+
+    int count = ui->treeFindText->topLevelItemCount();
+    for (int i = 0; i < count; ++i)
+    {
+        auto top_item = ui->treeFindText->takeTopLevelItem(i);
+        auto group = top_item->text(FindColumn::FilePath);
+        settings.beginGroup(group);
+        settings.beginWriteArray(group);
+        index = 0;
+        do_with_item_and_children(top_item, iterate_items);
+        settings.endArray();
+        settings.endGroup();
+    }
+}
+
+void MainWindow::load_bookmarks()
+{
+    QString   config_filename = getBookmarksgName();
+    QSettings settings(config_filename, QSettings::NativeFormat);
+    ParseMessagePattern message;
+    message.set_pattern("\\((.*)\\):(.*):text:(.*)");
+    auto groups = settings.childGroups();
+    for (const auto& group : groups)
+    {
+        settings.beginGroup(group);
+        {
+            int count = settings.beginReadArray(group);
+            {
+                for (int item = 0; item < count; ++item)
+                {
+                    settings.setArrayIndex(item);
+                    message.set_text_line("("      + settings.value(config::sPath).toString() +
+                                          "):"     + settings.value(config::sIndex).toString() +
+                                          ":text:" + settings.value(config::sText).toString());
+                    if (message.parse())
+                    {
+                        createBookmark(group, &message);
+                    }
+                }
+                ui->labelFilePath->setText("");
+            }
+            settings.endArray();
+        }
+        settings.endGroup();
+    }
+}
+
 void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
 {
     if (dockWidget)
@@ -1584,6 +1676,15 @@ QString MainWindow::getConfigName() const
     return QDir::homePath() + "/.config/" + sConfigFileName + ".ini";
 #else
     return "HKEY_CURRENT_USER\\Software\\KESoft\\" + sConfigFileName;
+#endif
+}
+
+QString MainWindow::getBookmarksgName() const
+{
+#ifdef __linux__
+    return QDir::homePath() + "/.config/" + "book_marks" + ".ini";
+#else
+    return "HKEY_CURRENT_USER\\Software\\KESoft\\book_marks";
 #endif
 }
 
@@ -1925,7 +2026,11 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
                 work_command = Work::AsynchroneousCommand;
             }
             QVariantMap workmap;
-            if (mContextMenuSourceTreeItem)
+            if (mActions.findID(sender_action) == git::Cmd::CustomBackgroundCommand)
+            {
+                workmap.insert(Worker::repository, a_source);
+            }
+            else if (mContextMenuSourceTreeItem)
             {
                 workmap.insert(Worker::repository, ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
             }
@@ -2293,6 +2398,8 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::ShowInformation, Type::File|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CustomTestCommand, tr("test command"), tr("")), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::CustomBackgroundCommand, tr("test command"), tr("")), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::CustomBackgroundCommand, ActionList::Flags::Asynchroneous, Flag::set);
 
     Cmd::eCmd new_id = Cmd::AutoCommand;
     create_auto_cmd(ui->ckDirectories, new_id);
@@ -2901,6 +3008,7 @@ void MainWindow::comboFindBoxIndexChanged(int index)
 {
     static QString oldFindAllToolTip;
     static QString oldFindAllText;
+    static QString oldFindTextToolTip;
     static QMetaObject::Connection find_all_connected;
     static QMetaObject::Connection find_next_connected;
 
@@ -2914,15 +3022,23 @@ void MainWindow::comboFindBoxIndexChanged(int index)
         oldFindAllText = ui->btnFindAll->text();
     }
 
+    if (oldFindTextToolTip.isEmpty())
+    {
+        oldFindTextToolTip = ui->edtFindText->toolTip();
+    }
+
     enum eflag
     {
        Next=1, Previous=2, All=4, Replace=8
     };
 
     FindView find = static_cast<FindView>(index);
-    if (find == FindView::ExecuteCommand )
+    if (is_any_equal_to(find, FindView::ExecuteCommand, FindView::ExecuteCommandinBackground) )
     {
         ui->btnFindAll->setText(tr("Execute"));
+        ui->btnFindAll->setToolTip(find == FindView::ExecuteCommand ?
+                                       tr("Execute command in selected path of tree view") :
+                                       tr("Execute command in background thread in selected path of tree view"));
         ui->edtFindText->setToolTip(tr("Enter git or bash command and hit \"Return\" to execute"));
         if (!find_all_connected)
         {
@@ -2949,7 +3065,8 @@ void MainWindow::comboFindBoxIndexChanged(int index)
         {
             find_next_connected = connect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindNext, SLOT(click()));
         }
-        ui->edtFindText->setToolTip(oldFindAllToolTip);
+        ui->edtFindText->setToolTip(oldFindTextToolTip);
+        ui->btnFindAll->setToolTip(oldFindAllToolTip);
         ui->btnFindAll->setText(oldFindAllText);
     }
 
@@ -2972,6 +3089,8 @@ void MainWindow::comboFindBoxIndexChanged(int index)
     case FindView::Branch:              ui->statusBar->showMessage(tr("Search item in Branch View"));                  flags = Next|Previous; break;
     case FindView::Stash:               ui->statusBar->showMessage(tr("Search in Stash View"));                        flags = Next|Previous; break;
     case FindView::ExecuteCommand:      ui->statusBar->showMessage(tr("Execute git command for selected Repository")); flags = All; break;
+    case FindView::ExecuteCommandinBackground:
+                                        ui->statusBar->showMessage(tr("Execute git command for selected Repository in backgorund thread")); flags = All; break;
     }
 
     set_widget_and_action_enabled(ui->btnFindNext,     flags & Next     ? true : false);
@@ -3022,6 +3141,7 @@ void MainWindow::combo_triggered()
         case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
         case FindView::GoToLineInText:
         case FindView::ExecuteCommand:
+        case FindView::ExecuteCommandinBackground:
             break;
         }
 
@@ -3103,7 +3223,12 @@ void MainWindow::on_btnFindAll_clicked()
     }
     else
     {
-        QAction* action = mActions.getAction(Cmd::CustomTestCommand);
+        Cmd::eCmd command = Cmd::CustomTestCommand;
+        if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::ExecuteCommandinBackground))
+        {
+            command = Cmd::CustomBackgroundCommand;
+        }
+        QAction* action = mActions.getAction(command);
         if (action)
         {
             action->setStatusTip(ui->edtFindText->text());
@@ -3206,9 +3331,10 @@ void MainWindow::find_in_tree_views(find find_item)
         case FindView::Branch:              tree_view = ui->treeBranches; break;
         case FindView::Stash:               tree_view = ui->treeStash;    break;
         case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
-        case FindView::Text: break;
-        case FindView::GoToLineInText: break;
-        case FindView::ExecuteCommand: break;
+        case FindView::Text:                       break;
+        case FindView::GoToLineInText:             break;
+        case FindView::ExecuteCommand:             break;
+        case FindView::ExecuteCommandinBackground: break;
     }
 
     if (tree_view)
@@ -3533,7 +3659,7 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
                 QStringList list;
                 auto function = [&list] (QTreeWidgetItem *item)
                 {
-                    list.append(item->text(0));
+                    list.append(item->text(FindColumn::FilePath));
                 };
                 QTreeWidgetItem *parent = getTopLevelItem(*ui->treeFindText, item, function);
                 if (parent)

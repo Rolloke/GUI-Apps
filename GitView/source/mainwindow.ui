@@ -1223,7 +1223,7 @@ Git or command results are always displayed in main editor.
          </size>
         </property>
         <property name="toolTip">
-         <string>Find</string>
+         <string>Select find view or to execute a command</string>
         </property>
         <property name="statusTip">
          <string>Select View for search function</string>

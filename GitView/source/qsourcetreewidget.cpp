@@ -575,7 +575,7 @@ QStringList QSourceTreeWidget::saveExpandedState(QTreeWidgetItem *item)
     QStringList list;
     if (item)
     {
-        do_with_item_and_children(item, [&list,this](QTreeWidgetItem*&this_item)
+        do_with_item_and_children(item, [&list,this](QTreeWidgetItem*&this_item, int)
         {
             if (this_item->isExpanded())
             {

@@ -341,12 +341,20 @@ QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& reposit
     return nullptr;
 }
 
-void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf)
+/*!
+ * \brief iterates through a tree widget recursively and calls a given function
+ * \param aItem root item for iteration (QTreeWidgetItem*)
+ * \param function function or lamda expression (const tGTLIFunction2&)
+ * \param also_leaf recurse also through leaf (bool)
+ * \param level level of recursion, default: 0, range: 0 - n, -1  (int)
+ * \note  when the item has children and the recurion goes one level up, the level is -1
+ */
+void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction2 &function, bool also_leaf, int level)
 {
     auto count = aItem->childCount();
     if (also_leaf || count)
     {
-        function(aItem);
+        function(aItem, level);
     }
 
     for (int i=0; i<count; ++i)
@@ -355,16 +363,25 @@ void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& func
         {
             continue;
         }
-        do_with_item_and_children(aItem->child(i), function, also_leaf);
+        ++level;
+        do_with_item_and_children(aItem->child(i), function, also_leaf, level);
+    }
+
+    if (count)
+    {
+        function(aItem, -1);
     }
 }
 
 void toggle_expand_item(QTreeWidgetItem* item)
 {
     bool expand = !item->isExpanded();
-    auto expand_item = [&](QTreeWidgetItem*the_item)
+    auto expand_item = [&](QTreeWidgetItem*the_item, int level)
     {
-        the_item->setExpanded(expand);
+        if (level >= 0)
+        {
+            the_item->setExpanded(expand);
+        }
     };
     do_with_item_and_children(item, expand_item, false);
     item->setExpanded(!expand);

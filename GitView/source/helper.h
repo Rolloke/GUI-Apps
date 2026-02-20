@@ -46,7 +46,18 @@ namespace txt
 
 #define INT(n) static_cast<qint32>(n)
 
+/*!
+ * \brief tGTLIFunction2 function type for function called for recursive iteration through tree widget items
+ * \param item tree widget item (QTreeWidgetItem*&item)
+ */
 typedef std::function<void(QTreeWidgetItem*&)> tGTLIFunction;
+
+/*!
+ * \brief tGTLIFunction2 function type for function called for recursive iteration through tree widget items
+ * \param item tree widget item (QTreeWidgetItem*&item)
+ * \param level level of recursion (0 - n, -1) (int)
+ */
+typedef std::function<void(QTreeWidgetItem*&item, int level)> tGTLIFunction2;
 
 QString getSettingsName(const QString& aItemName);
 
@@ -67,7 +78,7 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, const tGTLIFunction& function = {});
 QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& repository_root, QString& file_path_part);
-void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf = true);
+void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction2& function, bool also_leaf = true, int level=0);
 void toggle_expand_item(QTreeWidgetItem* item);
 int getItemLevel(QTreeWidgetItem* aItem);
 QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name);
