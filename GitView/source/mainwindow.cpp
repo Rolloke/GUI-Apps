@@ -1361,7 +1361,9 @@ void MainWindow::store_bookmarks()
         {
             if (level == 0)
             {
+#ifdef __linux__
                 file_path += "/";
+#endif
             }
             else
             {
