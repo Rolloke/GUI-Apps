@@ -2046,7 +2046,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
             workmap.insert(Worker::work, INT(work_command));
             mWorker.doWork(QVariant(workmap));
             kill_background_thread->setToolTip(mWorker.getBatchToolTip());
-            if (mOutput2secondTextView && mBackgroundTextView)
+            if (mOutput2secondTextView && has_background_text_view())
             {
                 showDockedWidget(mBackgroundTextView.data());
             }
@@ -2706,16 +2706,7 @@ void MainWindow::timerEvent(QTimerEvent *  event )
                 }
                 if (mOutput2secondTextView)
                 {
-                    if (!mBackgroundTextView)
-                    {
-                        // backgound process output text view
-                        mBackgroundTextView.reset(create_new_text_browser("", tr("Background Log")));
-                        QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.data()->parent());
-                        dock->setObjectName(background_textbrowser);
-                        dock->setAttribute(Qt::WA_DeleteOnClose, false);
-                        mBackgroundTextView->setReadOnly(true);
-                    }
-                    if (mBackgroundTextView)
+                    if (has_background_text_view())
                     {
                         appendTextToBrowser(array, true, "", !mBackgroundTextView->isVisible(), true);
                         mBackgroundTextView->moveCursor(QTextCursor::End);

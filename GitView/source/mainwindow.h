@@ -213,6 +213,7 @@ private:
 
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true, bool use_second_view=false);
     void     parseTextForBookmarks(const QString& aText, const QString& viewer);
+    bool     has_background_text_view();
 #ifdef USE_BOOST
     void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = false);
 #else

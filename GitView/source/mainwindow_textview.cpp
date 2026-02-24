@@ -32,7 +32,7 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
         {
             btnCloseText_clicked(Editor::Viewer);
         }
-        auto* browser = use_second_view ? mBackgroundTextView.data() : ui->textBrowser;
+        auto* browser = use_second_view && has_background_text_view() ? mBackgroundTextView.data() : ui->textBrowser;
         QDockWidget* parent = dynamic_cast<QDockWidget*>(browser->parent());
         const QString viewer =  parent ? parent->windowTitle() : "viewer";
         browser->setExtension(ext);
@@ -98,6 +98,20 @@ void MainWindow::parseTextForBookmarks(const QString &aText, const QString &view
             }
         }
     }
+}
+
+bool MainWindow::has_background_text_view()
+{
+    if (!mBackgroundTextView)
+    {
+        // backgound process output text view
+        mBackgroundTextView.reset(create_new_text_browser("", tr("Background Log")));
+        QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.data()->parent());
+        dock->setObjectName(background_textbrowser);
+        dock->setAttribute(Qt::WA_DeleteOnClose, false);
+        mBackgroundTextView->setReadOnly(true);
+    }
+    return static_cast<bool>(mBackgroundTextView);
 }
 
 void MainWindow::selectTextBrowserLanguage()
