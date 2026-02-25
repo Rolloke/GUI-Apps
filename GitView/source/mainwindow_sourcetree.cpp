@@ -1068,22 +1068,27 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
         int result = getInputText(dialog_title, edit_label, old_name, button_names, new_name);
         if (result != QDialog::Rejected && !new_name.isEmpty())
         {
-// #ifdef __linux__
+#ifdef __linux__
             const QString copy_cmd = "cp -r";
             const QString move_cmd = "mv";
-// #else
-//             const QString copy_cmd = "xcopy /E /H /C /K /O";
-//             const QString move_cmd = "move /y";
-// #endif
+ #else
+            QString copy_cmd = "copy";
+            //if (type.is(Type::Folder)) copy_cmd = "xcopy /S /C /K /E";
+            const QString move_cmd = "move /y";
+ #endif
             QString     command;
             bool        moved = false;
             if (result == result_copy)
             {
                 if (new_name.contains("/"))
                 {
-                    const QString new_copied = "\"" + new_name + "\"";
+                    QString new_copied = "\"" + new_name + "\"";
                     moved   = true;
                     old_name = "\"" + path.filePath() + "\"";
+#ifndef __linux__
+                    old_name.replace("/", "\\");
+                    new_copied.replace("/", "\\");
+#endif
                     command = tr("%1 %2 %3").arg(copy_cmd, old_name, new_copied);
                 }
             }
@@ -1107,15 +1112,24 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             {
                 if (new_name.contains("/"))
                 {
-                    const QString new_renamed = "\"" + new_name + "\"";
+                    QString new_renamed = "\"" + new_name + "\"";
                     moved   = true;
                     old_name = "\"" + path.filePath() + "\"";
+#ifndef __linux__
+                    old_name.replace("/", "\\");
+                    new_renamed.replace("/", "\\");
+#endif
                     command = tr("%3 %1 %2").arg(old_name, new_renamed, move_cmd);
                 }
                 else
                 {
+                    QString new_renamed = "\"" + new_name + "\"";
                     old_name = "\"" + old_name + "\"";
-                    command  = tr("%4 \"%1/%2\" \"%1/%3\"").arg(path.absolutePath(),old_name, new_name, move_cmd);
+#ifndef __linux__
+                    old_name.replace("/", "\\");
+                    new_renamed.replace("/", "\\");
+#endif
+                    command  = tr("%4 \"%1/%2\" \"%1/%3\"").arg(path.absolutePath(),old_name, new_renamed, move_cmd);
                 }
             }
 
