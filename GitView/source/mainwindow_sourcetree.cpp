@@ -1073,7 +1073,7 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             const QString move_cmd = "mv";
  #else
             QString copy_cmd = "copy";
-            //if (type.is(Type::Folder)) copy_cmd = "xcopy /S /C /K /E";
+            if (type.is(Type::Folder)) copy_cmd = "xcopy /S /E /C /Y /I";
             const QString move_cmd = "move /y";
  #endif
             QString     command;
@@ -1082,11 +1082,20 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             {
                 if (new_name.contains("/"))
                 {
-                    QString new_copied = "\"" + new_name + "\"";
                     moved   = true;
+#ifdef __linux__
+                    QString new_copied = "\"" + new_name + "\"";
                     old_name = "\"" + path.filePath() + "\"";
-#ifndef __linux__
+#else
+                    old_name = path.filePath();
                     old_name.replace("/", "\\");
+                    if (type.is(Type::Folder))
+                    {
+                        QStringList list = old_name.split("\\");
+                        new_name += "\\" + list.back();
+                    }
+                    old_name = "\"" + old_name + "\"";
+                    QString new_copied = "\"" + new_name + "\"";
                     new_copied.replace("/", "\\");
 #endif
                     command = tr("%1 %2 %3").arg(copy_cmd, old_name, new_copied);
