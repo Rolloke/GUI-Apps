@@ -8,7 +8,6 @@ App providing tools to work with git repositories.
 - displays a tree containing files and status of files
   - visibility of the file may depend on status
 - editing text files
-- preview of markdown and html
 - editing of binary files
 - search of text
   - in single text
@@ -38,7 +37,7 @@ Kodi media list viewer and editor
 
 ### Oscilloscope 
 
-Oscilloscope and function generator for selectable audio devices on sound card of a PC (Qt5)
+Oscilloscope and **function** generator for selectable audio devices on sound card of a PC (Qt5)
 
 - Calibration of single channels regarding offset and amplification
 - Supports also probes with different amplification
