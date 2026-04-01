@@ -363,8 +363,8 @@ void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction2 &fun
         {
             continue;
         }
-        ++level;
-        do_with_item_and_children(aItem->child(i), function, also_leaf, level);
+
+        do_with_item_and_children(aItem->child(i), function, also_leaf, level + 1);
     }
 
     if (count)
