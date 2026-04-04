@@ -59,6 +59,7 @@ public:
     ~ActionList();
 
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand="", QObject*aParent=nullptr);
+    git::Cmd::eCmd insertCustomAction(QAction*action);
     void     deleteAction(git::Cmd::eCmd aCmd);
     QAction* getAction(git::Cmd::eCmd aCmd) const;
     bool     hasAction(git::Cmd::eCmd aCmd) const;

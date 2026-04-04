@@ -388,7 +388,7 @@ public Q_SLOTS:
 
 private:
 
-    void read_commands(QSettings& fSettings);
+    void read_commands(QSettings& fSettings, ActionList *actions = nullptr, std::vector<git::Cmd::tVector> *menues = nullptr);
     void store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd> &commands = {});
     void read_filter(QSettings& fSettings);
     void store_filter(QSettings& fSettings);

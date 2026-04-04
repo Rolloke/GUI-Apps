@@ -17,7 +17,7 @@ class QStandardItem;
 class CustomGitActions : public QDialog
 {
     Q_OBJECT
-
+public:
     struct VariousListIndex
     {
         enum e
@@ -48,6 +48,7 @@ class CustomGitActions : public QDialog
         static bool isCustomToolbar(int);
         static e    cast(int);
     };
+private:
     std::vector<double> mActionListColumnWidth;
 
     struct VariousHeader { enum e

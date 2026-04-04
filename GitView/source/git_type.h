@@ -175,6 +175,7 @@ struct Cmd
     static QString toStringMT(const string2bool_map& aItems);
     static string2bool_map fromStringMT(const QString& aString);
 
+    static const uint  mMenues = 7;
     static tVector mContextMenuSourceTree;
     static tVector mContextMenuEmptySourceTree;
     static tVector mContextMenuHistoryTree;

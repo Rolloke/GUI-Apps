@@ -41,6 +41,13 @@ QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QSt
     return new_action;
 }
 
+Cmd::eCmd ActionList::insertCustomAction(QAction * action)
+{
+    Cmd::eCmd cmd = createNewID(git::Cmd::CustomCommand);
+    mActionList[cmd] = action;
+    return cmd;
+}
+
 void ActionList::initAction(git::Cmd::eCmd cmd, QAction* action)
 {
     QVariantList fList;
