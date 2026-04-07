@@ -391,14 +391,14 @@ void ActionList::select_action(QAction* action)
 
 void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items, QWidget* widget) const
 {
-    QMenu* sub_menu = nullptr;
+    QList<QMenu*> sub_menu;
     for (const auto& cmd : std::as_const(items))
     {
         if (cmd == Cmd::Separator)
         {
-            if (sub_menu)
+            if (sub_menu.size())
             {
-                sub_menu = nullptr;
+                sub_menu.pop_back();
             }
             else
             {
@@ -408,16 +408,35 @@ void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items, QWidge
         else if (cmd >= Cmd::Submenu)
         {
             auto* action = getAction(cmd);
-            if (action) sub_menu = menu.addMenu(action->text());
+            if (action)
+            {
+                if (sub_menu.size())
+                {
+                    sub_menu.push_back(sub_menu.back()->addMenu(action->text()));
+                }
+                else
+                {
+                    sub_menu.push_back(menu.addMenu(action->text()));
+                }
+            }
         }
         else
         {
             auto* action = getAction(cmd);
             if (action)
             {
-                if (sub_menu) sub_menu->addAction(action);
-                else menu.addAction(action);
-                if (widget) widget->addAction(action);
+                if (sub_menu.size())
+                {
+                    sub_menu.back()->addAction(action);
+                }
+                else
+                {
+                    menu.addAction(action);
+                }
+                if (widget)
+                {
+                    widget->addAction(action);
+                }
             }
         }
     }

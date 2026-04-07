@@ -2570,6 +2570,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::CloseAll});
     contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::ReloadAll});
+    contextmenu_text_view.push_back(Cmd::Separator);
 
     contextmenu_text_view.push_back(Cmd::SubFind);
     create_auto_cmd(ui->btnFindAll, new_id, mActions.check_location("edit-find.png"));
@@ -2599,6 +2600,8 @@ void MainWindow::initContextMenuActions()
     new_id += 3;
     create_auto_cmd(ui->btnFindReplace, new_id, mActions.check_location("edit-find-replace.png"));
     contextmenu_text_view.push_back(new_id);
+    contextmenu_text_view.push_back(Cmd::Separator);
+
     create_auto_cmd(ui->comboWordWrap, new_id);
     /// NOTE: free ID 536
     new_id += 2;
@@ -2610,8 +2613,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->comboFindBox, new_id, "")->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_E));
     mActions.getAction(new_id)->setToolTip(tr("Execute"));
 
-    contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubExtra, Cmd::EditToUpper, Cmd::EditToLower, Cmd::EditToggleComment, Cmd::EditToSnakeCase, Cmd::EditToCamelCase, Cmd::EditTabIndent, Cmd::EditTabOutdent });
-
+    contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubExtra, Cmd::EditToUpper, Cmd::EditToLower, Cmd::EditToggleComment, Cmd::EditToSnakeCase, Cmd::EditToCamelCase, Cmd::EditTabIndent, Cmd::EditTabOutdent, Cmd::Separator});
 
     auto found_sub = std::find_if(Cmd::mContextMenuTextView.begin(), Cmd::mContextMenuTextView.end(), [](auto cmd) { return is_any_equal_to(cmd, Cmd::SubFind, Cmd::SubFiles, Cmd::SubExtra); });
     if (found_sub == Cmd::mContextMenuTextView.end())
