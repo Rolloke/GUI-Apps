@@ -214,11 +214,11 @@ void ActionList::initActionIcons()
     action_icons[Cmd::ReplaceAll]              = "edit-find-replace.png";
     action_icons[Cmd::EditToUpper]             = "view-sort-descending.png";
     action_icons[Cmd::EditToLower]             = "view-sort-ascending.png";
-    action_icons[Cmd::EditToggleComment]       = "default.md";
+    action_icons[Cmd::EditToggleComment]       = "gnome-mime-text.png";
     action_icons[Cmd::EditToSnakeCase]         = "format-text-bold.png";
     action_icons[Cmd::EditToCamelCase]         = "format-text-bold.png";
-    action_icons[Cmd::EditTabIndent]           = "edit-redo-rtl.png";
-    action_icons[Cmd::EditTabOutdent]          = "edit-redo.png";
+    action_icons[Cmd::EditTabIndent]           = "edit-redo.png";
+    action_icons[Cmd::EditTabOutdent]          = "edit-redo-rtl.png";
     action_icons[Cmd::InvokeOutputParserDialog] = "text-x-patch.png";
     action_icons[Cmd::ReloadAll]               = "document-revert.png";
 
