@@ -683,6 +683,7 @@ void CustomGitActions::on_btnDelete_clicked()
                     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(static_cast<int>(fVector.size()-1), ActionsTable::ID), QItemSelectionModel::Select);
                     on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
                 }
+                fVector.erase(fFound);
             }
         }
     }

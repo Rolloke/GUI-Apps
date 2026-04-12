@@ -212,13 +212,13 @@ void ActionList::initActionIcons()
     action_icons[Cmd::OpenFile]                = "gnome-mime-text.png";
     action_icons[Cmd::SaveAs]                  = "document-save.png";
     action_icons[Cmd::ReplaceAll]              = "edit-find-replace.png";
-    action_icons[Cmd::EditToUpper]             = "window-close.png";
-    action_icons[Cmd::EditToLower]             = "window-close.png";
-    action_icons[Cmd::EditToggleComment]       = "window-close.png";
-    action_icons[Cmd::EditToSnakeCase]         = "window-close.png";
-    action_icons[Cmd::EditToCamelCase]         = "window-close.png";
-    action_icons[Cmd::EditTabIndent]           = "window-close.png";
-    action_icons[Cmd::EditTabOutdent]          = "window-close.png";
+    action_icons[Cmd::EditToUpper]             = "view-sort-descending.png";
+    action_icons[Cmd::EditToLower]             = "view-sort-ascending.png";
+    action_icons[Cmd::EditToggleComment]       = "default.md";
+    action_icons[Cmd::EditToSnakeCase]         = "format-text-bold.png";
+    action_icons[Cmd::EditToCamelCase]         = "format-text-bold.png";
+    action_icons[Cmd::EditTabIndent]           = "edit-redo-rtl.png";
+    action_icons[Cmd::EditTabOutdent]          = "edit-redo.png";
     action_icons[Cmd::InvokeOutputParserDialog] = "text-x-patch.png";
     action_icons[Cmd::ReloadAll]               = "document-revert.png";
 

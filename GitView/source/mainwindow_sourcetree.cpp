@@ -395,8 +395,6 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     m_tree_source_item_double_clicked = false;
 }
 
-/// TODO: implement open folder in default terminal
-/// TODO: create submenu for open functionalities
 void MainWindow::open_file_externally()
 {
     if (mContextMenuSourceTreeItem)

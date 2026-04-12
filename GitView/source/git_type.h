@@ -93,6 +93,7 @@ struct Cmd
         SubFiles,
         SubFind,
         SubExtra,
+        SubOpen,
         Separator = NonGitCommands,
 
         ExpandTreeItems,

@@ -1,6 +1,7 @@
 
 #include "git_type.h"
 #include "logger.h"
+#include "helper.h"
 #include <QStringList>
 #include <QObject>
 #include <QFileInfo>
@@ -91,12 +92,14 @@ Cmd::Cmd()
     mCommandMap[Clone]                  = "git clone -v %1";
     mCommandMap[MergeTwoBranches]       = " ";
 
+    /// Submenu IDs
     mCommandMap[SubFiles]               = QObject::tr("Files");
     mCommandMap[SubFind]                = QObject::tr("Find");
     mCommandMap[SubExtra]               = QObject::tr("Extra");
+    mCommandMap[SubOpen]                = QObject::tr("Open");
 
-    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename,
-                                    Separator, CompareTo, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally,
+    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, CompareTo, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename,
+                                    SubOpen, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally,
                                     Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History,
                                     Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
@@ -205,41 +208,23 @@ const QString& Cmd::getCommand(eCmd aCmd)
 
 bool Cmd::isCommandUsed(eCmd cmd)
 {
+    if (is_in_range(Cmd::AutoCommand, Cmd::NonGitCommands, cmd))
     {
-        const auto& tb = mContextMenuSourceTree;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+        return true;
     }
-    {
-        const auto& tb = mContextMenuEmptySourceTree;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
-    {
-        const auto& tb = mContextMenuHistoryTree;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
-    {
-        const auto& tb = mContextMenuBranchTree;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
-    {
-        const auto& tb = mContextMenuStashTree;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
-    {
-        const auto& tb = mContextMenuGraphicsView;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
-    {
-        const auto& tb = mContextMenuTextView;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
-    {
-        const auto& tb = mContextMenuFindTextTree;
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
-    }
+    auto contains = [](const tVector& tb, eCmd acmd) { return (std::find(tb.begin(), tb.end(), acmd) != tb.end()) ? true : false; };
+
+    if (contains(mContextMenuSourceTree     , cmd)) return true;
+    if (contains(mContextMenuEmptySourceTree, cmd)) return true;
+    if (contains(mContextMenuHistoryTree    , cmd)) return true;
+    if (contains(mContextMenuBranchTree     , cmd)) return true;
+    if (contains(mContextMenuStashTree      , cmd)) return true;
+    if (contains(mContextMenuGraphicsView   , cmd)) return true;
+    if (contains(mContextMenuTextView       , cmd)) return true;
+    if (contains(mContextMenuFindTextTree   , cmd)) return true;
     for (const auto& tb : mToolbars)
     {
-        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+        if (contains(tb, cmd)) return true;
     }
     return false;
 }

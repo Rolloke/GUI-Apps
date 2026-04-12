@@ -2600,15 +2600,17 @@ void MainWindow::initContextMenuActions()
     new_id += 3;
     create_auto_cmd(ui->btnFindReplace, new_id, mActions.check_location("edit-find-replace.png"));
     contextmenu_text_view.push_back(new_id);
-    contextmenu_text_view.push_back(Cmd::Separator);
+    contextmenu_text_view.push_back(Cmd::ReplaceAll);
 
     create_auto_cmd(ui->comboWordWrap, new_id);
     /// NOTE: free ID 536
     new_id += 2;
     create_auto_cmd(ui->spinFontSize, new_id);
 
-    create_auto_cmd(ui->comboFindBox, new_id, "")->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));
+    create_auto_cmd(ui->comboFindBox, new_id, mActions.check_location("edit-find.png"))->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));
     mActions.getAction(new_id)->setToolTip(tr("Go to Line"));
+    contextmenu_text_view.push_back(new_id);
+    contextmenu_text_view.push_back(Cmd::Separator);
 
     create_auto_cmd(ui->comboFindBox, new_id, "")->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_E));
     mActions.getAction(new_id)->setToolTip(tr("Execute"));
