@@ -2623,20 +2623,12 @@ void MainWindow::initContextMenuActions()
         Cmd::mContextMenuTextView.insert(Cmd::mContextMenuTextView.end(), contextmenu_text_view.begin(), contextmenu_text_view.end());
     }
 
-    auto cmd = Cmd::SubFiles;
-    QString name = Cmd::getCommand(cmd);
-    mActions.createAction(cmd, name, name);
-    mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
-
-    cmd = Cmd::SubFind;
-    name = Cmd::getCommand(cmd);
-    mActions.createAction(cmd, name, name);
-    mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
-
-    cmd = Cmd::SubExtra;
-    name = Cmd::getCommand(cmd);
-    mActions.createAction(cmd, name, name);
-    mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
+    for (auto cmd : { Cmd::SubFiles, Cmd::SubFind, Cmd::SubExtra, Cmd::SubOpen} )
+    {
+        QString name = Cmd::getCommand(cmd);
+        mActions.createAction(cmd, name, name);
+        mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
+    }
 
     for (const auto& fAction : std::as_const(mActions.getList()))
     {
