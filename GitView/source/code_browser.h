@@ -66,6 +66,7 @@ protected:
     bool event(QEvent *event) override;
     void focusInEvent(QFocusEvent *) override;
     void dropEvent(QDropEvent *de) override;
+    void mousePressEvent(QMouseEvent* me) override;
 
 Q_SIGNALS:
     void text_changed(const QString &text);

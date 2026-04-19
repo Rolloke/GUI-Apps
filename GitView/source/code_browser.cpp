@@ -68,7 +68,7 @@ int code_browser::lineNumberAreaWidth()
 
         if (m_text_section_start.size())
         {
-            digits += 2;
+            digits += 3;
         }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -231,6 +231,11 @@ void code_browser::focusInEvent(QFocusEvent *fie)
 void code_browser::dropEvent(QDropEvent *de)
 {
     QTextBrowser::dropEvent(de);
+}
+
+void code_browser::mousePressEvent(QMouseEvent *me)
+{
+    QTextBrowser::mousePressEvent(me);
 }
 
 bool code_browser::event(QEvent *event)
