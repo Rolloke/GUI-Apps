@@ -1981,36 +1981,63 @@ void MainWindow::killBackgroundThread()
     if (commands.size())
     {
         QStringList pidlist;
-        if (get_pid_list(commands[0], pidlist))
+        QStringList namelist;
+        if (get_pid_list(commands[0], pidlist, namelist))
         {
-            int msgbox_buttons = to_all;
-            if (pidlist.size() == 1)
+
+            QDialog dialog;
+            dialog.setWindowTitle(tr("Kill process ids"));
+            auto *layout = new QVBoxLayout(&dialog);
+            auto *label  = new QLabel(tr("Select processes to be killed"));
+            layout->addWidget(label);
+
+            for (int i=0; i<pidlist.size(); ++i)
             {
-                msgbox_buttons = to_one;
+                QString name = pidlist[i] + ": ";
+                if (i < namelist.size()) name += namelist[i];
+                QCheckBox* cb = new QCheckBox(name , &dialog);
+                cb->setMaximumHeight(label->height() - 2);
+                layout->addWidget(cb);
             }
+
+            auto *buttons = new QDialogButtonBox;
+            auto *btn = buttons->addButton(tr("Stop this process"), QDialogButtonBox::AcceptRole);
+            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::accept);
+            btn = buttons->addButton(tr("Cancel"), QDialogButtonBox::AcceptRole);
+            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::reject);
             if (mWorker.hasBatchList())
             {
-                msgbox_buttons = to_all_or_one;
+                btn = buttons->addButton(tr("Stop all processes in batch"), QDialogButtonBox::DestructiveRole);
+                QObject::connect(btn, &QPushButton::clicked, &dialog, [&] {dialog.done(QMessageBox::Accepted+1); } );
             }
-            int result = callMessageBox(
-                tr("Do you really whant to kill all background processes \"%1\"?;%1\n"
-                   "Yes kills process ID: %2\n"
-                   "Yes To All empties also batch list"), pidlist.join(" "), mWorker.getBatchToolTip(), msgbox_buttons);
-            if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
+
+            layout->addWidget(buttons);
+
+            int result = dialog.exec();
+            if (result >= QMessageBox::Accepted)
             {
-                for (const QString &pid : std::as_const(pidlist))
+                int index = 0;
+                for (int ichild = 0; ichild < layout->count(); ++ichild)
                 {
+                    QWidget *widget = layout->itemAt(ichild)->widget();
+                    if (!widget) continue;
+                    QCheckBox *cb = qobject_cast<QCheckBox *>(widget);
+                    if (!cb) continue;
+                    if (cb->isChecked())
+                    {
 #ifdef __linux__
-                    string cmd = "kill " + pid.toStdString();
+                        string cmd = "kill " + pidlist[index].toStdString();
 #else
-                    string cmd = "taskkill " + pid.toStdString();
+                        string cmd = "taskkill " + pidlist[index].toStdString();
 #endif
-                    QString cmd_result;
-                    execute(cmd.c_str(), cmd_result, true);
-                    cmd += '\n';
-                    appendTextToBrowser(cmd.c_str() + cmd_result, true);
+                        QString cmd_result;
+                        execute(cmd.c_str(), cmd_result, true);
+                        cmd += '\n';
+                        appendTextToBrowser(cmd.c_str() + cmd_result, true);
+                    }
+                    ++index;
                 }
-                if (result & QMessageBox::YesToAll)
+                if (result > QMessageBox::Accepted)
                 {
                     mWorker.clearBatchList();
                 }

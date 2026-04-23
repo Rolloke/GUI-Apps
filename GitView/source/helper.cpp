@@ -187,7 +187,7 @@ bool is_whole_word(const QString& text)
 #endif
     return false;
 }
-bool get_pid_list(const QString& name, QStringList& pid_list)
+bool get_pid_list(const QString& name, QStringList& pid_list, QStringList& name_list)
 {
     QString     pids;
     QStringList parts        = name.split("/");
@@ -196,8 +196,20 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
     if (execute(QObject::tr("pidof %1").arg(process_name), pids, true) == 0 && pids.size() > 1)
     {
         pid_list =  pids.split(" ");
+        for (auto & pid : pid_list)
+        {
+            QString name;
+            execute(QObject::tr("cat /proc/%1/status | head -n 1 | awk -F: '{print $NF}'").arg(pid), name);
+            name = name.replace("\n", "");
+            pid  = pid.replace("\n", "");
+            name = name.replace("\t", "");
+            if (name.size())
+            {
+                name_list.append(name);
+            }
+        }
     }
-    else if (execute("ps -e | tail -n 30", pids, true) == 0 && pids.size() > 1)
+    else if (execute("ps -e | tail -n 50", pids, true) == 0 && pids.size() > 1)
     {
         QStringList lines = pids.split("\n");
         for (int i = lines.size() - 1; i>0; --i)
@@ -210,6 +222,7 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
                 if (execute(QObject::tr("pgrep -P %1").arg(line), pids, true) == 0 && pids.size() > 1)
                 {
                     pid_list.append(pids.split("\n"));
+                    name_list.append(line);
                 }
             }
         }
@@ -234,6 +247,7 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
                     if (captured.count() == 2)
                     {
                         pid_list.append(captured[1]);
+                        name_list.append(lines[i].left(lines[i].indexOf(" ")));
                     }
                 }
             }
