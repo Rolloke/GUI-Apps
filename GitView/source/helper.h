@@ -118,6 +118,8 @@ const char* getLineFeed();
 
 int getInputText(const QString &title, const QString &label_text, const QString &initial_text, const QStringList &button_texts, QString &edit_text);
 
+int callCheckboxDialog(const QString &title, const QString &label_text, const QStringList &checkbox_texts, const QStringList &button_texts, QList<Qt::CheckState> &checkstate);
+
 
 class QTreeWidgetHook: public QTreeWidget
 {

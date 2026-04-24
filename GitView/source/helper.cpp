@@ -28,6 +28,7 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QLabel>
+#include <QCheckBox>
 
 #ifdef USE_BOOST
 #include <boost/algorithm/string.hpp>
@@ -952,5 +953,78 @@ int getInputText(const QString& title, const QString& label_text, const QString&
         break;
     }
 
+    return result;
+}
+
+//! \brief callCheckboxDialog
+//! \param title Title of the box (const QString&)
+//! \param label_text lable for edit field (const QString&)
+//! \param checkbox_texts List of names for the Checkboxes (const QStringList&)
+//! \param button_texts List of texts for buttons, Order: { Rejected, Accepted[, furtherID, ... ]} (const QStringList&)
+//! \param checkstate Check state for each CheckBox { Unchecked, PartiallyChecked, Checked } (QList<Qt::CheckState>&)
+//! \return result of the QDialog (Rejected, Accepted[, 2, ...])
+int callCheckboxDialog(const QString &title, const QString &label_text, const QStringList &checkbox_texts, const QStringList &button_texts, QList<Qt::CheckState>& checkstate)
+{
+    QDialog dialog;
+    dialog.setWindowTitle(title);
+    auto *layout = new QVBoxLayout(&dialog);
+    auto *label  = new QLabel(label_text);
+    layout->addWidget(label);
+
+    for (const auto& name : checkbox_texts)
+    {
+        QCheckBox* cb = new QCheckBox(name , &dialog);
+        cb->setMaximumHeight(label->height() - 2);
+        layout->addWidget(cb);
+    }
+
+    auto *buttons = new QDialogButtonBox;
+
+    for (int ret = 0; ret < button_texts.size(); ++ret)
+    {
+        QDialogButtonBox::ButtonRole role = QDialogButtonBox::DestructiveRole;
+        switch (ret)
+        {
+        case QDialog::Accepted:
+            role  = QDialogButtonBox::AcceptRole;
+            break;
+        case QDialog::Rejected:
+            role = QDialogButtonBox::RejectRole;
+            break;
+        }
+
+        auto *btn = buttons->addButton(button_texts[ret], role);
+        switch (role)
+        {
+        case QDialogButtonBox::AcceptRole:
+            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::accept);
+            break;
+        case QDialogButtonBox::RejectRole:
+            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::reject);
+            break;
+        case QDialogButtonBox::DestructiveRole:
+            QObject::connect(btn, &QPushButton::clicked, &dialog, [&, ret]
+                             {
+                                 dialog.done(ret);  // custom result code
+                             });
+            break;
+        default: break;
+        }
+    }
+
+    layout->addWidget(buttons);
+
+    int result = dialog.exec();
+    if (result != QDialog::Rejected)
+    {
+        for (int ichild = 0; ichild < layout->count(); ++ichild)
+        {
+            QWidget *widget = layout->itemAt(ichild)->widget();
+            if (!widget) continue;
+            QCheckBox *cb = qobject_cast<QCheckBox *>(widget);
+            if (!cb) continue;
+            checkstate.push_back(cb->checkState());
+        }
+    }
     return result;
 }

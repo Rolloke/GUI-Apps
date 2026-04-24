@@ -948,40 +948,20 @@ void MainWindow::read_custom_commands(const QString &file_name)
     std::vector<Cmd::tVector> menues;
     read_commands(settings, &actions, &menues);
 
-    QDialog dialog;
-    dialog.setWindowTitle(tr("Import Commands"));
-    auto *layout = new QVBoxLayout(&dialog);
-    auto *label  = new QLabel(tr("Select commands to import"));
-    layout->addWidget(label);
-
+    QStringList action_text_list;
     for (const auto & entry : actions.getList())
     {
         const QAction& action = *entry.second;
-        QCheckBox* cb = new QCheckBox(action.text() + " -> " + action.statusTip(), &dialog);
-        cb->setMaximumHeight(label->height() - 2);
-        layout->addWidget(cb);
+        action_text_list.push_back(action.text() + " -> " + action.statusTip());
     }
-
-    auto *buttons = new QDialogButtonBox;
-    auto *btn = buttons->addButton(tr("Ok"), QDialogButtonBox::AcceptRole);
-    QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::accept);
-    btn = buttons->addButton(tr("Cancel"), QDialogButtonBox::AcceptRole);
-    QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::reject);
-
-    layout->addWidget(buttons);
-
-    dialog.exec();
-
-    if (dialog.result() == QDialog::Accepted)
+    QList<Qt::CheckState> check_state_list;
+    if (   callCheckboxDialog(tr("Import Commands"), tr("Select commands to import"), action_text_list, { tr("Ok"), tr("Cancel") }, check_state_list)
+        == QDialog::Accepted)
     {
         int index = 0;
-        for (int ichild = 0; ichild < layout->count(); ++ichild)
+        for (const auto& check_state : check_state_list)
         {
-            QWidget *widget = layout->itemAt(ichild)->widget();
-            if (!widget) continue;
-            QCheckBox *cb = qobject_cast<QCheckBox *>(widget);
-            if (!cb) continue;
-            if (cb->isChecked())
+            if (check_state == Qt::Checked)
             {
                 auto entry = actions.getList().begin();
                 std::advance(entry, index);
@@ -1984,46 +1964,28 @@ void MainWindow::killBackgroundThread()
         QStringList namelist;
         if (get_pid_list(commands[0], pidlist, namelist))
         {
-
-            QDialog dialog;
-            dialog.setWindowTitle(tr("Kill process ids"));
-            auto *layout = new QVBoxLayout(&dialog);
-            auto *label  = new QLabel(tr("Select processes to be killed"));
-            layout->addWidget(label);
-
+            QStringList checkbox_list;
             for (int i=0; i<pidlist.size(); ++i)
             {
                 QString name = pidlist[i] + ": ";
                 if (i < namelist.size()) name += namelist[i];
-                QCheckBox* cb = new QCheckBox(name , &dialog);
-                cb->setMaximumHeight(label->height() - 2);
-                layout->addWidget(cb);
+                checkbox_list.push_back(name);
             }
 
-            auto *buttons = new QDialogButtonBox;
-            auto *btn = buttons->addButton(tr("Stop this process"), QDialogButtonBox::AcceptRole);
-            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::accept);
-            btn = buttons->addButton(tr("Cancel"), QDialogButtonBox::AcceptRole);
-            QObject::connect(btn, &QPushButton::clicked, &dialog, &QDialog::reject);
+            QStringList button_list = {tr("Stop this process"), tr("Cancel")};
             if (mWorker.hasBatchList())
             {
-                btn = buttons->addButton(tr("Stop all processes in batch"), QDialogButtonBox::DestructiveRole);
-                QObject::connect(btn, &QPushButton::clicked, &dialog, [&] {dialog.done(QMessageBox::Accepted+1); } );
+                button_list.push_back(tr("Stop all processes in batch"));
             }
 
-            layout->addWidget(buttons);
-
-            int result = dialog.exec();
+            QList<Qt::CheckState> check_state_list;
+            int result = callCheckboxDialog(tr("Kill process ids"), tr("Select processes to be killed"), checkbox_list, button_list, check_state_list);
             if (result >= QMessageBox::Accepted)
             {
                 int index = 0;
-                for (int ichild = 0; ichild < layout->count(); ++ichild)
+                for (const auto& check_state : check_state_list)
                 {
-                    QWidget *widget = layout->itemAt(ichild)->widget();
-                    if (!widget) continue;
-                    QCheckBox *cb = qobject_cast<QCheckBox *>(widget);
-                    if (!cb) continue;
-                    if (cb->isChecked())
+                    if (check_state == Qt::Checked)
                     {
 #ifdef __linux__
                         string cmd = "kill " + pidlist[index].toStdString();
