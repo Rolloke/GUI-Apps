@@ -955,7 +955,7 @@ void MainWindow::read_custom_commands(const QString &file_name)
         action_text_list.push_back(action.text() + " -> " + action.statusTip());
     }
     QList<Qt::CheckState> check_state_list;
-    if (   callCheckboxDialog(tr("Import Commands"), tr("Select commands to import"), action_text_list, { tr("Ok"), tr("Cancel") }, check_state_list)
+    if (   callCheckboxDialog(tr("Import Commands"), tr("Select commands to import"), action_text_list, { tr("Cancel"), tr("Ok") }, check_state_list)
         == QDialog::Accepted)
     {
         int index = 0;
@@ -1972,7 +1972,7 @@ void MainWindow::killBackgroundThread()
                 checkbox_list.push_back(name);
             }
 
-            QStringList button_list = {tr("Stop this process"), tr("Cancel")};
+            QStringList button_list = { tr("Cancel"), tr("Stop this process") };
             if (mWorker.hasBatchList())
             {
                 button_list.push_back(tr("Stop all processes in batch"));

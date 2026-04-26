@@ -961,7 +961,7 @@ int getInputText(const QString& title, const QString& label_text, const QString&
 //! \param label_text lable for edit field (const QString&)
 //! \param checkbox_texts List of names for the Checkboxes (const QStringList&)
 //! \param button_texts List of texts for buttons, Order: { Rejected, Accepted[, furtherID, ... ]} (const QStringList&)
-//! \param checkstate Check state for each CheckBox { Unchecked, PartiallyChecked, Checked } (QList<Qt::CheckState>&)
+//! \param checkstate Check state for each CheckBox (Unchecked, PartiallyChecked, Checked) (QList<Qt::CheckState>&)
 //! \return result of the QDialog (Rejected, Accepted[, 2, ...])
 int callCheckboxDialog(const QString &title, const QString &label_text, const QStringList &checkbox_texts, const QStringList &button_texts, QList<Qt::CheckState>& checkstate)
 {
@@ -969,6 +969,7 @@ int callCheckboxDialog(const QString &title, const QString &label_text, const QS
     dialog.setWindowTitle(title);
     auto *layout = new QVBoxLayout(&dialog);
     auto *label  = new QLabel(label_text);
+    layout->setSpacing(0);
     layout->addWidget(label);
 
     for (const auto& name : checkbox_texts)
