@@ -24,6 +24,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_blame_characters(0)
   , m_actions(nullptr)
   , m_do_preview(false)
+  , m_clone(nullptr)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(document(), SIGNAL(contentsChange(int,int,int)), this, SLOT(updatecontentsChange(int,int,int)));
@@ -44,6 +45,11 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
 
 code_browser::~code_browser()
 {
+    if (m_clone)
+    {
+        m_clone->m_clone = nullptr;
+        m_clone = nullptr;
+    }
     Q_EMIT show_web_view(false);
 #ifdef WEB_ENGINE
     m_web_page = nullptr;
@@ -114,16 +120,19 @@ void code_browser::updatecontentsChange(int from, int charsRemoved, int charsAdd
     }
 }
 
-code_browser* code_browser::clone(bool all_parameter, bool with_text) 
+code_browser* code_browser::clone(bool all_parameter, bool share_document)
 {
     auto *cloned =  new code_browser(parentWidget());
     cloned->reset();
     cloned->m_show_line_numbers = m_show_line_numbers;
     cloned->setFont(font());
-    if (with_text)
+    if (share_document)
     {
-        cloned->setText(toPlainText());
-        cloned->mHighlighter->setLanguage(mHighlighter->currentLanguage());
+        cloned->setDocument(document());
+        cloned->updateLineNumberAreaWidth(0);
+        cloned->m_clone = this;
+        m_clone = cloned;
+        synchronize_scrollbars(true);
     }
     if (all_parameter)
     {
@@ -145,9 +154,49 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
         QMenu menu;
         m_actions->fillContextMenue(menu, git::Cmd::mContextMenuTextView, cloned);
     }
+
     return cloned;
 }
 
+void code_browser::synchronize_scrollbars(bool sync)
+{
+    if (m_clone)
+    {
+        auto left  = m_clone;
+        auto right = m_clone->m_clone;
+        if (sync)
+        {
+            m_sync_connection = connect(left->verticalScrollBar(), &QScrollBar::valueChanged,
+                    [right](int value) {
+                        QSignalBlocker blocker(right->verticalScrollBar());
+                        right->verticalScrollBar()->setValue(value);
+                        right->viewport()->update();
+                    });
+
+            m_clone->m_sync_connection = connect(right->verticalScrollBar(), &QScrollBar::valueChanged,
+                    [left](int value) {
+                        QSignalBlocker blocker(left->verticalScrollBar());
+                        left->verticalScrollBar()->setValue(value);
+                        left->viewport()->update();
+                    });
+        }
+        else
+        {
+            if (m_sync_connection)
+            {
+                disconnect(m_sync_connection);
+                QMetaObject::Connection empty;
+                m_sync_connection.swap(empty);
+            }
+            if (m_clone->m_sync_connection)
+            {
+                disconnect(m_clone->m_sync_connection);
+                QMetaObject::Connection empty;
+                m_clone->m_sync_connection.swap(empty);
+            }
+        }
+    }
+}
 
 void code_browser::updateLineNumberAreaWidth(int)
 {
@@ -195,7 +244,15 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
     if (m_actions && git::Cmd::mContextMenuTextView.size())
     {
         QMenu *menu = createStandardContextMenu();
+        if (m_clone)
+        {
+            bool active = m_sync_connection;
+            auto action = menu->addAction(tr("synchronize vertical scrollbars"), {}, [active, this](){ synchronize_scrollbars(!active); });
+            action->setCheckable(true);
+            action->setChecked(active);
+        }
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
+
         auto* action = m_actions->getAction(git::Cmd::CloneTextBrowser);
         if (action) action->setEnabled(!isReadOnly());
         menu->exec(check_screen_position(event->globalPos(), true));
@@ -353,7 +410,8 @@ void code_browser::reset()
     {
         disconnect(mHighlighter.data(), SIGNAL(updateExtension(QString)), this, SLOT(call_updateExtension(QString)));
     }
-    mHighlighter.reset(new Highlighter(document()));
+
+    mHighlighter = new Highlighter(document());
     connect(mHighlighter.data(), SIGNAL(updateExtension(QString)), this, SLOT(call_updateExtension(QString)));
     reset_blame();
 }

@@ -57,7 +57,8 @@ public:
     void setTabstopCharacters(int characters);
     int  getTabstopCharacters();
 
-    code_browser* clone(bool all_parameter=false, bool with_text=true);
+    code_browser* clone(bool all_parameter=false, bool share_document=true);
+    void synchronize_scrollbars(bool sync);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -123,16 +124,18 @@ private:
     void       parse_sections(const QString& text);
 
 private:
-    QPointer<QWidget>       m_line_number_area;
-    bool                    m_show_line_numbers;
-    QMap<QString, s_blame>  m_blame_map;
-    QMap<int, s_blame_line> m_blame_start_line;
-    std::int32_t            m_blame_characters;
-    QString                 m_indent = "    ";
-    std::map<int, s_text_section>   m_text_section_start;
-    ActionList *m_actions;
-    bool        m_do_preview;
-    QSharedPointer<Highlighter> mHighlighter;
+    QPointer<QWidget>             m_line_number_area;
+    bool                          m_show_line_numbers;
+    QMap<QString, s_blame>        m_blame_map;
+    QMap<int, s_blame_line>       m_blame_start_line;
+    std::int32_t                  m_blame_characters;
+    QString                       m_indent = "    ";
+    std::map<int, s_text_section> m_text_section_start;
+    ActionList *                  m_actions;
+    bool                          m_do_preview;
+    QPointer<Highlighter>         mHighlighter;
+    code_browser*                 m_clone;
+    QMetaObject::Connection       m_sync_connection;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 public:
     void set_encoding(const std::optional<QStringConverter::Encoding>& encoding);

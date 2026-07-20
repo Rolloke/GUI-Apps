@@ -1236,8 +1236,6 @@ void MainWindow::clone_code_browser()
         }
         /// TODO: test splited view and implement new features
         /// Splitted View
-        /// o   Dupliziert als gleicher Editor?
-        /// o   Scrollen synchronisierbar
         /// o   auch mit verschiedenen Dateien zum vergleichen
         ///     §  (drag and drop)?
         ///     §  Diff anzeige
@@ -1245,8 +1243,8 @@ void MainWindow::clone_code_browser()
         QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
         connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
-//        cloned_browser->setReadOnly(false);
-//        QObject::connect(active_browser, SIGNAL(text_changed(QString)), cloned_browser, SLOT(setPlainText(QString)));
+        cloned_browser->setReadOnly(false);
+
         QDockWidget* parent = get_first_dock_tab(FirstTab::web_view);
         if (parent)
         {

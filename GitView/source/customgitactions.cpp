@@ -1236,7 +1236,7 @@ QVariant VariousItemModel::data(const QModelIndex& index, int role) const
 #else
             if ((the_dlg->mMiscelaneousItems.begin() + index.row())->second.type() == QVariant::Invalid)
 #endif
-                {
+            {
                 QFont font = the_dlg->font();
                 font.setBold(true);
                 return font;

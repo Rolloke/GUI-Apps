@@ -250,7 +250,7 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
     {
         mContextMenuSourceTreeItem = ui->treeSource->topLevelItem(ui->treeSource->topLevelItemCount()-1);
         ui->treeSource->setCurrentItem(mContextMenuSourceTreeItem);
-        ui->treeSource->setFocus();
+        //ui->treeSource->setFocus();
         action->trigger();
     }
     m_loading_repository = false;
