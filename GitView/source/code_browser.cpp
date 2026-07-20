@@ -186,13 +186,13 @@ void code_browser::synchronize_scrollbars(bool sync)
             {
                 disconnect(m_sync_connection);
                 QMetaObject::Connection empty;
-                m_sync_connection.swap(empty);
+                m_sync_connection = empty;
             }
             if (m_clone->m_sync_connection)
             {
                 disconnect(m_clone->m_sync_connection);
                 QMetaObject::Connection empty;
-                m_clone->m_sync_connection.swap(empty);
+                m_clone->m_sync_connection = empty;
             }
         }
     }
@@ -247,7 +247,11 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
         if (m_clone)
         {
             bool active = m_sync_connection;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             auto action = menu->addAction(tr("synchronize vertical scrollbars"), {}, [active, this](){ synchronize_scrollbars(!active); });
+#else
+            auto action = menu->addAction(tr("synchronize vertical scrollbars"),  [active, this](){ synchronize_scrollbars(!active); }, {});
+#endif
             action->setCheckable(true);
             action->setChecked(active);
         }
