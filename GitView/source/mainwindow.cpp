@@ -1239,7 +1239,7 @@ void MainWindow::clone_code_browser()
         /// o   auch mit verschiedenen Dateien zum vergleichen
         ///     §  (drag and drop)?
         ///     §  Diff anzeige
-        code_browser* cloned_browser = active_browser->clone();
+        code_browser* cloned_browser = active_browser->clone(true);
         QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
         connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
@@ -3350,6 +3350,9 @@ void MainWindow::on_btnFindAll_clicked()
 void MainWindow::on_edtFindText_textChanged(const QString &arg)
 {
     ui->btnFindAll->setEnabled(arg.size() > 0);
+    ui->btnFindNext->setEnabled(arg.size() > 0);
+    ui->btnFindPrevious->setEnabled(arg.size() > 0);
+    ui->btnFindReplace->setEnabled(arg.size() > 0);
 }
 
 void MainWindow::on_btnFindReplace_clicked()

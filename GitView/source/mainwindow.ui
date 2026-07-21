@@ -1232,6 +1232,9 @@ Git or command results are always displayed in main editor.
       </item>
       <item>
        <widget class="QPushButton" name="btnFindPrevious">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="toolTip">
          <string>Search backward</string>
         </property>
@@ -1242,6 +1245,9 @@ Git or command results are always displayed in main editor.
       </item>
       <item>
        <widget class="QPushButton" name="btnFindNext">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -1278,6 +1284,9 @@ Git or command results are always displayed in main editor.
       </item>
       <item>
        <widget class="QPushButton" name="btnFindReplace">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="toolTip">
          <string>Replace expression</string>
         </property>

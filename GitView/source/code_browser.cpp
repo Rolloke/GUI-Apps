@@ -248,9 +248,9 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
         {
             bool active = m_sync_connection;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            auto action = menu->addAction(tr("synchronize vertical scrollbars"), {}, [active, this](){ synchronize_scrollbars(!active); });
+            auto action = menu->addAction(tr("Synchronize vertical Scrollbars"), {}, [active, this](){ synchronize_scrollbars(!active); });
 #else
-            auto action = menu->addAction(tr("synchronize vertical scrollbars"),  [active, this](){ synchronize_scrollbars(!active); }, {});
+            auto action = menu->addAction(tr("Synchronize vertical Scrollbars"),  [active, this](){ synchronize_scrollbars(!active); }, {});
 #endif
             action->setCheckable(true);
             action->setChecked(active);
@@ -258,7 +258,7 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
 
         auto* action = m_actions->getAction(git::Cmd::CloneTextBrowser);
-        if (action) action->setEnabled(!isReadOnly());
+        if (action) action->setEnabled(m_clone == 0);
         menu->exec(check_screen_position(event->globalPos(), true));
         delete menu;
     }
