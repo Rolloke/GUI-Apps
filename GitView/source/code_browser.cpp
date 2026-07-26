@@ -198,6 +198,11 @@ void code_browser::synchronize_scrollbars(bool sync)
     }
 }
 
+code_browser* code_browser::get_clone()
+{
+    return m_clone;
+}
+
 void code_browser::updateLineNumberAreaWidth(int)
 {
     setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);

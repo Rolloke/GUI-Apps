@@ -34,6 +34,11 @@ bool QDockWidgetX::is_closing()
     return m_closed;
 }
 
+bool QDockWidgetX::contains_cloned_view()
+{
+    return objectName() == cloned_textbrowser;
+}
+
 void QDockWidgetX::change_visibility(bool visible)
 {
     if(!get_active(widget()))

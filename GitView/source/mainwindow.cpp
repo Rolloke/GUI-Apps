@@ -1050,7 +1050,7 @@ void MainWindow::createDockWindows()
     QDockWidget* dock;
     // text browser
     QDockWidget *first_tab = nullptr;
-    dock = create_dock_widget(ui->textBrowser, tr("Text View/Editor"), textbrowser);
+    dock = create_dock_widget(ui->textBrowser, tr("Text View/Editor"), QDockWidgetX::textbrowser);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->comboFindBox->addItem(tr("Go to line"));
@@ -1059,14 +1059,14 @@ void MainWindow::createDockWindows()
     first_tab = dock;
 
     // graphics view
-    dock = create_dock_widget(ui->graphicsView, tr("Graphics View"), graphicsviewer);
+    dock = create_dock_widget(ui->graphicsView, tr("Graphics View"), QDockWidgetX::graphicsviewer);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->verticalLayout_2->removeWidget(ui->graphicsView);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     tabifyDockWidget(first_tab, dock);
 
     // binary table view
-    dock = create_dock_widget(ui->tableBinaryView, tr("Binary View"), binary_table_view);
+    dock = create_dock_widget(ui->tableBinaryView, tr("Binary View"), QDockWidgetX::binary_table_view);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->verticalLayout->removeWidget(ui->tableBinaryView);
     tabifyDockWidget(first_tab, dock);
@@ -1075,7 +1075,7 @@ void MainWindow::createDockWindows()
 #ifdef WEB_ENGINE
     // markdown view
     mWebEngineView.reset(new QWebEngineView(this));
-    dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
+    dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), QDockWidgetX::markdown_view, true, Qt::Horizontal);
 #else
     mTextRenderView.reset(new QTextBrowser(this));
     dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
@@ -1086,35 +1086,35 @@ void MainWindow::createDockWindows()
     dock->setVisible(false);
 
     // history tree
-    dock = create_dock_widget(ui->treeHistory, tr("History View"), historyview);
+    dock = create_dock_widget(ui->treeHistory, tr("History View"), QDockWidgetX::historyview);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->verticalLayout->removeWidget(ui->treeHistory);
     first_tab = dock;
 
     // branch tree
-    dock = create_dock_widget(ui->treeBranches, tr("Branch View"), branchview);
+    dock = create_dock_widget(ui->treeBranches, tr("Branch View"), QDockWidgetX::branchview);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->verticalLayout->removeWidget(ui->treeBranches);
     tabifyDockWidget(first_tab, dock);
 
     // stash tree
-    dock = create_dock_widget(ui->treeStash, tr("Stash View"), stashview);
+    dock = create_dock_widget(ui->treeStash, tr("Stash View"), QDockWidgetX::stashview);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->verticalLayout->removeWidget(ui->treeStash);
     tabifyDockWidget(first_tab, dock);
 
     // find tree
-    dock = create_dock_widget(ui->treeFindText, tr("Found in Text Files"), findview);
+    dock = create_dock_widget(ui->treeFindText, tr("Found in Text Files"), QDockWidgetX::findview);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle() + tr(" View"));
     ui->verticalLayout->removeWidget(ui->treeFindText);
     tabifyDockWidget(first_tab, dock);
 
     mBinaryValuesView.reset(new binary_values_view(this));
-    dock = create_dock_widget(mBinaryValuesView.data(), tr("Binary Values"), binaryview);
+    dock = create_dock_widget(mBinaryValuesView.data(), tr("Binary Values"), QDockWidgetX::binaryview);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
@@ -1240,7 +1240,7 @@ void MainWindow::clone_code_browser()
         ///     §  (drag and drop)?
         ///     §  Diff anzeige
         code_browser* cloned_browser = active_browser->clone(true);
-        QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
+        QDockWidget*dock = create_dock_widget(cloned_browser, file_name, QDockWidgetX::cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
         connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
         cloned_browser->setReadOnly(false);
@@ -1537,16 +1537,20 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
         code_browser* textBrowser = dynamic_cast<code_browser*>(get_widget(dockWidget));
         if (textBrowser)
         {
-            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, textbrowser, background_textbrowser });
+            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser, QDockWidgetX::textbrowser, QDockWidgetX::background_textbrowser });
             for (QDockWidget* current_widget : dock_widgets)
             {
                 code_browser* browser = dynamic_cast<code_browser*>(get_widget(current_widget));
                 if (browser && browser->set_active(current_widget == dockWidget))
                 {
                     check_reload(browser);
+                    if (browser->get_clone())
+                    {
+                        showDockedWidget(browser->get_clone(), true);
+                    }
                 }
             }
-            if (!m_tree_source_item_double_clicked)
+            if (!m_tree_source_item_double_clicked && !((QDockWidgetX*)dockWidget)->contains_cloned_view())
             {
                 QString file_path_part = textBrowser->get_file_path();
                 ui->labelFilePath->setText(file_path_part);
@@ -1558,7 +1562,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
             }
         }
         mActivViewObjectName = dockWidget->objectName();
-        bool bv_active = mActivViewObjectName == binary_table_view;
+        bool bv_active = mActivViewObjectName == QDockWidgetX::binary_table_view;
         ui->tableBinaryView->set_active(bv_active);
         if (bv_active)
         {
@@ -1634,7 +1638,7 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
 {
     if (file_path.isEmpty())
     {
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, binary_table_view, background_textbrowser });
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser, QDockWidgetX::binary_table_view, QDockWidgetX::background_textbrowser });
         for (QDockWidget* dock_widget : dock_widgets)
         {
             auto* widget = get_widget(dock_widget);
@@ -1648,7 +1652,7 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
     else
     {
         QWidget* editable_with_file_path = nullptr;
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, textbrowser, binary_table_view });
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser, QDockWidgetX::textbrowser, QDockWidgetX::binary_table_view });
         for (QDockWidget* dock_widget : dock_widgets)
         {
             auto* widget = get_widget(dock_widget);
@@ -1676,7 +1680,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
     case AdditionalEditor::One:
     {
         set_filename = false;
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser });
         if (dock_widgets.size())
         {
             return dynamic_cast<code_browser*>(get_widget(dock_widgets[0]));
@@ -1714,7 +1718,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
 
     docked_browser->setReadOnly(false);
     connect(docked_browser, SIGNAL(send_focused(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
-    QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, new_textbrowser, true);
+    QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, QDockWidgetX::new_textbrowser, true);
     dock->setAttribute(Qt::WA_DeleteOnClose);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
     connect(dock, SIGNAL(signal_dock_widget_activated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
@@ -1762,7 +1766,7 @@ void MainWindow::close_tree_view(QDockWidgetX *widget, bool &closed)
 
 void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
 {
-    if (dock_widget && dock_widget->objectName() == new_textbrowser)
+    if (dock_widget && dock_widget->objectName() == QDockWidgetX::new_textbrowser)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
         disconnect(text_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
@@ -1777,7 +1781,7 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         show_web_view(false);
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
         show_web_view(false);
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser });
         ui->comboOpenNewEditor->setEnabled(dock_widgets.size() <= 1);
     }
 }
@@ -2633,7 +2637,7 @@ void MainWindow::add_action_to_widgets(QAction * action)
     ui->treeHistory->addAction(action);
     ui->treeStash->addAction(action);
     action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser });
     for (QDockWidget* dock_widget : std::as_const(dock_widgets))
     {
         get_widget(dock_widget)->addAction(action);
@@ -3836,7 +3840,7 @@ void MainWindow::on_ckTypeConverter_stateChanged(int active)
 
 void MainWindow::on_spinTabulator_valueChanged(int width)
 {
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ textbrowser, new_textbrowser });
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::textbrowser, QDockWidgetX::new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
@@ -3851,14 +3855,13 @@ void MainWindow::comboTabPositionIndexChanged(int index)
 
 void MainWindow::on_comboWordWrap_currentIndexChanged(int index)
 {
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ textbrowser, new_textbrowser });
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::textbrowser, QDockWidgetX::new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
         text_browser->setWordWrapMode(static_cast<QTextOption::WrapMode>(index));
     }
 }
-
 
 void MainWindow::setFontForViews(int)
 {
@@ -3868,7 +3871,7 @@ void MainWindow::setFontForViews(int)
     font.setPointSize(ui->spinFontSize->value());
     ui->textBrowser->setFont(font);
     ui->tableBinaryView->setFont(font);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));

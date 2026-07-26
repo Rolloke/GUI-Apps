@@ -107,7 +107,7 @@ bool MainWindow::has_background_text_view()
         // backgound process output text view
         mBackgroundTextView.reset(create_new_text_browser("", tr("Background Log")));
         QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.data()->parent());
-        dock->setObjectName(background_textbrowser);
+        dock->setObjectName(QDockWidgetX::background_textbrowser);
         dock->setAttribute(Qt::WA_DeleteOnClose, false);
         mBackgroundTextView->setReadOnly(true);
     }
@@ -222,14 +222,14 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
             return false;
         case Editor::CalledFromAction:
             send_close_to_editable_widget(dynamic_cast<code_browser*>(active_widget));
-            if (mActivViewObjectName == textbrowser)
+            if (mActivViewObjectName == QDockWidgetX::textbrowser)
             {
                 reset_text_browser(ui->textBrowser);
             }
-            if (   mActivViewObjectName == binary_table_view
-                || mActivViewObjectName == binaryview
-                || mActivViewObjectName == graphicsviewer
-                || mActivViewObjectName == background_textbrowser )
+            if (   mActivViewObjectName == QDockWidgetX::binary_table_view
+                || mActivViewObjectName == QDockWidgetX::binaryview
+                || mActivViewObjectName == QDockWidgetX::graphicsviewer
+                || mActivViewObjectName == QDockWidgetX::background_textbrowser )
             {
                 return true;
             }
@@ -239,7 +239,7 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
         case Editor::All:
             if (additional_editor() == AdditionalEditor::OnNewFile)
             {
-                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binary_table_view});
+                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({QDockWidgetX::new_textbrowser, QDockWidgetX::binary_table_view});
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
                     set_active(get_widget(dock_widget), false);
@@ -281,7 +281,7 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
 
 void MainWindow::set_show_line_numbers(bool show)
 {
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({QDockWidgetX::textbrowser, QDockWidgetX::new_textbrowser});
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
@@ -333,7 +333,7 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
             }
         }
 
-        if (is_any_equal_to(mActivViewObjectName, binary_table_view, binaryview))
+        if (is_any_equal_to(mActivViewObjectName, QDockWidgetX::binary_table_view, QDockWidgetX::binaryview))
         {
             if (ui->tableBinaryView->get_binary_data().size())
             {
@@ -349,11 +349,11 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
 
         if (editor == Editor::CalledFromAction)
         {
-            if (mActivViewObjectName == graphicsviewer)
+            if (mActivViewObjectName == QDockWidgetX::graphicsviewer)
             {
                 ui->graphicsView->clear();
             }
-            if (mActivViewObjectName == background_textbrowser)
+            if (mActivViewObjectName == QDockWidgetX::background_textbrowser)
             {
                 mBackgroundTextView->setText("");
             }
@@ -368,11 +368,11 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
 void MainWindow::btnStoreAll_clicked()
 {
     QWidget* active_widget = nullptr;
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser });
     const QString& bf_path = get_file_path(mBinaryValuesView.data());
     if (bf_path.size() && QFileInfo(bf_path).isFile())
     {
-        dock_widgets.append(get_dock_widget_of_name({ binary_table_view }));
+        dock_widgets.append(get_dock_widget_of_name({ QDockWidgetX::binary_table_view }));
     }
 
     for (QDockWidget* dock_widget : dock_widgets)   // find active widget first
@@ -398,7 +398,7 @@ void MainWindow::btnStoreAll_clicked()
 
 void MainWindow::btnReloadAll_clicked()
 {
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ QDockWidgetX::new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)   // store temporarily activated widgets
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));

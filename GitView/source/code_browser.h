@@ -59,6 +59,7 @@ public:
 
     code_browser* clone(bool all_parameter=false, bool share_document=true);
     void synchronize_scrollbars(bool sync);
+    code_browser *get_clone();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
