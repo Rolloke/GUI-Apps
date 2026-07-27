@@ -1078,7 +1078,7 @@ void MainWindow::createDockWindows()
     dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), QDockWidgetX::markdown_view, true, Qt::Horizontal);
 #else
     mTextRenderView.reset(new QTextBrowser(this));
-    dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
+    dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"),  QDockWidgetX::markdown_view, true, Qt::Horizontal);
     mTextRenderView->setOpenExternalLinks(true);
     mTextRenderView->setReadOnly(true);
 #endif
@@ -1254,6 +1254,48 @@ void MainWindow::clone_code_browser()
     }
 }
 
+/**
+ * @brief Erzeugt und konfiguriert ein neues QDockWidgetX für das MainWindow.
+ *
+ * Diese Funktion erstellt ein Dock-Widget, setzt dessen Eigenschaften,
+ * dockt es an der rechten Seite des Hauptfensters an und verbindet optional
+ * das Signal `topLevelChanged(bool)` mit einem entsprechenden Slot.
+ *
+ * @param widget
+ *      Das zentrale QWidget, das im Dock angezeigt werden soll.
+ *
+ * @param name
+ *      Der sichtbare Titel des Dock-Widgets (Fensterüberschrift).
+ *
+ * @param object_name
+ *      Der interne Objektname, der z. B. für Stylesheets oder
+ *      das Wiederherstellen von Layouts verwendet wird.
+ *
+ * @param connect_dock
+ *      Wenn `true`, wird das Signal `topLevelChanged(bool)` des Dock-Widgets
+ *      mit dem Slot `dockWidget_topLevelChanged(bool)` des MainWindow verbunden.
+ *      Dies ermöglicht Reaktionen darauf, ob das Dock abgedockt oder wieder
+ *      angedockt wurde.
+ *
+ * @param orientation
+ *      Die Orientierung, die beim Einfügen des Dock-Widgets berücksichtigt wird.
+ *      Sie beeinflusst die relative Positionierung zu anderen Docks.
+ *
+ * @return QDockWidgetX*
+ *      Ein Zeiger auf das neu erzeugte und vollständig konfigurierte Dock-Widget.
+ *
+ * @details
+ * Die Funktion führt folgende Schritte aus:
+ * - Erzeugt ein neues `QDockWidgetX` mit Titel und Parent `MainWindow`.
+ * - Setzt die erlaubten Dock-Bereiche auf `Qt::AllDockWidgetAreas`.
+ * - Vergibt den Objekt-Namen für interne Identifikation.
+ * - Setzt das übergebene `widget` als Inhalt des Dock-Widgets.
+ * - Dockt das Widget standardmäßig im `Qt::RightDockWidgetArea` an.
+ * - Verbindet optional das `topLevelChanged`‑Signal mit einem Slot des MainWindow.
+ *
+ * Diese Methode kapselt die wiederkehrende Logik zur Erstellung von Dock-Widgets
+ * und sorgt für ein konsistentes Verhalten im gesamten UI.
+ */
 QDockWidgetX* MainWindow::create_dock_widget(QWidget* widget, const QString& name, const QString& object_name, bool connect_dock, Qt::Orientation orientation)
 {
     QDockWidgetX* dock = new QDockWidgetX(name, this);
@@ -1301,6 +1343,33 @@ void MainWindow::dockWidget_topLevelChanged(bool)
     }
 }
 
+/**
+ * @brief Liefert das primäre Kind-Widget eines QDockWidget.
+ *
+ * Diese Funktion ermittelt das tatsächlich relevante Widget innerhalb eines
+ * Dock-Widgets. Falls das Dock ein QSplitter als direktes Kind enthält,
+ * wird dessen erstes Unter-Widget zurückgegeben. Andernfalls wird das
+ * normale Kind-Widget des Dock-Widgets zurückgegeben.
+ *
+ * @param dock
+ *      Das QDockWidget, aus dem das enthaltene Widget extrahiert werden soll.
+ *
+ * @return QWidget*
+ *      Das ermittelte Kind-Widget. Dies ist entweder:
+ *      - das direkte Widget des Dock-Widgets, oder
+ *      - das erste Widget eines enthaltenen QSplitter.
+ *
+ * @details
+ * Die Funktion führt folgende Schritte aus:
+ * - Ruft `dock->widget()` auf, um das direkte Kind-Widget zu erhalten.
+ * - Prüft mittels `dynamic_cast`, ob dieses Widget ein `QSplitter` ist.
+ * - Falls ein `QSplitter` vorliegt und dieser mindestens ein Kind besitzt,
+ *   wird das erste Kind (`splitter->widget(0)`) zurückgegeben.
+ * - In allen anderen Fällen wird das ursprüngliche Kind-Widget zurückgegeben.
+ *
+ * Diese Methode ist hilfreich, wenn Dock-Widgets komplexere Layouts enthalten,
+ * aber für bestimmte Operationen nur das eigentliche Nutz-Widget benötigt wird.
+ */
 QWidget* MainWindow::get_widget(QDockWidget*dock)
 {
     QWidget* child_widget = dock->widget();
@@ -1572,6 +1641,35 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
     }
 }
 
+/**
+ * @brief Zeigt oder versteckt das QDockWidget, das ein bestimmtes Widget enthält.
+ *
+ * Diese Funktion steuert die Sichtbarkeit eines Dock-Widgets basierend auf dem
+ * übergebenen Kind-Widget. Sie ermittelt zunächst das zugehörige QDockWidget
+ * über den Parent des Widgets und setzt dessen Sichtbarkeit entsprechend dem
+ * Parameter @p show. Beim Anzeigen wird das Dock zusätzlich nach vorne geholt.
+ *
+ * @param widget
+ *      Das Widget, dessen übergeordnetes QDockWidget sichtbar oder unsichtbar
+ *      geschaltet werden soll.
+ *
+ * @param show
+ *      Wenn `true`, wird das Dock-Widget sichtbar gemacht und nach vorne geholt.
+ *      Wenn `false`, wird es ausgeblendet.
+ *
+ * @details
+ * Ablauf der Funktion:
+ * - Ermittelt mittels `dynamic_cast`, ob das Parent des Widgets ein QDockWidget ist.
+ * - Falls kein Dock-Widget gefunden wird, passiert nichts.
+ * - Wenn @p show `true` ist:
+ *      - Das Dock-Widget wird sichtbar gemacht, falls es aktuell unsichtbar ist.
+ *      - Anschließend wird es mit `raise()` nach vorne geholt.
+ * - Wenn @p show `false` ist:
+ *      - Das Dock-Widget wird ausgeblendet.
+ *
+ * Diese Methode ist nützlich, um Dock-Widgets gezielt ein- oder auszublenden,
+ * ohne direkt mit dem Dock selbst arbeiten zu müssen.
+ */
 void MainWindow::showDockedWidget(QWidget* widget, bool show)
 {
     QDockWidget* parent = dynamic_cast<QDockWidget*>(widget->parent());
