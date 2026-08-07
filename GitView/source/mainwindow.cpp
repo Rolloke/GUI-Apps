@@ -3305,10 +3305,12 @@ void MainWindow::comboFindBoxIndexChanged(int index)
                                         ui->statusBar->showMessage(tr("Execute git command for selected Repository in backgorund thread")); flags = All; break;
     }
 
-    set_widget_and_action_enabled(ui->btnFindNext,     flags & Next     ? true : false);
-    set_widget_and_action_enabled(ui->btnFindPrevious, flags & Previous ? true : false);
-    set_widget_and_action_enabled(ui->btnFindAll,      flags & All      ? (ui->edtFindText->text().size() > 0) : false);
-    set_widget_and_action_enabled(ui->btnFindReplace,  flags & Replace  ? true : false);
+    bool find_text = (ui->edtFindText->text().size() > 0);
+    set_widget_and_action_enabled(ui->btnFindNext,     flags & Next     ? find_text : false);
+    set_widget_and_action_enabled(ui->btnFindPrevious, flags & Previous ? find_text : false);
+    set_widget_and_action_enabled(ui->btnFindAll,      flags & All      ? find_text : false);
+    set_widget_and_action_enabled(ui->btnFindReplace,  flags & Replace  ? find_text : false);
+    set_widget_and_action_enabled(ui->btnFindReplace,  flags & Replace  ? find_text : false);
 }
 
 void MainWindow::combo_triggered()
