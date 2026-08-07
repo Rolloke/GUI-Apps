@@ -91,7 +91,28 @@ QString getSettingsName(const QString& aItemName)
     else return aItemName;
 }
 
-
+/**
+ * @brief Formatiert eine Dateigröße in eine menschenlesbare Zeichenkette.
+ *
+ * Die Funktion konvertiert eine Dateigröße in Byte in die jeweils größte
+ * passende Binäreinheit (KB, MB, GB oder TB). Die Umrechnung erfolgt auf
+ * Basis von Zweierpotenzen (1 KB = 1024 Byte, 1 MB = 1024 KB usw.).
+ *
+ * Der Nachkommaanteil wird aus den nächstkleineren 1024er-Schritten gebildet
+ * und besteht immer aus drei Ziffern. Beispielsweise wird eine Größe von
+ * 1536 Byte als "1.500 KB" dargestellt.
+ *
+ * Größen kleiner als 1024 Byte werden unverändert in Byte ausgegeben.
+ *
+ * @param aSize Dateigröße in Byte.
+ *
+ * @return Eine formatierte Zeichenkette mit der Größe und der passenden
+ *         Einheit (B, KB, MB, GB oder TB).
+ *
+ * @note Die Funktion verwendet Binärpräfixe (1024er-Schritte), gibt jedoch
+ *       die Einheiten "KB", "MB", "GB" und "TB" anstelle der normgerechten
+ *       Bezeichnungen "KiB", "MiB", "GiB" und "TiB" aus.
+ */
 QString formatFileSize(quint64 aSize)
 {
     using namespace std;
@@ -356,13 +377,37 @@ QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& reposit
     return nullptr;
 }
 
-/*!
- * \brief iterates through a tree widget recursively and calls a given function
- * \param aItem root item for iteration (QTreeWidgetItem*)
- * \param function function or lamda expression (const tGTLIFunction2&)
- * \param also_leaf recurse also through leaf (bool)
- * \param level level of recursion, default: 0, range: 0 - n, -1  (int)
- * \note  when the item has children and the recurion goes one level up, the level is -1
+
+/**
+ * @brief Führt eine Funktion rekursiv für einen Baumknoten und dessen Kinder aus.
+ *
+ * Die Funktion durchläuft den Teilbaum beginnend bei @p aItem in Tiefensuche
+ * (Depth-First Traversal). Für jeden besuchten Knoten wird die übergebene
+ * Callback-Funktion aufgerufen.
+ *
+ * Der Callback wird bei inneren Knoten zweimal ausgeführt:
+ * - Vor der Verarbeitung der Kindknoten mit der aktuellen Verschachtelungstiefe.
+ * - Nach der Verarbeitung aller Kindknoten mit dem Levelwert `-1`.
+ *
+ * Blattknoten werden nur berücksichtigt, wenn @p also_leaf den Wert
+ * `true` besitzt. In diesem Fall erfolgt lediglich der Aufruf vor der
+ * Verarbeitung (da keine Kindknoten vorhanden sind).
+ *
+ * @param aItem     Wurzel des zu durchlaufenden Teilbaums.
+ * @param function  Callback-Funktion, die für die besuchten Knoten aufgerufen
+ *                  wird. Der zweite Parameter enthält entweder die aktuelle
+ *                  Verschachtelungstiefe oder den Wert `-1`, um das Ende der
+ *                  Verarbeitung eines inneren Knotens zu kennzeichnen.
+ * @param also_leaf Gibt an, ob Blattknoten ebenfalls verarbeitet werden sollen.
+ *                  Ist der Wert `false`, werden ausschließlich innere Knoten
+ *                  berücksichtigt.
+ * @param level     Aktuelle Verschachtelungstiefe des Knotens. Der Startwert
+ *                  beträgt üblicherweise `0` und wird bei jedem Rekursionsschritt
+ *                  um eins erhöht.
+ *
+ * @note Der Callback kann den Wert `level == -1` verwenden, um Aktionen
+ *       nach der vollständigen Verarbeitung aller Kindknoten eines Knotens
+ *       auszuführen (Post-Order-Verarbeitung).
  */
 void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction2 &function, bool also_leaf, int level)
 {
@@ -877,13 +922,49 @@ QPoint check_screen_position(QPoint pos, bool add_offset, QWidget* map_to_global
     return pos;
 }
 
-//! \brief retrieves text from an edit field confirmed by confgurable buttons
-//! \param title Title of the box (const QString&)
-//! \param label_text lable for edit field (const QString&)
-//! \param initial_text initial edit field text (const QString&)
-//! \param button_texts List of texts for buttons, Order: { Rejected, Accepted[, furtherID, ... ]} (const QStringList&)
-//! \param edit_text returned text from edit field (QString&)
-//! \return result of the QDialog (Rejected, Accepted[, 2, ...])
+/**
+ * @brief Displays a modal dialog with a single-line text input and configurable buttons.
+ *
+ * This function creates and executes a modal dialog containing a descriptive
+ * label, a single-line text input initialized with @p initial_text, and an
+ * arbitrary number of buttons specified by @p button_texts.
+ *
+ * The first two buttons receive the standard dialog semantics:
+ * - Button at index `QDialog::Accepted` (typically `1`) acts as an **Accept**
+ *   button and closes the dialog with the result `QDialog::Accepted`.
+ * - Button at index `QDialog::Rejected` (typically `0`) acts as a **Reject**
+ *   button and closes the dialog with the result `QDialog::Rejected`.
+ *
+ * All additional buttons are assigned a custom result code equal to their
+ * index in @p button_texts.
+ *
+ * If the dialog is accepted or closed using a custom button, the current
+ * contents of the input field are returned via @p edit_text. If the dialog
+ * is rejected, @p edit_text remains unchanged.
+ *
+ * @param title         Window title of the dialog.
+ * @param label_text    Text displayed above the input field.
+ * @param initial_text  Initial contents of the input field.
+ * @param button_texts  Captions of the dialog buttons. The button at index
+ *                      `QDialog::Rejected` is treated as the Reject button,
+ *                      the button at index `QDialog::Accepted` as the Accept
+ *                      button, and all remaining buttons return their index
+ *                      as a custom dialog result.
+ * @param[out] edit_text Receives the entered text if the dialog is accepted
+ *                       or closed using a custom button.
+ *
+ * @return The dialog result code:
+ *         - `QDialog::Rejected` if the Reject button was pressed.
+ *         - `QDialog::Accepted` if the Accept button was pressed.
+ *         - The index of the pressed button for any additional custom button.
+ *
+ * @note The function blocks until the dialog is closed.
+ *
+ * @warning The mapping of button roles relies on the numeric values of
+ *          `QDialog::Accepted` and `QDialog::Rejected` (currently 1 and 0,
+ *          respectively). This coupling should be kept in mind if the
+ *          implementation is modified.
+ */
 int getInputText(const QString& title, const QString& label_text, const QString& initial_text, const QStringList& button_texts, QString& edit_text)
 {
     QDialog dialog;
@@ -956,13 +1037,56 @@ int getInputText(const QString& title, const QString& label_text, const QString&
     return result;
 }
 
-//! \brief callCheckboxDialog
-//! \param title Title of the box (const QString&)
-//! \param label_text lable for edit field (const QString&)
-//! \param checkbox_texts List of names for the Checkboxes (const QStringList&)
-//! \param button_texts List of texts for buttons, Order: { Rejected, Accepted[, furtherID, ... ]} (const QStringList&)
-//! \param checkstate Check state for each CheckBox (Unchecked, PartiallyChecked, Checked) (QList<Qt::CheckState>&)
-//! \return result of the QDialog (Rejected, Accepted[, 2, ...])
+/**
+ * @brief Displays a modal dialog containing a list of check boxes and configurable buttons.
+ *
+ * This function creates and executes a modal dialog consisting of a descriptive
+ * label, a check box for each entry in @p checkbox_texts, and a configurable
+ * set of buttons specified by @p button_texts.
+ *
+ * The first two buttons receive the standard dialog semantics:
+ * - Button at index `QDialog::Rejected` (typically `0`) acts as the **Reject**
+ *   button and closes the dialog with the result `QDialog::Rejected`.
+ * - Button at index `QDialog::Accepted` (typically `1`) acts as the **Accept**
+ *   button and closes the dialog with the result `QDialog::Accepted`.
+ *
+ * All additional buttons are treated as custom buttons and close the dialog
+ * with a result code equal to their index in @p button_texts.
+ *
+ * If the dialog is not rejected, the check state of every check box is
+ * appended to @p checkstate in the same order as the corresponding entries in
+ * @p checkbox_texts. If the dialog is rejected, @p checkstate is left
+ * unchanged.
+ *
+ * @param title           Window title of the dialog.
+ * @param label_text      Text displayed above the list of check boxes.
+ * @param checkbox_texts  Labels of the check boxes to display.
+ * @param button_texts    Captions of the dialog buttons. The button at index
+ *                        `QDialog::Rejected` is treated as the Reject button,
+ *                        the button at index `QDialog::Accepted` as the Accept
+ *                        button, and all remaining buttons return their index
+ *                        as a custom dialog result.
+ * @param[out] checkstate Receives the check state of each check box if the
+ *                        dialog is accepted or closed using a custom button.
+ *                        The states are appended to the existing contents of
+ *                        the list.
+ *
+ * @return The dialog result code:
+ *         - `QDialog::Rejected` if the Reject button was pressed.
+ *         - `QDialog::Accepted` if the Accept button was pressed.
+ *         - The index of the pressed button for any additional custom button.
+ *
+ * @note The function blocks until the dialog is closed.
+ *
+ * @note The contents of @p checkstate are appended to rather than replaced.
+ *       Callers should clear the list before calling this function if they
+ *       require only the current dialog state.
+ *
+ * @warning The mapping of button roles relies on the numeric values of
+ *          `QDialog::Rejected` and `QDialog::Accepted` (currently 0 and 1,
+ *          respectively). This dependency should be considered if the
+ *          implementation is modified.
+ */
 int callCheckboxDialog(const QString &title, const QString &label_text, const QStringList &checkbox_texts, const QStringList &button_texts, QList<Qt::CheckState>& checkstate)
 {
     QDialog dialog;

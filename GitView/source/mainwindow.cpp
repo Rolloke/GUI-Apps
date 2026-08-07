@@ -1219,6 +1219,31 @@ void MainWindow::removeCmdToolBar(const QString& toolbar_name)
     }
 }
 
+/**
+ * @brief Erstellt eine Kopie des aktuell aktiven Code-Editors.
+ *
+ * Die Funktion ermittelt zunächst den aktuell aktiven Editor. Ist dieser ein
+ * gültiger code_browser, wird eine Kopie des Editors erzeugt und in einem
+ * neuen Dock-Widget geöffnet.
+ *
+ * Der Titel des neuen Dock-Widgets entspricht dem Dateinamen der geöffneten
+ * Datei. Falls der Editor keiner Datei zugeordnet ist, wird der Titel
+ * "Cloned Editor" verwendet.
+ *
+ * Der geklonte Editor wird als eigenständiges Dock-Widget erstellt,
+ * zum automatischen Löschen beim Schließen konfiguriert und mit der
+ * Schließen-Logik des Hauptfensters verbunden. Anschließend wird das neue
+ * Dock-Widget, sofern vorhanden, in die Gruppe der Web-View-Dock-Tabs
+ * einsortiert und angezeigt.
+ *
+ * @note Der geklonte Editor ist nicht schreibgeschützt und kann unabhängig
+ *       vom Original verwendet werden.
+ *
+ * @todo Unterstützung einer geteilten Ansicht (Split View) implementieren.
+ * @todo Vergleich verschiedener Dateien innerhalb der Split View ermöglichen.
+ * @todo Drag-and-Drop zum Erstellen einer Vergleichsansicht unterstützen.
+ * @todo Diff-Anzeige für verglichene Dateien integrieren.
+ */
 void MainWindow::clone_code_browser()
 {
     code_browser *active_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
