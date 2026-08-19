@@ -130,6 +130,14 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         }
 #endif
         fTopLevelItem = true;
+        if (git_folder)
+        {
+            QTreeWidgetItem* fItem = new QTreeWidgetItem(aParentItem, {"branch-name"});
+            Type fType;
+            fType.add(Type::Branch);
+            fItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
+            /// TODO: determine current branch
+        }
     }
 
     mGitIgnore.addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
