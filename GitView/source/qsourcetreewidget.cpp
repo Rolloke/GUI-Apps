@@ -132,7 +132,7 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         fTopLevelItem = true;
         if (git_folder)
         {
-            QTreeWidgetItem* fItem = new QTreeWidgetItem(aParentItem, {"branch-name"});
+            QTreeWidgetItem* fItem = new QTreeWidgetItem(aParentItem, {"<branch-name>"});
             Type fType;
             fType.add(Type::Branch);
             fItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
@@ -312,6 +312,15 @@ bool QSourceTreeWidget::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2
         else
         {
             Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
+            if (fType.is(Type::Branch))
+            {
+                auto found = std::find_if(aPathMap.begin(), aPathMap.end(), [] (auto it) { return it.second.is(Type::Branch); });
+                if (found != aPathMap.end())
+                {
+                    const QString& branch = found->first;
+                    aParentItem->setText(Column::FileName, tr(".branch -> ") + branch.split("..")[0]);
+                }
+            }
             fType.remove(Type::AllGitActions);
             aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
             const QString fState = fType.getStates();

@@ -387,7 +387,7 @@ void Type::translate(const QString& git_identifier)
     else if (git_identifier=="AA")     add(type(GitUnmerged|GitBoth));   // unmerged, both added
     else if (git_identifier=="UU")     add(type(GitUnmerged|GitBoth));   // unmerged, both modified
     if (git_identifier.contains("?"))  add(GitUnTracked);
-    if (git_identifier.contains("##")) add(Repository);
+    if (git_identifier.contains("##")){add(Repository); add(Branch); }
 
 }
 

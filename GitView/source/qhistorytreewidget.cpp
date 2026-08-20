@@ -390,6 +390,42 @@ void QHistoryTreeWidget::insertFileNames()
 /// git mergetool -F <file> <commit>
 /// git merge abort
 
+/**
+    @brief Ermittelt und fügt die durch einen Git-Diff betroffenen Dateinamen als Kind-Elemente in den History-Baum ein.
+
+    Die Funktion führt abhängig von child und second_child einen git diff --name-only aus und trägt die dabei ermittelten Dateien unter
+    dem entsprechenden History-Eintrag ein. Dabei werden verschiedene Vergleichsarten unterstützt:
+     - Vergleich eines Commits mit einem anderen Commit.
+     - Vergleich eines Commits mit dem aktuellen Stand.
+     - Vergleich eines Commits mit seinem Parent-Commit.
+     - Vergleich über einen Schritt in der Commit-Historie.
+     - Vergleich von Branches.
+
+    Bei einem direkten Vergleich zweier Commits wird zusätzlich ein neuer Baumknoten vom Typ DiffOf2Commits erzeugt. Dieser enthält die Metadaten
+    beider verglichener Commits.
+    Für Branch-Vergleiche wird ein eigener Top-Level-Eintrag mit der Bezeichnung "Branch difference for repository ..." verwendet. Bei
+    erfolgreicher Ausführung wird dieser Bereich anschließend vollständig expandiert und über show_me() signalisiert, dass er angezeigt werden soll.
+    Der ausgeführte Git-Befehl wird außerdem im GitDiffCommand-Role des betreffenden Baumknotens gespeichert. Die Anzahl der ermittelten Dateien
+    wird im NoOfFiles-Role abgelegt.
+    Ist der angegebene Kindknoten nicht vorhanden oder ausgeblendet, oder handelt es sich bei dem Eintrag um eine Datei, wird keine Aktion
+    durchgeführt. Ebenso werden bereits vorhandene Untereinträge nicht erneut verarbeitet, sofern kein Vergleich über einen Schritt erforderlich ist.
+
+    @param[in] parent_item  Übergeordnetes Element des History-Baums, unter dem der Diff verarbeitet werden soll.
+    @param[in] child        Index des ersten zu betrachtenden Kindknotens innerhalb von `parent_item`.
+    @param[in] second_child Index des zweiten zu betrachtenden Kindknotens bzw. ein Wert aus `History::Diff`, der die gewünschte Vergleichsart beschreibt.
+                            Insbesondere wird `History::Diff::to_next_commit` verwendet, um einen Vergleich mit dem nächsten Commit auszulösen.
+
+    @note Vor der Verarbeitung wird `initialize()` aufgerufen.
+    @note Tritt beim Ausführen des Git-Befehls ein Fehler auf, werden die Fehlermeldung und der verwendete Git-Befehl über den Logger protokolliert.
+
+    @see History::Diff  (to_next_commit, to_current, list_files_to_parent)
+    @see History::Entry (Type, CommitHash, ParentHash, NoOfEntries, GitDiffCommand, NoOfFiles)
+    @see Type           (File, Branch, Folder, DiffOf2Commits)
+    /
+    void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem parent_item,
+    int child,
+    int second_child)
+*/
 void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child, int second_child)
 {
     initialize();
