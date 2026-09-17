@@ -221,6 +221,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::EditTabOutdent]          = "edit-redo-rtl.png";
     action_icons[Cmd::InvokeOutputParserDialog] = "text-x-patch.png";
     action_icons[Cmd::ReloadAll]               = "document-revert.png";
+    action_icons[Cmd::CopyTreeText]            = "edit-copy.png";
 
     for (auto& icon_path: action_icons )
     {

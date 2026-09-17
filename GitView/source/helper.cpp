@@ -381,9 +381,8 @@ QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& reposit
 /**
  * @brief Führt eine Funktion rekursiv für einen Baumknoten und dessen Kinder aus.
  *
- * Die Funktion durchläuft den Teilbaum beginnend bei @p aItem in Tiefensuche
- * (Depth-First Traversal). Für jeden besuchten Knoten wird die übergebene
- * Callback-Funktion aufgerufen.
+ * Die Funktion durchläuft den Teilbaum beginnend bei @p aItem in Tiefensuche (Depth-First Traversal).
+ * Für jeden besuchten Knoten wird die übergebene Callback-Funktion aufgerufen.
  *
  * Der Callback wird bei inneren Knoten zweimal ausgeführt:
  * - Vor der Verarbeitung der Kindknoten mit der aktuellen Verschachtelungstiefe.
@@ -445,6 +444,34 @@ void toggle_expand_item(QTreeWidgetItem* item)
     };
     do_with_item_and_children(item, expand_item, false);
     item->setExpanded(!expand);
+}
+
+void extract_text_of_tree(QTreeWidgetItem* item, QString& text, int column)
+{
+    auto extract_text_of_item = [&text, column](QTreeWidgetItem*the_item, int level)
+    {
+        if (level >= 0)
+        {
+            QString str(level * 2, ' ');
+            text += str + "- ";
+            const int columns = the_item->columnCount();
+            if (column == -1)
+            {
+                text += "| ";
+                for (int column=0; column < columns; ++column)
+                {
+                    text += the_item->text(column);
+                    text += " | ";
+                }
+            }
+            else if (column < columns)
+            {
+                text += the_item->text(column);
+            }
+            text += "\n";
+        }
+    };
+    do_with_item_and_children(item, extract_text_of_item, true);
 }
 
 QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name)

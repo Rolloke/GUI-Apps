@@ -82,6 +82,7 @@ QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, con
 QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& repository_root, QString& file_path_part);
 void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction2& function, bool also_leaf = true, int level=0);
 void toggle_expand_item(QTreeWidgetItem* item);
+void extract_text_of_tree(QTreeWidgetItem* item, QString& text, int column=-1);
 int getItemLevel(QTreeWidgetItem* aItem);
 QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name);
 bool containsPathAsChildren(QTreeWidgetItem*, int, const QString& );

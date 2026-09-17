@@ -356,6 +356,7 @@ private Q_SLOTS:
     void removeGitSourceFolder();
     void gitview_about();
     void deleteFileOrFolder();
+    void copyTreeItemTextToClipboard();
     void selectTextBrowserLanguage();
     void killBackgroundThread();
     void copyFileName();

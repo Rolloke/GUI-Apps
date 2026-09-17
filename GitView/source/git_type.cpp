@@ -101,20 +101,20 @@ Cmd::Cmd()
     mContextMenuSourceTree      = { CopyFileName, CopyFilePath, CompareTo, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename,
                                     SubOpen, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally,
                                     Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History,
-                                    Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
+                                    Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation, CopyTreeText };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, UndoCommitSoft, UndoCommitHard,
-                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems, CopyTreeText };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged,
                                     Separator, BranchShow, DiffOfTwoBranches, MergeTwoBranches, BranchCreate, BranchCheckout, BranchDelete,
-                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems, CopyTreeText };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool,
                                     Separator, StashPop, StashApply, StashDrop, StashClear,
-                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems, CopyTreeText };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
     mContextMenuTextView        = { CloneTextBrowser, CreateBookMark, Separator };
-    mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+    mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems, CopyTreeText };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove,
                           Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame,

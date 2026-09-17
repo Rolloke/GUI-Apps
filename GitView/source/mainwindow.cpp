@@ -29,6 +29,7 @@
 #include <QSplitter>
 #include <QActionGroup>
 #include <QSystemTrayIcon>
+#include <QClipboard>
 
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
@@ -1957,6 +1958,22 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
 
 }
 
+void MainWindow::copyTreeItemTextToClipboard()
+{
+    auto* ftw = focusedTreeWidget(true);
+    if (ftw)
+    {
+        auto selected_list = ftw->selectedItems();
+        if (selected_list.size())
+        {
+            QString text;
+            extract_text_of_tree(selected_list[0], text);
+            QApplication::clipboard()->setText(text);
+        }
+    }
+}
+
+
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
     QMainWindow::mousePressEvent(event);
@@ -2650,6 +2667,14 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CustomTestCommand, tr("test command"), tr("")), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::CustomBackgroundCommand, tr("test command"), tr("")), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::CustomBackgroundCommand, ActionList::Flags::Asynchroneous, Flag::set);
+
+    connect(mActions.createAction(Cmd::ClearTreeItems, tr("Clear all tree entries"), tr("Clears all tree entries in focused tree except repository tree")), SIGNAL(triggered()), this, SLOT(clearTrees()));
+    mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::ClearTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
+    connect(mActions.createAction(Cmd::CopyTreeText, tr("Copy tree content"), tr("Copy tree test of selected item and all sub items to clipboard")), SIGNAL(triggered()), this, SLOT(copyTreeItemTextToClipboard()));
+    mActions.setFlags(Cmd::CopyTreeText, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::CopyTreeText, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     Cmd::eCmd new_id = Cmd::AutoCommand;
     create_auto_cmd(ui->ckDirectories, new_id);

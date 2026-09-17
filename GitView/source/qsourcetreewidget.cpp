@@ -136,7 +136,6 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
             Type fType;
             fType.add(Type::Branch);
             fItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
-            /// TODO: determine current branch
         }
     }
 

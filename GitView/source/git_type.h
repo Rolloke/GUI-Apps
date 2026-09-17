@@ -141,6 +141,7 @@ struct Cmd
         InvokeOutputParserDialog,
         ClearView,
         ReloadAll,
+        CopyTreeText,
 
         /// hint: add non git commands before
         LastNonGitCommand = InvokeOutputParserDialog,
