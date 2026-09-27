@@ -200,7 +200,7 @@ private:
     int      call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
 
     QString  get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
-    void     perform_post_cmd_action(git::Cmd::ePostAction post_cmd, const git::Type& type = {}, git::Cmd::eCmd cmd = git::Cmd::Invalid);
+    void     perform_post_cmd_action(git::Cmd::ePostAction post_cmd, const git::Type& type = {}, git::Cmd::eCmd cmd = git::Cmd::Invalid, const QString &result="");
 
     QString  getConfigName() const;
     QString  getBookmarksgName() const;

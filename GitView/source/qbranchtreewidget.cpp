@@ -6,6 +6,7 @@
 
 #include <QMenu>
 
+
 using namespace git;
 
 QBranchTreeWidget::QBranchTreeWidget(QWidget *parent) : QTreeWidget(parent)
@@ -63,6 +64,63 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText, const QS
     {
         expandItem(new_branch_item);
     }
+}
+
+void QBranchTreeWidget::insertBranchListText(const QString &result, const QString &git_root_path)
+{
+    /// TODO: test insert new branch in pull command to branch list
+    /// 31047275..b69b27c4  community  -> origin/community
+    /// * [neuer Branch]      dependabot/github_actions/github/codeql-action-4.37.3 -> origin/dependabot/github_actions/github/codeql-action-4.37.3
+    /// RegEx: "\*.\[.*(B|b)ranch\]"
+    /// Trenner: "->"
+    /// Trim left and right
+    /// 05f2f103..6724c548  master     -> origin/master
+    /// * [neues Tag]         2.5.5      -> 2.5.5
+    /// RegEx: "\*.\[.*(T|t)ag\]"
+    /// Trenner: "->"
+    /// Trim left and right
+    const char* extract_branch = "\\* \\[.*(B|b)ranch\\].(.*) ->";
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    static const QRegularExpression fRegEx(extract_branch);
+    const auto result_lines = result.split("\n");
+    QString branch;
+    for (const QString& result_line : result_lines)
+    {
+        auto match = fRegEx.match(result_line);
+        if (match.isValid())
+        {
+            const auto captured = match.capturedTexts();
+            branch = captured[2].trimmed();
+        }
+    }
+#else
+    static const QRegExp fRegEx(extract_branch);
+    const auto result_lines = result.split("\n");
+    for (const auto& result_line : result_lines)
+    {
+        int fPos = fRegEx.indexIn(result_line);
+        if (fPos != -1 && fRegEx.captureCount())
+        {
+            const auto captured = fRegEx.capturedTexts();
+            branch = captured[2].trimmed();
+        }
+    }
+#endif
+    QTreeWidgetItem* branch_item = nullptr;
+    auto found_item = findItems(git_root_path, Qt::MatchContains|Qt::MatchCaseSensitive, Column::Text);
+    if (found_item.size())
+    {
+        branch_item = found_item[0];
+    }
+    else
+    {
+        branch_item = new QTreeWidgetItem(QStringList(git_root_path));
+        addTopLevelItem(branch_item);
+        branch_item->setData(Column::Text, Role::GitRootPath, QVariant(git_root_path));
+    }
+    QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
+    branch_item->addChild(new_child_item);
+    new_child_item->setText(Column::Text, branch);
 }
 
 void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)

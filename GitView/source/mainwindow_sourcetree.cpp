@@ -1224,6 +1224,7 @@ void MainWindow::perform_custom_command()
     {
         Type    type;
         QString message_box_text = variant_list[ActionList::Data::MsgBoxText].toString();
+        QString result_str;
         getSelectedTreeItem();
         if (mContextMenuSourceTreeItem)
         {
@@ -1239,7 +1240,6 @@ void MainWindow::perform_custom_command()
                 btnCloseText_clicked(Editor::Viewer);
             }
             QString repository = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
-            QString result_str;
             git_command = tr(git_command.toStdString().c_str()).arg(repository);
             QString cmd_option = get_git_command_option(type, command_flags, variant_list);
             if (cmd_option.size())
@@ -1309,12 +1309,12 @@ void MainWindow::perform_custom_command()
 
         if (!(command_flags & ActionList::Flags::CallInThread))
         {
-            perform_post_cmd_action(static_cast<Cmd::ePostAction>(variant_list[ActionList::Data::PostCmdAction].toUInt()), type, mActions.findID(action));
+            perform_post_cmd_action(static_cast<Cmd::ePostAction>(variant_list[ActionList::Data::PostCmdAction].toUInt()), type, mActions.findID(action), result_str);
         }
     }
 }
 
-void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::Type& type, Cmd::eCmd cmd)
+void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::Type& type, Cmd::eCmd cmd, const QString& result)
 {
     switch (post_cmd)
     {
@@ -1327,6 +1327,11 @@ void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::T
         break;
     case Cmd::UpdateRepository:
         updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
+        if (cmd == Cmd::Pull)
+        {
+            const QString path = ui->treeSource->getItemFilePath(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
+            ui->treeBranches->insertBranchListText(result, path);
+        }
         break;
     case Cmd::UpdateRepositorySubFolder:
         if (mContextMenuSourceTreeItem)

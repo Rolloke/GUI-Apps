@@ -65,11 +65,11 @@ void MainWindow::call_git_stash_command()
             }
             break;
         case Cmd::UpdateStash:
-            perform_post_cmd_action(post_action_cmd, {}, cmd_id);
+            perform_post_cmd_action(post_action_cmd, {}, cmd_id, result_str);
             break;
         case Cmd::UpdateRootItemStatus:
             perform_post_cmd_action(Cmd::UpdateStash, {}, cmd_id);
-            perform_post_cmd_action(post_action_cmd, {}, cmd_id);
+            perform_post_cmd_action(post_action_cmd, {}, cmd_id, result_str);
             break;
         case Cmd::DoNothing:
         case Cmd::UpdateItemStatus:

@@ -19,6 +19,7 @@ public:
     QString getSelectedBranchGitRootPath();
     QString getSelectedBranch(const QString &separator = " ");
     void parseBranchListText(const QString& aBranchText, const QString& aGitRootPath);
+    void insertBranchListText(const QString& result, const QString& git_root_path);
     void on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
     void on_itemDoubleClicked(const ActionList& aActionList, QTreeWidgetItem *item, int );
     void deleteSelectedItem();
