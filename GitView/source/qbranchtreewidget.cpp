@@ -68,54 +68,58 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText, const QS
 
 void QBranchTreeWidget::insertBranchListText(const QString &result, const QString &git_root_path)
 {
-    /// TODO: test insert new branch in pull command to branch list
-    /// 31047275..b69b27c4  community  -> origin/community
-    /// * [neuer Branch]      dependabot/github_actions/github/codeql-action-4.37.3 -> origin/dependabot/github_actions/github/codeql-action-4.37.3
-    /// RegEx: "\*.\[.*(B|b)ranch\]"
-    /// Trenner: "->"
-    /// Trim left and right
-    /// 05f2f103..6724c548  master     -> origin/master
-    /// * [neues Tag]         2.5.5      -> 2.5.5
-    /// RegEx: "\*.\[.*(T|t)ag\]"
-    /// Trenner: "->"
-    /// Trim left and right
+    // Test line for branch:
+    // auto result_lines = {"* [new branch]      dependabot/github_actions/github/codeql-action-4.37.3 -> origin/dependabot/github_actions/github/codeql-action-4.37.3"};
     const char* extract_branch = "\\* \\[.*(B|b)ranch\\].(.*) ->";
+    const char* extract_tag    = "\\* \\[.*(T|t)ag\\].(.*) ->";
+    const char* prefix[]       = { "B ", "T "};
+    const int   captured_index = 2; // index of back reference containing branch or tag name
+    const auto  result_lines   = result.split("\n");
+    QStringList new_branches;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
-    static const QRegularExpression fRegEx(extract_branch);
-    const auto result_lines = result.split("\n");
-    QStringList new_branches;
+    static const QRegularExpression reg_exes[2] = { QRegularExpression(extract_branch), QRegularExpression(extract_tag) };
     for (const QString& result_line : result_lines)
     {
-        auto match = fRegEx.match(result_line);
-        if (match.isValid())
+        int i=0;
+        for (const auto &reg_ex : reg_exes)
         {
-            const auto captured = match.capturedTexts();
-            if (captured.size() >= 2)
+            auto match = reg_ex.match(result_line);
+            if (match.isValid())
             {
-                new_branches.append(captured[2].trimmed());
+                const auto captured = match.capturedTexts();
+                if (captured.size() >= captured_index)
+                {
+                    new_branches.append(prefix[i] + captured[captured_index].trimmed());
+                }
             }
+            ++i;
         }
     }
 
 #else
 
-    static const QRegExp fRegEx(extract_branch);
-    const auto result_lines = result.split("\n");
+    static const QRegExp reg_exes[] = { QRegExp(extract_branch), QRegExp(extract_tag) };
     for (const auto& result_line : result_lines)
     {
-        int fPos = fRegEx.indexIn(result_line);
-        if (fPos != -1 && fRegEx.captureCount())
+        int i=0;
+        for (const auto &reg_ex : reg_exes)
         {
-            const auto captured = fRegEx.capturedTexts();
-            if (captured.size() >= 2)
+            int fPos = reg_ex.indexIn(result_line);
+            if (fPos != -1 && reg_ex.captureCount())
             {
-                new_branches.append(captured[2].trimmed());
+                const auto captured = reg_ex.capturedTexts();
+                if (captured.size() >= captured_index)
+                {
+                    new_branches.append(prefix[i] + captured[captured_index].trimmed());
+                }
             }
+            ++i;
         }
     }
 
 #endif
+
     if (new_branches.size())
     {
         QTreeWidgetItem* branch_item = nullptr;
