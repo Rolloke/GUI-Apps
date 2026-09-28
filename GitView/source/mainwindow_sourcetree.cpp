@@ -1259,7 +1259,7 @@ void MainWindow::perform_custom_command()
                         action_kbgcmd->setEnabled(true);
                         QVariantMap workmap;
                         workmap.insert(Worker::repository, repository);
-                        workmap.insert(Worker::command_id, mActions.findID(action_kbgcmd));
+                        workmap.insert(Worker::command_id, mActions.findID(action));
                         workmap.insert(Worker::command, git_command);
                         workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
                         workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
