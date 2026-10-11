@@ -1842,12 +1842,12 @@ Könnte etwas länger dauern</translation>
     <message>
         <location filename="mainwindow.cpp" line="2345"/>
         <source>Call diff tool...</source>
-        <translation>Zeige Unterschiede extern an...</translation>
+        <translation>Unterschiede...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2351"/>
         <source>Call merge tool...</source>
-        <translation>Rufe Zusammenführungswerkzeug auf...</translation>
+        <translation>Zusammenführen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2357"/>
@@ -2049,12 +2049,12 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="mainwindow.cpp" line="2360"/>
         <source>Edit Highlighting...</source>
-        <translation>Bearbeite Texthervorhebung...</translation>
+        <translation>Hervorhebung...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2360"/>
         <source>Edit highlighting color and font</source>
-        <translation>Bearbeitet Farbe und Schrift der Hervorhebung</translation>
+        <translation>Bearbeitet Farbe und Schrift der Hervorhebung von Quelltexten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2367"/>
@@ -2069,12 +2069,12 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="mainwindow.cpp" line="2375"/>
         <source>Add to git (stage)</source>
-        <translation>Zu git hinzufügen (stagen)</translation>
+        <translation>Git Add (stagen)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2381"/>
         <source>Reset file (unstage)</source>
-        <translation>Aus git entfernen (unstage)</translation>
+        <translation>Zurücksetzen (unstage)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2386"/>
@@ -2094,13 +2094,13 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="mainwindow.cpp" line="2402"/>
         <source>Restore changes...</source>
-        <translation>Änderungen rückgangig machen...</translation>
+        <translation>Änderung verwerfen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2439"/>
         <source>Stash all entries;Do you whant to stash all entries of repository:
 &quot;%1&quot;?</source>
-        <translation>Alle Einträge zwischenspeichern (stash); Möchten Sie alle Einträge des Repositorys zwischenspeichern:
+        <translation type="unfinished">Alle Einträge stashen (stash); Möchten Sie alle Einträge des Repositorys zwischenspeichern:
 „%1“?</translation>
     </message>
     <message>
@@ -2131,7 +2131,7 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="mainwindow.cpp" line="2468"/>
         <source>List stashes</source>
-        <translation>Stash auflisten</translation>
+        <translation>Stashliste</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2490"/>
@@ -2161,376 +2161,378 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="mainwindow.cpp" line="2509"/>
         <source>Merge Branch</source>
-        <translation type="unfinished"></translation>
+        <translation>Branch zusammenführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2551"/>
         <source>go to line given in edit field</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu der im Eingabefeld angegebenen Zeile springen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2571"/>
         <source>Tab Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulator-Einzug vergrößern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2571"/>
         <source>Indent selected text by Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Text mit Tabulator einrücken</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2574"/>
         <source>Tab Outdent</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab-Einzug verringern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2574"/>
         <source>Outdent selected text by Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzug des ausgewählten Textes durch Tabulator verringern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2578"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2578"/>
         <source>Updates the git status of all or the selected source folder or reloads the selected file</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiert den Git-Status des gesamten oder des ausgewählten Quellordners oder lädt die ausgewählte Datei neu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2582"/>
         <location filename="mainwindow.cpp" line="2671"/>
         <source>Clear all tree entries</source>
-        <translation type="unfinished">Alle Einträge löschen</translation>
+        <translation>Alle Einträge löschen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2582"/>
         <location filename="mainwindow.cpp" line="2671"/>
         <source>Clears all tree entries in focused tree except repository tree</source>
-        <translation type="unfinished">Löscht alle Einträge der aktiven Baumansicht außer im Repository Baum</translation>
+        <translation>Löscht alle Einträge der aktiven Baumansicht außer im Repository Baum</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2586"/>
         <source>Delete selected tree items</source>
-        <translation type="unfinished">Lösche Auswahl in Baumansicht</translation>
+        <translation>Lösche Auswahl in Baumansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2586"/>
         <source>Deletes all selected tree items in focused tree except repository tree</source>
-        <translation type="unfinished">Löscht alle gewählten Einträge der Baumansicht</translation>
+        <translation>Löscht alle gewählten Einträge der Baumansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2590"/>
         <source>Set open external flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen in einem externen Fenster aktivieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2590"/>
         <source>Sets parameters to open files with this extension externally</source>
-        <translation type="unfinished"></translation>
+        <translation>Legt Parameter für das externe Öffnen von Dateien mit dieser Erweiterung fest</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2594"/>
         <source>Remove open external flag</source>
-        <translation type="unfinished">Extern öffen deaktivieren</translation>
+        <translatorcomment>Öffnen in externer Anwendung deaktivieren</translatorcomment>
+        <translation>Extern öffen deaktivieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2594"/>
         <source>Removes open external parameters</source>
-        <translation type="unfinished">Parameter für externes Öffen löschen</translation>
+        <translation>Parameter für externes Öffen löschen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2598"/>
         <source>Open file externally</source>
-        <translation type="unfinished">Datei mit externem Programm öffnen</translation>
+        <translation>Datei mit externem Programm öffnen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2598"/>
         <source>Opens file externally</source>
-        <translation type="unfinished">Öffnet Datei mit externem Programm</translation>
+        <translation>Öffnet Datei mit externem Programm</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2602"/>
         <source>Whats this?</source>
-        <translation type="unfinished"></translation>
+        <translation>Was ist das?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2602"/>
         <source>Whats this help</source>
-        <translation type="unfinished"></translation>
+        <translation>Was ist das?-Hilfe</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2605"/>
         <source>Compare to...</source>
-        <translation type="unfinished">Vergleiche mit...</translation>
+        <translation>Vergleiche mit...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2605"/>
         <source>Start compare mode to select other file ore folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergleichsmodus starten und eine andere Datei oder einen anderen Ordner zum Vergleich auswählen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2609"/>
         <source>Close all</source>
-        <translation type="unfinished">Alle schließen</translation>
+        <translation>Alle schließen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2609"/>
         <source>Closes all documents</source>
-        <translation type="unfinished">Schließt alle Dokumente</translation>
+        <translation>Schließt alle Dokumente</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2610"/>
         <source>Save all</source>
-        <translation type="unfinished">Alles speichern</translation>
+        <translation>Alles speichern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2610"/>
         <source>Saves all documents</source>
-        <translation type="unfinished">Alle Dokumente speichern</translation>
+        <translation>Alle Dokumente speichern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2611"/>
         <source>Reload all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien neu laden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2611"/>
         <source>Reloads all documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Lädt alle Dokumente neu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2656"/>
         <source>Split view</source>
-        <translation type="unfinished"></translation>
+        <translation>Geteilte Ansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2656"/>
         <source>Splits view into two views and vice versa</source>
-        <translation type="unfinished"></translation>
+        <translation>Teilt die Ansicht in zwei Ansichten auf und umgekehrt</translation>
     </message>
     <message>
         <location filename="mainwindow_textview.cpp" line="108"/>
         <source>Background Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundprotokoll</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3236"/>
         <source>Select style for app</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil für die App auswählen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3236"/>
         <source>Style File (*.qss);;All Files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Stildatei (*.qss);;Alle Dateien (*.*)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2755"/>
         <location filename="mainwindow.cpp" line="3300"/>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1412"/>
         <source>Compare tool command</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommando für „Vergleichstool“</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1420"/>
         <source>Edit mime type for file copy</source>
-        <translation type="unfinished"></translation>
+        <translation>MIME-Typ für Dateikopie bearbeiten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1421"/>
         <source>Edit path to style qss file</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zur QSS-Stildatei bearbeiten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1423"/>
         <source>Show repository view date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum der Repository-Ansicht anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1424"/>
         <source>Show repository view size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe der Repository-Ansicht anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1425"/>
         <source>Show messages in Systemtray</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldungen im System-Tray anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1426"/>
         <source>Close all files of repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien des Repositorys schließen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1427"/>
         <source>Use experimental functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Experimentelle Funktionen verwenden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1428"/>
         <source>Select logging severity</source>
-        <translation type="unfinished"></translation>
+        <translation>Logging Typen auswählen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1435"/>
         <source>Edit linux theme name</source>
-        <translation type="unfinished"></translation>
+        <translation>Linux-Theme-Namen bearbeiten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1451"/>
         <source>Find words in text files</source>
-        <translation type="unfinished"></translation>
+        <translation>Wörter in Textdateien finden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1456"/>
         <source>Repository parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Repository-Parameter</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1464"/>
         <source>Tree view icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole der Baumansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1470"/>
         <source>Miscelaneous parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonstige Parameter</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2043"/>
         <source>command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>command: %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2046"/>
         <source>
 Repository: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Repository: %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2048"/>
         <source>Backgound command finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbefehl abgeschlossen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2117"/>
         <source>Stop this process</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppen Sie diesen Vorgang</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2120"/>
         <source>Stop all processes in batch</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Prozesse im Batch beenden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2124"/>
         <source>Kill process ids</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozess-IDs beenden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2124"/>
         <source>Select processes to be killed</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu beendende Prozesse auswählen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2363"/>
         <source>Edit Output Parser...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe-Parser...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2363"/>
         <source>Edit output parser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe-Parser Filterausdrücke konfigurieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2403"/>
         <source>Restore %1 changes;Do you want to restore the changes in &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Änderungen wiederherstellen;Möchten Sie die Änderungen in „%1“ wiederherstellen?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2410"/>
         <source>Undo commit soft...</source>
-        <translation type="unfinished"></translation>
+        <translation>Commit „soft“ rückgängig machen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2411"/>
         <source>Undo commit %1 and leave local changes;Do you want to undo the commit(s) in &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Commit %1 rückgängig machen und lokale Änderungen beibehalten;Möchten Sie den/die Commit(s) in „%1“ rückgängig machen?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2414"/>
         <source>Undo commit hard...</source>
-        <translation type="unfinished"></translation>
+        <translation>Commit hart rückgängig machen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2415"/>
         <source>Undo commit %1 and overwrite local changes;Do you want to undo the commit(s) in &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Commit %1 rückgängig machen und lokale Änderungen überschreiben;Möchten Sie die Commits in „%1“ rückgängig machen?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2675"/>
         <source>Copy tree content</source>
-        <translation type="unfinished"></translation>
+        <translation>Baumansichtsinhalt kopieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2675"/>
         <source>Copy tree test of selected item and all sub items to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Baumansichtstext des ausgewählten Elements und aller Unterelemente in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2823"/>
         <source> up</source>
-        <translation type="unfinished"></translation>
+        <translation> hoch</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2870"/>
         <source> down</source>
-        <translation type="unfinished"></translation>
+        <translation> runter</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3257"/>
         <source>Restart Gitview</source>
-        <translation type="unfinished"></translation>
+        <translation>Gitview neu starten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3302"/>
         <source>Execute command in selected path of tree view</source>
-        <translation type="unfinished"></translation>
+        <translation>Befehl im ausgewählten Pfad der Baumansicht ausführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3303"/>
         <source>Execute command in background thread in selected path of tree view</source>
-        <translation type="unfinished"></translation>
+        <translation>Befehl im Hintergrund-Thread im ausgewählten Pfad der Baumansicht ausführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3304"/>
         <source>Enter git or bash command and hit &quot;Return&quot; to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Gib einen Git- oder Bash-Befehl ein und drücke die Eingabetaste, um ihn auszuführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3312"/>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehe zu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3313"/>
         <source>Enter line number and hit &quot;Return&quot; to go to line</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie die Zeilennummer ein und drücken Sie die Eingabetaste, um zur Zeile zu springen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3355"/>
         <source>Execute git command for selected Repository in backgorund thread</source>
-        <translation type="unfinished"></translation>
+        <translation>Git-Befehl für das ausgewählte Repository in einem Hintergrund-Thread ausführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4098"/>
         <source>Move [ %1 ] to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebe [ %1 ] nach</translation>
     </message>
     <message>
         <source>Running Background Activity...</source>
@@ -2539,62 +2541,62 @@ Repository: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2632"/>
         <source>You may try to kill git action running in background</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können versuchen, die im Hintergrund laufende Git-Aktion zu beenden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2632"/>
         <source>Background Activity...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundaktivität...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2637"/>
         <source>Copy file name</source>
-        <translation type="unfinished">Kopiere Dateinamen</translation>
+        <translation>Kopiere Dateinamen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2637"/>
         <source>Copy file name to clipboard</source>
-        <translation type="unfinished">Kopiere Dateinamen in die Zwischenablage</translation>
+        <translation>Kopiere Dateinamen in die Zwischenablage</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2640"/>
         <source>Copy file and path</source>
-        <translation type="unfinished">Kopiere Dateipfad</translation>
+        <translation>Kopiere Dateipfad</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2640"/>
         <source>Copy file or folder and path to clipboard</source>
-        <translation type="unfinished">Kopiere Datei- bzw. Ordnerpfad in die Zwischenablage</translation>
+        <translation>Kopiere Datei- bzw. Ordnerpfad in die Zwischenablage</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2645"/>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Heranzoomen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2645"/>
         <source>Zoom in (make larger)</source>
-        <translation type="unfinished"></translation>
+        <translation>Heranzoomen (vergrößern)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2648"/>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Heraus.Zoomen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2648"/>
         <source>Zoom out (make smaller)</source>
-        <translation type="unfinished"></translation>
+        <translation>Herauszoomen (verkleinern)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2651"/>
         <source>Fit in View</source>
-        <translation type="unfinished">Alles in der Ansicht anzeigen</translation>
+        <translation>Alles in der Ansicht anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2651"/>
         <source>Fits Item in View, when opened</source>
-        <translation type="unfinished">Alles in der Ansicht anzeigen, wenn geöffnet wird</translation>
+        <translation>Alles in der Ansicht anzeigen, wenn geöffnet wird</translation>
     </message>
     <message>
         <source>Clone text view</source>
@@ -2607,49 +2609,50 @@ Repository: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2659"/>
         <source>Create Bookmark</source>
-        <translation type="unfinished">Lesezeichen erstellen</translation>
+        <translation>Lesezeichen erstellen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2659"/>
         <source>Creates a Bookmark</source>
-        <translation type="unfinished">Erstellt ein Lesezeichen</translation>
+        <translation>Erstellt ein Lesezeichen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2662"/>
         <source>Show Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2662"/>
         <source>Show information about selected item</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen zum ausgewählten Element anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2667"/>
         <location filename="mainwindow.cpp" line="2668"/>
         <source>test command</source>
-        <translation type="unfinished"></translation>
+        <translation>test command</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2911"/>
         <source>Program parameter</source>
-        <translation type="unfinished">Programm Parameter</translation>
+        <translation>Programm Parameter</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2912"/>
         <source>Set open program for &apos;%1&apos; file extension
 Leave empty for default program &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm zum Öffnen für die Dateiendung „%1“ festlegen
+Für das Standardprogramm „%2“ leer lassen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1294"/>
         <source>Replace</source>
-        <translation type="unfinished">Ersetzen</translation>
+        <translation>Ersetzen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1291"/>
         <source>Replace expression</source>
-        <translation type="unfinished">Ersetzt Ausdruck</translation>
+        <translation>Ersetzt Ausdruck</translation>
     </message>
     <message>
         <source>Search expression in all files of selected folder</source>
@@ -2658,12 +2661,12 @@ Leave empty for default program &apos;%2&apos;</source>
     <message>
         <location filename="mainwindow.cpp" line="3346"/>
         <source>Search in Text Editor</source>
-        <translation type="unfinished">Suche im Text Editor</translation>
+        <translation>Suche im Text Editor</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3347"/>
         <source>Go to line in Text Editor</source>
-        <translation type="unfinished">Gehe zu Zeile im Texteditor</translation>
+        <translation>Gehe zu Zeile im Texteditor</translation>
     </message>
     <message>
         <source>Search for text in files under selected folder in Repository View</source>
@@ -2672,68 +2675,68 @@ Leave empty for default program &apos;%2&apos;</source>
     <message>
         <location filename="mainwindow.cpp" line="3348"/>
         <source>Search for text in find results</source>
-        <translation type="unfinished">Suche nach Text in Suchergebnis Ansicht</translation>
+        <translation>Suche nach Text in Suchergebnis Ansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3349"/>
         <source>Search files or folders in Repository View</source>
-        <translation type="unfinished">Suche Dateien oder Orner in der Repository Ansicht</translation>
+        <translation>Suche Dateien oder Orner in der Repository Ansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3350"/>
         <source>Search item in History View</source>
-        <translation type="unfinished">Suche Text in Historienansicht</translation>
+        <translation>Suche Text in Historienansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3351"/>
         <source>Search item in Branch View</source>
-        <translation type="unfinished">Suche Text ind Zweigansicht</translation>
+        <translation>Suche Text ind Zweigansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3352"/>
         <source>Search in Stash View</source>
-        <translation type="unfinished">Suche in Stash Ansicht</translation>
+        <translation>Suche in Stash Ansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3353"/>
         <source>Execute git command for selected Repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Git-Befehl für das ausgewählte Repository ausführen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3776"/>
         <source>%1 -d %2 -g %3 %4 &apos;%5&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 -d %2 -g %3 %4 &apos;%5&apos;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3780"/>
         <source>%1 -d %2 %3 &apos;%4&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 -d %2 %3 &apos;%4&apos;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3805"/>
         <source>%1 %2 &apos;%3&apos; &apos;%4&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 &apos;%3&apos; &apos;%4&apos;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3811"/>
         <source>Search expression: %1</source>
-        <translation type="unfinished">Such Asudruck: %1</translation>
+        <translation>Such Ausdruck: %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="3908"/>
         <source>
 result error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4048"/>
         <source>Text Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Textanzeige</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4048"/>
         <source>Text Viewer / Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Textbetrachter / -editor</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2418"/>
@@ -2743,7 +2746,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2423"/>
         <source>Clone</source>
-        <translation type="unfinished">Klonen</translation>
+        <translation>Klonen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2426"/>
@@ -2758,7 +2761,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2433"/>
         <source>Fetch</source>
-        <translation type="unfinished">Holen</translation>
+        <translation>Holen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2436"/>
@@ -2769,7 +2772,7 @@ result error: %1</source>
         <location filename="mainwindow.ui" line="590"/>
         <location filename="mainwindow.cpp" line="2440"/>
         <source>Stash</source>
-        <translation>In git Speicher verschieben</translation>
+        <translation>Stashen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2454"/>
@@ -2779,7 +2782,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2472"/>
         <source>List Branches</source>
-        <translation>Quellcodezweige auflisten</translation>
+        <translation>Branchliste</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2476"/>
@@ -2819,7 +2822,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2524"/>
         <source>Expand Tree Items</source>
-        <translation>Baumansicht aufklappen</translation>
+        <translation>Alle aufklappen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2524"/>
@@ -2829,7 +2832,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2528"/>
         <source>Collapse Tree Items</source>
-        <translation>Zweige zuklappen</translation>
+        <translation>Alle zuklappen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2528"/>
@@ -2839,117 +2842,117 @@ result error: %1</source>
     <message>
         <location filename="mainwindow.cpp" line="2533"/>
         <source>Add git source folder...</source>
-        <translation>git Repository hinzufügen...</translation>
+        <translation>Git Repo öffnen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2533"/>
         <source>Add a git source folder to repository view</source>
-        <translation type="unfinished">Git Repository Ordner hinzufügen...</translation>
+        <translation>Git Repository Ordner hinzufügen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2536"/>
         <source>Remove git source folder</source>
-        <translation type="unfinished">Git Repository Ordner schließen</translation>
+        <translation>Git Repo schließen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2536"/>
         <source>Remove a git source folder from repository view</source>
-        <translation type="unfinished">Git Repo schließen</translation>
+        <translation>Git Repo schließen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2539"/>
         <source>Open File...</source>
-        <translation type="unfinished">Datei öffnen...</translation>
+        <translation>Datei öffnen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2539"/>
         <source>Open arbitrary file</source>
-        <translation type="unfinished">Beliebige Datei öffnen</translation>
+        <translation>Beliebige Datei öffnen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2543"/>
         <source>Save File as...</source>
-        <translation type="unfinished">Speichern unter...</translation>
+        <translation>Speichern unter...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2543"/>
         <source>Save file under alternative name</source>
-        <translation type="unfinished">Speichern mit anderem Namen</translation>
+        <translation>Speichern mit anderem Namen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2547"/>
         <source>Replace All</source>
-        <translation type="unfinished">Alles ersetzen</translation>
+        <translation>Alles ersetzen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2547"/>
         <source>Replace all found items</source>
-        <translation type="unfinished">Ersetzt alles gefundenen Einträge</translation>
+        <translation>Ersetzt alles gefundenen Einträge</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2556"/>
         <source>To Upper.</source>
-        <translation type="unfinished"></translation>
+        <translation>Großbuchstaben</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2556"/>
         <source>Modify selected text to upper case</source>
-        <translation type="unfinished">Seletierten Text in Großbuchstaben ändern</translation>
+        <translation>Ausgewählten Text in Großbuchstaben umwandeln</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2559"/>
         <source>To Lower</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinbuchstaben</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2559"/>
         <source>Modify selected text to lower case</source>
-        <translation type="unfinished">Seletierten Text in Kleinbuchstaben ändern</translation>
+        <translation>Ausgewählten Text in Kleinbuchstaben ändern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2562"/>
         <source>Comment / uncomment</source>
-        <translation type="unfinished">Kommentieren / Auskommentieren</translation>
+        <translation>Kommentieren / Auskommentieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2562"/>
         <source>Comment or uncomment selected text lines</source>
-        <translation type="unfinished">Wandelt Code in Komentar und umgekehrt</translation>
+        <translation>Wandelt Code in Komentar und umgekehrt</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2565"/>
         <source>To Snake Case</source>
-        <translation type="unfinished"></translation>
+        <translation>In Snake Case umwandeln</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2565"/>
         <source>Modify selected text to snake_case</source>
-        <translation type="unfinished">Seletierten Text in snake_case ändern</translation>
+        <translation>Seletierten Text in snake_case ändern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2568"/>
         <source>To Camel Case</source>
-        <translation type="unfinished"></translation>
+        <translation>In Camel-Case umwandeln</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2568"/>
         <source>Modify selected text to CameCase</source>
-        <translation type="unfinished">Seletierten Text in CameCase ändern</translation>
+        <translation>Seletierten Text in CameCase ändern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2613"/>
         <source>Customize git actions...</source>
-        <translation>Benutzer Kommandos bearbeiten...</translation>
+        <translation>Benutzerbefehle...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2613"/>
         <source>Edit custom git actions, menues and toolbars</source>
-        <translation>Bearbeitet git Kommandos, Menüeintrage und Werkzeugleisteneinträge</translation>
+        <translation>Bearbeitet git Kommandos, Menüeintrage, Werkzeugleisteneinträge und weitere Einstellungen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2617"/>
         <source>Insert File Name List</source>
-        <translation>Für Dateinameliste ein</translation>
+        <translation type="unfinished">Füge Dateinamenliste ein</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2617"/>
@@ -2994,7 +2997,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow_historytree.cpp" line="33"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie</translation>
     </message>
     <message>
         <location filename="mainwindow_historytree.cpp" line="78"/>
@@ -3004,7 +3007,7 @@ result error: %1</source>
     <message>
         <location filename="mainwindow_historytree.cpp" line="158"/>
         <source>git show %1:%2</source>
-        <translation type="unfinished">git show %1:%2</translation>
+        <translation>git show %1:%2</translation>
     </message>
     <message>
         <location filename="mainwindow_sourcetree.cpp" line="1459"/>
@@ -3021,12 +3024,12 @@ result error: %1</source>
         <location filename="mainwindow_branchtree.cpp" line="74"/>
         <location filename="mainwindow_stashtree.cpp" line="88"/>
         <source>Error %1 occurred</source>
-        <translation type="unfinished">Fehler %1 ist aufgetreten</translation>
+        <translation>Fehler %1 ist aufgetreten</translation>
     </message>
     <message>
         <location filename="mainwindow.h" line="364"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen</translation>
     </message>
 </context>
 <context>
@@ -3119,178 +3122,178 @@ result error: %1</source>
     <message>
         <location filename="outputparser.ui" line="14"/>
         <source>Output Parser </source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe-Parser </translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="30"/>
         <source>Pattern to be replaced in output view log:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu ersetzendes Muster:</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="43"/>
         <source>Add new search and replace pair</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Such- und Ersetzungspaar hinzufügen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="46"/>
         <location filename="outputparser.ui" line="172"/>
         <source>Add</source>
-        <translation type="unfinished">Hinzufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="62"/>
         <source>Modify selected search and replace pair</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewähltes Such- und Ersetzungspaar ändern</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="65"/>
         <location filename="outputparser.ui" line="191"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändern</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="81"/>
         <source>remove selected search and replace pair</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewähltes Such- und Ersetzungspaar entfernen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="84"/>
         <location filename="outputparser.ui" line="210"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="101"/>
         <source>Search:  </source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen:  </translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="108"/>
         <source>Enter search pattern that shall be replaced</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie das Suchmuster ein, das ersetzt werden soll</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="115"/>
         <source>Replace: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetzen: </translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="122"/>
         <source>Enter text to replace the search pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie den Text ein, der das Suchmuster ersetzen soll</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="131"/>
         <source>Table of patterns for Search and replace within text output views</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabelle der Muster für Suchen und Ersetzen in Textausgabeansichten</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="156"/>
         <source>Pattern to recognize message in output view log:</source>
-        <translation type="unfinished"></translation>
+        <translation>Muster zum Dekodieren der Ausgabemeldung:</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="169"/>
         <source>Add new pattern for message recognition</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Suchmuster für die Nachrichtenerkennung hinzufügen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="188"/>
         <source>Modify selected pattern for message recognition</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewähltes Muster für die Nachrichtenerkennung ändern</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="207"/>
         <source>Remove selected pattern for message recognition</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewähltes Muster für die Nachrichtenerkennung entfernen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="219"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter regular expression for recognition of messages: &lt;span style=&quot; font-style:italic;&quot;&gt;(.*)\(([\d]+)\): error: (.*)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie den regulären Ausdruck zur Erkennung von Meldungen ein: &lt;span style=&quot; font-style:italic;&quot;&gt;(.*)\(([\d]+)\): error: (.*)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="226"/>
         <source>Positions of placeholders:</source>
-        <translation type="unfinished"></translation>
+        <translation>Positionen der Platzhalter:</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="241"/>
         <location filename="outputparser.ui" line="322"/>
         <source>File name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiname: </translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="248"/>
         <location filename="outputparser.ui" line="265"/>
         <location filename="outputparser.ui" line="282"/>
         <source>Select placeholder number within regular expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Platzhalternummer innerhalb des regulären Ausdrucks auswählen</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="258"/>
         <source>Line number</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilennummer</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="275"/>
         <source>Message text</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachrichtentext</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="300"/>
         <source>Message line from output view as example to evaluate the pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldungszeile aus der Logansicht als Beispiel zur Auswertung des Musters:</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="307"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter text from output view, that shall be recognized.&lt;/p&gt;&lt;p&gt;Example: &lt;span style=&quot; font-style:italic;&quot;&gt;/&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;home/user/project/main.cpp(41): error: undeclared identifier &amp;quot;i&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Geben Sie den Text aus der Logansicht ein, der erkannt werden soll.&lt;/p&gt;&lt;p&gt;Beispiel: &lt;span style=&quot; font-style:italic;&quot;&gt;/&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;home/user/project/main.cpp(41): error: undeclared identifier &amp;quot;i&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="329"/>
         <source>Displays the file name of the text file from the output view log</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigt den Dateinamen der Textdatei aus dem Protokoll der Logansicht an</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="349"/>
         <source>Line number: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilennummer: </translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="356"/>
         <source>Displays the line number of the output log message, if available</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigt die Zeilennummer der Ausgage Logmeldung an, falls verfügbar</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="376"/>
         <source>Message text: </source>
-        <translation type="unfinished"></translation>
+        <translation>Meldungstext: </translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="383"/>
         <source>Displays the text of the message from the output view</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigt den Text der Meldung aus der Logansicht an</translation>
     </message>
     <message>
         <location filename="outputparser.ui" line="395"/>
         <source>Table of patterns to recognize messages within output text views</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabelle der Muster zur Erkennung von Meldungen in der Logausgabenansicht</translation>
     </message>
     <message>
         <location filename="outputparser.cpp" line="138"/>
         <source>Search expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchausdruck</translation>
     </message>
     <message>
         <location filename="outputparser.cpp" line="138"/>
         <source>Replace expression</source>
-        <translation type="unfinished">Ersetzt Ausdruck</translation>
+        <translation>Ausdruck ersetzen</translation>
     </message>
     <message>
         <location filename="outputparser.cpp" line="150"/>
         <source>Parse expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyseausdruck</translation>
     </message>
 </context>
 <context>
@@ -3298,7 +3301,7 @@ result error: %1</source>
     <message>
         <location filename="palettecolorselector.ui" line="14"/>
         <source>Settings for a user defined palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierte Palette</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="22"/>
@@ -3309,87 +3312,93 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600;&quot;&gt;Textbrowser&lt;/span&gt;&lt;/h1&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;containing some text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600;&quot;&gt;Textbrowser&lt;/span&gt;&lt;/h1&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;containing some text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="41"/>
         <source>Group Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppenfeld</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="53"/>
         <source>Radio Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio Button</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="66"/>
         <source>Check Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Check Box</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="78"/>
         <source>Combobox element</source>
-        <translation type="unfinished"></translation>
+        <translation>Combobox element</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="86"/>
         <source>Text Label</source>
-        <translation type="unfinished"></translation>
+        <translation>Text Label</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="120"/>
         <source>Palette for Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbpalette für Dark Mode</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="138"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="145"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <location filename="palettecolorselector.ui" line="152"/>
         <source>Save Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="102"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="110"/>
         <source>QPushButton {background-color: %1; color: %2; }</source>
-        <translation type="unfinished"></translation>
+        <translation>QPushButton {background-color: %1; color: %2; }</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="190"/>
         <source>Color of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe von %1</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="208"/>
         <source>QPushButton {background-color: %1; color: %2 }</source>
-        <translation type="unfinished">QPushButton {background-color: %1; color: %2;} {1;?} {2 ?}</translation>
+        <translation>QPushButton {background-color: %1; color: %2 }</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="212"/>
         <source>QPushButton {background-color: %1; }</source>
-        <translation type="unfinished"></translation>
+        <translation>QPushButton {background-color: %1; }</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="219"/>
         <source>QPushButton {background-color: %2; color: %1 }</source>
-        <translation type="unfinished">QPushButton {background-color: %1; color: %2;} {2;?} {1 ?}</translation>
+        <translation>QPushButton {background-color: %2; color: %1 }</translation>
     </message>
     <message>
         <location filename="palettecolorselector.cpp" line="223"/>
         <source>QPushButton {color: %1; }</source>
-        <translation type="unfinished"></translation>
+        <translation>QPushButton {color: %1; }</translation>
     </message>
 </context>
 <context>
@@ -3397,13 +3406,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="qbranchtreewidget.cpp" line="50"/>
         <source>git -C %1 log %2 --max-count=1 --pretty=format:&quot;%H&lt;td&gt;%T&lt;td&gt;%P&lt;td&gt;%B&lt;td&gt;%an&lt;td&gt;%ae&lt;td&gt;%ad&lt;td&gt;%cn&lt;td&gt;%ce&lt;td&gt;%cd&lt;tr&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>git -C %1 log %2 --max-count=1 --pretty=format:&quot;%H&lt;td&gt;%T&lt;td&gt;%P&lt;td&gt;%B&lt;td&gt;%an&lt;td&gt;%ae&lt;td&gt;%ad&lt;td&gt;%cn&lt;td&gt;%ce&lt;td&gt;%cd&lt;tr&gt;&quot;</translation>
     </message>
     <message>
         <location filename="qbranchtreewidget.cpp" line="192"/>
         <source>
 Error %1 occurred</source>
-        <translation type="unfinished">
+        <translation>
 Fehler %1 ist aufgetreten</translation>
     </message>
 </context>
@@ -3458,32 +3467,32 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="git_type.cpp" line="96"/>
         <source>Files</source>
-        <translation type="unfinished">Dateien</translation>
+        <translation>Dateien</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="97"/>
         <source>Find</source>
-        <translation type="unfinished">Suche</translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="98"/>
         <source>Extra</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="99"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="127"/>
         <source>Toolbar Git Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolleiste git Befehle</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="128"/>
         <source>Toolbar Control Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolleiste Steuerbefehle</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="136"/>
@@ -3508,37 +3517,37 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="git_type.cpp" line="140"/>
         <source>Parse Stash List Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Stash-Listen-Text parsen</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="141"/>
         <source>Parse Blame Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Blame-Text parsen</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="142"/>
         <source>Update Root Item Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere Repository</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="143"/>
         <source>Update Repository Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere Repository Status</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="144"/>
         <source>Update Stash Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere Stash Status</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="145"/>
         <source>Update Repository Folder Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere Repository Ordner Status</translation>
     </message>
     <message>
         <location filename="git_type.cpp" line="146"/>
         <source>Insert Repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Repository einfügen</translation>
     </message>
     <message>
         <location filename="helper.cpp" line="218"/>
@@ -3548,12 +3557,12 @@ Fehler %1 ist aufgetreten</translation>
     <message>
         <location filename="helper.cpp" line="224"/>
         <source>cat /proc/%1/status | head -n 1 | awk -F: &apos;{print $NF}&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>cat /proc/%1/status | head -n 1 | awk -F: &apos;{print $NF}&apos;</translation>
     </message>
     <message>
         <location filename="helper.cpp" line="244"/>
         <source>pgrep -P %1</source>
-        <translation type="unfinished"></translation>
+        <translation>pgrep -P %1</translation>
     </message>
     <message>
         <location filename="helper.cpp" line="301"/>
@@ -3572,14 +3581,16 @@ Fehler %1 ist aufgetreten</translation>
         <location filename="helper.cpp" line="646"/>
         <source>
 Error occurred executing command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Fehler beim Ausführen des Befehls: %1</translation>
     </message>
     <message>
         <location filename="helper.cpp" line="633"/>
         <location filename="helper.cpp" line="649"/>
         <source>
 Error number : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Fehlernummer: %1</translation>
     </message>
     <message>
         <location filename="helper.cpp" line="634"/>
@@ -3594,12 +3605,12 @@ Error number : %1</source>
     <message>
         <location filename="main.cpp" line="27"/>
         <source>Log file name for debugging.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name der Protokolldatei für das Debugging.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="32"/>
         <source>Language.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache.</translation>
     </message>
 </context>
 <context>
@@ -3607,17 +3618,17 @@ Error number : %1</source>
     <message>
         <location filename="qsourcetreewidget.cpp" line="320"/>
         <source>.branch -&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation>.branch -&gt; </translation>
     </message>
     <message>
         <location filename="qsourcetreewidget.cpp" line="544"/>
         <source>Insert Ignored Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorierten Ordner einfügen</translation>
     </message>
     <message>
         <location filename="qsourcetreewidget.cpp" line="575"/>
         <source>Insert Ignored File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorierte Datei einfügen</translation>
     </message>
 </context>
 <context>
@@ -3625,12 +3636,12 @@ Error number : %1</source>
     <message>
         <location filename="qstashtreewidget.cpp" line="60"/>
         <source>git -C %1 show %2</source>
-        <translation type="unfinished"></translation>
+        <translation>git -C %1 show %2</translation>
     </message>
     <message>
         <location filename="qstashtreewidget.cpp" line="78"/>
         <source>git -C %1 stash show --name-only %2</source>
-        <translation type="unfinished"></translation>
+        <translation>git -C %1 stash show --name-only %2</translation>
     </message>
 </context>
 <context>
@@ -3638,19 +3649,21 @@ Error number : %1</source>
     <message>
         <location filename="workerthreadconnector.cpp" line="102"/>
         <source>Background commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbefehle</translation>
     </message>
     <message>
         <location filename="workerthreadconnector.cpp" line="105"/>
         <source>: none</source>
-        <translation type="unfinished"></translation>
+        <translation>: keine</translation>
     </message>
     <message>
         <location filename="workerthreadconnector.cpp" line="109"/>
         <source>
 :currently running: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+:gerade laufend : %1
+</translation>
     </message>
 </context>
 <context>
@@ -3658,173 +3671,173 @@ Error number : %1</source>
     <message>
         <location filename="binary_values_view.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="53"/>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="82"/>
         <source>Unsigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Vorzeichen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="114"/>
         <source>Signed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit Vorzeichen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="143"/>
         <source>Hexadecimal</source>
-        <translation type="unfinished"></translation>
+        <translation>Hexadezimal</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="173"/>
         <source>Byte</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="187"/>
         <source>Check to edit this value</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren, um diesen Wert zu bearbeiten</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="197"/>
         <source>Hit Enter to confirm input</source>
-        <translation type="unfinished"></translation>
+        <translation>Drücken Sie die Eingabetaste, um die Eingabe zu bestätigen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="264"/>
         <source>Short</source>
-        <translation type="unfinished"></translation>
+        <translation>Short</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="339"/>
         <source>Long</source>
-        <translation type="unfinished"></translation>
+        <translation>Long</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="414"/>
         <source>LongLong</source>
-        <translation type="unfinished"></translation>
+        <translation>LongLong</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="489"/>
         <source>Char</source>
-        <translation type="unfinished"></translation>
+        <translation>Char</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="533"/>
         <source>Float</source>
-        <translation type="unfinished"></translation>
+        <translation>Float</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="577"/>
         <source>Double</source>
-        <translation type="unfinished"></translation>
+        <translation>Double</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="621"/>
         <source>Binary</source>
-        <translation type="unfinished"></translation>
+        <translation>Binär</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="675"/>
         <source>Endian</source>
-        <translation type="unfinished"></translation>
+        <translation>Endian</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="687"/>
         <source>Select little endian</source>
-        <translation type="unfinished"></translation>
+        <translation>Little-Endian auswählen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="690"/>
         <source>Little</source>
-        <translation type="unfinished"></translation>
+        <translation>Little</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="703"/>
         <source>Select big endian</source>
-        <translation type="unfinished"></translation>
+        <translation>Big-Endian auswählen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="706"/>
         <source>Big</source>
-        <translation type="unfinished"></translation>
+        <translation>Big</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="721"/>
         <source>Check to edit local values</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren, um lokale Werte zu bearbeiten</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="724"/>
         <source>Local Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokale Bearbeitung</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="755"/>
         <source>Binary View Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen für die Binäransicht</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="776"/>
         <source>Choose data type for table view</source>
-        <translation type="unfinished"></translation>
+        <translation>Datentyp für die Tabellenansicht auswählen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="783"/>
         <source>Edit number of columns shown in binary table view</source>
         <oldsource>Edit number of collumns shown in binary table view</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der in der Binärtabellenansicht angezeigten Spalten</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="796"/>
         <source>Edit offset for first byte</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset für das erste Byte</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="818"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read values again from binary content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Werte erneut aus dem Binärinhalt lesen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="821"/>
         <source>Read Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Wert lesen</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="828"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Store edited value to binary content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bearbeiteten Wert im Binärinhalt speichern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="831"/>
         <source>Write Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Wert schreiben</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="842"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens Json file with binary format description of the file content.&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; to see file format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Öffnet eine JSON-Datei mit einer Beschreibung des Binärformats des Dateiinhalts.&lt;br/&gt;Klicken Sie auf die „Was ist das?“-Hilfe &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt;, um das Dateiformat anzuzeigen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="845"/>
         <source>Open Type Format File...</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ-Formatdatei öffnen...</translation>
     </message>
     <message>
         <location filename="binary_values_view.cpp" line="413"/>
         <source>Wrong input value: %1 for type %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Eingabewert: %1 für Typ %2</translation>
     </message>
     <message>
         <location filename="binary_values_view.cpp" line="422"/>
         <source>Open type format file for binary content</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Typ-Formatdatei für Binärinhalt</translation>
     </message>
 </context>
 <context>
@@ -3833,27 +3846,27 @@ Error number : %1</source>
         <location filename="code_browser.cpp" line="256"/>
         <location filename="code_browser.cpp" line="258"/>
         <source>Synchronize vertical Scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Bildlaufleisten synchronisieren</translation>
     </message>
     <message>
         <location filename="code_browser.cpp" line="1043"/>
         <source>commit:	</source>
-        <translation type="unfinished"></translation>
+        <translation>Commit:	</translation>
     </message>
     <message>
         <location filename="code_browser.cpp" line="1043"/>
         <source>author:	</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor:	</translation>
     </message>
     <message>
         <location filename="code_browser.cpp" line="1043"/>
         <source>date:	</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:	</translation>
     </message>
     <message>
         <location filename="code_browser.cpp" line="1043"/>
         <source>time:	</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit:	</translation>
     </message>
 </context>
 <context>
@@ -3861,7 +3874,7 @@ Error number : %1</source>
     <message>
         <location filename="graphics_view.cpp" line="93"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
@@ -3869,22 +3882,22 @@ Error number : %1</source>
     <message>
         <location filename="qbinarytableview.cpp" line="59"/>
         <source>Typed View</source>
-        <translation type="unfinished"></translation>
+        <translation>Typisierte Ansicht</translation>
     </message>
     <message>
         <location filename="qbinarytableview.cpp" line="59"/>
         <source>Character View</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeichenansicht</translation>
     </message>
     <message>
         <location filename="qbinarytableview.cpp" line="60"/>
         <source>Content / Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalte / Werte</translation>
     </message>
     <message>
         <location filename="qbinarytableview.cpp" line="60"/>
         <source>Data Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Datentyp</translation>
     </message>
 </context>
 </TS>

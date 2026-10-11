@@ -14,8 +14,8 @@ namespace cmdline
 int main(int argc, char *argv[])
 {
     QFileInfo file_info(argv[0]);
-    std::string program_title = file_info.baseName().toStdString();
-    Logger fLogger(program_title.c_str());
+    QString program_title = file_info.absoluteFilePath();
+    Logger fLogger(program_title.toStdString().c_str());
 
     QApplication app(argc, argv);
     QApplication::setApplicationName("GitView");
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     FILE* logfile = 0;
 
     QTranslator translator;
-    bool loaded = translator.load(QLocale(), QLatin1String(program_title.c_str()), QLatin1String("_"), QLatin1String(":/i18n"));
+    bool loaded = translator.load(QLocale(), program_title, QLatin1String("_"), QLatin1String(":/i18n"));
     if (cmd_line.value(cmdline::Language).size())
     {
         loaded = translator.load(cmd_line.value(cmdline::Language));
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
     if (cmd_line.value(cmdline::Log2file).toInt())
     {
-        std::string filename = program_title +  ".log";
+        std::string filename = program_title.toStdString() +  ".log";
         logfile = fopen(filename.c_str(), "a+t");
         auto log_function = [logfile](const std::string&text){ fprintf(logfile, "%s\n", text.c_str()); };
 
