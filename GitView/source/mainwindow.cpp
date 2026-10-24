@@ -3383,6 +3383,7 @@ void MainWindow::combo_triggered()
         else if (ui->treeHistory->hasFocus())  index = FindView::History;
         else if (ui->treeBranches->hasFocus()) index = FindView::Branch;
         else if (ui->treeStash->hasFocus())    index = FindView::Stash;
+        else if (ui->treeFindText->hasFocus()) index = FindView::FindTextInFilesView;
         else if (ui->treeSource->hasFocus())   index = FindView::Source;
 
         QString find_text;

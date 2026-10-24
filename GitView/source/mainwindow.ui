@@ -529,6 +529,12 @@ Shows git history of files or folders
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectItems</enum>
               </property>
+              <attribute name="headerHighlightSections">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="headerShowSortIndicator" stdset="0">
+               <bool>true</bool>
+              </attribute>
               <column>
                <property name="text">
                 <string>History</string>
@@ -585,6 +591,12 @@ Shows git stashed of files or folders
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectItems</enum>
               </property>
+              <attribute name="headerHighlightSections">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="headerShowSortIndicator" stdset="0">
+               <bool>true</bool>
+              </attribute>
               <column>
                <property name="text">
                 <string>Stash</string>
@@ -624,6 +636,9 @@ Shows git branches
               <property name="sortingEnabled">
                <bool>true</bool>
               </property>
+              <attribute name="headerHighlightSections">
+               <bool>true</bool>
+              </attribute>
               <column>
                <property name="text">
                 <string>Branch</string>
@@ -658,6 +673,15 @@ Bookmarks are shown in the same way
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectItems</enum>
               </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <attribute name="headerHighlightSections">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="headerShowSortIndicator" stdset="0">
+               <bool>true</bool>
+              </attribute>
               <column>
                <property name="text">
                 <string>File</string>
