@@ -110,6 +110,31 @@ private slots:
 private:
     void call_metaDataChanged(meta what);
 
+    struct Names
+    {
+        Names();
+        QString radio;
+        QString tv;
+        QString open_media_list;
+        QString open_folder;
+        QString media_list;
+        QString duration;
+        QString position;
+        QString store_kodi_fav;
+        QString store_downloaded_kodi_fav;
+        QString store_downloaded_kodi_raw;
+        QString upload_kodi_fav ;
+        QString update_kodi_fav;
+        QString kodi_favorites;
+        QString kodi_raw_files;
+        QString media_player_cmd;
+        QString upload_favorite_cmd;
+        QString download_favorite_cmd;
+        QString download_kodi_raw_file;
+        QStringList media_player_cmd_line;
+        QString version;
+    };
+
     Ui::MainWindow *    ui;
     QErrorMessage       mErrorMsgDlg;
     QVideoWidget        mVideo;
@@ -138,6 +163,7 @@ private:
     int                 mChecked {0};
     bool                m_media_folder_mode {false};
     int                 mTimerID {0};
+    Names               m_txt;
 };
 
 #endif // MAINWINDOW_H

@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="107"/>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>Logo</source>
         <oldsource>Shows logo</oldsource>
         <translation>Zeigt Logo</translation>
@@ -235,7 +235,7 @@
     <message>
         <location filename="mainwindow.ui" line="586"/>
         <source>Open folder with media files</source>
-        <translation>Öfnne Ordner mit Media Dateien</translation>
+        <translation>Öffne Ordner mit Media Dateien</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="597"/>
@@ -245,7 +245,7 @@
     <message>
         <location filename="mainwindow.ui" line="608"/>
         <source>Shuffle </source>
-        <translation>Zufall </translation>
+        <translation>Zufallswiedergabe </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="616"/>
@@ -388,185 +388,185 @@
         <translation>Zeige System Tray Icon und Informationen zu Titel im Tooltip an</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>URL</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>Friendly Name</source>
         <translation>Ausführlicher Name</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>Medium</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="500"/>
+        <location filename="mainwindow.cpp" line="495"/>
         <source>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Page Title&lt;/title&gt;&lt;/head&gt;&lt;body style=&apos;background-color:white;&apos; &gt;&lt;img src=&apos;%1&apos; alt=&apos;%2&apos; width=&apos;90%&apos; height=&apos;90%&apos;&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Seitenüberschrift&lt;/title&gt;&lt;/head&gt;&lt;body style=&apos;background-color:white;&apos; &gt;&lt;img src=&apos;%1&apos; alt=&apos;%2&apos; width=&apos;90%&apos; height=&apos;90%&apos;&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="562"/>
+        <location filename="mainwindow.cpp" line="557"/>
         <source>Stopped</source>
         <translation>Gestoppt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="570"/>
+        <location filename="mainwindow.cpp" line="565"/>
         <source>Paused</source>
         <translation>Pausiert</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="578"/>
+        <location filename="mainwindow.cpp" line="573"/>
         <source>Playing</source>
         <translation>Spiele</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="645"/>
+        <location filename="mainwindow.cpp" line="640"/>
         <source>Currently selected favorites %1</source>
         <translation>Ausgewählte Favoriten %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="743"/>
+        <location filename="mainwindow.cpp" line="738"/>
         <source>&lt;favourite name=&quot;%1&quot; thumb=&quot;%2&quot;&gt;PlayMedia(&amp;quot;%3&amp;quot;)&lt;/favourite&gt;
 </source>
         <translation>&lt;favourite name=&quot;%1&quot; thumb=&quot;%2&quot;&gt;Spiele Medium(&amp;quot;%3&amp;quot;)&lt;/favourite&gt;
 </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="944"/>
+        <location filename="mainwindow.cpp" line="939"/>
         <source>&lt;h3&gt;About Kodi media list viewer and editor&lt;/h3&gt;&lt;br&gt;&lt;br&gt;Store tv channels from m3u files as favorites within raspberry kodi&lt;br&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND&lt;br&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; &gt;&lt;tr&gt;&lt;td&gt;Based on Qt&lt;/td&gt;&lt;td&gt;%1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Built on&lt;/td&gt;&lt;td&gt;%2, %3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Author&lt;/td&gt;&lt;td&gt;Rolf Kary Ehlers&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Version&lt;/td&gt;&lt;td&gt;%4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;License&lt;/td&gt;&lt;td&gt;GNU GPL Version 2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Email&lt;/td&gt;&lt;td&gt;rolf-kary-ehlers@t-online.de&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Command Line </source>
-        <translation>&lt;h3&gt;Über Kodi Medienlistenbetrachter und Editor&lt;/h3&gt;&lt;br&gt;&lt;br&gt;Speichere TV-Kanal vn m3u Dateien als Favoriten im Raspi Kodi&lt;br&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND&lt;br&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; &gt;&lt;tr&gt;&lt;td&gt;Based on Qt&lt;/td&gt;&lt;td&gt;%1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Gebaut am&lt;/td&gt;&lt;td&gt;%2, %3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Author&lt;/td&gt;&lt;td&gt;Rolf Kary Ehlers&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Version&lt;/td&gt;&lt;td&gt;%4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Lizenz&lt;/td&gt;&lt;td&gt;GNU GPL Version 2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Email&lt;/td&gt;&lt;td&gt;rolf-kary-ehlers@t-online.de&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Kommandozeile </translation>
+        <translation>&lt;h3&gt;Über Kodi Medienlistenbetrachter und Editor&lt;/h3&gt;&lt;br&gt;&lt;br&gt;Speichere TV-Kanal von m3u Dateien als Favoriten im Raspi Kodi&lt;br&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND&lt;br&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; &gt;&lt;tr&gt;&lt;td&gt;Basiert auf Qt&lt;/td&gt;&lt;td&gt;%1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Gebaut am&lt;/td&gt;&lt;td&gt;%2, %3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Autor&lt;/td&gt;&lt;td&gt;Rolf Kary Ehlers&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Version&lt;/td&gt;&lt;td&gt;%4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Lizenz&lt;/td&gt;&lt;td&gt;GNU GPL Version 2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Email&lt;/td&gt;&lt;td&gt;rolf-kary-ehlers@t-online.de&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Kommandozeile </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="970"/>
+        <location filename="mainwindow.cpp" line="965"/>
         <source>&lt;h3&gt;Information about selected item&lt;/h3&gt;&lt;h4&gt;Stream Information:&lt;/h4&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; style=&quot;white-space:nowrap;width:100%&quot; &gt;&lt;tr white-space: nowrap;&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;%1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Web&lt;/td&gt;&lt;td&gt;%2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Pretty name&lt;/td&gt;&lt;td&gt;%3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Media URL&lt;/td&gt;&lt;td&gt;%4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Thumb&lt;/td&gt;&lt;td&gt;%5&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
         <translation>&lt;h3&gt;Information über Auswahl&lt;/h3&gt;&lt;h4&gt;Stream Information:&lt;/h4&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; style=&quot;white-space:nowrap;width:100%&quot; &gt;&lt;tr white-space: nowrap;&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;%1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Web&lt;/td&gt;&lt;td&gt;%2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Ausführlicher Name&lt;/td&gt;&lt;td&gt;%3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Medien URL&lt;/td&gt;&lt;td&gt;%4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Thumb&lt;/td&gt;&lt;td&gt;%5&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="984"/>
+        <location filename="mainwindow.cpp" line="979"/>
         <source>&lt;h4&gt;Meta Information:&lt;/h4&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; style=&quot;white-space:nowrap;width:100%&quot;&gt;</source>
         <translation>&lt;h4&gt;Meta Information:&lt;/h4&gt;&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;4&quot; style=&quot;white-space:nowrap;width:100%&quot;&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1023"/>
+        <location filename="mainwindow.cpp" line="1018"/>
         <source>typeid: %1, %2</source>
         <translation>typeid: %1, %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1101"/>
+        <location filename="mainwindow.cpp" line="1096"/>
         <source>No media Player command defined, define under &quot;Options/Media Player...&quot;</source>
         <translation>Kein Media Player Kommando definiert, Erstelle unter &quot;Bearbeiten/Media Player...&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1108"/>
+        <location filename="mainwindow.cpp" line="1103"/>
         <source>Select a list entry first</source>
         <translation>Auswahl in der Liste wählen und dann Starten oder doppelklicken</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1148"/>
+        <location filename="mainwindow.cpp" line="1143"/>
         <source>Stored file from download to %1, reloaded</source>
         <translation>Datei vom Download nach %1 gespeichert, Liste aktualisiert</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1231"/>
+        <location filename="mainwindow.cpp" line="1226"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1240"/>
+        <location filename="mainwindow.cpp" line="1235"/>
         <source>%1:%2</source>
         <translation>%1:%2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1277"/>
+        <location filename="mainwindow.cpp" line="1272"/>
         <source>Error: %1 status: %2</source>
         <translation>Fehler: %1 Status: %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1286"/>
+        <location filename="mainwindow.cpp" line="1281"/>
         <source>Download failed. Check internet connection</source>
         <translation>Herunterladen fehlgeschlagen. Prüfe Internetverbindung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1294"/>
+        <location filename="mainwindow.cpp" line="1289"/>
         <source>Media error number: %1: %2</source>
         <translation>Mediafehlernummer: %1, %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1396"/>
+        <location filename="mainwindow.cpp" line="1391"/>
         <source>upload favorites: %1, %2</source>
         <translation>Favoriten hochladen: %1, %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1401"/>
+        <location filename="mainwindow.cpp" line="1396"/>
         <source>Define upload favorite command</source>
         <translation>Erstelle Kommando für Hochladen der Favoriten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1415"/>
+        <location filename="mainwindow.cpp" line="1410"/>
         <source>download favorites: %1, %2</source>
         <translation>Favoriten herunterladen: %1, %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1420"/>
+        <location filename="mainwindow.cpp" line="1415"/>
         <source>Define download favorite command</source>
         <translation>Erstelle Kommando für Herunterladen der Favoriten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1445"/>
+        <location filename="mainwindow.cpp" line="1440"/>
         <source>Define download path for kodi raw file</source>
         <translation>Definire Download Pfad für Kodi Raw Datei</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1533"/>
+        <location filename="mainwindow.cpp" line="1528"/>
         <source>Show %1</source>
         <translation>Zeigt %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1535"/>
+        <location filename="mainwindow.cpp" line="1530"/>
         <source>Hide %1</source>
         <translation>Verstecke %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1538"/>
+        <location filename="mainwindow.cpp" line="1533"/>
         <source>Next source</source>
         <translation>Nächster</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1542"/>
-        <location filename="mainwindow.cpp" line="1549"/>
+        <location filename="mainwindow.cpp" line="1537"/>
+        <location filename="mainwindow.cpp" line="1544"/>
         <source>Selected</source>
         <translation>Ausgewählt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1540"/>
         <source>Previous source</source>
         <translation>Vorhergehender</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1649"/>
+        <location filename="mainwindow.cpp" line="1644"/>
         <source>&lt;b&gt;Source:&lt;/b&gt;&lt;br&gt;%1&lt;br&gt;&lt;b&gt;%2:&lt;/b&gt;&lt;br&gt;%3</source>
         <translation>&lt;b&gt;Quelle:&lt;/b&gt;&lt;br&gt;%1&lt;br&gt;&lt;b&gt;%2:&lt;/b&gt;&lt;br&gt;%3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1653"/>
+        <location filename="mainwindow.cpp" line="1648"/>
         <source>Source:
 %1
 %2:
@@ -577,7 +577,7 @@
 %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1656"/>
+        <location filename="mainwindow.cpp" line="1651"/>
         <source>Source: %1
 %2: %3</source>
         <translation>Quelle: %1
@@ -587,147 +587,147 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="mainwindow.cpp" line="82"/>
+        <location filename="mainwindow.cpp" line="1838"/>
         <source>Radio</source>
         <translation>Radio</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="83"/>
+        <location filename="mainwindow.cpp" line="1839"/>
         <source>TV</source>
         <translation>TV</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="84"/>
+        <location filename="mainwindow.cpp" line="1840"/>
         <source>Open Kodi raw media List</source>
         <translation>Offnet Kodi Raw Media Liste</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="85"/>
+        <location filename="mainwindow.cpp" line="1841"/>
         <source>Open folder with media files</source>
         <translation>Offnet Ordner mit Media Dateien</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="86"/>
+        <location filename="mainwindow.cpp" line="1842"/>
         <source>Media List (*.m3u);;Text File (*.txt);;All Files (*.*)</source>
         <translation>Media Liste (*.m3u);;Text Datei (*.txt);;Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="93"/>
         <source>Duration (m:s)</source>
         <translation>Länge (m:s)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="99"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>Position (m:s)</source>
         <translation>Position (m:s)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="101"/>
+        <location filename="mainwindow.cpp" line="96"/>
         <source>Store media list as favorites for Raspi</source>
         <translation>Medienliste als Favoriten für Raspi speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="102"/>
+        <location filename="mainwindow.cpp" line="97"/>
         <source>Store downloaded favorites from Raspi</source>
         <translation>Speichert heruntergeladene Favoriten vom Raspi</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="103"/>
+        <location filename="mainwindow.cpp" line="98"/>
         <source>Store downloaded kodi raw file</source>
         <translation>Speichert heruntergeladene Kodi Raw Dateie</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="104"/>
+        <location filename="mainwindow.cpp" line="99"/>
         <source>Upload favorites to Raspi</source>
         <translation>Favoriten auf Raspi hochladen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="105"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Load favorites for update media list check states</source>
         <translation>Lade Kodi Favoriten Liste, um die Auswahl der Medienliste zu aktualisieren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="106"/>
+        <location filename="mainwindow.cpp" line="101"/>
         <source>Favorites (*.xml);;All Files (*.*)</source>
         <translation>Favoriten (*.xml);;Alle Datein (*.*</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="107"/>
+        <location filename="mainwindow.cpp" line="102"/>
         <source>Kodi Raw File (*.m3u);;All Files (*.*)</source>
         <translation>Kodi Raw Datei (*.m3u);;Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="109"/>
+        <location filename="mainwindow.cpp" line="104"/>
         <source>&lt;h3&gt;Edit media player command&lt;/h3&gt;&lt;pre&gt;path_to_media_player %1&lt;/pre&gt;&lt;p&gt;%1 Placeholder for URL&lt;p&gt;</source>
         <translation>&lt;h3&gt;Ändere Media Player Kommando&lt;/h3&gt;&lt;pre&gt;Pfad_zu_MediaPlayer %1&lt;/pre&gt;&lt;p&gt;%1 Platzhalter für URL&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="114"/>
+        <location filename="mainwindow.cpp" line="109"/>
         <source>&lt;h3&gt;Edit upload favorite command&lt;/h3&gt;&lt;pre&gt;scp %1 user@address:/path/favorites.xml&lt;/pre&gt;&lt;p&gt;%1 Placeholder for favorites file name&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Ändere Kommando zum Hochladen der Favoriten&lt;/h3&gt;&lt;pre&gt;scp %1 user@address:/path/favorites.xml&lt;/pre&gt;&lt;p&gt;%1 Platzhalter für Dateinamen der Favoritenliste&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="114"/>
         <source>&lt;h3&gt;Edit download favorite command&lt;/h3&gt;&lt;pre&gt;scp user@address:/path/favorites.xml %1&lt;/pre&gt;&lt;p&gt;%1 Placeholder for favorites file name&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Ändere Kommando zum herunterladen der Favoriten&lt;/h3&gt;&lt;pre&gt;scp %1 user@address:/path/favorites.xml&lt;/pre&gt;&lt;p&gt;%1 Platzhalter für Dateinamen der Favoritenliste&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="124"/>
+        <location filename="mainwindow.cpp" line="119"/>
         <source>&lt;h3&gt;Edit download file path for kodi raw files (m3u)&lt;/h3&gt;Select kodi_xxx.m3u file, click on button Raw and copy the internet address&lt;/p&gt;&lt;pre&gt;path to kodi raw file internet address&lt;/pre&gt;</source>
         <translation>&lt;h3&gt;Ändere Kommando zum herunterladen der Kodi Raw Datei&lt;/h3&gt;Wähle kodi_xxx.m3u file, Klick auf den Button Raw und kopiere die Internetaddresse&lt;p&gt;pfad-zu-kodir-raw-datei-internet-adresse&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="132"/>
+        <location filename="mainwindow.cpp" line="127"/>
         <source>Arguments:</source>
         <translation>Parameter:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="133"/>
+        <location filename="mainwindow.cpp" line="128"/>
         <source>-f &lt;file&gt;, --file=&lt;file&gt;</source>
         <translation>-f &lt;file&gt;, --file=&lt;file&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="134"/>
+        <location filename="mainwindow.cpp" line="129"/>
         <source>   open kodi m3u media file at start</source>
         <translation>   Öffnet Kodi m3u Mediadatei bei Programstart</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="135"/>
+        <location filename="mainwindow.cpp" line="130"/>
         <source>--font_size &lt;font_size&gt;</source>
         <translation>--font_size &lt;font_size&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="136"/>
+        <location filename="mainwindow.cpp" line="131"/>
         <source>--font_name &lt;font_name&gt;</source>
         <translation>--font_name &lt;font_name&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="137"/>
+        <location filename="mainwindow.cpp" line="132"/>
         <source>   font size activates setting a font for application</source>
         <translation>   font size activates setting a font for application</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="138"/>
+        <location filename="mainwindow.cpp" line="133"/>
         <source>   font name is optional, default is &quot;Ubuntu Regular&quot;</source>
         <translation>   font name is optional, default is &quot;Ubuntu Regular&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="139"/>
+        <location filename="mainwindow.cpp" line="134"/>
         <source>--help show this help</source>
         <translation>--help Zeige diese Hilfe an</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="142"/>
+        <location filename="mainwindow.cpp" line="137"/>
         <source>1.0.0.1</source>
         <translation>1.0.0.1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1825"/>
+        <location filename="mainwindow.cpp" line="1820"/>
         <source>Error occurred executing command: </source>
         <translation>Fehler bei Ausführung des Kommandos: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1828"/>
+        <location filename="mainwindow.cpp" line="1823"/>
         <source>Error number : </source>
         <translation>Fehlernummer: </translation>
     </message>

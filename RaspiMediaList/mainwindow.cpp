@@ -79,11 +79,6 @@ namespace txt
 {
 constexpr char sGroupLogging[] = "Logging";
 
-const QString radio            = QObject::tr("Radio");
-const QString tv               = QObject::tr("TV");
-const QString open_media_list  = QObject::tr("Open Kodi raw media List");
-const QString open_folder      = QObject::tr("Open folder with media files");
-const QString media_list       = QObject::tr("Media List (*.m3u);;Text File (*.txt);;All Files (*.*)");
 const QStringList media_picture_endings = {"*.jpg", "*.png"};
 const QStringList media_audio_endings   = {
     "*.mp3", "*.wav", "*.wma", "*.m4a", "*.m4b", "*.m4p", "*.mpg", "*.flac" "*.ogg", "*.oga", "*.mogg",
@@ -95,51 +90,7 @@ const QString prefix_file      = "file://";
 #else
 const QString prefix_file      = "";
 #endif
-const QString duration = QObject::tr("Duration (m:s)");
-const QString position = QObject::tr("Position (m:s)");
 
-const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
-const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
-const QString store_downloaded_kodi_raw = QObject::tr("Store downloaded kodi raw file");
-const QString upload_kodi_fav  = QObject::tr("Upload favorites to Raspi");
-const QString update_kodi_fav  = QObject::tr("Load favorites for update media list check states");
-const QString kodi_favorites   = QObject::tr("Favorites (*.xml);;All Files (*.*)");
-const QString kodi_raw_files   = QObject::tr("Kodi Raw File (*.m3u);;All Files (*.*)");
-
-const QString media_player_cmd = QObject::tr(
-            "<h3>Edit media player command</h3>"
-            "<pre>path_to_media_player %1</pre>"
-            "<p>%1 Placeholder for URL<p>");
-
-const QString upload_favorite_cmd = QObject::tr(
-            "<h3>Edit upload favorite command</h3>"
-            "<pre>scp %1 user@address:/path/favorites.xml</pre>"
-            "<p>%1 Placeholder for favorites file name</p>");
-
-const QString download_favorite_cmd = QObject::tr(
-            "<h3>Edit download favorite command</h3>"
-            "<pre>scp user@address:/path/favorites.xml %1</pre>"
-            "<p>%1 Placeholder for favorites file name</p>");
-
-const QString download_kodi_raw_file = QObject::tr(
-            "<h3>Edit download file path for kodi raw files (m3u)</h3>"
-            "Select kodi_xxx.m3u file, click on button Raw and copy the internet address</p>"
-            "<pre>path to kodi raw file internet address</pre>"
-            );
-
-const QStringList media_player_cmd_line =
-{
-    QObject::tr("Arguments:"),
-    QObject::tr("-f <file>, --file=<file>"),
-    QObject::tr("   open kodi m3u media file at start"),
-    QObject::tr("--font_size <font_size>"),
-    QObject::tr("--font_name <font_name>"),
-    QObject::tr("   font size activates setting a font for application"),
-    QObject::tr("   font name is optional, default is \"Ubuntu Regular\""),
-    QObject::tr("--help show this help")
-};
-
-const QString version          = QObject::tr("1.0.0.1");
 }
 
 enum eTable
@@ -208,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
             pos = arguments[n].indexOf(arg_help);
             if (pos != -1)
             {
-                for (const auto& line : txt::media_player_cmd_line)
+                for (const auto& line : m_txt.media_player_cmd_line)
                 {
                     std::cout << line.toStdString() << std::endl;
                 }
@@ -534,7 +485,7 @@ void MainWindow::on_pushButtonStart_clicked()
 #else
             mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
 #endif
-            if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
+            if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == m_txt.tv)
             {
                 mVideo.show();
             }
@@ -724,7 +675,7 @@ void MainWindow::on_lineEditSelection_textChanged(const QString &)
 
 void MainWindow::menu_file_save_as_favorites()
 {
-    QString filename = QFileDialog::getSaveFileName(this, txt::store_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+    QString filename = QFileDialog::getSaveFileName(this, m_txt.store_kodi_fav, mFavoritesOpenPath, m_txt.kodi_favorites);
     if (filename.size())
     {
         QFileInfo info(filename);
@@ -758,7 +709,7 @@ void MainWindow::menu_file_save_as_favorites()
 
 void MainWindow::menu_file_update_favorites()
 {
-    QString filename = QFileDialog::getOpenFileName(this, txt::update_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+    QString filename = QFileDialog::getOpenFileName(this, m_txt.update_kodi_fav, mFavoritesOpenPath, m_txt.kodi_favorites);
     if (filename.size())
     {
         QFileInfo info(filename);
@@ -837,7 +788,7 @@ void MainWindow::menu_file_update_favorites()
 
 void MainWindow::menu_file_open()
 {
-    QString filename = QFileDialog::getOpenFileName(this, txt::open_media_list, mFileOpenPath, txt::media_list);
+    QString filename = QFileDialog::getOpenFileName(this, m_txt.open_media_list, mFileOpenPath, m_txt.media_list);
     if (filename.size())
     {
         QFileInfo info(filename);
@@ -848,7 +799,7 @@ void MainWindow::menu_file_open()
 
 void MainWindow::menu_folder_open()
 {
-    QString foldername = QFileDialog::getExistingDirectory(this, txt::open_folder, mFileOpenFolderPath, QFileDialog::ShowDirsOnly);
+    QString foldername = QFileDialog::getExistingDirectory(this, m_txt.open_folder, mFileOpenFolderPath, QFileDialog::ShowDirsOnly);
     if (foldername.size())
     {
         disconnect(&mPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
@@ -954,8 +905,8 @@ void MainWindow::menu_help_about()
              "</table>"
              "<br>"
             "<br>Command Line "
-            ).arg(qVersion(), __DATE__, __TIME__, txt::version);
-    for (const auto& line : txt::media_player_cmd_line)
+            ).arg(qVersion(), __DATE__, __TIME__, m_txt.version);
+    for (const auto& line : m_txt.media_player_cmd_line)
     {
         message += line;
         message += "<br>";
@@ -1113,7 +1064,7 @@ void MainWindow::menu_edit_open_media_player()
 
 void MainWindow::menu_option_media_player_command()
 {
-    const QString text = QInputDialog::getText(this, windowTitle(), txt::media_player_cmd, QLineEdit::Normal, mMediaPlayerCommand);
+    const QString text = QInputDialog::getText(this, windowTitle(), m_txt.media_player_cmd, QLineEdit::Normal, mMediaPlayerCommand);
     if (text.size())
     {
         mMediaPlayerCommand = text;
@@ -1135,7 +1086,7 @@ void  MainWindow::onDownloadFinished()
             }
             else
             {
-                filename = QFileDialog::getSaveFileName(this, txt::store_downloaded_kodi_raw, mFavoritesOpenPath, txt::kodi_raw_files);
+                filename = QFileDialog::getSaveFileName(this, m_txt.store_downloaded_kodi_raw, mFavoritesOpenPath, m_txt.kodi_raw_files);
             }
             if (filename.size())
             {
@@ -1226,7 +1177,7 @@ void MainWindow::generate_media_file_tray_message()
             message += status + "\n";
             ui->statusBar->showMessage(status);
         }
-        message += txt::duration + ": " + mCurrentMetainfo[txt::duration].toString();
+        message += m_txt.duration + ": " + mCurrentMetainfo[m_txt.duration].toString();
         m_tray_message->setToolTip(message);
         m_tray_message->showMessage(tr("Information"), message);
     }
@@ -1239,7 +1190,7 @@ void MainWindow::update_duration_info(bool position)
     seconds = seconds - minutes * 60;
     QString time = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
     time.replace(" ", "0");
-    mCurrentMetainfo[position ? txt::position : txt::duration] = time;
+    mCurrentMetainfo[position ? m_txt.position : m_txt.duration] = time;
 }
 
 void MainWindow::onReplyFinished()
@@ -1360,7 +1311,7 @@ void MainWindow::open_file(const QString& filename)
                 }
                 // insert the checkbox and the media type
                 mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
-                mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), line.indexOf(is_radio) != -1 ? txt::radio : txt::tv);
+                mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), line.indexOf(is_radio) != -1 ? m_txt.radio : m_txt.tv);
                 read_url = true;
             }
         };
@@ -1387,7 +1338,7 @@ void MainWindow::menu_file_upload_favorites()
 {
     if (mUploadFavoriteCommand.size())
     {
-        QString filename = QFileDialog::getOpenFileName(this, txt::upload_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+        QString filename = QFileDialog::getOpenFileName(this, m_txt.upload_kodi_fav, mFavoritesOpenPath, m_txt.kodi_favorites);
         if (filename.size())
         {
             QString command_str = tr(mUploadFavoriteCommand.toStdString().c_str()).arg(filename);
@@ -1406,7 +1357,7 @@ void MainWindow::menu_file_download_favorites()
 {
     if (mDownloadFavoriteCommand.size())
     {
-        QString filename = QFileDialog::getSaveFileName(this, txt::store_downloaded_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+        QString filename = QFileDialog::getSaveFileName(this, m_txt.store_downloaded_kodi_fav, mFavoritesOpenPath, m_txt.kodi_favorites);
         if (filename.size())
         {
             QString command_str = tr(mDownloadFavoriteCommand.toStdString().c_str()).arg(filename);
@@ -1423,7 +1374,7 @@ void MainWindow::menu_file_download_favorites()
 
 void MainWindow::menu_option_edit_upload_command()
 {
-    QString text = QInputDialog::getText(this, windowTitle(), txt::upload_favorite_cmd, QLineEdit::Normal, mUploadFavoriteCommand);
+    QString text = QInputDialog::getText(this, windowTitle(), m_txt.upload_favorite_cmd, QLineEdit::Normal, mUploadFavoriteCommand);
     if (text.size())
     {
         mUploadFavoriteCommand = text;
@@ -1448,7 +1399,7 @@ void MainWindow::menu_file_download_kodi_raw_file()
 
 void MainWindow::menu_option_edit_download_command()
 {
-    QString text = QInputDialog::getText(this, windowTitle(), txt::download_favorite_cmd, QLineEdit::Normal, mDownloadFavoriteCommand);
+    QString text = QInputDialog::getText(this, windowTitle(), m_txt.download_favorite_cmd, QLineEdit::Normal, mDownloadFavoriteCommand);
     if (text.size())
     {
         mDownloadFavoriteCommand = text;
@@ -1460,7 +1411,7 @@ void MainWindow::menu_option_edit_download_m3u_file()
 {
     QInputDialog dlg(this);
     dlg.setInputMode(QInputDialog::TextInput);
-    dlg.setLabelText(txt::download_kodi_raw_file);
+    dlg.setLabelText(m_txt.download_kodi_raw_file);
     dlg.setTextValue(mDownloadKodiRawFilePath);
     dlg.setWindowTitle(windowTitle());
     if (dlg.exec() == QDialog::Accepted)
@@ -1711,7 +1662,7 @@ void MainWindow::timerEvent(QTimerEvent *evt)
     update_duration_info(false);
     update_duration_info(true);
 
-    m_play_name->setText(mCurrentMetainfo[txt::position].toString() + " of " + mCurrentMetainfo[txt::duration].toString());
+    m_play_name->setText(mCurrentMetainfo[m_txt.position].toString() + " of " + mCurrentMetainfo[m_txt.duration].toString());
 }
 
 QString getSettingsName(const QString& aItemName)
@@ -1835,5 +1786,57 @@ int execute(const QString& command, QString& aResultText)
     return fResult;
 }
 
+MainWindow::Names::Names()
+{
+    radio            = QObject::tr("Radio");
+    tv               = QObject::tr("TV");
+    open_media_list  = QObject::tr("Open Kodi raw media List");
+    open_folder      = QObject::tr("Open folder with media files");
+    media_list       = QObject::tr("Media List (*.m3u);;Text File (*.txt);;All Files (*.*)");
 
+    duration = QObject::tr("Duration (m:s)");
+    position = QObject::tr("Position (m:s)");
 
+    store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
+    store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
+    store_downloaded_kodi_raw = QObject::tr("Store downloaded kodi raw file");
+    upload_kodi_fav  = QObject::tr("Upload favorites to Raspi");
+    update_kodi_fav  = QObject::tr("Load favorites for update media list check states");
+    kodi_favorites   = QObject::tr("Favorites (*.xml);;All Files (*.*)");
+    kodi_raw_files   = QObject::tr("Kodi Raw File (*.m3u);;All Files (*.*)");
+
+    media_player_cmd = QObject::tr(
+        "<h3>Edit media player command</h3>"
+        "<pre>path_to_media_player %1</pre>"
+        "<p>%1 Placeholder for URL<p>");
+
+    upload_favorite_cmd = QObject::tr(
+        "<h3>Edit upload favorite command</h3>"
+        "<pre>scp %1 user@address:/path/favorites.xml</pre>"
+        "<p>%1 Placeholder for favorites file name</p>");
+
+    download_favorite_cmd = QObject::tr(
+        "<h3>Edit download favorite command</h3>"
+        "<pre>scp user@address:/path/favorites.xml %1</pre>"
+        "<p>%1 Placeholder for favorites file name</p>");
+
+    download_kodi_raw_file = QObject::tr(
+        "<h3>Edit download file path for kodi raw files (m3u)</h3>"
+        "Select kodi_xxx.m3u file, click on button Raw and copy the internet address</p>"
+        "<pre>path to kodi raw file internet address</pre>"
+        );
+
+    const QStringList media_player_cmd_line =
+        {
+            QObject::tr("Arguments:"),
+            QObject::tr("-f <file>, --file=<file>"),
+            QObject::tr("   open kodi m3u media file at start"),
+            QObject::tr("--font_size <font_size>"),
+            QObject::tr("--font_name <font_name>"),
+            QObject::tr("   font size activates setting a font for application"),
+            QObject::tr("   font name is optional, default is \"Ubuntu Regular\""),
+            QObject::tr("--help show this help")
+        };
+
+    version          = QObject::tr("1.0.0.1");
+}
