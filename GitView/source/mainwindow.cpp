@@ -1038,17 +1038,22 @@ void MainWindow::createDockWindows()
     /// git files view as central widget
     ui->verticalLayoutForTreeView->removeWidget(ui->treeSource);
     setCentralWidget(ui->treeSource);
-    ui->treeSource->setObjectName("sourceview");
+
+    QDockWidget* central_tree = new QDockWidget(tr("Sourceview"), this);
+    central_tree->setAllowedAreas(Qt::AllDockWidgetAreas);
+    central_tree->setObjectName("sourceview");
+    central_tree->setWidget(ui->treeSource);
+    addDockWidget(Qt::LeftDockWidgetArea, central_tree, Qt::Horizontal);
 
     setTabShape(QTabWidget::Rounded); // or QTabWidget::Triangular
 //    setDocumentMode(false);
     setAnimated(true);
     setDockNestingEnabled(true);
-//    setDockOptions(AllowTabbedDocks);
+    setDockOptions(AnimatedDocks|AllowTabbedDocks);
 //    setDockOptions(ForceTabbedDocks); // dock widgets cannot be placed next to each other in a dock area
 //    setDockOptions(VerticalTabs);
 //    setDockOptions(GroupedDragging);
-    QDockWidget* dock;
+    QDockWidget* dock = nullptr;
     // text browser
     QDockWidget *first_tab = nullptr;
     dock = create_dock_widget(ui->textBrowser, tr("Text View/Editor"), QDockWidgetX::textbrowser);
@@ -1138,6 +1143,7 @@ void MainWindow::createDockWindows()
     ui->verticalLayout_2 = nullptr;
     ui->verticalLayoutForTextBrowser = nullptr;
     ui->verticalLayoutForTreeView = nullptr;
+
 }
 
 void MainWindow::addCmdToolBar(int i)

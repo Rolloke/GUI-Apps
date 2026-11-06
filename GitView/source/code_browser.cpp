@@ -47,6 +47,7 @@ code_browser::~code_browser()
 {
     if (m_clone)
     {
+        synchronize_scrollbars(false);
         m_clone->m_clone = nullptr;
         m_clone = nullptr;
     }
