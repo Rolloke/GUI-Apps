@@ -42,7 +42,8 @@ Q_SIGNALS:
     void change_table_type(int type);
     void change_table_columns(int columns);
     void change_table_offset(int offset);
-    void open_binary_format_file(const QString& filename, bool &opened);
+    void open_binary_format_file(const QString& filename, int &json_flag);
+    void edit_binary_format_file(QString& filename, int &json_flag);
     void endian_changed();
 
 public Q_SLOTS:
@@ -67,6 +68,10 @@ private Q_SLOTS:
     void table_offset_changed(int offset);
     void editing_finished();
     void showLink(const QString& link_name);
+
+    void on_btnEditJsonFile_clicked();
+
+    void on_btnReloadJsonText_clicked();
 
 private:
     Ui::binary_values_view *ui;

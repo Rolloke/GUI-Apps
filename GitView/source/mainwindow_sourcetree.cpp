@@ -422,10 +422,13 @@ void MainWindow::open_file_externally()
 #ifdef USE_BOOST
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number, bool reopen_file)
 #else
-void MainWindow::open_file(const QString& file_path, std::optional<int> line_number, bool reopen_file)
+QWidget* MainWindow::open_file(const QString& file_path, std::optional<int> line_number, bool reopen_file, bool close_active)
 #endif
 {
-    btnCloseText_clicked(Editor::Active);
+    if (close_active)
+    {
+        btnCloseText_clicked(Editor::Active);
+    }
     const QFileInfo file_info(file_path);
     QString         file_extension = file_info.suffix().toLower();
 
@@ -444,7 +447,7 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
         }
         else
         {
-            return;
+            return nullptr;
         }
     }
 
@@ -455,7 +458,7 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
         {
             updateSelectedLanguage(file_extension);
             showDockedWidget(ui->graphicsView);
-            return;
+            return nullptr;
         }
     }
 
@@ -470,7 +473,7 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
                 arg(formatFileSize(info.size()), formatFileSize(mWarnOpenFileSize)),
             QMessageBox::Yes, QMessageBox::No) == QMessageBox::No)
         {
-            return;
+            return nullptr;
         }
     }
 
@@ -656,6 +659,36 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
             if (line_number)
             {
                 text_browser->go_to_line(*line_number);
+            }
+        }
+        return widget_to_be_shown;
+    }
+    return nullptr;
+}
+
+void MainWindow::open_json_file(QString &filename, int &json_flag)
+{
+    if (Json::is(json_flag, Json::open_in_editor))
+    {
+        int old = ui->comboOpenFile->currentIndex();
+        ui->comboOpenFile->setCurrentIndex(static_cast<int>(OpenFileAs::Automatic));
+        QWidget *active = open_file(filename, {}, false, false);
+        ui->comboOpenFile->setCurrentIndex(old);
+        QDockWidget* active_parent = dynamic_cast<QDockWidget*>(active->parent());
+        if (active_parent)
+        {
+            move_active_window_to(FirstTab::web_view, active_parent);
+        }
+    }
+    if (Json::is(json_flag, Json::get_text_from_editor))
+    {
+        code_browser * text_browser = dynamic_cast<code_browser*>(get_active_editable_widget(filename));
+        if (text_browser)
+        {
+            filename = text_browser->toPlainText();
+            if (filename.size())
+            {
+                Json::set(json_flag, Json::text_input);
             }
         }
     }

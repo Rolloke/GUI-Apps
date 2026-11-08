@@ -14,86 +14,10 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="7" column="1">
-    <widget class="QLabel" name="textBuildDate">
-     <property name="text">
-      <string>Built</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="labelBuildDate">
-     <property name="text">
-      <string>Built on:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0">
-    <widget class="QLabel" name="labelLicense">
-     <property name="text">
-      <string>License:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="1">
-    <widget class="QLabel" name="textLicense">
-     <property name="text">
-      <string>GNU GPL Version 2</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="textDescription">
-     <property name="text">
-      <string>Viewer for git repositories. Compiled with c++ 17</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="0">
-    <widget class="QLabel" name="labelEmail">
-     <property name="text">
-      <string>Email:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="labelVersion">
-     <property name="text">
-      <string>Version:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QLabel" name="textBased_on">
-     <property name="text">
-      <string>Qt-Version </string>
-     </property>
-    </widget>
-   </item>
    <item row="6" column="0">
     <widget class="QLabel" name="labelBased_on">
      <property name="text">
       <string>Based on:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QLabel" name="textVersion">
-     <property name="text">
-      <string>0.0.0.0</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
-    <widget class="QLabel" name="labelAuthor">
-     <property name="text">
-      <string>Author:</string>
      </property>
     </widget>
    </item>
@@ -107,23 +31,6 @@
      </property>
      <property name="textInteractionFlags">
       <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QLabel" name="textAuthor">
-     <property name="text">
-      <string>Rolf Kary-Ehlers</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="2">
-    <widget class="QLabel" name="textWarranty">
-     <property name="text">
-      <string>The program is provided AS IS with NO WARRANTY OF ANY KIND</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -207,6 +114,113 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="10" column="1">
+    <widget class="QLabel" name="textLicense">
+     <property name="text">
+      <string>GNU GPL Version 2</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLabel" name="textBased_on">
+     <property name="text">
+      <string>Qt-Version </string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLabel" name="textAuthor">
+     <property name="text">
+      <string>Rolf Kary-Ehlers</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="labelEmail">
+     <property name="text">
+      <string>Email:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QLabel" name="textWarranty">
+     <property name="text">
+      <string>The program is provided AS IS with NO WARRANTY OF ANY KIND</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QLabel" name="textVersion">
+     <property name="text">
+      <string>0.0.0.0</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="labelAuthor">
+     <property name="text">
+      <string>Author:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QLabel" name="textBuildDate">
+     <property name="text">
+      <string>Built</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="textDescription">
+     <property name="text">
+      <string>Viewer for git repositories. Compiled with c++ 17</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="labelLicense">
+     <property name="text">
+      <string>License:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelBuildDate">
+     <property name="text">
+      <string>Built on:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="labelVersion">
+     <property name="text">
+      <string>Version:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Commandline Parameter</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>--config &lt;configname&gt;, --help</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -56,6 +56,8 @@ using namespace std::placeholders;
 
 #define RELATIVE_GIT_PATH 1
 
+/// BUG: close window outside common tabs before closing app otherwise the app crashes at startup, when resizing windows
+/// TODO: it ist probably fixed, test it more
 
 using namespace std;
 using namespace git;
@@ -463,7 +465,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(mBinaryValuesView.data(), SIGNAL(change_table_columns(int)), ui->tableBinaryView, SLOT(set_columns(int)));
     connect(mBinaryValuesView.data(), SIGNAL(change_table_offset(int)), ui->tableBinaryView, SLOT(set_offset(int)));
     connect(mBinaryValuesView.data(), SIGNAL(status_message(QString,int)), ui->statusBar, SLOT(showMessage(QString,int)));
-    connect(mBinaryValuesView.data(), SIGNAL(open_binary_format_file(QString,bool&)), ui->tableBinaryView, SLOT(open_binary_format_file(QString,bool&)));
+    connect(mBinaryValuesView.data(), SIGNAL(open_binary_format_file(QString,int&)), ui->tableBinaryView, SLOT(open_binary_format_file(QString,int&)));
+    connect(mBinaryValuesView.data(), SIGNAL(edit_binary_format_file(QString&,int&)), this, SLOT(open_json_file(QString&,int&)));
     connect(mBinaryValuesView.data(), SIGNAL(endian_changed()), ui->tableBinaryView, SLOT(update_table()));
 
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->tableBinaryView, SLOT(receive_value(QByteArray,int)));
@@ -538,6 +541,10 @@ void MainWindow::update_widget_states(QWidget *widget)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    /// NOTE: this activates WebView within rigth Tab and allows to store
+    /// - widget geometry
+    /// - widget settings of this tab
+    showDockedWidget(mWebEngineView.data(), true);
     if (btnCloseText_clicked(Editor::All))
     {
         event->accept();
@@ -1873,7 +1880,9 @@ bool MainWindow::send_close_to_editable_widget(QWidget*editable_widget)
             QAction* action = dw->toggleViewAction();
             action->setChecked(true);
             action->trigger();
-            return dw->is_closing();
+            bool is_closing = dw->is_closing();
+            removeDockWidget(dw);
+            return is_closing;
         }
     }
     return true;
@@ -3991,7 +4000,7 @@ void MainWindow::on_treeFindText_customContextMenuRequested(const QPoint &pos)
 
 void MainWindow::on_ckTypeConverter_stateChanged(int active)
 {
-    mBinaryValuesView->receive_external_data(active);
+    mBinaryValuesView->receive_external_data(false);
     showDockedWidget(mBinaryValuesView.data(), active);
 }
 

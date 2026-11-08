@@ -6,7 +6,6 @@
 #include <QFileDialog>
 #include <QClipboard>
 
-
 binary_values_view::binary_values_view(QWidget *parent) :
     QDialog(parent)
   , ui(new Ui::binary_values_view)
@@ -229,6 +228,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
 void binary_values_view::receive_external_data(bool external_data)
 {
     ui->checkStandAlone->setChecked(!external_data);
+    ui->btnOpenTypeFile->setEnabled(external_data);
 }
 
 void binary_values_view::on_btnReadValue_clicked()
@@ -380,6 +380,8 @@ void binary_values_view::on_checkStandAlone_toggled(bool checked)
     ui->btnReadValue->setEnabled(!checked);
     ui->btnWriteValue->setEnabled(!checked);
     ui->btnOpenTypeFile->setEnabled(!checked);
+    ui->btnEditJsonFile->setEnabled(!checked);
+    ui->btnReloadJsonText->setEnabled(!checked);
     ui->comboType->setEnabled(!checked);
     ui->spinColumns->setEnabled(!checked);
     ui->spinOffset->setEnabled(!checked);
@@ -425,18 +427,47 @@ void binary_values_view::on_btnOpenTypeFile_clicked()
         QFileInfo file_info(file_name);
         m_type_format_files_location = file_info.absolutePath();
     }
-    bool opened = false;
-    Q_EMIT open_binary_format_file(file_name, opened);
-    if (opened)
+
+    int  json_flag = Json::file_input;
+    Q_EMIT open_binary_format_file(file_name, json_flag);
+
+    if (Json::is(json_flag, Json::text_parsed) || Json::is(json_flag, Json::file_opened))
     {
         m_current_combo_index = ui->comboType->currentIndex();
         ui->edtOpenFilePath->setText(file_name);
         ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::FormatFile));
+        ui->btnEditJsonFile->setEnabled(true);
+        ui->btnReloadJsonText->setEnabled(true);
     }
     else if (m_current_combo_index)
     {
         ui->comboType->setCurrentIndex(m_current_combo_index.value());
         m_current_combo_index.reset();
+    }
+}
+
+void binary_values_view::on_btnEditJsonFile_clicked()
+{
+    QString file_name = ui->edtOpenFilePath->text();
+    if (QFileInfo(file_name).exists())
+    {
+        int  json_flag = Json::open_in_editor;
+        Q_EMIT edit_binary_format_file(file_name, json_flag);
+    }
+}
+
+void binary_values_view::on_btnReloadJsonText_clicked()
+{
+    QString file_name = ui->edtOpenFilePath->text();
+    if (QFileInfo(file_name).exists())
+    {
+        int  json_flag = Json::get_text_from_editor;
+        Q_EMIT edit_binary_format_file(file_name, json_flag);
+        if (Json::is(json_flag, Json::text_input))
+        {
+            json_flag = Json::text_input;
+            Q_EMIT open_binary_format_file(file_name, json_flag);
+        }
     }
 }
 

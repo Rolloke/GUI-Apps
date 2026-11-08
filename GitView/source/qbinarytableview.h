@@ -67,7 +67,7 @@ public Q_SLOTS:
     void set_columns(int);
     void set_offset(int);
     void receive_value(const QByteArray& array, int position);
-    void open_binary_format_file(const QString& filename, bool& opened);
+    void open_binary_format_file(const QString &filename, int &json_flag);
     void update_table();
 
 private:

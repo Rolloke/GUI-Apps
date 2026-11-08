@@ -342,19 +342,38 @@ int qbinarytableview::get_offset() const
     return get_model()->m_start_offset;
 }
 
-void qbinarytableview::open_binary_format_file(const QString& filename, bool &opened)
+void qbinarytableview::open_binary_format_file(const QString &filename, int &json_flag)
 {
+    if (!Json::is(json_flag, Json::binary_table_view_input))
+    {
+        return;
+    }
     auto& themodel = *get_model();
     themodel.clear_typed_display();
 
     QFile file(filename);
-    file.open(QIODevice::ReadOnly);
+    if (Json::is(json_flag, Json::file_input))
+    {
+        file.open(QIODevice::ReadOnly);
+        if (file.isOpen())
+        {
+            Json::set(json_flag, Json::file_opened);
+        }
+    }
     bool file_parsing_ok = false;
 
-    if (file.isOpen())
+    if (Json::is(json_flag, Json::parser_input))
     {
         QJsonParseError error;
-        QByteArray data = file.readAll();
+        QByteArray data;
+        if (Json::is(json_flag, Json::file_opened))
+        {
+            data = file.readAll();
+        }
+        else
+        {
+            data = filename.toUtf8();
+        }
         QJsonDocument doc = QJsonDocument::fromJson(data, &error);
         if (error.error != QJsonParseError::NoError)
         {
@@ -426,7 +445,8 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
     {
         update_rows();
     }
-    opened = file_parsing_ok;
+
+    Json::set(json_flag, file_parsing_ok ? Json::text_parsed : Json::text_not_parsed);
 }
 
 void qbinarytableview::update_table()

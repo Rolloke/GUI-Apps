@@ -8,6 +8,29 @@
 #include <cstdint>
 
 #define DISPLAY_STRINGS 1
+struct Json
+{
+    enum e
+    {
+        file_input      =  1,
+        file_opened     =  2,
+        text_input      =  4,
+        text_parsed     =  8,
+        text_not_parsed = 16,
+        binary_table_view_input = file_input|text_input,
+        parser_input    = file_opened|text_input,
+        open_in_editor  = 32,
+        get_text_from_editor = 64
+    };
+    static bool is(int flag, e e_in)
+    {
+        return (flag & e_in) != 0;
+    }
+    static void set(int& flag, e e_in)
+    {
+        flag |= e_in;
+    }
+};
 
 class CDisplayType
 {

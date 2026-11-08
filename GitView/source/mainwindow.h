@@ -215,9 +215,9 @@ private:
     void     parseTextForBookmarks(const QString& aText, const QString& viewer);
     bool     has_background_text_view();
 #ifdef USE_BOOST
-    void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = false);
+    QWidget *open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = false, bool close_active=true);
 #else
-    void     open_file(const QString& file_path, std::optional<int> line_number = {}, bool reopen_file = false);
+    QWidget *open_file(const QString& file_path, std::optional<int> line_number = {}, bool reopen_file = false, bool close_active=true);
 #endif
 
     QVariant handleWorker(const QVariant&);
@@ -321,6 +321,7 @@ private Q_SLOTS:
     void on_comboOpenNewEditor_currentIndexChanged(int index);
     void on_comboWordWrap_currentIndexChanged(int index);
     void setFontForViews(int);
+    void open_json_file(QString &filename, int &json_flag);
 
     void showDockedWidget(QWidget* widget, bool show=true);
     QList<QDockWidget *> get_dock_widget_of_name(QStringList names);
