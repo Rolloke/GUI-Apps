@@ -61,6 +61,8 @@ private Q_SLOTS:
     void on_radioEndian2_clicked();
     void on_checkStandAlone_toggled(bool checked);
     void on_btnOpenTypeFile_clicked();
+    void on_btnEditJsonFile_clicked();
+    void on_btnReloadJsonText_clicked();
 
     void check_box_clicked(bool checked);
     void table_type_changed(QString type_name);
@@ -68,10 +70,6 @@ private Q_SLOTS:
     void table_offset_changed(int offset);
     void editing_finished();
     void showLink(const QString& link_name);
-
-    void on_btnEditJsonFile_clicked();
-
-    void on_btnReloadJsonText_clicked();
 
 private:
     Ui::binary_values_view *ui;

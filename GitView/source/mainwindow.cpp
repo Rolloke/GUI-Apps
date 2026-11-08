@@ -541,9 +541,10 @@ void MainWindow::update_widget_states(QWidget *widget)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    /// NOTE: this activates WebView within rigth Tab and allows to store
+    /// NOTE: this activates WebView within right Tab and allows to store
     /// - widget geometry
-    /// - widget settings of this tab
+    /// - widget settings
+    /// of this tab correctly
     showDockedWidget(mWebEngineView.data(), true);
     if (btnCloseText_clicked(Editor::All))
     {
