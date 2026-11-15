@@ -2,9 +2,17 @@
 #include "ui_binary_values_view.h"
 #include "DisplayType.h"
 #include "helper.h"
-
 #include <QFileDialog>
 #include <QClipboard>
+#include <QScrollBar>
+#include <QTextStream>
+
+/// TODO: [x] Suche nach Tabellenwerten mit CheckBox aktivierbar
+/// TODO: [x] Suche nach Tabellenwerten implementieren
+/// TODO: [ ] Binär Tabelle als Tree
+/// TODO: [ ] JSON Strukturen mit ID (integer, string) wählbar
+/// TODO: [x] String Datentyp mit Größe
+/// TODO: [x] enable disable buttons by context
 
 binary_values_view::binary_values_view(QWidget *parent) :
     QDialog(parent)
@@ -110,6 +118,30 @@ binary_values_view::binary_values_view(QWidget *parent) :
        "</pre>"
        "<a href='btnOpenTypeFile'>Copy text</a>");
 
+    for (const auto& type : std::as_const(m_display))
+    {
+        if (type.first == CDisplayType::Binary) continue;
+        ui->comboDataType2insert->addItem(CDisplayType::getNameOfType(type.first));
+    }
+
+    mListModel = new CheckboxItemModel(0, 4, this);
+    ui->tableView->setModel(mListModel);
+    mListModel->setCheckedColumn(Table::checkbox);
+    mListModel->setHeaderData(Table::checkbox,  Qt::Horizontal, tr("Select"), Qt::CheckStateRole);
+    mListModel->setHeaderData(Table::name,  Qt::Horizontal, tr("Name"), Qt::DisplayRole);
+    mListModel->setHeaderData(Table::type,  Qt::Horizontal, tr("Type"), Qt::DisplayRole);
+    mListModel->setHeaderData(Table::value, Qt::Horizontal, tr("Value"), Qt::DisplayRole);
+
+    const int column_width = 200;
+
+    ui->tableView->setColumnWidth(Table::checkbox, 30);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(Table::checkbox, QHeaderView::Fixed);
+    ui->tableView->setColumnWidth(Table::name    , column_width);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(Table::name    , QHeaderView::ResizeToContents);
+    ui->tableView->setColumnWidth(Table::type    , column_width);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(Table::type    , QHeaderView::Fixed);
+    ui->tableView->setColumnWidth(Table::value   , column_width);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(Table::value   , QHeaderView::Stretch);
 }
 
 void binary_values_view::showLink(const QString& link_name)
@@ -122,7 +154,6 @@ void binary_values_view::showLink(const QString& link_name)
         QApplication::clipboard()->setText(text.mid(start, end-start + 1));
     }
 }
-
 
 binary_values_view::~binary_values_view()
 {
@@ -145,7 +176,6 @@ CDisplayType::eType binary_values_view::index2type(std::uint32_t index)
     }
     return CDisplayType::Unknown;
 }
-
 
 void binary_values_view::receive_value(const QByteArray &array, int position)
 {
@@ -221,6 +251,34 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
         case CDisplayType::Ascii: ui->edtChar->setText(text); break;
         default:
             break;
+        }
+    }
+
+    const int rows = mListModel->rowCount();
+    for (int row = 0; row < rows; ++row)
+    {
+        const QString type_name = mListModel->data(mListModel->index(row, Table::type)).toString();
+        QStringList type_name_parts = type_name.split("[");
+        const auto type_id = CDisplayType::getTypeOfName(type_name_parts[0]);
+        auto &display_type = m_display[type_id];
+        if (type_name_parts.length() > 1)
+        {
+            type_name_parts[1].remove("]");
+            display_type->SetBytes(type_id == CDisplayType::Ascii ? type_name_parts[1].toInt() : type_name_parts[1].toInt()*2);
+        }
+        const auto length = display_type->GetByteLength();
+        if (position + static_cast<int>(length) <= array.size())
+        {
+            if (!mListModel->data(mListModel->index(row, Table::checkbox), Qt::CheckStateRole).toBool())
+            {
+                text = display_type->Display(&buffer_pointer[position]);
+                mListModel->setData(mListModel->index(row, Table::value), text, Qt::DisplayRole);
+            }
+            position += length;
+        }
+        else
+        {
+            mListModel->setData(mListModel->index(row, Table::value), "n/a", Qt::DisplayRole);
         }
     }
 }
@@ -471,3 +529,161 @@ void binary_values_view::on_btnReloadJsonText_clicked()
     }
 }
 
+void binary_values_view::on_btnInsertType_clicked()
+{
+    const int row = mListModel->rowCount();
+    mListModel->insertRows(row, 1, QModelIndex());
+    QString type_name = ui->comboDataType2insert->currentText();
+    auto type_id = CDisplayType::getTypeOfName(type_name);
+    if (is_any_equal_to(type_id, CDisplayType::Ascii, CDisplayType::Unicode))
+    {
+        QString format = type_name + "[%1]";
+        type_name = tr(format.toStdString().c_str()).arg(ui->spinTextLength->value());
+    }
+
+    mListModel->setData(mListModel->index(row, Table::checkbox), false, Qt::CheckStateRole);
+    mListModel->setData(mListModel->index(row, Table::name), tr("name %1").arg(row + 1), Qt::EditRole);
+    mListModel->setData(mListModel->index(row, Table::type), type_name, Qt::DisplayRole);
+    mListModel->setData(mListModel->index(row, Table::value), "", Qt::EditRole);
+    update_table_buttons();
+}
+
+
+void binary_values_view::on_btnRemoveType_clicked()
+{
+    auto index = ui->tableView->currentIndex();
+    if (index.isValid())
+    {
+        mListModel->removeRow(index.row());
+        update_table_buttons();
+    }
+}
+
+QVariantList binary_values_view::get_search_list()
+{
+    QVariantList list;
+    QByteArray array;
+    const int rows = mListModel->rowCount();
+    for (int row = 0; row < rows; ++row)
+    {
+        const QString type_name = mListModel->data(mListModel->index(row, Table::type)).toString();
+        QStringList type_name_parts = type_name.split("[");
+        const auto type_id = CDisplayType::getTypeOfName(type_name_parts[0]);
+        auto &display_type = m_display[type_id];
+        if (type_name_parts.length() > 1)
+        {
+            type_name_parts[1].remove("]");
+            display_type->SetBytes(type_id == CDisplayType::Ascii ? type_name_parts[1].toInt() : type_name_parts[1].toInt()*2);
+        }
+        if (mListModel->data(mListModel->index(row, Table::checkbox), Qt::CheckStateRole).toBool())
+        {
+            QByteArray element(display_type->GetByteLength(), ' ');
+            display_type->Write(reinterpret_cast<std::uint8_t*>(element.data()), mListModel->data(mListModel->index(row, Table::value)).toString());
+            array.append(element);
+        }
+        else
+        {
+            if (array.length())
+            {
+                list.append(array);
+                array.clear();
+            }
+            list.append(static_cast<int>(display_type->GetByteLength()));
+        }
+    }
+
+    if (array.length())
+    {
+        list.append(array);
+    }
+    return list;
+}
+
+
+void binary_values_view::on_btnFindNext_clicked()
+{
+    QVariantList list = get_search_list();
+    Q_EMIT search_expression(list, true);
+}
+
+
+void binary_values_view::on_btnFindPrevious_clicked()
+{
+    QVariantList list =get_search_list();
+    Q_EMIT search_expression(list, false);
+}
+
+
+void binary_values_view::on_tableView_clicked(const QModelIndex &index)
+{
+    if (index.column() == mListModel->getCheckedColumn())
+    {
+        bool new_state = !mListModel->data(index, Qt::CheckStateRole).toBool();
+        mListModel->setData(index, new_state, Qt::CheckStateRole);
+        update_table_buttons();
+    }
+}
+
+void binary_values_view::on_btnStoreTableContent_clicked()
+{
+    const QString file_name = QFileDialog::getSaveFileName(this, tr("Open table content file with data types"), m_type_format_files_location, "Name and Type definition file (*.txt)");
+    QFile file(file_name);
+    if (file.open( QIODevice::WriteOnly))
+    {
+        QTextStream stream(&file);
+        const int rows = mListModel->rowCount();
+        for (int row = 0; row < rows; ++row)
+        {
+            stream << mListModel->data(mListModel->index(row, Table::name)).toString() << ",";
+            stream << mListModel->data(mListModel->index(row, Table::type)).toString() << ",";
+            stream << mListModel->data(mListModel->index(row, Table::value)).toString() << ",";
+            stream << mListModel->data(mListModel->index(row, Table::checkbox)).toInt() << "\n";
+        }
+    }
+}
+
+void binary_values_view::on_btnLoadTableContent_clicked()
+{
+    const QString file_name = QFileDialog::getOpenFileName(this, tr("Open table content file with data types"), m_type_format_files_location, "Name and Type definition file (*.txt)");
+    QFile file(file_name);
+    if (file.open( QIODevice::ReadOnly))
+    {
+        QTextStream stream(&file);
+        QString line;
+        int row = mListModel->rowCount();
+        while (!stream.atEnd())
+        {
+            line = stream.readLine();
+            QStringList parts = line.split(",");
+            if (parts.size() == 4)
+            {
+                mListModel->insertRows(row, 1, QModelIndex());
+                mListModel->setData(mListModel->index(row, Table::name), parts[0], Qt::EditRole);
+                mListModel->setData(mListModel->index(row, Table::type), parts[1], Qt::DisplayRole);
+                mListModel->setData(mListModel->index(row, Table::value), parts[2], Qt::EditRole);
+                mListModel->setData(mListModel->index(row, Table::checkbox), parts[3].toInt() != 0 ? true: false, Qt::CheckStateRole);
+                ++row;
+            }
+        }
+        update_table_buttons();
+    }
+}
+
+void binary_values_view::update_table_buttons()
+{
+    const int count = mListModel->rowCount();
+    bool check_state = false;
+    for (int i = 0; i < count; ++i)
+    {
+        if (mListModel->data(mListModel->index(i, Table::checkbox), Qt::CheckStateRole).toBool())
+        {
+            check_state = true;
+            break;
+        }
+    }
+
+    ui->btnRemoveType->setEnabled(ui->tableView->currentIndex().isValid());
+    ui->btnFindNext->setEnabled(check_state);
+    ui->btnFindPrevious->setEnabled(check_state);
+    ui->btnStoreTableContent->setEnabled(count > 0);
+}

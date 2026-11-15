@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QCheckBox>
 #include <QLineEdit>
+#include <QStandardItemModel>
 
 #include <map>
 #include <memory>
@@ -21,7 +22,7 @@ namespace Ui {
 class binary_values_view;
 }
 
-
+class CheckboxItemModel;
 
 class binary_values_view : public QDialog
 {
@@ -32,8 +33,21 @@ public:
     ~binary_values_view();
 
 private:
-    std::uint32_t type2index(CDisplayType::eType type);
+    struct Table
+    {
+        enum
+        {
+            checkbox,
+            name,
+            type,
+            value
+        };
+    };
+
+    std::uint32_t       type2index(CDisplayType::eType type);
     CDisplayType::eType index2type(std::uint32_t index);
+    QVariantList        get_search_list();
+    void                update_table_buttons();
 
 public:
 Q_SIGNALS:
@@ -45,6 +59,7 @@ Q_SIGNALS:
     void open_binary_format_file(const QString& filename, int &json_flag);
     void edit_binary_format_file(QString& filename, int &json_flag);
     void endian_changed();
+    void search_expression(const QVariantList& list, bool forward);
 
 public Q_SLOTS:
     void receive_value(const QByteArray& array, int position);
@@ -63,6 +78,13 @@ private Q_SLOTS:
     void on_btnOpenTypeFile_clicked();
     void on_btnEditJsonFile_clicked();
     void on_btnReloadJsonText_clicked();
+    void on_btnInsertType_clicked();
+    void on_btnRemoveType_clicked();
+    void on_btnFindNext_clicked();
+    void on_btnFindPrevious_clicked();
+    void on_tableView_clicked(const QModelIndex &index);
+    void on_btnStoreTableContent_clicked();
+    void on_btnLoadTableContent_clicked();
 
     void check_box_clicked(bool checked);
     void table_type_changed(QString type_name);
@@ -70,6 +92,8 @@ private Q_SLOTS:
     void table_offset_changed(int offset);
     void editing_finished();
     void showLink(const QString& link_name);
+
+
 
 private:
     Ui::binary_values_view *ui;
@@ -79,6 +103,9 @@ private:
     int                 m_current_position;
     QByteArray          m_array;
     bool                m_setting_table_property;
+
+    CheckboxItemModel* mListModel = nullptr;
+
 #ifdef USE_BOOST
     boost::optional<int>  m_current_combo_index;
 #else

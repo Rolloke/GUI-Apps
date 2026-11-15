@@ -468,10 +468,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(mBinaryValuesView.data(), SIGNAL(open_binary_format_file(QString,int&)), ui->tableBinaryView, SLOT(open_binary_format_file(QString,int&)));
     connect(mBinaryValuesView.data(), SIGNAL(edit_binary_format_file(QString&,int&)), this, SLOT(open_json_file(QString&,int&)));
     connect(mBinaryValuesView.data(), SIGNAL(endian_changed()), ui->tableBinaryView, SLOT(update_table()));
+    connect(mBinaryValuesView.data(), SIGNAL(search_expression(QVariantList,bool)), ui->tableBinaryView, SLOT(search_expression(QVariantList,bool)));
 
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->tableBinaryView, SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
+
     connect(ui->tableBinaryView, SIGNAL(contentChanged(bool)), this, SLOT(textBrowserChanged(bool)));
 
 #ifdef WEB_ENGINE

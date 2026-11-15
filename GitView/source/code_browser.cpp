@@ -581,6 +581,7 @@ QString code_browser::change_start_of_selection(selection how_to)
             }
         }
     }
+    /// TODO: Selection wiederherstellen
     return text;
 }
 

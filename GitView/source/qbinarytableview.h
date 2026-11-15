@@ -69,6 +69,7 @@ public Q_SLOTS:
     void receive_value(const QByteArray& array, int position);
     void open_binary_format_file(const QString &filename, int &json_flag);
     void update_table();
+    void search_expression(const QVariantList& list, bool forward);
 
 private:
     BinaryTableModel* get_model() const;
@@ -171,6 +172,7 @@ private:
     QByteArray                      m_binary_content;
     int                             m_columns_per_row;
     int                             m_start_offset;
+    /// TODO: quint64
     int                             m_byte_cursor;
     CDisplayType::eType             m_display_type;
     CDisplayType::type_map&         m_display;

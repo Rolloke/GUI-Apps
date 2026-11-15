@@ -7,6 +7,8 @@
 #include <functional>
 #include <QFile>
 #include <QObject>
+#include <QStandardItemModel>
+
 #ifdef USE_BOOST
 #include <boost/function.hpp>
 #else
@@ -183,6 +185,18 @@ protected:
 
 };
 
+class CheckboxItemModel : public QStandardItemModel
+{
+public:
+    CheckboxItemModel(int rows, int columns, QObject *parent = nullptr);
+
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    void setCheckedColumn(int checked);
+    int  getCheckedColumn();
+private:
+    int mChecked;
+};
 
 #if 1
 /// \brief variadic count_equal

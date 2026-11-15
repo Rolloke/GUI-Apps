@@ -419,6 +419,8 @@ void qbinarytableview::open_binary_format_file(const QString &filename, int &jso
                         file_parsing_ok = themodel.update_binary_struct_dependencies();
                     }
                 }
+                /// TODO: implement tables for assignement of structs to an ID
+                /// ID -> struct name
 
                 QJsonValue content = obj.take("content");
                 /// parse content
@@ -452,6 +454,99 @@ void qbinarytableview::open_binary_format_file(const QString &filename, int &jso
 void qbinarytableview::update_table()
 {
     update_rows();
+}
+
+void qbinarytableview::search_expression(const QVariantList &list, bool forward)
+{
+    auto& themodel      = *get_model();
+    const auto length   = themodel.m_binary_content.size();
+    size_t search_size  = 0;
+    int    search_items = 0;
+
+    for (const QVariant& var : list)
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (var.typeId() == QMetaType::Type::QByteArray)
+#else
+        if (var.type() == QVariant::ByteArray)
+#endif
+        {
+            search_size += var.toByteArray().size();
+            search_items++;
+        }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        else if (var.typeId() == QMetaType::Type::Int)
+#else
+        else if (var.type() == QVariant::Int)
+#endif
+        {
+            search_size += var.toInt();
+        }
+    }
+
+    auto is_valid = [search_size, forward, length](ssize_t index)
+    {
+        if (forward)
+        {
+            return static_cast<qsizetype>(index + search_size) < length;
+        }
+        else
+        {
+            return index >= 0;
+        }
+    };
+
+    auto step = [forward] (int & index)
+    {
+        if (forward) ++index;
+        else         --index;
+    };
+
+    const int old_row = themodel.m_byte_cursor / themodel.get_bytes_per_row();
+
+    for (auto current = themodel.m_byte_cursor; is_valid(current); step(current))
+    {
+        int  found_items = 0;
+        auto start_index = current;
+        for (const QVariant& var : list)
+        {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if (var.typeId() == QMetaType::Type::QByteArray)
+#else
+             if (var.type() == QVariant::ByteArray)
+#endif
+            {
+                auto ba = var.toByteArray();
+                if (memcmp(themodel.m_binary_content.data() + start_index, ba.data(), ba.size()) == 0)
+                {
+                    found_items++;
+                }
+                start_index += ba.size();
+            }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            else if (var.typeId() == QMetaType::Type::Int)
+#else
+            else if (var.type() == QVariant::Int)
+#endif
+
+            {
+                start_index += var.toInt();
+            }
+        }
+        if (found_items == search_items)
+        {
+            themodel.m_byte_cursor = current;
+            change_cursor();
+            const int new_row = themodel.m_byte_cursor / themodel.get_bytes_per_row();
+            update_complete_row(old_row);
+            if (old_row != new_row)
+            {
+                update_complete_row(new_row);
+            }
+            break;
+        }
+    }
+
 }
 
 void qbinarytableview::change_cursor()
