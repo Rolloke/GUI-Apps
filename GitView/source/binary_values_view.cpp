@@ -13,6 +13,7 @@
 /// TODO: [ ] JSON Strukturen mit ID (integer, string) wählbar
 /// TODO: [x] String Datentyp mit Größe
 /// TODO: [x] enable disable buttons by context
+/// TODO: [x] document functions in GUI
 
 binary_values_view::binary_values_view(QWidget *parent) :
     QDialog(parent)
@@ -90,33 +91,6 @@ binary_values_view::binary_values_view(QWidget *parent) :
     LinkFilter * filter = new LinkFilter(this);
     installEventFilter(filter);
     connect(filter, SIGNAL(linkClicked(QString)), this, SLOT(showLink(QString)));
-
-    ui->btnOpenTypeFile->setWhatsThis(""
-       "<pre>{\n"
-       "\"file\":{ // optional file parameter section\n"
-       "   \"description\": \"file description\",\n"
-       "      \"mime\"       : \"mymime\",\n"
-       "      \"extension\"  : \"ext\",\n"
-       "      \"endian\"     : \"big\"\n"
-       "    },\n"
-       "    \"content\":[ // content of file in an array\n"
-       "       {\"name\": \"long\"},                   // simple name and type\n"
-       "       [\"name\", \"float\", 8],               // float array with size 8\n"
-       "       {\"sizedouble\", \"int32\"},            // size variable for double array\n"
-       "       [\"darray\", \"double\", \"sizedouble\"], // variable double array\n"
-       "       {\"text string\": \"String\"},          // struct \"String\" see below\n"
-       "       {\"bytes\": \"uint32\"},                // simple name and type\n"
-       "       [\"some strings\", \"String\", \"#bytes\"]// strings with max bytes to read\n"
-       "    ],\n"
-       "    \"structs\":{ // optional structs section\n"
-       "       \"String\": [  // structure for strings, name is used like a type\n"
-       "          [\"length\", \"uint32\" ],           // length of string\n"
-       "          [\"text\", \"string\", \"length\"]     // variable length string type\n"
-       "       ]\n"
-       "    }\n"
-       "}\n"
-       "</pre>"
-       "<a href='btnOpenTypeFile'>Copy text</a>");
 
     for (const auto& type : std::as_const(m_display))
     {

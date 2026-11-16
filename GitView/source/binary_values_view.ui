@@ -877,6 +877,35 @@
              <property name="toolTip">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens Json file with binary format description of the file content.&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; to see file format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
+             <property name="whatsThis">
+              <string>&lt;pre&gt;{
+ &quot;file&quot;:{ // optional file parameter section
+    &quot;description&quot;: &quot;file description&quot;,
+       &quot;mime&quot;       : &quot;mymime&quot;,
+       &quot;extension&quot;  : &quot;ext&quot;,
+       &quot;endian&quot;     : &quot;big&quot;
+     },
+     &quot;content&quot;:[ // content of file in an array
+        {&quot;name&quot;: &quot;long&quot;},                   // simple name and type
+        [&quot;name&quot;, &quot;float&quot;, 8],               // float array with size 8
+        {&quot;sizedouble&quot;, &quot;int32&quot;},            // size variable for double array
+        [&quot;darray&quot;, &quot;double&quot;, &quot;sizedouble&quot;], // variable double array
+        {&quot;text string&quot;: &quot;String&quot;},          // struct &quot;String&quot; see below
+        {&quot;bytes&quot;: &quot;uint32&quot;},                // simple name and type
+        [&quot;some strings&quot;, &quot;String&quot;, &quot;#bytes&quot;]// strings with max bytes to read
+     ],
+     &quot;structs&quot;:{ // optional structs section
+        &quot;String&quot;: [  // structure for strings, name is used like a type
+           [&quot;length&quot;, &quot;uint32&quot; ],           // length of string
+           [&quot;text&quot;, &quot;string&quot;, &quot;length&quot;]     // variable length string type
+        ]
+     }
+ }
+ &lt;/pre&gt;
+ &lt;a href='btnOpenTypeFile'&gt;Copy text&lt;/a&gt;) &lt;br&gt;
+Remove the comments &quot;//&quot;, because json does not support comments
+</string>
+             </property>
              <property name="text">
               <string>Open Type Format File...</string>
              </property>
@@ -1010,6 +1039,9 @@
      </item>
      <item>
       <widget class="QSpinBox" name="spinTextLength">
+       <property name="toolTip">
+        <string>Number of characters for Ascii or Unicode</string>
+       </property>
        <property name="maximum">
         <number>256</number>
        </property>
@@ -1034,7 +1066,7 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>Not yet implemented</string>
+        <string>Remove selected entry from table</string>
        </property>
        <property name="text">
         <string>Remove</string>
@@ -1054,7 +1086,7 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>Not yet implemented</string>
+        <string>Search next pattern</string>
        </property>
        <property name="text">
         <string>Next</string>
@@ -1067,7 +1099,7 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>Not yet implemented</string>
+        <string>Search previous pattern</string>
        </property>
        <property name="text">
         <string>Previous</string>
@@ -1075,7 +1107,17 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="labelFile">
+       <property name="text">
+        <string>File</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btnStoreTableContent">
+       <property name="toolTip">
+        <string>Store Table elements to file</string>
+       </property>
        <property name="text">
         <string>Store...</string>
        </property>
@@ -1083,6 +1125,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnLoadTableContent">
+       <property name="toolTip">
+        <string>Load Table elements from file</string>
+       </property>
        <property name="text">
         <string>Load... </string>
        </property>
@@ -1106,7 +1151,10 @@
    <item>
     <widget class="QTableView" name="tableView">
      <property name="toolTip">
-      <string>Insert data type to be diplayed</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Table for data types defined like a structure. &lt;/p&gt;&lt;p&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; for more information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Table for data type elements defined like a structure. &lt;br/&gt;The data pointer is increased by the size of the data type elements respectively. &lt;br/&gt;When the pointer cursor is moved in the binary document, the value of the data type element is updated.&lt;/p&gt;&lt;p&gt;You may check the checkbox to define the structure element as search pattern. &lt;br/&gt;- A checked datatype element is not updated&lt;br/&gt;- The value of a checked element can be edited in the table&lt;/p&gt;&lt;p&gt;The search pattern is used to find parts within the binary document&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
