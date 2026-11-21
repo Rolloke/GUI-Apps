@@ -71,13 +71,13 @@ namespace txt
 QString getSettingsName(const QString& aItemName)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    static const QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    static const QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\\[]+)");
     auto match = fRegEx.match(aItemName);
     if (match.isValid())
     {
         const auto captured = match.capturedTexts();
 #else
-    static const QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    static const QRegExp fRegEx("([A-Z][A-Za-z0-9:\\[]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
     {

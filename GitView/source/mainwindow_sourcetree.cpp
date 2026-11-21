@@ -1297,6 +1297,7 @@ void MainWindow::perform_custom_command()
                         workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
                         workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
                         workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
+                        workmap.insert(Worker::type   , type.type());
                         mWorker.doWork(QVariant(workmap));
                         action_kbgcmd->setToolTip(mWorker.getBatchToolTip());
                         if (mOutput2secondTextView && has_background_text_view())
@@ -1347,7 +1348,7 @@ void MainWindow::perform_custom_command()
     }
 }
 
-void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::Type& type, Cmd::eCmd cmd, const QString& result)
+void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::Type& type, Cmd::eCmd cmd, const QString& result, const QString& repository)
 {
     switch (post_cmd)
     {
@@ -1362,8 +1363,7 @@ void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::T
         updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
         if (cmd == Cmd::Pull)
         {
-            const QString path = ui->treeSource->getItemFilePath(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
-            ui->treeBranches->insertBranchListText(result, path);
+            ui->treeBranches->insertBranchListText(result, repository);
         }
         break;
     case Cmd::UpdateRepositorySubFolder:

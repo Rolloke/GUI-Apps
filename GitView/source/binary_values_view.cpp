@@ -7,13 +7,8 @@
 #include <QScrollBar>
 #include <QTextStream>
 
-/// TODO: [x] Suche nach Tabellenwerten mit CheckBox aktivierbar
-/// TODO: [x] Suche nach Tabellenwerten implementieren
 /// TODO: [ ] Binär Tabelle als Tree
 /// TODO: [ ] JSON Strukturen mit ID (integer, string) wählbar
-/// TODO: [x] String Datentyp mit Größe
-/// TODO: [x] enable disable buttons by context
-/// TODO: [x] document functions in GUI
 
 binary_values_view::binary_values_view(QWidget *parent) :
     QDialog(parent)

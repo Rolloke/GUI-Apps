@@ -82,6 +82,7 @@ public:
         type7,
         startsection,
         stopsection,
+        findmark,
         keyword_formats,
         numbers = keyword_formats,
         single_line_comment,
@@ -109,6 +110,7 @@ public:
         static void invokeHighlighterDlg(QWidget *parent);
         QString get_pattern(const QTextCharFormat& format) const;
         const QRegularExpression &get_regex(const QTextCharFormat& format) const;
+        void set_regex(const keys key, const QRegularExpression &);
         const QRegularExpression &get_regex(const keys key) const;
 
         QVector<HighlightingRule> highlightingRules;
@@ -136,7 +138,8 @@ public:
     QString get_current_language_pattern(const QTextCharFormat& format) const;
     static const char *get_regex(keys key);
     const Language& get_language() const ;
-
+    void setSearchExpression(const QString& exp);
+    void setSearchExpression(const QRegularExpression& exp);
 
 protected:
     void highlightBlock(const QString &text) override;
@@ -145,6 +148,7 @@ private:
     void load_language_list();
     void load_language(QString fLanguage);
     void load_default_language();
+    Language& get_language_nc() const;
 
 Q_SIGNALS:
     void updateExtension(const QString&);
@@ -157,6 +161,7 @@ private:
     static QStringList mLanguageNames;
 
     QString mCurrentLanguage;
+    QString mSearchExpression;
     static const QString mDefault;
     static QMap<QString, int>  mKeywordMap;
 };

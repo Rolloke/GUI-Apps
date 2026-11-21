@@ -22,6 +22,7 @@ public:
     static constexpr char flags[]      = "flags";
     static constexpr char work[]       = "work";
     static constexpr char repository[] = "repository";
+    static constexpr char type[]       = "type";
 
     Worker();
     friend class WorkerThreadConnector;

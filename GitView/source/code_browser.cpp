@@ -204,6 +204,36 @@ code_browser* code_browser::get_clone()
     return m_clone;
 }
 
+bool code_browser::find(const QString &exp, QTextDocument::FindFlags options)
+{
+    bool result = QTextBrowser::find(exp, options);
+    if (result)
+    {
+        mHighlighter->setSearchExpression(exp);
+    }
+    else
+    {
+        mHighlighter->setSearchExpression("");
+    }
+    return result;
+}
+
+#if QT_CONFIG(regularexpression)
+bool code_browser::find(const QRegularExpression &exp, QTextDocument::FindFlags options)
+{
+    bool result = QTextBrowser::find(exp, options);
+    if (result)
+    {
+        mHighlighter->setSearchExpression(exp);
+    }
+    else
+    {
+        mHighlighter->setSearchExpression("");
+    }
+    return result;
+}
+#endif
+
 void code_browser::updateLineNumberAreaWidth(int)
 {
     setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);

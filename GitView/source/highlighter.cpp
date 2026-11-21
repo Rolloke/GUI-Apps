@@ -127,6 +127,9 @@ void Highlighter::Language::load(QSettings& fSettings)
     mKeywordFormat[stopsection].setForeground(Qt::black);
     mKeywordFormat[stopsection].setFontWeight(QFont::Medium);
 
+    mKeywordFormat[findmark].setForeground(QBrush(QColor(255, 165, 0)));
+    mKeywordFormat[findmark].setFontWeight(QFont::Medium);
+
     mNumbersFormat.setForeground(Qt::blue);
     mNumbersFormat.setFontWeight(QFont::Medium);
 
@@ -149,6 +152,7 @@ void Highlighter::Language::load(QSettings& fSettings)
     ADD_MAP_ENTRY(mKeywordMap, type7);
     ADD_MAP_ENTRY(mKeywordMap, startsection);
     ADD_MAP_ENTRY(mKeywordMap, stopsection);
+    ADD_MAP_ENTRY(mKeywordMap, findmark);
 
     fSettings.beginGroup(ColorSelector::is_dark_mode() ? groupHighlighterDark : groupHighlighter);
     LOAD_FORMAT(fSettings, mSingleLineCommentFormat);
@@ -164,6 +168,7 @@ void Highlighter::Language::load(QSettings& fSettings)
     LOAD_FORMAT(fSettings, mKeywordFormat[type7]);
     LOAD_FORMAT(fSettings, mKeywordFormat[startsection]);
     LOAD_FORMAT(fSettings, mKeywordFormat[stopsection]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[findmark]);
     LOAD_FORMAT(fSettings, mFunctionFormat);
     LOAD_FORMAT(fSettings, mNumbersFormat);
     LOAD_FORMAT(fSettings, mPreprocessorFormat);
@@ -193,6 +198,7 @@ void Highlighter::Language::store( QSettings& fSettings)
     STORE_STRF(fSettings, mKeywordFormat[type7], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mKeywordFormat[startsection], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mKeywordFormat[stopsection], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[findmark], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mFunctionFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mNumbersFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mPreprocessorFormat, Highlighter::Language::to_string);
@@ -327,7 +333,7 @@ const char* Highlighter::get_regex(keys key)
     case multi_line_comment: return "";
     case instre1: case instre2:
     case type1: case type2: case type3: case type4:
-    case type5: case type6: case type7:
+    case type5: case type6: case type7: case findmark:
         return "\\b(?:%1)\\b";
     case startsection: case stopsection:
         return "%1";
@@ -390,6 +396,7 @@ TextCharFormatMap  Highlighter::Language::getHighlightFormats()
     ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type5]);
     ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type6]);
     ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type7]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[findmark]);
     return list;
 }
 
@@ -415,6 +422,7 @@ void Highlighter::Language::invokeHighlighterDlg(QWidget*parent)
         SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type5]);
         SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type6]);
         SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type7]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[findmark]);
         mLanguages.clear();
     }
 }
@@ -561,14 +569,39 @@ void Highlighter::load_default_language()
     mLanguages[mDefault] = language;
 }
 
-const Highlighter::Language& Highlighter::get_language()const
+Highlighter::Language& Highlighter::get_language_nc() const
 {
-    const auto found_language = mLanguages.find(mCurrentLanguage);
+    auto found_language = mLanguages.find(mCurrentLanguage);
     if (found_language != mLanguages.end())
     {
         return found_language.value();
     }
     return mLanguages[mDefault];
+}
+
+const Highlighter::Language& Highlighter::get_language() const
+{
+    return get_language_nc();
+}
+
+void Highlighter::setSearchExpression(const QString &exp)
+{
+    if (exp != mSearchExpression)
+    {
+        get_language_nc().set_regex(findmark, QRegularExpression(tr("\\b(?:%1)\\b").arg(exp)));
+        rehighlight();
+        mSearchExpression = exp;
+    }
+}
+
+void Highlighter::setSearchExpression(const QRegularExpression &exp)
+{
+    if (exp.pattern() != mSearchExpression)
+    {
+        get_language_nc().set_regex(findmark, exp);
+        rehighlight();
+        mSearchExpression = exp.pattern();
+    }
 }
 
 QString Highlighter::Language::get_pattern(const QTextCharFormat &format) const
@@ -589,6 +622,28 @@ const QRegularExpression& Highlighter::Language::get_regex(const QTextCharFormat
         }
     }
     return dummy;
+}
+
+void Highlighter::Language::set_regex(const keys key, const QRegularExpression& regex)
+{
+    bool found = false;
+    for ( auto& rule : highlightingRules)
+    {
+        if (rule.key == key)
+        {
+            rule.pattern = regex;
+            found = true;
+            break;
+        }
+    }
+    if (!found)
+    {
+        HighlightingRule rule;
+        rule.key = key;
+        rule.pattern = regex;
+        rule.format = mKeywordFormat[key];
+        highlightingRules.append(rule);
+    }
 }
 
 const QRegularExpression& Highlighter::Language::get_regex(const keys key) const

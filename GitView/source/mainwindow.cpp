@@ -2104,8 +2104,9 @@ void MainWindow::handleMessage(QVariant aData)
         {
             auto cmd_action = static_cast<Cmd::ePostAction>(data_map[Worker::action].toUInt());
             appendTextToBrowser(data_map[Worker::command].toString(), cmd_action == 0);
-            appendTextToBrowser(data_map[Worker::result].toString(), true);
-            perform_post_cmd_action(cmd_action, {}, static_cast<git::Cmd::eCmd>(data_map[Worker::command_id].toInt()));
+            QString result = data_map[Worker::result].toString();
+            appendTextToBrowser(result, true);
+            perform_post_cmd_action(cmd_action, Type(data_map[Worker::type].toUInt()), static_cast<git::Cmd::eCmd>(data_map[Worker::command_id].toInt()), result, data_map[Worker::repository].toString());
         } break;
         case Work::AsynchroneousCommand:
             break;

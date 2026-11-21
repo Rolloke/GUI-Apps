@@ -60,6 +60,10 @@ public:
     code_browser* clone(bool all_parameter=false, bool share_document=true);
     void synchronize_scrollbars(bool sync);
     code_browser *get_clone();
+    bool find(const QString &exp, QTextDocument::FindFlags options = QTextDocument::FindFlags());
+#if QT_CONFIG(regularexpression)
+    bool find(const QRegularExpression &exp, QTextDocument::FindFlags options = QTextDocument::FindFlags());
+#endif
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
