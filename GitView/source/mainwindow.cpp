@@ -30,6 +30,7 @@
 #include <QActionGroup>
 #include <QSystemTrayIcon>
 #include <QClipboard>
+#include <QRegularExpression>
 
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
@@ -3558,11 +3559,7 @@ void MainWindow::find_function(find find_item)
 
 void MainWindow::find_in_text_view(find find_item)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QRegularExpression::PatternOption reg_ex_case = QRegularExpression::CaseInsensitiveOption;
-#else
-    Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
-#endif
     int                 find_flag   = find_item == find::forward || find_item == find::replace ? 0 : QTextDocument::FindBackward;
 
     code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
@@ -3575,11 +3572,7 @@ void MainWindow::find_in_text_view(find find_item)
 
         if (ui->ckFindCaseSensitive->isChecked())
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             reg_ex_case = QRegularExpression::NoPatternOption;
-#else
-            reg_ex_case = Qt::CaseSensitive;
-#endif
             find_flag |= QTextDocument::FindCaseSensitively;
         }
         if (ui->ckFindWholeWord->isChecked())
@@ -3590,11 +3583,7 @@ void MainWindow::find_in_text_view(find find_item)
         bool found_text = false;
         if (ui->ckFindRegEx->isChecked())
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             found_text = text_browser->find(QRegularExpression(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
-#else
-            found_text = text_browser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
-#endif
         }
         else
         {

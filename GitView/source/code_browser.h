@@ -7,6 +7,8 @@
 
 #include <QTextBrowser>
 #include <QPlainTextEdit>
+#include <QRegularExpression>
+
 #ifdef WEB_ENGINE
 #include <QWebEnginePage>
 class    QWebEngineView;
