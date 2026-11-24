@@ -548,7 +548,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
     /// - widget geometry
     /// - widget settings
     /// of this tab correctly
+#ifdef WEB_ENGINE
     showDockedWidget(mWebEngineView.data(), true);
+#else
+    showDockedWidget(mTextRenderView.data(), true);
+#endif
     if (btnCloseText_clicked(Editor::All))
     {
         event->accept();
