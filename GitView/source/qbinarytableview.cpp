@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QHeaderView>
 
+
 namespace
 {
     /// brief set the temporary length for display with variable length
@@ -63,6 +64,7 @@ const QList<QStringList> qbinarytableview::m_section_names =
 
 qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 {
+    /// TODO: [ ] Binär Tabelle als Tree
     BinaryTableModel* ListModel = new BinaryTableModel(0, INT(BinaryTableModel::Table::Last), this);
     mColumnWidth   = { 0.6, 0 };
 

@@ -502,9 +502,12 @@ void code_browser::changeSelection(selection command)
         }
         if (text.size())
         {
+            int start = text_cursor.selectionStart();
             text_cursor.beginEditBlock();
             text_cursor.insertText(text);
             text_cursor.endEditBlock();
+            text_cursor.setPosition(start, QTextCursor::KeepAnchor);
+            setTextCursor(text_cursor);
         }
     }
 }
@@ -611,7 +614,6 @@ QString code_browser::change_start_of_selection(selection how_to)
             }
         }
     }
-    /// TODO: Selection wiederherstellen
     return text;
 }
 

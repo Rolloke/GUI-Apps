@@ -7,7 +7,6 @@
 #include <QScrollBar>
 #include <QTextStream>
 
-/// TODO: [ ] Binär Tabelle als Tree
 /// TODO: [ ] JSON Strukturen mit ID (integer, string) wählbar
 
 binary_values_view::binary_values_view(QWidget *parent) :
